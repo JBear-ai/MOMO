@@ -33,8 +33,13 @@ class MoviePosterPersistenceServiceTest {
     @Mock
     private PosterFileStorageService posterFileStorageService;
 
-    @InjectMocks
     private MoviePosterPersistenceService persistenceService;
+
+    @org.junit.jupiter.api.BeforeEach
+    void setup() {
+        persistenceService = new MoviePosterPersistenceService(posterCacheRepository, movieRepository, posterFileStorageService,
+                new MoviePosterWriter(movieRepository, posterCacheRepository));
+    }
 
     @Test
     void savesFilmographyTmdbPosterForTheResolvedAlphanumericMovieCode() {
@@ -69,6 +74,7 @@ class MoviePosterPersistenceServiceTest {
                 eq(movieCode), anyString(), eq(localPosterPath), any()))
                 .thenReturn(1);
 
+        when(movieRepository.findForPosterWrite(movieCode)).thenReturn(java.util.Optional.of(movie));
         boolean saved = persistenceService.saveFilmographyPosterIfMissing(
                 movieCode, tmdbPosterUrl);
 
@@ -79,7 +85,7 @@ class MoviePosterPersistenceServiceTest {
         verify(posterFileStorageService).downloadAndSave(movieCode, tmdbPosterUrl);
         verify(posterCacheRepository).completeClaim(
                 eq(movieCode), anyString(), eq(localPosterPath), any());
-        verify(movieRepository).save(movie);
+        verify(movieRepository).flush();
     }
 
     @Test
@@ -134,6 +140,8 @@ class MoviePosterPersistenceServiceTest {
                 eq("12345678"), eq("claim-1"), eq("/posters/12345678-image.jpg"), any()))
                 .thenReturn(1);
 
+        when(movieRepository.findForPosterWrite("12345678")).thenReturn(java.util.Optional.of(
+                new Movie("12345678", "movie", "", "", "", "", "", "", "")));
         assertDoesNotThrow(() -> persistenceService.saveSuccess(
                 "12345678", "claim-1", "https://image.tmdb.org/t/p/w500/poster.jpg"));
 
@@ -141,7 +149,7 @@ class MoviePosterPersistenceServiceTest {
                 "12345678", "https://image.tmdb.org/t/p/w500/poster.jpg");
         verify(posterCacheRepository).completeClaim(
                 eq("12345678"), eq("claim-1"), eq("/posters/12345678-image.jpg"), any());
-        verify(movieRepository).findById("12345678");
+        verify(movieRepository).findForPosterWrite("12345678");
     }
 
     @Test
@@ -153,10 +161,12 @@ class MoviePosterPersistenceServiceTest {
                 eq("12345678"), eq("old-claim"), anyString(), any()))
                 .thenReturn(0);
 
+        when(movieRepository.findForPosterWrite("12345678")).thenReturn(java.util.Optional.of(
+                new Movie("12345678", "movie", "", "", "", "", "", "", "")));
         assertFalse(persistenceService.saveSuccess(
                 "12345678", "old-claim", "https://image.tmdb.org/t/p/w500/poster.jpg"));
 
         verify(posterFileStorageService).delete("/posters/12345678-old-image.jpg");
-        verifyNoInteractions(movieRepository);
+        verify(movieRepository).existsByPosterUrl("/posters/12345678-old-image.jpg");
     }
 }

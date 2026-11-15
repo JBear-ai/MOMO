@@ -1,6 +1,7 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AxiosApi, { clearAuthSession } from "../api/AxiosApi";
+import AxiosApi, { clearAuthSession, getAuthSessionVersion, isAuthSessionCurrent } from "../api/AxiosApi";
 
 function ProfileDelete() {
   const navigate = useNavigate();
@@ -28,12 +29,13 @@ function ProfileDelete() {
       return;
     }
 
+    const sessionVersion = getAuthSessionVersion();
     try {
       // Spring Boot 회원 탈퇴 API 호출
       await AxiosApi.memberDelete(password);
 
       // 탈퇴 성공 후 브라우저에 저장된 로그인 정보 제거
-      clearAuthSession();
+      if (!clearAuthSession(sessionVersion)) return;
       localStorage.removeItem("email");
       localStorage.removeItem("password");
 
@@ -42,7 +44,8 @@ function ProfileDelete() {
       // 로그인 화면으로 이동
       navigate("/login", { replace: true });
     } catch (error) {
-      console.error("회원 탈퇴 실패:", error);
+      if (!isAuthSessionCurrent(sessionVersion) || error.code === "MOMO_AUTH_SESSION_CHANGED") return;
+      console.error("회원 탈퇴 실패:", safeRequestFailure(error));
 
       if (error.momoAuthExpiredHandled) {
         return;

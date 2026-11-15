@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import SafeImage from "../components/common/SafeImage";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -128,7 +129,7 @@ function PersonDetail() {
       } catch (requestError) {
         if (!active || requestError.code === "ERR_CANCELED") return;
 
-        console.error("인물 정보 조회 실패:", requestError);
+        console.error("인물 정보 조회 실패:", safeRequestFailure(requestError));
 
         setError(
           requestError?.response?.data?.message ||

@@ -57,7 +57,7 @@ public class SecurityConfig {
         @Bean
         public SecurityFilterChain securityFilterChain(
                         HttpSecurity http,
-                        TokenProvider tokenProvider) throws Exception {
+                        TokenProvider tokenProvider, UserRepository userRepository) throws Exception {
 
                 http
                                 .csrf(csrf -> csrf.disable())
@@ -167,7 +167,7 @@ public class SecurityConfig {
                                                 }))
 
                                 .addFilterBefore(
-                                                new JwtFilter(tokenProvider),
+                                                new JwtFilter(tokenProvider, userRepository),
                                                 UsernamePasswordAuthenticationFilter.class);
 
                 return http.build();

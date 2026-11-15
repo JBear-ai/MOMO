@@ -24,22 +24,25 @@ public class ApiCallMetrics {
         long startedAt = System.nanoTime();
         current.calls.increment();
 
-        try {
+        try (var operation = com.momo.backend.observability.ApiCallTrace.operation(provider, endpoint)) {
             T result = request.get();
             current.successes.increment();
             long elapsedMillis = (System.nanoTime() - startedAt) / 1_000_000;
             current.totalMillis.add(elapsedMillis);
-            log.info("EXTERNAL_API provider={} endpoint={} result=SUCCESS durationMs={} calls={} successes={} failures={}",
+            log.info("EXTERNAL_API provider={} endpoint={} result=SUCCESS durationMs={} calls={} successes={} failures={} source={} requestId={}",
                     provider, endpoint, elapsedMillis, current.calls.sum(),
-                    current.successes.sum(), current.failures.sum());
+                    current.successes.sum(), current.failures.sum(),
+                    com.momo.backend.observability.ApiCallTrace.source(), com.momo.backend.observability.ApiCallTrace.requestId());
             return result;
         } catch (RuntimeException exception) {
             current.failures.increment();
             long elapsedMillis = (System.nanoTime() - startedAt) / 1_000_000;
             current.totalMillis.add(elapsedMillis);
-            log.warn("EXTERNAL_API provider={} endpoint={} result=FAILURE durationMs={} calls={} successes={} failures={}",
+            log.warn("EXTERNAL_API provider={} endpoint={} result=FAILURE durationMs={} calls={} successes={} failures={} source={} requestId={} errorType={}",
                     provider, endpoint, elapsedMillis, current.calls.sum(),
-                    current.successes.sum(), current.failures.sum(), exception);
+                    current.successes.sum(), current.failures.sum(),
+                    com.momo.backend.observability.ApiCallTrace.source(), com.momo.backend.observability.ApiCallTrace.requestId(),
+                    exception.getClass().getSimpleName());
             throw exception;
         }
     }

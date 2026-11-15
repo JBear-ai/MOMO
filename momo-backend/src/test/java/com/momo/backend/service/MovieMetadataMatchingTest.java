@@ -1,5 +1,7 @@
 package com.momo.backend.service;
 
+import com.momo.backend.entity.Movie;
+
 import com.momo.backend.client.KmdbApiClient;
 import com.momo.backend.client.TmdbApiClient;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -353,6 +355,7 @@ class MovieMetadataMatchingTest {
         when(tmdbService.findMovieOverview(anyString(), anyString()))
                 .thenReturn(java.util.Optional.empty());
 
+        when(movieRepository.saveAndFlush(any(Movie.class))).thenAnswer(inv -> inv.getArgument(0));
         MovieService service = new MovieService(
                 mock(MoviePosterAsyncService.class),
                 kobisApiClient,
@@ -362,7 +365,7 @@ class MovieMetadataMatchingTest {
                 movieRepository,
                 mock(com.momo.backend.repository.MovieCacheRepository.class),
                 mock(MoviePosterCacheService.class),
-                mock(MoviePersistenceService.class),
+                new MoviePersistenceService(new MoviePersistenceWriter(movieRepository)),
                 mock(com.momo.backend.repository.MoviePosterCacheRepository.class),
                 mock(com.momo.backend.repository.MovieExternalIdMappingRepository.class),
                 mock(PosterFileStorageService.class),

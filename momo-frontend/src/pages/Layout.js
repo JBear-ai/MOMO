@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useState, useEffect } from "react";
 import {
   Link,
@@ -26,7 +27,7 @@ import {
 } from "../styles/legacy/Layout.styles";
 
 import textlogo from "../textlogo.png";
-import AxiosApi, { clearAuthSession } from "../api/AxiosApi";
+import AxiosApi, { clearAuthSession, getAuthSessionVersion, isAuthSessionCurrent } from "../api/AxiosApi";
 import { getCurrentFavoriteUserId, syncFavoriteMoviesFromServer } from "../utils/favorites";
 import MovieSearchAutocomplete from "../components/common/MovieSearchAutocomplete";
 import ChatPopup from "../components/chat/ChatPopup";
@@ -51,7 +52,7 @@ function Layout() {
       if (!currentUserId) return;
 
       syncFavoriteMoviesFromServer(currentUserId).catch((error) => {
-        console.error("관심 영화 동기화 실패:", error);
+        console.error("관심 영화 동기화 실패:", safeRequestFailure(error));
       });
     };
 
@@ -98,7 +99,7 @@ function Layout() {
           setNickname("");
         } else {
           // 서버 연결 오류와 인증 실패를 구분
-          console.error("로그인 상태 확인 실패:", error);
+          console.error("로그인 상태 확인 실패:", safeRequestFailure(error));
           setNickname("");
         }
       } finally {
@@ -112,6 +113,7 @@ function Layout() {
 
     // 인증 상태가 바뀌면 관심 영화 화면도 현재 회원 기준으로 다시 읽는다.
     const handleAuthChanged = () => {
+      setLogoutLoading(false);
       window.dispatchEvent(new Event("momo-favorites-changed"));
       checkLogin();
     };
@@ -134,17 +136,19 @@ function Layout() {
 
     setLogoutLoading(true);
 
+    const sessionVersion = getAuthSessionVersion();
     try {
       // Spring Boot 서버 로그아웃 요청
       await AxiosApi.memberLogout();
 
       // Access Token과 Refresh Token을 포함한 인증 정보를 한 번에 정리한다.
-      clearAuthSession();
+      if (!clearAuthSession(sessionVersion)) return;
 
       // 메인 화면 이동
       navigate("/", { replace: true });
     } catch (error) {
-      console.error("로그아웃 실패:", error);
+      if (!isAuthSessionCurrent(sessionVersion) || error.code === "MOMO_AUTH_SESSION_CHANGED") return;
+      console.error("로그아웃 실패:", safeRequestFailure(error));
 
       // 401은 AxiosApi 인증 인터셉터가 처리하므로
       // 중복 알림을 표시하지 않음
@@ -152,7 +156,7 @@ function Layout() {
         alert("로그아웃에 실패했습니다. 다시 시도해 주세요.");
       }
     } finally {
-      setLogoutLoading(false);
+      if (isAuthSessionCurrent(sessionVersion)) setLogoutLoading(false);
     }
   };
 

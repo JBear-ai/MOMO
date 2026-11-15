@@ -16,6 +16,7 @@ public class KobisApiClient {
     private final ApiCallMetrics metrics;
     private final com.momo.backend.service.ApiCallBudgetService apiCallBudgetService;
 
+    @org.springframework.beans.factory.annotation.Autowired
     public KobisApiClient(
             @Value("${kobis.api.base-url}") String baseUrl,
             @Value("${kobis.api.key}") String apiKey,
@@ -24,17 +25,23 @@ public class KobisApiClient {
             ApiCallMetrics metrics,
             com.momo.backend.service.ApiCallBudgetService apiCallBudgetService) {
 
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(connectTimeout);
-        requestFactory.setReadTimeout(readTimeout);
+        this(configuredBuilder(baseUrl, connectTimeout, readTimeout), apiKey, metrics, apiCallBudgetService);
+    }
 
-        this.restClient = RestClient.builder()
-                .baseUrl(baseUrl)
-                .requestFactory(requestFactory)
-                .build();
+    // Package-visible builder injection permits transport-level mocks without any network access.
+    KobisApiClient(RestClient.Builder builder, String apiKey, ApiCallMetrics metrics,
+            com.momo.backend.service.ApiCallBudgetService apiCallBudgetService) {
+        this.restClient = builder.requestInterceptor(com.momo.backend.observability.ApiCallTrace.interceptor()).build();
         this.apiKey = apiKey;
         this.metrics = metrics;
         this.apiCallBudgetService = apiCallBudgetService;
+    }
+
+    private static RestClient.Builder configuredBuilder(String baseUrl, Duration connectTimeout, Duration readTimeout) {
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(connectTimeout);
+        requestFactory.setReadTimeout(readTimeout);
+        return RestClient.builder().baseUrl(baseUrl).requestFactory(requestFactory);
     }
 
     public String searchMovies(String keyword) {
@@ -140,8 +147,4 @@ public class KobisApiClient {
         }));
     }
 
-    public String searchMoviesByGenre(int page) {
-        return searchCatalogMovies(page, 100, null, null,
-                com.momo.backend.service.ApiCallBudgetService.TrafficType.USER_SEARCH);
-    }
 }

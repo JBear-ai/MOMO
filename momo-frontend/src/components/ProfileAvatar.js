@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useEffect, useState } from "react";
 import AxiosApi from "../api/AxiosApi";
 import SafeImage from "./common/SafeImage";
@@ -40,7 +41,7 @@ function ProfileAvatar({
         if (active && error.code !== "ERR_CANCELED" && error.name !== "CanceledError") {
           setFailed(true);
           if (error.response?.status !== 404) {
-            console.error("프로필 이미지 조회 실패:", error);
+            console.error("프로필 이미지 조회 실패:", safeRequestFailure(error));
           }
         }
       }

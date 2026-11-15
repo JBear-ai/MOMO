@@ -51,11 +51,11 @@ class RefreshTokenServiceTest {
     void reissueRotatesBothTokensAndRejectsPreviousRefreshToken() {
         String loginId = "momo-user";
         Long userId = 1L;
-        String oldRefreshToken = tokenProvider.createRefreshToken(loginId);
+        String oldRefreshToken = tokenProvider.createRefreshToken(userId);
         RefreshToken storedToken = new RefreshToken(user, oldRefreshToken);
 
         when(user.getUserId()).thenReturn(userId);
-        when(userRepository.findByLoginIdForUpdate(loginId)).thenReturn(Optional.of(user));
+        when(userRepository.findByUserIdForUpdate(userId)).thenReturn(Optional.of(user));
         when(refreshTokenRepository.findByUserIdForUpdate(userId)).thenReturn(Optional.of(storedToken));
 
         TokenRefreshResponse response = refreshTokenService.reissue(oldRefreshToken);
@@ -76,12 +76,12 @@ class RefreshTokenServiceTest {
     void mismatchedTokenDoesNotDeleteOrReplaceCurrentActiveToken() {
         String loginId = "momo-user";
         Long userId = 1L;
-        String requestToken = tokenProvider.createRefreshToken(loginId);
-        String activeToken = tokenProvider.createRefreshToken(loginId);
+        String requestToken = tokenProvider.createRefreshToken(userId);
+        String activeToken = tokenProvider.createRefreshToken(userId);
         RefreshToken storedToken = new RefreshToken(user, activeToken);
 
         when(user.getUserId()).thenReturn(userId);
-        when(userRepository.findByLoginIdForUpdate(loginId)).thenReturn(Optional.of(user));
+        when(userRepository.findByUserIdForUpdate(userId)).thenReturn(Optional.of(user));
         when(refreshTokenRepository.findByUserIdForUpdate(userId)).thenReturn(Optional.of(storedToken));
 
         CustomException error = assertThrows(
@@ -95,19 +95,19 @@ class RefreshTokenServiceTest {
     @Test
     void logoutLocksMemberBeforeDeletingItsRefreshToken() {
         when(user.getUserId()).thenReturn(1L);
-        when(userRepository.findByLoginIdForUpdate("momo-user"))
+        when(userRepository.findByUserIdForUpdate(1L))
                 .thenReturn(Optional.of(user));
 
-        refreshTokenService.deleteByLoginId("momo-user");
+        refreshTokenService.deleteByUserIdWithLock(1L);
 
         InOrder order = inOrder(userRepository, refreshTokenRepository);
-        order.verify(userRepository).findByLoginIdForUpdate("momo-user");
+        order.verify(userRepository).findByUserIdForUpdate(1L);
         order.verify(refreshTokenRepository).deleteByUser_UserId(1L);
     }
 
     @Test
     void accessTokenCannotBeUsedForReissue() {
-        String accessToken = tokenProvider.createToken("momo-user");
+        String accessToken = tokenProvider.createToken(1L);
 
         CustomException error = assertThrows(
                 CustomException.class,
@@ -120,10 +120,10 @@ class RefreshTokenServiceTest {
     void refreshTokenWithoutStoredTokenIsRejected() {
         String loginId = "momo-user";
         Long userId = 1L;
-        String refreshToken = tokenProvider.createRefreshToken(loginId);
+        String refreshToken = tokenProvider.createRefreshToken(userId);
 
         when(user.getUserId()).thenReturn(userId);
-        when(userRepository.findByLoginIdForUpdate(loginId)).thenReturn(Optional.of(user));
+        when(userRepository.findByUserIdForUpdate(userId)).thenReturn(Optional.of(user));
         when(refreshTokenRepository.findByUserIdForUpdate(userId)).thenReturn(Optional.empty());
 
         CustomException error = assertThrows(
@@ -136,7 +136,7 @@ class RefreshTokenServiceTest {
     @Test
     void firstLoginLocksUserBeforeCreatingRefreshToken() {
         Long userId = 1L;
-        String refreshToken = tokenProvider.createRefreshToken("momo-user");
+        String refreshToken = tokenProvider.createRefreshToken(1L);
 
         when(user.getUserId()).thenReturn(userId);
         when(userRepository.findByUserIdForUpdate(userId)).thenReturn(Optional.of(user));

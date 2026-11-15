@@ -93,8 +93,8 @@ public class AuthService {
     }
 
     @Transactional(readOnly = true)
-    public User getLoginUser(String loginId) {
-        return userRepository.findByLoginId(loginId)
+    public User getLoginUser(Long userId) {
+        return userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
     }
 
@@ -104,9 +104,9 @@ public class AuthService {
 
     // 회원 정보 수정
 
-    public UserResponse updateMyInfo(String loginId, UserUpdateRequest dto) {
+    public UserResponse updateMyInfo(Long userId, UserUpdateRequest dto) {
         // 탈퇴·프로필 이미지 변경과 회원 정보 수정을 같은 회원 행 잠금으로 직렬화한다.
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
         if (!user.getNickname().equals(dto.nickname())
@@ -160,8 +160,8 @@ public class AuthService {
     // 내가 누른 좋아요 개수
 
     @Transactional(readOnly = true)
-    public long getMyLikeCount(String loginId) {
-        User user = getLoginUser(loginId);
+    public long getMyLikeCount(Long userId) {
+        User user = getLoginUser(userId);
 
         long reviewLikeCount = reviewReactionRepository.countByUser_UserIdAndLiked(
                 user.getUserId(), true);
@@ -174,16 +174,15 @@ public class AuthService {
 
     // 회원 탈퇴
 
-    public void deleteMyAccount(String loginId, String password) {
+    public void deleteMyAccount(Long userId, String password) {
         // 회원 행을 잠가 다른 생성·반응 요청과 탈퇴 작업을 직렬화한다.
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
         if (!passwordEncoder.matches(password, user.getPasswordHash())) {
             throw new IllegalArgumentException("현재 비밀번호가 일치하지 않습니다.");
         }
 
-        Long userId = user.getUserId();
 
         // 회원 삭제 전에 Refresh Token 제거
         refreshTokenService.deleteByUserId(userId);
@@ -236,9 +235,9 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public boolean checkCurrentPassword(
-            String loginId, String currentPassword) {
+            Long userId, String currentPassword) {
 
-        User user = getLoginUser(loginId);
+        User user = getLoginUser(userId);
 
         return passwordEncoder.matches(
                 currentPassword, user.getPasswordHash());
@@ -247,10 +246,10 @@ public class AuthService {
     // 프로필 이미지
 
     public UserResponse updateProfileImage(
-            String loginId, MultipartFile file) throws IOException {
+            Long userId, MultipartFile file) throws IOException {
 
         // 프로필 업로드와 회원 탈퇴가 동시에 실행되지 않도록 회원 행을 잠근다.
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
         String oldProfileImage = user.getProfileImage();
@@ -301,9 +300,9 @@ public class AuthService {
         return new UserResponse(user);
     }
 
-    public UserResponse removeProfileImage(String loginId) {
+    public UserResponse removeProfileImage(Long userId) {
         // 프로필 삭제와 회원 탈퇴가 동시에 실행되지 않도록 회원 행을 잠근다.
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
         String oldProfileImage = user.getProfileImage();
@@ -333,16 +332,16 @@ public class AuthService {
     }
 
     @Transactional(readOnly = true)
-    public byte[] getProfileImage(String loginId) {
-        User user = getLoginUser(loginId);
+    public byte[] getProfileImage(Long userId) {
+        User user = getLoginUser(userId);
 
         return firebaseStorageService.getProfileImage(
                 user.getProfileImage());
     }
 
     @Transactional(readOnly = true)
-    public String getProfileImageContentType(String loginId) {
-        User user = getLoginUser(loginId);
+    public String getProfileImageContentType(Long userId) {
+        User user = getLoginUser(userId);
 
         return firebaseStorageService.getProfileImageContentType(
                 user.getProfileImage());

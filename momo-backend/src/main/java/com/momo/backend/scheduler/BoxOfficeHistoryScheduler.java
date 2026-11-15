@@ -23,10 +23,13 @@ public class BoxOfficeHistoryScheduler {
             fixedDelayString = "${momo.boxoffice.history.daily-refresh-delay-ms:300000}"
     )
     public void refreshRecentHistory() {
-        try {
-            movieService.refreshRecentBoxOfficeHistory();
-        } catch (Exception e) {
-            log.warn("최근 박스오피스 백그라운드 갱신 실패. 서버 실행은 계속합니다.", e);
+        try (var trace = com.momo.backend.observability.ApiCallTrace.open(
+                com.momo.backend.observability.ApiCallTrace.Source.SCHEDULER)) {
+            try {
+                movieService.refreshRecentBoxOfficeHistory();
+            } catch (Exception e) {
+                log.warn("최근 박스오피스 백그라운드 갱신 실패. 서버 실행은 계속합니다.", e);
+            }
         }
     }
 
@@ -36,10 +39,13 @@ public class BoxOfficeHistoryScheduler {
             fixedDelayString = "${momo.boxoffice.history.refresh-delay-ms:600000}"
     )
     public void refreshWeeklyHistory() {
-        try {
-            movieService.refreshWeeklyBoxOfficeHistory();
-        } catch (Exception e) {
-            log.warn("주간 박스오피스 백그라운드 갱신 실패. 서버 실행은 계속합니다.", e);
+        try (var trace = com.momo.backend.observability.ApiCallTrace.open(
+                com.momo.backend.observability.ApiCallTrace.Source.SCHEDULER)) {
+            try {
+                movieService.refreshWeeklyBoxOfficeHistory();
+            } catch (Exception e) {
+                log.warn("주간 박스오피스 백그라운드 갱신 실패. 서버 실행은 계속합니다.", e);
+            }
         }
     }
 }

@@ -48,7 +48,7 @@ class MoviePersistenceServiceTest {
         MovieSearchResponse movie = new MovieSearchResponse(
                 "20260003", "동시 저장 영화", "20260103", "드라마", "감독 B"
         );
-        doThrow(new DataIntegrityViolationException("duplicate movieCode"))
+        doThrow(new org.springframework.dao.DuplicateKeyException("duplicate movieCode"))
                 .when(writer).saveOrSupplement(movie);
 
         MoviePersistenceService service = new MoviePersistenceService(writer);
@@ -68,7 +68,7 @@ class MoviePersistenceServiceTest {
         MovieSearchResponse second = new MovieSearchResponse(
                 "20260005", "다음 영화", "20260105", "액션", "감독 D"
         );
-        doThrow(new DataIntegrityViolationException("duplicate movieCode"))
+        doThrow(new org.springframework.dao.DuplicateKeyException("duplicate movieCode"))
                 .when(writer).saveOrSupplement(first);
 
         MoviePersistenceService service = new MoviePersistenceService(writer);

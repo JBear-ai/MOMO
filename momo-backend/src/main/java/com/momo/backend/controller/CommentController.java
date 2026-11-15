@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import com.momo.backend.security.MemberPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,7 +32,7 @@ public class CommentController {
 
         CommentResponse response = commentService.createComment(
                 reviewId,
-                authentication.getName(),
+                MemberPrincipal.requireUserId(authentication),
                 dto
         );
 
@@ -47,14 +48,10 @@ public class CommentController {
             @RequestParam(defaultValue = "0") int page,
             Authentication authentication) {
 
-        String loginId = authentication == null
-                || !authentication.isAuthenticated()
-                || "anonymousUser".equals(authentication.getName())
-                        ? null
-                        : authentication.getName();
+        Long userId = MemberPrincipal.optionalUserId(authentication);
 
         return ResponseEntity.ok(
-                commentService.getComments(reviewId, page, loginId)
+                commentService.getComments(reviewId, page, userId)
         );
     }
 
@@ -67,7 +64,7 @@ public class CommentController {
 
         CommentResponse response = commentService.updateComment(
                 commentId,
-                authentication.getName(),
+                MemberPrincipal.requireUserId(authentication),
                 dto
         );
 
@@ -82,7 +79,7 @@ public class CommentController {
 
         commentService.deleteComment(
                 commentId,
-                authentication.getName()
+                MemberPrincipal.requireUserId(authentication)
         );
 
         return ResponseEntity.noContent().build();

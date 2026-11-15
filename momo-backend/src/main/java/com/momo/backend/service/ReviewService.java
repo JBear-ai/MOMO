@@ -235,10 +235,10 @@ public class ReviewService {
     // 리뷰 작성
 
     public ReviewResponse createReview(
-            String loginId,
+            Long userId,
             ReviewCreateRequest dto) {
 
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",
@@ -313,10 +313,10 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public Page<ReviewResponse> getMyReviews(
-            String loginId,
+            Long userId,
             int page) {
 
-        User user = userRepository.findByLoginId(loginId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",
@@ -345,10 +345,10 @@ public class ReviewService {
 
     public ReviewResponse updateReview(
             Long reviewId,
-            String loginId,
+            Long userId,
             ReviewUpdateRequest dto) {
 
-        userRepository.findByLoginIdForUpdate(loginId)
+        userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new CustomException("USER_NOT_FOUND", "회원 정보를 찾을 수 없습니다."));
 
         // 리뷰 행 잠금은 새 댓글·리뷰 반응이 삭제 도중 추가되는 것을 막는다.
@@ -359,7 +359,7 @@ public class ReviewService {
                                 "리뷰를 찾을 수 없습니다."
                         ));
 
-        if (!review.getUser().getLoginId().equals(loginId)) {
+        if (!review.getUser().getUserId().equals(userId)) {
             throw new CustomException(
                     "FORBIDDEN",
                     "본인이 작성한 리뷰만 수정할 수 있습니다."
@@ -378,9 +378,9 @@ public class ReviewService {
 
     public void deleteReview(
             Long reviewId,
-            String loginId) {
+            Long userId) {
 
-        userRepository.findByLoginIdForUpdate(loginId)
+        userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new CustomException("USER_NOT_FOUND", "회원 정보를 찾을 수 없습니다."));
 
         // 리뷰 행 잠금으로 신규 댓글·반응 저장과 리뷰 삭제를 직렬화한다.
@@ -391,7 +391,7 @@ public class ReviewService {
                                 "리뷰를 찾을 수 없습니다."
                         ));
 
-        if (!review.getUser().getLoginId().equals(loginId)) {
+        if (!review.getUser().getUserId().equals(userId)) {
             throw new CustomException(
                     "FORBIDDEN",
                     "본인이 작성한 리뷰만 삭제할 수 있습니다."

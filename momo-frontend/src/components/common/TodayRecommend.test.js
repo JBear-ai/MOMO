@@ -109,4 +109,27 @@ describe("TodayRecommend poster recovery", () => {
       consoleError.mockRestore();
     }
   });
+
+  test.each(["empty", "unsupported"])("falls back to all candidates after %s genre results", async (mode) => {
+    localStorage.setItem("accessToken", "test-session");
+    AxiosApi.myLikedMovies.mockResolvedValue({ data: [{ movieCode: "20260002", genre: "드라마" }] });
+    AxiosApi.boxOfficeRecommendations.mockImplementation((genre) => {
+      if (genre) return mode === "empty"
+        ? Promise.resolve({ data: [] })
+        : Promise.reject({ response: { status: 400 } });
+      return Promise.resolve({ data: [{ movieCode: "20260001", title: "추천 영화", releaseDate: "20200101", genre: "드라마", posterUrl: "/posters/fallback.jpg" }] });
+    });
+    const warning = jest.spyOn(console, "warn").mockImplementation(() => {});
+    try {
+      render(React.createElement(TodayRecommend));
+      await act(async () => {
+        for (let i = 0; i < 20; i += 1) await Promise.resolve();
+      });
+      expect(AxiosApi.boxOfficeRecommendations).toHaveBeenCalledWith("드라마", expect.any(AbortSignal));
+      expect(AxiosApi.boxOfficeRecommendations).toHaveBeenCalledWith(null, expect.any(AbortSignal));
+      expect(screen.getByAltText("추천 영화").getAttribute("src")).toContain("/posters/fallback.jpg");
+    } finally {
+      warning.mockRestore();
+    }
+  });
 });

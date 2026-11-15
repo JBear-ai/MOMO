@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import SafeImage from "../components/common/SafeImage";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -70,10 +71,10 @@ function AllReviews() {
         if (controller.signal.aborted) return;
 
         if (summaryResult.status === "rejected") {
-          console.error("리뷰 요약 조회 실패:", summaryResult.reason);
+          console.error("리뷰 요약 조회 실패:", safeRequestFailure(summaryResult.reason));
         }
         if (posterResult.status === "rejected") {
-          console.error("일괄 포스터 조회 실패:", posterResult.reason);
+          console.error("일괄 포스터 조회 실패:", safeRequestFailure(posterResult.reason));
         }
 
         const summaryByReviewId = new Map(
@@ -102,7 +103,7 @@ function AllReviews() {
           return;
         }
 
-        console.error("전체 리뷰 조회 실패:", err);
+        console.error("전체 리뷰 조회 실패:", safeRequestFailure(err));
         setError("리뷰 목록을 불러오지 못했습니다.");
       } finally {
         if (!controller.signal.aborted) {

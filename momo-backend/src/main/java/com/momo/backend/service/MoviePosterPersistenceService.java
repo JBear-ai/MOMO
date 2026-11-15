@@ -16,11 +16,14 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@lombok.extern.slf4j.Slf4j
+@org.springframework.transaction.annotation.Transactional(propagation = org.springframework.transaction.annotation.Propagation.NOT_SUPPORTED)
 public class MoviePosterPersistenceService {
 
     private final MoviePosterCacheRepository posterCacheRepository;
     private final MovieRepository movieRepository;
     private final PosterFileStorageService posterFileStorageService;
+    private final MoviePosterWriter writer;
 
     // TMDb 필모그래피에서 영화 ID로 정확히 확인한 포스터를 같은 KOBIS 영화 코드에 저장한다.
     // 기존 파일이나 진행 중인 포스터 작업은 덮어쓰지 않고 작업 소유권을 확인한다.
@@ -59,9 +62,11 @@ public class MoviePosterPersistenceService {
 
         if (cache.getStatus() == PosterStatus.SUCCESS
                 && isPosterFileAvailable(cache.getPosterUrl())) {
-            movie.updatePosterUrl(cache.getPosterUrl());
-            movieRepository.save(movie);
-            return true;
+            String cachedPath = cache.getPosterUrl();
+            try {
+                MovieWriteRetry.execute(() -> { writer.restore(movieCode, movie.getPosterUrl(), cachedPath); return null; });
+                return true;
+            } catch (MoviePosterWriter.Rejected rejected) { return false; }
         }
 
         // 이미 검색 작업이 진행 중이면 그 작업의 claim token으로 TMDb에서 확인한 이미지를 확정한다.
@@ -107,19 +112,25 @@ public class MoviePosterPersistenceService {
         String localPosterPath = posterFileStorageService.downloadAndSave(
                 movieCode, normalizedPosterUrl);
 
-        int completed = posterCacheRepository.completeClaim(
-                movieCode, claimToken, localPosterPath, LocalDateTime.now());
-        if (completed != 1) {
-            // 작업 소유권이 바뀐 경우 오래된 비동기 작업이 남긴 파일을 정리한다.
-            posterFileStorageService.delete(localPosterPath);
+        try {
+            MovieWriteRetry.execute(() -> { writer.complete(movieCode, claimToken, localPosterPath); return null; });
+            return true;
+        } catch (MoviePosterWriter.Rejected rejected) {
+            cleanupUnreferenced(localPosterPath);
             return false;
+        } catch (RuntimeException failure) {
+            cleanupUnreferenced(localPosterPath);
+            throw failure;
         }
+    }
 
-        movieRepository.findById(movieCode).ifPresent(movie -> {
-            movie.updatePosterUrl(localPosterPath);
-            movieRepository.save(movie);
-        });
-        return true;
+    public void cleanupUnreferenced(String path) {
+        try {
+            if (!writer.isReferenced(path)) posterFileStorageService.delete(path);
+        } catch (RuntimeException checkOrDeleteFailure) {
+            // Fail closed: keep the file if reference verification or deletion failed.
+            log.warn("Poster compensation deferred; reference check/delete failed.");
+        }
     }
 
     // 외부 공급원 응답에 이미지 주소가 아닌 값이나 사용자 정보가 포함된 URI가 섞이지 않도록 검사한다.
