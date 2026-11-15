@@ -29,7 +29,7 @@ public class MovieRatingService {
 
     // 영화 좋아요 또는 싫어요 등록 및 변경
     public void saveRating(
-            String loginId,
+            Long userId,
             String movieCode,
             Boolean liked
     ) {
@@ -41,7 +41,7 @@ public class MovieRatingService {
         }
 
         // 같은 회원의 같은 영화 평가 저장·변경·삭제를 직렬화한다.
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",
@@ -74,11 +74,11 @@ public class MovieRatingService {
 
     // 로그인한 회원의 영화 평가 취소
     public void deleteRating(
-            String loginId,
+            Long userId,
             String movieCode
     ) {
 
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",
@@ -103,12 +103,12 @@ public class MovieRatingService {
 
     // 로그인 회원이 좋아요한 영화 목록 조회
     @Transactional(readOnly = true)
-    public List<Map<String, Object>> getMyLikedMovies(String loginId) {
-        if (loginId == null || loginId.isBlank()) {
+    public List<Map<String, Object>> getMyLikedMovies(Long userId) {
+        if (userId == null) {
             return List.of();
         }
 
-        User user = userRepository.findByLoginId(loginId).orElse(null);
+        User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             return List.of();
         }
@@ -134,7 +134,7 @@ public class MovieRatingService {
     // 특정 영화의 전체 평가 및 로그인 회원의 평가 상태 조회
     public Map<String, Object> getMovieRating(
             String movieCode,
-            String loginId
+            Long userId
     ) {
         // 상세정보 경로에서 등록이 누락된 KOBIS 영화도 평가 조회 시 DB에 먼저 등록한다.
         if (!movieRepository.existsById(movieCode)) {
@@ -158,9 +158,8 @@ public class MovieRatingService {
                 : Math.round((double) likeCount / totalCount * 1000) / 10.0;
 
         Boolean myRating = null;
-        if (loginId != null && !loginId.isBlank()
-                && !"anonymousUser".equals(loginId)) {
-            User user = userRepository.findByLoginId(loginId).orElse(null);
+        if (userId != null) {
+            User user = userRepository.findById(userId).orElse(null);
             if (user != null) {
                 MovieRating rating = movieRatingRepository
                         .findByUser_UserIdAndMovie_MovieCode(user.getUserId(), movieCode)

@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getFavoriteMovies } from "../utils/favorites";
@@ -54,7 +55,7 @@ function Profile() {
         setHasProfileImage(Boolean(response.data.profileImage));
       } catch (error) {
         if (error.code !== "ERR_CANCELED" && error.name !== "CanceledError") {
-          console.error("프로필 정보 조회 실패:", error);
+          console.error("프로필 정보 조회 실패:", safeRequestFailure(error));
         }
       }
     };
@@ -89,13 +90,13 @@ function Profile() {
       }
 
       if (myReviewsResult.status === "rejected") {
-        console.error("작성한 리뷰 개수 조회 실패:", myReviewsResult.reason);
+        console.error("작성한 리뷰 개수 조회 실패:", safeRequestFailure(myReviewsResult.reason));
       }
 
       if (likedReviewsResult.status === "rejected") {
         console.error(
           "좋아요한 리뷰 개수 조회 실패:",
-          likedReviewsResult.reason,
+          safeRequestFailure(likedReviewsResult.reason),
         );
       }
     };

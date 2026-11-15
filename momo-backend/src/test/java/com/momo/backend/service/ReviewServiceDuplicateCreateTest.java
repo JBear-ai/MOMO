@@ -23,7 +23,7 @@ class ReviewServiceDuplicateCreateTest {
         UserRepository userRepository = mock(UserRepository.class);
         User user = mock(User.class);
         when(user.getUserId()).thenReturn(5L);
-        when(userRepository.findByLoginIdForUpdate("member")).thenReturn(Optional.of(user));
+        when(userRepository.findByUserIdForUpdate(5L)).thenReturn(Optional.of(user));
         when(reviewRepository.existsByUser_UserIdAndMovieCode(5L, "20260001"))
                 .thenReturn(false);
         when(reviewRepository.saveAndFlush(any()))
@@ -45,7 +45,7 @@ class ReviewServiceDuplicateCreateTest {
 
         assertThrows(
                 CustomException.class,
-                () -> service.createReview("member", request)
+                () -> service.createReview(5L, request)
         );
         verify(reviewRepository).saveAndFlush(any());
     }

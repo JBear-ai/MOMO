@@ -1,3 +1,4 @@
+import { safeRequestFailure as requestFailureDetails } from "../../utils/safeRequestFailure";
 import React, { useEffect, useState } from "react";
 import SafeImage from "./SafeImage";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +11,7 @@ const isValidMovieCode = (movieCode) => /^[A-Za-z0-9]{8}$/.test(String(movieCode
 const isValidReleaseDate = (releaseDate) => /^\d{8}$/.test(String(releaseDate || ""));
 
 // Axios 오류 전체에는 Authorization 헤더가 포함될 수 있으므로 상태와 오류 코드만 기록한다.
-const requestFailureDetails = (error) => ({
-  status: error?.response?.status ?? null,
-  code: error?.code ?? null,
-});
+
 
 function TodayRecommend() {
   const [movie, setMovie] = useState(null);

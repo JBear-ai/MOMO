@@ -54,7 +54,7 @@ class CommentServiceTest {
         Comment comment = org.mockito.Mockito.mock(Comment.class);
         LocalDateTime now = LocalDateTime.now();
 
-        when(userRepository.findByLoginIdForUpdate("member"))
+        when(userRepository.findByUserIdForUpdate(7L))
                 .thenReturn(java.util.Optional.of(user));
         when(user.getUserId()).thenReturn(7L);
         when(user.getNickname()).thenReturn("작성자");
@@ -82,7 +82,7 @@ class CommentServiceTest {
         org.springframework.test.util.ReflectionTestUtils.setField(
                 request, "content", "동시성 검증 댓글");
 
-        CommentResponse response = commentService.createComment(15L, "member", request);
+        CommentResponse response = commentService.createComment(15L, 7L, request);
 
         assertEquals(27L, response.getCommentId());
         verify(commentReactionRepository).findResponseSummaryByCommentId(27L, 7L);
@@ -91,7 +91,7 @@ class CommentServiceTest {
 
         org.mockito.InOrder order = org.mockito.Mockito.inOrder(
                 userRepository, reviewRepository, commentRepository);
-        order.verify(userRepository).findByLoginIdForUpdate("member");
+        order.verify(userRepository).findByUserIdForUpdate(7L);
         order.verify(reviewRepository).findByIdForUpdate(15L);
         order.verify(commentRepository).save(org.mockito.ArgumentMatchers.any(Comment.class));
     }
@@ -103,7 +103,7 @@ class CommentServiceTest {
         Review review = org.mockito.Mockito.mock(Review.class);
         Comment comment = org.mockito.Mockito.mock(Comment.class);
 
-        when(userRepository.findByLoginIdForUpdate("member"))
+        when(userRepository.findByUserIdForUpdate(7L))
                 .thenReturn(java.util.Optional.of(user));
         when(commentRepository.findById(27L))
                 .thenReturn(java.util.Optional.of(commentReference));
@@ -122,17 +122,17 @@ class CommentServiceTest {
         when(user.getUserId()).thenReturn(7L);
         when(user.getNickname()).thenReturn("작성자");
         when(user.getProfileImage()).thenReturn(null);
-        when(user.getLoginId()).thenReturn("member");
+
 
         CommentRequest request = new CommentRequest();
         org.springframework.test.util.ReflectionTestUtils.setField(
                 request, "content", "수정된 댓글");
 
-        commentService.updateComment(27L, "member", request);
+        commentService.updateComment(27L, 7L, request);
 
         org.mockito.InOrder order = org.mockito.Mockito.inOrder(
                 userRepository, commentRepository, reviewRepository, comment);
-        order.verify(userRepository).findByLoginIdForUpdate("member");
+        order.verify(userRepository).findByUserIdForUpdate(7L);
         order.verify(commentRepository).findById(27L);
         order.verify(reviewRepository).findByIdForUpdate(15L);
         order.verify(commentRepository).findByIdForUpdate(27L);
@@ -146,7 +146,7 @@ class CommentServiceTest {
         Review review = org.mockito.Mockito.mock(Review.class);
         Comment comment = org.mockito.Mockito.mock(Comment.class);
 
-        when(userRepository.findByLoginIdForUpdate("member"))
+        when(userRepository.findByUserIdForUpdate(7L))
                 .thenReturn(java.util.Optional.of(user));
         when(commentRepository.findById(27L))
                 .thenReturn(java.util.Optional.of(commentReference));
@@ -157,16 +157,17 @@ class CommentServiceTest {
         when(commentRepository.findByIdForUpdate(27L))
                 .thenReturn(java.util.Optional.of(comment));
         when(comment.getUser()).thenReturn(user);
-        when(user.getLoginId()).thenReturn("member");
 
-        commentService.deleteComment(27L, "member");
+
+        when(user.getUserId()).thenReturn(7L);
+        commentService.deleteComment(27L, 7L);
 
         org.mockito.InOrder order = org.mockito.Mockito.inOrder(
                 userRepository,
                 commentRepository,
                 reviewRepository,
                 commentReactionRepository);
-        order.verify(userRepository).findByLoginIdForUpdate("member");
+        order.verify(userRepository).findByUserIdForUpdate(7L);
         order.verify(commentRepository).findById(27L);
         order.verify(reviewRepository).findByIdForUpdate(15L);
         order.verify(commentRepository).findByIdForUpdate(27L);
@@ -235,7 +236,7 @@ class CommentServiceTest {
         Review review = org.mockito.Mockito.mock(Review.class);
         when(review.getReviewId()).thenReturn(reviewId);
         when(reviewRepository.existsById(reviewId)).thenReturn(true);
-        when(userRepository.findByLoginId("member"))
+        when(userRepository.findById(7L))
                 .thenReturn(java.util.Optional.of(author));
         when(author.getUserId()).thenReturn(viewerId);
         when(author.getNickname()).thenReturn("영화기록자");
@@ -285,7 +286,7 @@ class CommentServiceTest {
         when(commentReactionRepository.findMyReactionsByCommentIds(commentIds, viewerId))
                 .thenReturn(List.of(firstMine, secondMine));
 
-        Page<CommentResponse> result = commentService.getComments(reviewId, 0, "member");
+        Page<CommentResponse> result = commentService.getComments(reviewId, 0, 7L);
 
         assertEquals(2, result.getTotalElements());
         assertEquals(3L, result.getContent().get(0).getLikeCount());
@@ -306,4 +307,22 @@ class CommentServiceTest {
                         org.mockito.ArgumentMatchers.anyLong());
     }
 
+
+    @Test
+    void anotherPrimaryKeyCannotDeleteOwnersComment() {
+        User actor = org.mockito.Mockito.mock(User.class);
+        User owner = org.mockito.Mockito.mock(User.class);
+        Review review = org.mockito.Mockito.mock(Review.class);
+        Comment comment = org.mockito.Mockito.mock(Comment.class);
+        when(userRepository.findByUserIdForUpdate(9L)).thenReturn(java.util.Optional.of(actor));
+        when(commentRepository.findById(27L)).thenReturn(java.util.Optional.of(comment));
+        when(comment.getReview()).thenReturn(review);
+        when(review.getReviewId()).thenReturn(15L);
+        when(reviewRepository.findByIdForUpdate(15L)).thenReturn(java.util.Optional.of(review));
+        when(commentRepository.findByIdForUpdate(27L)).thenReturn(java.util.Optional.of(comment));
+        when(comment.getUser()).thenReturn(owner);
+        when(owner.getUserId()).thenReturn(7L);
+        org.junit.jupiter.api.Assertions.assertThrows(com.momo.backend.exception.CustomException.class, () -> commentService.deleteComment(27L, 9L));
+        verify(commentRepository, never()).delete(comment);
+    }
 }

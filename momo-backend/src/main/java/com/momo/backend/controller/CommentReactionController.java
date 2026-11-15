@@ -4,6 +4,7 @@ import com.momo.backend.service.CommentReactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import com.momo.backend.security.MemberPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -25,7 +26,7 @@ public class CommentReactionController {
             Authentication authentication) {
 
         reactionService.saveReaction(
-                authentication.getName(),
+                MemberPrincipal.requireUserId(authentication),
                 commentId,
                 liked
         );
@@ -40,7 +41,7 @@ public class CommentReactionController {
             Authentication authentication) {
 
         reactionService.deleteReaction(
-                authentication.getName(),
+                MemberPrincipal.requireUserId(authentication),
                 commentId
         );
 

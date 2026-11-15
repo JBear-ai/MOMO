@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../../utils/safeRequestFailure";
 import React, { useState, useEffect } from "react";
 import {
   getCurrentFavoriteUserId,
@@ -48,7 +49,7 @@ function FavoriteStar({ movie }) {
         ),
       );
     } catch (error) {
-      console.error("관심 영화 저장 실패:", error);
+      console.error("관심 영화 저장 실패:", safeRequestFailure(error));
       alert("관심 영화 저장에 실패했습니다. 잠시 후 다시 시도해 주세요.");
     } finally {
       setSaving(false);

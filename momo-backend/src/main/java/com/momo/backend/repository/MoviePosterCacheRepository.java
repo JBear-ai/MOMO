@@ -16,6 +16,12 @@ import java.util.List;
 public interface MoviePosterCacheRepository
         extends JpaRepository<MoviePosterCache, String> {
 
+    @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @Query("select c from MoviePosterCache c where c.movieCode = :code")
+    java.util.Optional<MoviePosterCache> findForPosterWrite(@Param("code") String code);
+
+    boolean existsByPosterUrl(String posterUrl);
+
     // 우선순위가 높은 영화부터 처리하고 같은 우선순위에서는 오래 기다린 작업을 먼저 처리한다.
     List<MoviePosterCache> findTop50ByStatusOrderByPriorityAscUpdatedAtAsc(PosterStatus status);
 

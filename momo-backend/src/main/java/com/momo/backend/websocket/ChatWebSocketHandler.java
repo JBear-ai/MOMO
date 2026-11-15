@@ -37,7 +37,7 @@ import java.util.UUID;
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
     private static final String AUTHENTICATED_ATTRIBUTE = "momoChatAuthenticated";
-    private static final String LOGIN_ID_ATTRIBUTE = "momoChatLoginId";
+    private static final String USER_ID_ATTRIBUTE = "momoChatUserId";
     private static final String MEMBER_ID_ATTRIBUTE = "momoChatMemberId";
     private static final String ACCESS_TOKEN_ATTRIBUTE = "momoChatAccessToken";
     private static final String AUTH_TIMEOUT_ATTRIBUTE = "momoChatAuthTimeout";
@@ -93,8 +93,8 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             return;
         }
 
-        String loginId = (String) session.getAttributes().get(LOGIN_ID_ATTRIBUTE);
-        User user = userRepository.findByLoginId(loginId).orElse(null);
+        Long userId = (Long) session.getAttributes().get(USER_ID_ATTRIBUTE);
+        User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             sendError(session, "MEMBER_NOT_FOUND", "회원 정보를 확인할 수 없어 연결을 종료합니다.");
             closeSession(session, AUTH_FAILURE);
@@ -126,23 +126,23 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             return;
         }
 
-        String loginId;
+        Long userId;
         try {
-            loginId = tokenProvider.getLoginId(request.accessToken());
+            userId = tokenProvider.getUserId(request.accessToken());
         } catch (RuntimeException exception) {
             sendError(session, "INVALID_ACCESS_TOKEN", "유효한 Access Token이 필요합니다.");
             closeSession(session, AUTH_FAILURE);
             return;
         }
 
-        User user = userRepository.findByLoginId(loginId).orElse(null);
+        User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             sendError(session, "MEMBER_NOT_FOUND", "회원 정보를 확인할 수 없습니다.");
             closeSession(session, AUTH_FAILURE);
             return;
         }
 
-        session.getAttributes().put(LOGIN_ID_ATTRIBUTE, loginId);
+        session.getAttributes().put(USER_ID_ATTRIBUTE, userId);
         session.getAttributes().put(MEMBER_ID_ATTRIBUTE, user.getUserId());
         session.getAttributes().put(ACCESS_TOKEN_ATTRIBUTE, request.accessToken());
         cancelTimeout(session, AUTH_TIMEOUT_ATTRIBUTE);
@@ -194,7 +194,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     private void broadcast(ChatServerMessage event) {
         for (WebSocketSession recipient : authenticatedSessions) {
             String accessToken = (String) recipient.getAttributes().get(ACCESS_TOKEN_ATTRIBUTE);
-            if (!recipient.isOpen() || !tokenProvider.validateToken(accessToken)) {
+            if (!canReceive(recipient, accessToken)) {
                 closeSession(recipient, AUTH_FAILURE);
                 continue;
             }
@@ -251,7 +251,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
                 List<WebSocketSession> recipients = new ArrayList<>(authenticatedSessions);
                 for (WebSocketSession recipient : recipients) {
                     String accessToken = (String) recipient.getAttributes().get(ACCESS_TOKEN_ATTRIBUTE);
-                    if (!recipient.isOpen() || !tokenProvider.validateToken(accessToken)) {
+                    if (!canReceive(recipient, accessToken)) {
                         closeSession(recipient, AUTH_FAILURE);
                         continue;
                     }
@@ -264,6 +264,19 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             } while (presenceChangedDuringBroadcast);
         } finally {
             publishingPresence = false;
+        }
+    }
+
+    // Do not deliver room data/presence to deleted accounts, even when their JWT has not expired.
+    private boolean canReceive(WebSocketSession session, String accessToken) {
+        if (!session.isOpen() || !tokenProvider.validateToken(accessToken)) return false;
+        Object memberId = session.getAttributes().get(USER_ID_ATTRIBUTE);
+        if (!(memberId instanceof Long id)) return false;
+        try {
+            return userRepository.findById(id).isPresent();
+        } catch (RuntimeException unavailable) {
+            // Fail closed without logging database details or credentials.
+            return false;
         }
     }
 

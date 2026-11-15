@@ -28,7 +28,7 @@ class CommentReactionServiceTest {
         CommentReaction existing = mock(CommentReaction.class);
 
         when(user.getUserId()).thenReturn(9L);
-        when(userRepository.findByLoginIdForUpdate("member")).thenReturn(Optional.of(user));
+        when(userRepository.findByUserIdForUpdate(9L)).thenReturn(Optional.of(user));
         when(commentRepository.findById(21L)).thenReturn(Optional.of(comment));
         when(comment.getReview()).thenReturn(review);
         when(review.getReviewId()).thenReturn(15L);
@@ -40,7 +40,7 @@ class CommentReactionServiceTest {
         CommentReactionService service = new CommentReactionService(
                 reactionRepository, commentRepository, reviewRepository, userRepository);
 
-        service.saveReaction("member", 21L, true);
+        service.saveReaction(9L, 21L, true);
 
         verify(existing).updateReaction(true);
         verify(reactionRepository, never()).save(any());
@@ -94,7 +94,7 @@ class CommentReactionServiceTest {
         Review review = mock(Review.class);
 
         when(user.getUserId()).thenReturn(9L);
-        when(userRepository.findByLoginIdForUpdate("member")).thenReturn(Optional.of(user));
+        when(userRepository.findByUserIdForUpdate(9L)).thenReturn(Optional.of(user));
         when(commentRepository.findById(21L)).thenReturn(Optional.of(comment));
         when(comment.getReview()).thenReturn(review);
         when(review.getReviewId()).thenReturn(15L);
@@ -104,7 +104,7 @@ class CommentReactionServiceTest {
         CommentReactionService service = new CommentReactionService(
                 reactionRepository, commentRepository, reviewRepository, userRepository);
 
-        service.saveReaction("member", 21L, false);
+        service.saveReaction(9L, 21L, false);
 
         verify(reactionRepository).findByUser_UserIdAndComment_CommentId(9L, 21L);
         verify(reactionRepository).save(any(com.momo.backend.entity.CommentReaction.class));

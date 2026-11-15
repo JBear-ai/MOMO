@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../../utils/safeRequestFailure";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -72,7 +73,7 @@ function MovieSearchAutocomplete() {
           err.code !== "ERR_CANCELED" &&
           err.name !== "CanceledError"
         ) {
-          console.error("영화 자동완성 검색 실패:", err);
+          console.error("영화 자동완성 검색 실패:", safeRequestFailure(err));
           setError("영화 검색 중 오류가 발생했습니다.");
         }
       } finally {

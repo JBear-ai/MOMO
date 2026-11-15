@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import SafeImage from "../components/common/SafeImage";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -66,10 +67,10 @@ function LikedReviews() {
         if (controller.signal.aborted) return;
 
         if (summaryResult.status === "rejected") {
-          console.error("리뷰 요약 조회 실패:", summaryResult.reason);
+          console.error("리뷰 요약 조회 실패:", safeRequestFailure(summaryResult.reason));
         }
         if (posterResult.status === "rejected") {
-          console.error("일괄 포스터 조회 실패:", posterResult.reason);
+          console.error("일괄 포스터 조회 실패:", safeRequestFailure(posterResult.reason));
         }
 
         const summaryByReviewId = new Map(
@@ -97,7 +98,7 @@ function LikedReviews() {
       } catch (err) {
         if (isCanceled(err)) return;
 
-        console.error("좋아요한 리뷰 조회 실패:", err);
+        console.error("좋아요한 리뷰 조회 실패:", safeRequestFailure(err));
         setError("좋아요한 리뷰를 불러오지 못했습니다.");
       } finally {
         if (!controller.signal.aborted) {
@@ -161,7 +162,7 @@ function LikedReviews() {
     } catch (err) {
       if (isCanceled(err)) return;
 
-      console.error("좋아요 취소 실패:", err);
+      console.error("좋아요 취소 실패:", safeRequestFailure(err));
 
       alert(err.response?.data?.message || "좋아요 취소에 실패했습니다.");
     } finally {

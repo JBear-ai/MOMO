@@ -290,10 +290,10 @@ class MomoBackendApplicationTests {
 
     @Test
     void createsAndValidatesJwtForLoginId() {
-        String token = tokenProvider.createToken("momo-test-user");
+        String token = tokenProvider.createToken(1L);
 
         assertTrue(tokenProvider.validateToken(token));
-        assertEquals("momo-test-user", tokenProvider.getAuthentication(token).getName());
+        assertEquals("1", tokenProvider.getAuthentication(token).getName());
     }
 
     @Test

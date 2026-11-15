@@ -21,8 +21,8 @@ public class FavoriteMovieService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public List<FavoriteMovieResponse> getFavorites(String loginId) {
-        User user = userRepository.findByLoginId(loginId)
+    public List<FavoriteMovieResponse> getFavorites(Long userId) {
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
         return favoriteMovieRepository
@@ -33,10 +33,10 @@ public class FavoriteMovieService {
     }
 
     public FavoriteMovieResponse addFavorite(
-            String loginId,
+            Long userId,
             FavoriteMovieRequest request
     ) {
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
         FavoriteMovie favorite = favoriteMovieRepository
@@ -64,8 +64,8 @@ public class FavoriteMovieService {
         return new FavoriteMovieResponse(favorite);
     }
 
-    public void removeFavorite(String loginId, String movieCode) {
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+    public void removeFavorite(Long userId, String movieCode) {
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
         // 이미 삭제된 관심 영화를 다시 삭제해도 성공으로 처리해 요청 재시도에 안전하게 만든다.

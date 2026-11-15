@@ -24,6 +24,7 @@ public class AsyncConfig {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
         executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.setAwaitTerminationSeconds(30);
+        executor.setTaskDecorator(com.momo.backend.observability.ApiCallTrace::decorateAsync);
         executor.initialize();
         return executor;
     }
@@ -39,6 +40,7 @@ public class AsyncConfig {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.setAwaitTerminationSeconds(30);
+        executor.setTaskDecorator(com.momo.backend.observability.ApiCallTrace::decorateAsync);
         executor.initialize();
         return executor;
     }
@@ -61,6 +63,7 @@ public class AsyncConfig {
         executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.setAwaitTerminationSeconds(30);
 
+        executor.setTaskDecorator(com.momo.backend.observability.ApiCallTrace::decorateAsync);
         executor.initialize();
         return executor;
     }
