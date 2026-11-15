@@ -63,7 +63,7 @@ class ChatWebpValidationTest {
         String id=service.store(new MockMultipartFile("file","animation.webp","image/webp",valid),1L);
         service.attachToMessage(id,1L);
         assertEquals("image/webp",service.read(id).contentType());
-        // Preserve a valid frame header so only decoding the later payload reveals the failure.
+        // 정상 프레임 헤더를 유지해 뒤쪽 압축 데이터를 디코딩해야 손상을 발견하도록 구성한다.
         byte[] broken=chunk("VP8 ",Arrays.copyOfRange(frame,8,18));
         assertRejected(animation(frame,broken));
     }

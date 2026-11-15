@@ -1640,7 +1640,7 @@ public class MovieService {
             return pageMovies;
         }
 
-        // Collection belongs to MovieCatalogSyncScheduler; an empty DB page never starts a scan.
+        // 전체 수집은 기존 카탈로그 배치가 담당하며 빈 DB 조회 결과로 수집을 시작하지 않는다.
         return List.of();
     }
 

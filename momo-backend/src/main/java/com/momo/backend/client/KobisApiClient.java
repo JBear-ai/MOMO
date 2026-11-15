@@ -28,7 +28,7 @@ public class KobisApiClient {
         this(configuredBuilder(baseUrl, connectTimeout, readTimeout), apiKey, metrics, apiCallBudgetService);
     }
 
-    // Package-visible builder injection permits transport-level mocks without any network access.
+    // 네트워크 호출 없이 HTTP 전송을 모의 검증하도록 패키지 범위에서 builder를 주입받는다.
     KobisApiClient(RestClient.Builder builder, String apiKey, ApiCallMetrics metrics,
             com.momo.backend.service.ApiCallBudgetService apiCallBudgetService) {
         this.restClient = builder.requestInterceptor(com.momo.backend.observability.ApiCallTrace.interceptor()).build();

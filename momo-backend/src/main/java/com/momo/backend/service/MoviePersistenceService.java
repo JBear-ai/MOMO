@@ -27,7 +27,7 @@ public class MoviePersistenceService {
                 return moviePersistenceWriter.applyDetail(update, requireExisting);
             } catch (DataIntegrityViolationException duplicate) {
                 if (requireExisting || !MovieWriteRetry.isDuplicateInsert(duplicate) || attempt == 3) throw duplicate;
-                // A later write can only supplement the competing row; never repeat the INSERT.
+                // 중복 INSERT 이후 재시도에서는 경합 중 생성된 행을 보완하고 INSERT를 반복하지 않는다.
                 requireExisting = true;
             } catch (OptimisticLockingFailureException exhausted) {
                 if (attempt < 3) continue;

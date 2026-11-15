@@ -83,7 +83,7 @@ class ChatImageStorageServiceTest {
         Files.delete(image);
         Files.createDirectory(image);
         Path blocker = Files.writeString(image.resolve("blocker"), "test only");
-        service.delete(id); // A nonempty directory deterministically makes file deletion fail.
+        service.delete(id); // 비어 있지 않은 디렉터리로 만들어 파일 삭제 실패를 재현한다.
         assertThrows(ResponseStatusException.class, () -> service.read(id));
         assertTrue(Files.exists(image));
         Files.delete(blocker);

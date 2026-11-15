@@ -6,7 +6,7 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Bounded task/request state; never retains tokens, URLs, query strings or user identities. */
+/** 요청·작업별 계측 상태를 관리하며 토큰·URL·쿼리·회원정보를 보관하지 않는다. */
 public final class ApiCallTrace {
     private static final Logger log = LoggerFactory.getLogger(ApiCallTrace.class);
     public enum Source { HTTP, SCHEDULER, ASYNC, UNSCOPED }

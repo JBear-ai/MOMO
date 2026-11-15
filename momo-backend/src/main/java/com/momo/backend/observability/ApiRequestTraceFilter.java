@@ -20,7 +20,7 @@ public class ApiRequestTraceFilter extends OncePerRequestFilter {
             FilterChain chain) throws ServletException, IOException {
         String path = request.getServletPath();
         if (path == null || path.isEmpty()) path = request.getRequestURI().substring(request.getContextPath().length());
-        // Log only fixed route labels, never arbitrary URLs or query parameters.
+        // 임의 URL·쿼리가 로그에 남지 않도록 정해진 경로 이름만 기록한다.
         String route = "GET".equals(request.getMethod()) &&
                 ("/api/movies/genre".equals(path) || "/api/movies/recommendations".equals(path)) ? path : null;
         try (var scope = ApiCallTrace.open(ApiCallTrace.Source.HTTP)) {

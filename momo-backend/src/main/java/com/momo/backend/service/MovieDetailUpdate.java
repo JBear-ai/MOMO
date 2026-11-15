@@ -3,7 +3,7 @@ package com.momo.backend.service;
 import com.momo.backend.entity.Movie;
 import java.time.LocalDateTime;
 
-/** Frozen enrichment result. Deliberately excludes poster and box-office state. */
+/** 포스터·박스오피스 상태를 제외하고 정보 보완 결과만 전달하는 불변 값이다. */
 public record MovieDetailUpdate(String movieCode, String title, String titleEn, String releaseDate,
         String showTime, String genre, String director, String actors, String watchGrade,
         String overview, String sources, boolean supplementVerified, LocalDateTime overviewAttemptedAt,

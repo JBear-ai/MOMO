@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/** Real filter/controller with an isolated H2 DB and temporary image files; no development DB/cloud. */
+/** 실제 인증 필터·Controller를 격리 H2와 임시 이미지로 검증하며 개발 DB·클라우드는 사용하지 않는다. */
 @SpringBootTest(properties = {
     "spring.datasource.url=jdbc:h2:mem:chat-image-authorization;DB_CLOSE_DELAY=-1;MODE=MySQL",
     "spring.datasource.driver-class-name=org.h2.Driver", "spring.datasource.username=sa",

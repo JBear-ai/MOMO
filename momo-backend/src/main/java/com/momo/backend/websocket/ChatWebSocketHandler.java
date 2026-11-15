@@ -267,7 +267,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
         }
     }
 
-    // Do not deliver room data/presence to deleted accounts, even when their JWT has not expired.
+    // JWT가 만료되지 않았어도 탈퇴 회원에게 채팅 메시지나 접속자 정보를 전달하지 않는다.
     private boolean canReceive(WebSocketSession session, String accessToken) {
         if (!session.isOpen() || !tokenProvider.validateToken(accessToken)) return false;
         Object memberId = session.getAttributes().get(USER_ID_ATTRIBUTE);
@@ -275,7 +275,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
         try {
             return userRepository.findById(id).isPresent();
         } catch (RuntimeException unavailable) {
-            // Fail closed without logging database details or credentials.
+            // DB 상세 정보·인증정보를 기록하지 않고 수신을 차단한다.
             return false;
         }
     }

@@ -19,7 +19,7 @@ const sessionChangedError = () => {
   return error;
 };
 
-// Keep the original adapter, including custom/mock adapters, and guard the last dispatch boundary.
+// 사용자 정의·mock adapter를 유지하면서 실제 요청 전송 직전에 세션 변경을 차단한다.
 const guardSessionAdapter = (config) => {
   if (config._momoSessionGuarded) return;
   const adapter = config.adapter || axios.defaults?.adapter;

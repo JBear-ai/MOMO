@@ -16,8 +16,8 @@ class FirebaseStorageServiceTest {
         MultipartFile file = mock(MultipartFile.class);
         when(file.isEmpty()).thenReturn(false);
         when(file.getSize()).thenReturn((long) FIVE_MIB + 1);
-        // Valid type/signature ensure a wrong size constant cannot pass this test
-        // merely by failing later for an unrelated MIME error.
+        // 정상 형식·서명을 사용해 크기 상수 오류가 다른 MIME 오류에 가려지지 않도록 한다.
+        // 파일 크기 제한 자체가 적용되는지 확인한다.
         when(file.getContentType()).thenReturn("image/png");
         when(file.getBytes()).thenReturn(new byte[]{(byte) 0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a});
         try (var firebase = mockStatic(StorageClient.class)) {

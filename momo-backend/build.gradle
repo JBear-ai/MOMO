@@ -53,7 +53,7 @@ dependencies {
     // 운영 데이터베이스
     runtimeOnly 'com.mysql:mysql-connector-j'
 
-    // WebP uploads use the same ImageIO decoding validation as JPEG/PNG.
+    // WebP도 JPEG/PNG와 동일하게 실제 디코딩으로 검증한다.
     runtimeOnly 'com.twelvemonkeys.imageio:imageio-webp:3.15.3'
 
     // 테스트
