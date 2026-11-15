@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-/** Short DB-only boundary. All poster transactions lock Movie before the cache row. */
+/** DB 작업만 수행하는 짧은 경계이며 포스터 트랜잭션은 Movie→캐시 순서로 잠근다. */
 @Service
 @RequiredArgsConstructor
 public class MoviePosterWriter {
@@ -53,7 +53,7 @@ public class MoviePosterWriter {
         movie.updatePosterUrl(localPath);
         movies.flush();
         caches.findForPosterWrite(code).ifPresent(cache -> {
-            // A current claim belongs to another worker; do not steal it during migration.
+            // 진행 중인 claim은 다른 작업 소유이므로 포스터 이전 중 빼앗지 않는다.
             if (cache.getStatus() == PosterStatus.PROCESSING) throw new Rejected();
             cache.updatePosterUrl(localPath);
         });

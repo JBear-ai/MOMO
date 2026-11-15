@@ -3,7 +3,7 @@ package com.momo.backend.service;
 import java.util.List;
 import java.util.function.Predicate;
 
-/** Application genre policy. New catalog tokens can be accepted without an API lookup. */
+/** 외부 API 조회 없이 카탈로그의 새 장르도 검증할 수 있는 공통 장르 정책이다. */
 public final class MovieGenrePolicy {
     public static final List<String> SUPPORTED_GENRES = List.of(
             "드라마", "코미디", "액션", "멜로/로맨스", "스릴러", "미스터리", "공포(호러)",
@@ -24,7 +24,7 @@ public final class MovieGenrePolicy {
         for (String supported : SUPPORTED_GENRES) {
             if (supported.equalsIgnoreCase(normalized)) return supported;
         }
-        // One bounded token only: reject wildcards, comma-separated lists and control characters.
+        // 길이가 제한된 단일 장르만 허용하고 와일드카드·쉼표 목록·제어 문자는 거부한다.
         if (normalized.length() <= 50
                 && normalized.matches("[\\p{L}\\p{N}][\\p{L}\\p{N} /()·-]*")
                 && storedGenreExists.test(normalized)) {

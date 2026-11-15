@@ -66,7 +66,7 @@ class ChatImageStorageQuotaTest {
 
     @Test void concurrentDifferentMembersCannotConsumeTheSameRemainingCapacity() throws Exception {
         int size = png().getBytes().length;
-        // The inventory is real; a small overridden ceiling offset avoids filling a disk.
+        // 실제 파일을 합산하되 사용량에 보정값을 더해 디스크를 채우지 않고 한도 경쟁을 검증한다.
         var service = new ChatImageStorageService(directory.toString()) {
             @Override long directoryUsageBytes() throws IOException {
                 return MAX_DIRECTORY_BYTES - size + super.directoryUsageBytes();
@@ -134,7 +134,7 @@ class ChatImageStorageQuotaTest {
         Path blocker = Files.write(file.resolve("blocker"), new byte[19]);
         service.delete(id);
         assertEquals(19, service.directoryUsageBytes());
-        // Inventory counts this failed-delete content rather than assuming a successful release.
+        // 삭제 실패를 성공으로 간주해 용량을 반환하지 않고 남은 파일을 계속 합산하는지 확인한다.
         Files.delete(blocker);
         Files.delete(file);
         Files.write(file, png().getBytes());

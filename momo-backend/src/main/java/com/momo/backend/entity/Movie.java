@@ -156,7 +156,7 @@ public class Movie {
         this.supplementSources = "KOBIS";
     }
 
-    /** External enrichment must never dirty a Movie managed by a caller's transaction. */
+    /** 외부 정보 보완 시 호출자 트랜잭션이 관리하는 Movie 원본을 변경하지 않도록 복사한다. */
     public Movie enrichmentCopy() {
         Movie copy = new Movie(movieCode, title, titleEn, releaseDate, showTime, genre, director, actors, watchGrade);
         copy.overview = overview;

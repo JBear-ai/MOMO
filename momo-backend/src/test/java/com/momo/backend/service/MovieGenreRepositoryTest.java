@@ -9,7 +9,7 @@ import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabas
 import org.springframework.data.domain.PageRequest;
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Dedicated H2 memory database only; no application services or external clients are loaded. */
+/** 전용 H2 메모리 DB만 사용하며 애플리케이션 서비스·외부 API 클라이언트는 로드하지 않는다. */
 @DataJpaTest(showSql = false, properties = {
     "spring.datasource.url=jdbc:h2:mem:h2-genre-policy;DB_CLOSE_DELAY=-1;MODE=MySQL",
     "spring.datasource.driver-class-name=org.h2.Driver", "spring.datasource.username=sa",

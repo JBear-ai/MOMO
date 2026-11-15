@@ -4,7 +4,7 @@ import com.momo.backend.exception.CustomException;
 import java.security.Principal;
 import org.springframework.security.core.Authentication;
 
-/** Stable internal account identity, independent of the reusable login ID. */
+/** 재사용 가능한 로그인 아이디와 구분되는 회원 PK 기반 인증 식별자다. */
 public record MemberPrincipal(Long userId) implements Principal {
     public MemberPrincipal {
         if (userId == null || userId <= 0) {

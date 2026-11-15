@@ -23,8 +23,8 @@ import java.util.concurrent.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-/** Regression: verify preservation under controlled interleavings, not universal concurrency safety.
- * Enable only against a disposable, separately launched MySQL server. Never use the development server.
+/** 제어한 동시 실행 순서에서 값 보존을 검증하며 모든 동시성 상황을 보장하지 않는다.
+ * 별도로 실행한 폐기 가능한 MySQL에서만 활성화하고 개발 DB는 사용하지 않는다.
  */
 @EnabledIfEnvironmentVariable(named="MOMO_M2_EPHEMERAL_SERVER", matches="true")
 @EnabledIfEnvironmentVariable(named="MOMO_M2_ISOLATED_URL", matches="jdbc:mysql://127[.]0[.]0[.]1:[0-9]+/momo_m2_isolated[?]useSSL=false&allowPublicKeyRetrieval=true")
@@ -121,7 +121,7 @@ class MovieMySqlLostUpdateTest {
    movies.saveAndFlush(current);
    assertEquals("Committed English",movies.findById(code).orElseThrow().getTitleEn());
   });
-  // No dirty fields in the stale writer above: this path should preserve the concurrent value.
+  // 오래된 writer가 필드를 변경하지 않는 경로에서도 다른 작업이 저장한 값이 유지돼야 한다.
   assertEquals("Committed English",movies.findById(code).orElseThrow().getTitleEn());
  }
 

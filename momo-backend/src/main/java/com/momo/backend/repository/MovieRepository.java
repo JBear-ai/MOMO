@@ -47,8 +47,8 @@ public interface MovieRepository extends JpaRepository<Movie, String> {
     );
 
 
-    // Narrow discovery to matching values, then compare complete comma-delimited tokens.
-    // Trim token edges only: internal spaces are part of the stored genre name.
+    // 후보를 먼저 좁힌 뒤 쉼표로 구분된 장르를 완전 일치로 비교한다.
+    // 저장된 장르명 내부 공백은 유지하고 앞뒤 공백만 제거한다.
     @Query("""
             select distinct movie.genre from Movie movie
              where locate(lower(:genre), lower(movie.genre)) > 0

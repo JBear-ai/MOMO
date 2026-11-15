@@ -21,7 +21,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import java.util.Base64;
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Isolated in-memory H2 only: never loads Firebase or external API services. */
+/** 격리 H2 메모리 DB만 사용하며 Firebase·외부 API 서비스는 로드하지 않는다. */
 @DataJpaTest(showSql = false, properties = {
  "spring.datasource.url=jdbc:h2:mem:h1-identity;DB_CLOSE_DELAY=-1;MODE=MySQL",
  "spring.datasource.driver-class-name=org.h2.Driver",

@@ -128,7 +128,7 @@ public class MoviePosterPersistenceService {
         try {
             if (!writer.isReferenced(path)) posterFileStorageService.delete(path);
         } catch (RuntimeException checkOrDeleteFailure) {
-            // Fail closed: keep the file if reference verification or deletion failed.
+            // 파일 참조 확인이나 삭제에 실패하면 안전을 위해 파일을 보존한다.
             log.warn("Poster compensation deferred; reference check/delete failed.");
         }
     }

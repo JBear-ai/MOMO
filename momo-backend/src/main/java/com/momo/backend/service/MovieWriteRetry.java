@@ -3,7 +3,7 @@ package com.momo.backend.service;
 import org.springframework.dao.OptimisticLockingFailureException;
 import java.util.function.Supplier;
 
-/** Invoke a proxied REQUIRES_NEW writer; each failed transaction ends before the next attempt. */
+/** 프록시를 거친 REQUIRES_NEW writer를 호출해 실패한 트랜잭션 종료 후 재시도한다. */
 public final class MovieWriteRetry {
     private MovieWriteRetry() {}
     public static <T> T execute(Supplier<T> write) {

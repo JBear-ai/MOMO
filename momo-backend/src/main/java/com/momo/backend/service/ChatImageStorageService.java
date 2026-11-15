@@ -61,8 +61,8 @@ public class ChatImageStorageService {
     public synchronized String store(MultipartFile file, Long ownerId) {
         enforceUploadRate(ownerId);
         purgeExpiredUploads();
-        // Only retry deletions requested for known images. Unknown files may belong to
-        // an earlier process; a missing in-memory entry is not permission to delete them.
+        // 소유 정보를 아는 이미지의 삭제 실패만 재시도한다.
+        // 이전 실행에서 남은 불명확 파일은 메모리 기록이 없다는 이유로 삭제하지 않는다.
         Set.copyOf(pendingDeletes).forEach(this::delete);
         if (file == null || file.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이미지 파일을 선택해 주세요.");
@@ -98,7 +98,7 @@ public class ChatImageStorageService {
         }
     }
 
-    // Authenticated attempts (including failed validation/writes) consume the rolling window.
+    // 검증·저장 실패를 포함한 인증 회원의 업로드 시도를 최근 60초 기준으로 집계한다.
     private void enforceUploadRate(Long ownerId) {
         if (ownerId == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인이 필요합니다.");
@@ -117,8 +117,8 @@ public class ChatImageStorageService {
         times.addLast(now);
     }
 
-    // The store monitor covers inspection through move: no second local upload can
-    // consume the same capacity. Recount actual files on every attempt, also after restart.
+    // 같은 인스턴스의 동시 업로드가 남은 용량을 중복 사용하지 않도록 검사부터 이동까지 잠근다.
+    // 재시작 후에도 실제 사용량을 반영하도록 매번 폴더를 다시 합산한다.
     private void checkStorageCapacity(long incomingBytes) {
         try {
             Files.createDirectories(imageDirectory);
@@ -128,7 +128,7 @@ public class ChatImageStorageService {
                         "채팅 이미지 저장 공간이 부족합니다. 잠시 후 다시 시도해 주세요.");
             }
         } catch (IOException | SecurityException exception) {
-            // A failed inventory must never be interpreted as an empty directory.
+            // 폴더 조회 실패를 사용량 0으로 처리하면 제한을 우회할 수 있으므로 저장을 거부한다.
             throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE,
                     "채팅 이미지 저장 공간을 확인할 수 없습니다. 잠시 후 다시 시도해 주세요.");
         }
@@ -141,7 +141,7 @@ public class ChatImageStorageService {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attributes) throws IOException {
                 if (!attributes.isRegularFile()) throw new IOException("Unsupported storage entry");
-                // Include unknown, temporary and failed-deletion files, including subdirectories.
+                // 하위 폴더의 불명확 파일·임시 파일·삭제 실패 파일도 사용량에 포함한다.
                 total[0] = Math.min(MAX_DIRECTORY_BYTES + 1,
                         total[0] + Math.min(attributes.size(), MAX_DIRECTORY_BYTES + 1));
                 return FileVisitResult.CONTINUE;
@@ -154,7 +154,7 @@ public class ChatImageStorageService {
         return Files.getFileStore(imageDirectory).getUsableSpace();
     }
 
-    // Package-visible fault boundary permits real partial-write cleanup tests.
+    // 실제 부분 쓰기 실패와 정리를 검증하도록 파일 쓰기 경계를 패키지에 공개한다.
     void writeTemporaryImage(Path temporary, byte[] bytes) throws IOException {
         Files.write(temporary, bytes);
     }
@@ -195,7 +195,7 @@ public class ChatImageStorageService {
                 images.remove(imageId);
                 pendingDeletes.remove(imageId);
             } else {
-                // Preserve the known path for a later retry; deny read/attach meanwhile.
+                // 다음 삭제 재시도를 위해 경로를 보존하고, 그동안 읽기와 메시지 연결을 차단한다.
                 pendingDeletes.add(imageId);
             }
         }
@@ -222,8 +222,8 @@ public class ChatImageStorageService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "JPEG, PNG, WebP 이미지만 업로드할 수 있습니다.");
         }
 
-        // Decode every accepted format, including WebP, before any file is stored.
-        // Keep the existing decoded-pixel budget for the complete animation as well.
+        // 저장 전에 WebP를 포함한 모든 허용 형식을 실제로 디코딩한다.
+        // 애니메이션 전체 프레임에도 기존 픽셀 합계 제한을 적용한다.
         try (ImageInputStream input = ImageIO.createImageInputStream(new ByteArrayInputStream(bytes))) {
             var readers = ImageIO.getImageReaders(input);
             if (!readers.hasNext()) {
@@ -280,7 +280,7 @@ public class ChatImageStorageService {
                 if (extended || staticImages != 0 || chunkSize != 10) return false;
                 extended = true;
                 animated = (bytes[offset + 8] & 2) != 0;
-                // Metadata alone is not an image. Bound the canvas before decoding.
+                // 메타데이터만으로 정상 이미지로 인정하지 않으며 디코딩 전에 캔버스 크기를 제한한다.
                 canvasWidth = 1L + littleEndian24(bytes, offset + 12);
                 canvasHeight = 1L + littleEndian24(bytes, offset + 15);
                 if (canvasWidth * canvasHeight > MAX_IMAGE_PIXELS) return false;
@@ -320,8 +320,8 @@ public class ChatImageStorageService {
         return offset == end && images == 1;
     }
 
-    // Check the compressed bitstream's own dimensions before entering the decoder:
-    // a small VP8X/ANMF rectangle must not hide a much larger VP8/VP8L allocation.
+    // 작은 VP8X/ANMF 영역 정보로 큰 이미지 할당을 숨기지 못하도록
+    // 디코더 진입 전에 VP8/VP8L 압축 데이터 자체의 크기를 검사한다.
     private boolean validBitstreamSize(byte[] bytes, int chunk, long size, long expectedWidth, long expectedHeight) {
         int data = chunk + 8;
         long width, height;
