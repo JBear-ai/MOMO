@@ -27,10 +27,10 @@ const SearchHeading = styled.div`
 
 const SearchInput = styled.input`
   width: 100%;
-  padding: 17px 20px;
+  padding: 18px 22px;
   box-sizing: border-box;
   border: 1px solid var(--momo-border);
-  border-radius: 12px;
+  border-radius: var(--momo-radius-lg);
   background: var(--momo-surface);
   color: var(--momo-text);
   font-size: 15px;
@@ -49,8 +49,8 @@ const SearchInput = styled.input`
 const MovieGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 28px 18px;
-  margin-top: 36px;
+  gap: 22px 16px;
+  margin-top: 28px;
 
   @media (max-width: 1000px) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
