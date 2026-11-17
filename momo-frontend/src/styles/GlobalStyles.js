@@ -1,5 +1,6 @@
 import React from "react";
 import GlobalTokensStyles from "./global/GlobalTokens.styles";
+import ProductExperienceStyles from "./global/ProductExperience.styles";
 import GlobalResetStyles from "./global/GlobalReset.styles";
 import ToastNotificationStyles from "./global/ToastNotification.styles";
 import FoundationAndProfileStyles from "./legacy/FoundationAndProfile.styles";
@@ -41,6 +42,7 @@ function GlobalStyles() {
       <ResponsiveAndPosterOverridesStyles />
       <PersonDetailStyles />
       <ChatPopupGlobalStyles />
+      <ProductExperienceStyles />
     </>
   );
 }
