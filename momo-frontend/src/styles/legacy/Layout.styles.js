@@ -23,19 +23,19 @@ const Header = styled.header`
   z-index: 100;
   width: calc(100% - 2 * clamp(12px, 3vw, 44px));
   max-width: 1480px;
-  min-height: 72px;
+  min-height: 76px;
   margin: 12px auto 0;
   padding: 0 clamp(18px, 2.6vw, 38px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 22px;
-  background: rgba(255, 254, 250, .86);
+  gap: clamp(14px, 2vw, 28px);
+  background: var(--momo-header-glass);
   border: 1px solid rgba(255, 255, 255, .92);
-  border-radius: 20px;
+  border-radius: 22px;
   box-sizing: border-box;
-  box-shadow: 0 10px 30px rgba(54, 45, 28, .075), inset 0 1px 0 rgba(255,255,255,.9);
-  backdrop-filter: blur(20px) saturate(130%);
+  box-shadow: 0 8px 28px rgba(54, 45, 28, .055), inset 0 1px 0 rgba(255,255,255,.94);
+  backdrop-filter: blur(18px) saturate(125%);
   -webkit-backdrop-filter: blur(20px) saturate(130%);
 
   @media (max-width: 768px) {
@@ -78,7 +78,7 @@ const Navigation = styled.nav`
   background: rgba(245, 242, 235, .62);
 
   a {
-    padding: 9px 13px;
+    padding: 10px 14px;
     color: var(--momo-muted);
     text-decoration: none;
     font-size: 13px;
@@ -156,7 +156,7 @@ const Main = styled.main`
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(28px, 3.6vw, 52px) clamp(16px, 4vw, 56px) 64px;
+  padding: clamp(32px, 4vw, 60px) clamp(18px, 4.2vw, 64px) 76px;
   box-sizing: border-box;
 
   @media (max-width: 600px) {
@@ -170,7 +170,7 @@ const Main = styled.main`
 // ========================================
 
 const Footer = styled.footer`
-  padding: 44px clamp(18px, 5vw, 80px) 28px;
+  padding: 52px clamp(18px, 5vw, 80px) 30px;
   background:
     linear-gradient(180deg, rgba(255,250,236,.82), var(--momo-note));
   color: var(--momo-text-soft);
