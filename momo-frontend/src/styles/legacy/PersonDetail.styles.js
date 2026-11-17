@@ -141,6 +141,25 @@ const PersonDetailStyles = createGlobalStyle`
     height: 210px;
   }
 }
+
+/* Person pages: keep portrait scale and filmography density balanced. */
+.movie-detail-page > .detail-content-section > .people-list { gap: 16px; }
+.movie-detail-page > .detail-content-section > .people-list > .person-chip {
+  padding: 11px;
+  border-radius: 12px;
+  box-shadow: none;
+}
+.movie-detail-page > .detail-content-section > .people-list > .person-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--momo-shadow-sm);
+}
+.movie-detail-page > .detail-content-section > .people-list > .person-chip > img,
+.movie-detail-page > .detail-content-section > .people-list > .person-chip > div:first-child {
+  height: 230px;
+  border-radius: 8px;
+}
+.movie-detail-page > .detail-content-section > .people-list > .person-chip strong { font-size: 14px; }
+
 `;
 
 export default PersonDetailStyles;
