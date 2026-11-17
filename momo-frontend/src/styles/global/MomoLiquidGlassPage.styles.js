@@ -2253,6 +2253,26 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     outline-color: rgba(198,161,43,.62);
   }
 
+
+  /* Preserve danger semantics after the shared profile-button rule. */
+  #root .profile-page .profile-delete-button {
+    border-color: #E5B8AD;
+    background: #FFF1EC;
+    color: #8C3F38;
+    box-shadow: none;
+  }
+  #root .profile-page .profile-delete-button:hover:not(:disabled) {
+    border-color: #D69D91;
+    background: #FFE5DC;
+    color: #793A34;
+  }
+  #root .profile-page .profile-delete-button:disabled {
+    border-color: #E9DFC5;
+    background: #F1EADF;
+    color: #776F62;
+    opacity: .62;
+  }
+
 `;
 
 export default MomoLiquidGlassPageStyles;
