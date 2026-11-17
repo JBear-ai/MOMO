@@ -186,6 +186,35 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
       max-height: 320px;
     }
   }
+
+/* Header command search */
+.momo-search-area { width:clamp(220px,28vw,390px); }
+.momo-search-area .momo-search-input,
+.momo-search-area input {
+  min-height:48px;
+  padding:0 18px;
+  border:1px solid rgba(216,206,186,.9);
+  border-radius:7px 16px 7px 16px;
+  background:rgba(255,255,255,.78);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 7px 16px rgba(54,45,28,.045);
+  backdrop-filter:blur(14px);
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.momo-search-area .momo-search-input:focus,
+.momo-search-area input:focus {
+  border-color:#9C791B;
+  background:#FFFEFA;
+  box-shadow:0 0 0 4px rgba(255,212,59,.18),0 10px 20px rgba(54,45,28,.07);
+}
+.momo-search-dropdown {
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:14px;
+  background:rgba(255,254,250,.94);
+  box-shadow:0 24px 54px rgba(41,40,32,.16);
+  backdrop-filter:blur(22px) saturate(145%);
+}
+@media(max-width:680px) { .momo-search-area { width:100%; grid-column:1 / -1; grid-row:2; } .momo-search-area input { min-height:42px; } }
+
 `;
 
 export default MovieSearchAutocompleteStyles;
