@@ -342,6 +342,34 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 }
 
 
+
+/* Product refinement: the reader's note is the visual focus. */
+.review-detail-page { max-width: 920px; padding-top: 6px; }
+.review-detail-card {
+  padding: clamp(22px, 3vw, 36px);
+  border-radius: 16px;
+  box-shadow: var(--momo-shadow-xs);
+}
+.review-detail-card::before { left: 0; right: auto; width: 48px; height: 4px; background: var(--momo-accent); }
+.review-detail-title { font-size: clamp(25px, 3.4vw, 35px); line-height: 1.3; }
+.review-detail-movie { padding: 17px 19px; border-radius: 12px; }
+.review-detail-content {
+  min-height: 160px;
+  padding: clamp(20px, 2.5vw, 28px);
+  background: #FFFAEC;
+  border-color: #E9DFC5;
+  border-radius: 9px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.movie-rating-panel { padding: 18px; border-radius: 12px; }
+.detail-reaction-count { min-height: 96px; border-radius: 9px; box-shadow: none; }
+.detail-reaction-count:hover { box-shadow: var(--momo-shadow-sm); }
+@media (max-width: 600px) {
+  .review-detail-card { padding: 23px 17px; }
+  .review-detail-title { font-size: 25px; }
+}
+
 `;
 
 export default ReviewDetailAndRatingStyles;

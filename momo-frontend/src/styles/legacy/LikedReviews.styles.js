@@ -351,6 +351,32 @@ const LikedReviewsStyles = createGlobalStyle`
   }
 }
 
+
+/* Liked review archive: poster-led rows with a calm reading surface. */
+.liked-reviews-container { max-width: 1080px; }
+.liked-reviews-heading {
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  background: #FFF9E9;
+  border-radius: 15px;
+}
+.liked-reviews-heading h1 { font-size: clamp(26px, 3vw, 34px); letter-spacing: -.04em; }
+.liked-reviews-card {
+  padding: clamp(18px, 2.5vw, 28px);
+  border-radius: 14px;
+  box-shadow: none;
+}
+.liked-review-item { gap: 16px; padding: 18px 10px; border-radius: 8px; }
+.liked-review-item:hover { background: #FFFAEC; }
+.liked-review-poster { width: 86px; height: 126px; border-radius: 7px; }
+.liked-review-title { font-size: 16px; }
+.liked-review-unlike { min-height: 36px; border-radius: 7px; }
+@media (max-width: 600px) {
+  .liked-reviews-heading { padding: 20px 17px; }
+  .liked-reviews-card { padding: 16px 13px; }
+  .liked-review-poster { width: 70px; height: 104px; }
+}
+
 `;
 
 export default LikedReviewsStyles;

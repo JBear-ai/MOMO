@@ -479,6 +479,39 @@ const ReviewListStyles = createGlobalStyle`
   }
 }
 
+
+/* Product refinement: review discovery stays compact and readable. */
+.all-reviews-heading {
+  padding: 26px 30px;
+  margin-bottom: 22px;
+  background: #FFF9E9;
+  border-radius: 16px;
+  box-shadow: none;
+}
+.all-reviews-heading::before { width: 4px; }
+.all-reviews-heading h1 { font-size: clamp(27px, 3vw, 35px); line-height: 1.2; }
+.all-reviews-count { width: 104px; height: 86px; border-radius: 10px; }
+.all-reviews-card {
+  padding: clamp(18px, 2.4vw, 28px);
+  border-radius: 14px;
+  box-shadow: none;
+}
+.all-reviews-card-heading { margin-bottom: 18px; padding-bottom: 15px; }
+.all-reviews-search {
+  padding: 12px;
+  background: #F7F3E9;
+  border-color: var(--momo-border);
+  border-radius: 9px;
+}
+.all-reviews-table th { padding: 13px 12px; }
+.all-reviews-table td { padding: 16px 12px; }
+.all-reviews-table tbody tr:hover { background: #FFFAEC; }
+.all-reviews-pagination button { border-radius: 8px; }
+@media (max-width: 600px) {
+  .all-reviews-heading { padding: 22px 18px; }
+  .all-reviews-card { padding: 16px 13px; }
+}
+
 `;
 
 export default ReviewListStyles;
