@@ -43,10 +43,10 @@ const PersonDetailStyles = createGlobalStyle`
   gap: 10px;
   padding: 12px;
   overflow: hidden;
-  background: var(--momo-surface);
+  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
   border: 1px solid var(--momo-border);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  box-shadow: var(--momo-shadow-xs);
   cursor: default;
   transition:
     transform 0.2s ease,
