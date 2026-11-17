@@ -1147,7 +1147,25 @@ const PaperGlassDesignStyles = createGlobalStyle`
     .review-detail-content { padding: 20px 16px 22px 42px; }
     .movie-detail-header { padding: 20px 16px; }
     .movie-detail-page > .detail-content-section > .filmography-list {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .movie-detail-page > .detail-content-section > .filmography-list > .person-chip {
+      min-height: 88px;
+      gap: 7px;
+      padding: 7px;
+    }
+    .movie-detail-page > .detail-content-section > .filmography-list > .person-chip > img,
+    .movie-detail-page > .detail-content-section > .filmography-list > .person-chip > div:first-child {
+      flex-basis: 48px;
+      width: 48px;
+      height: 70px;
+    }
+    .movie-detail-page > .detail-content-section > .filmography-list > .person-chip strong {
+      font-size: 11px;
+    }
+    .movie-detail-page > .detail-content-section > .filmography-list > .person-chip > div:last-child > span {
+      font-size: 10px;
     }
   }
   @media (prefers-reduced-motion: reduce) {
