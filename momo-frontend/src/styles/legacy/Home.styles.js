@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 /* 홈은 큰 장식보다 영화 발견과 기록 흐름을 먼저 보여준다. */
-export const HomePage = styled.div`
+export const HomePage = styled.div.attrs({ className: "home-page" })`
   display: flex;
   flex-direction: column;
   gap: clamp(38px, 4.6vw, 62px);
