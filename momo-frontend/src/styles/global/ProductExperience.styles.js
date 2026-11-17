@@ -29,9 +29,9 @@ const ProductExperienceStyles = createGlobalStyle`
   }
 
   /* All route-level surfaces */
-  .home-page, .movie-detail-page, .all-reviews-page, .review-detail-page,
+  .movie-detail-page, .all-reviews-page, .review-detail-page,
   .profile-page, .favorite-page, .my-reviews-page, .liked-reviews-page,
-  .signup-page, .search-page {
+  .signup-page {
     animation: momo-surface-in .48s var(--momo-ease-out) both;
   }
 
@@ -77,75 +77,6 @@ const ProductExperienceStyles = createGlobalStyle`
     .all-reviews-search-reset, .review-form-actions button,
     .signup-submit, .recommend-button):hover::after {
     transform: translateX(130%);
-  }
-
-  /* Home: balanced cinema hero, clear section rhythm, lively poster rail */
-  .home-page { width: 100%; }
-  .home-page .section-block { margin: clamp(30px, 4vw, 52px) 0; }
-  .home-page .section-heading { border-bottom-color: rgba(177, 157, 111, .34); }
-  .home-page .section-heading h2 { letter-spacing: -.045em; }
-  .home-page .movie-grid { gap: 22px 17px; }
-  .home-page .movie-card {
-    position: relative;
-    padding: 0;
-    border: 0;
-    border-radius: 12px;
-    background: transparent;
-    box-shadow: none;
-    overflow: visible;
-    transition: transform 260ms var(--momo-ease-out);
-  }
-  .home-page .movie-card:hover {
-    transform: translateY(-6px);
-    border-color: transparent;
-    box-shadow: none;
-  }
-  .home-page .movie-card .poster-frame {
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.9);
-    border-radius: 12px;
-    box-shadow: 0 8px 22px rgba(43,35,21,.1);
-    transition: box-shadow 260ms ease, border-color 260ms ease;
-  }
-  .home-page .movie-card:hover .poster-frame {
-    border-color: rgba(210,166,31,.72);
-    box-shadow: 0 18px 34px rgba(43,35,21,.18);
-  }
-  .home-page .movie-card .poster-frame::after {
-    position: absolute; inset: 0; content: "";
-    pointer-events: none;
-    background: linear-gradient(140deg, rgba(255,255,255,.24), transparent 34%, transparent 70%, rgba(0,0,0,.12));
-    opacity: .8; transition: opacity 240ms ease;
-  }
-  .home-page .movie-card:hover .poster-frame::after { opacity: .35; }
-  .home-page .movie-card .movie-info { padding: 10px 2px 0; }
-  .home-page .movie-card .movie-info h3 { font-size: 14px; }
-  .home-page .community-review {
-    position: relative;
-    border: 1px solid rgba(255,255,255,.94);
-    border-left: 3px solid var(--momo-accent);
-    border-radius: 14px;
-    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.74));
-    box-shadow: var(--momo-glass-shadow);
-    backdrop-filter: blur(12px);
-    transition: transform 240ms var(--momo-ease-out), box-shadow 240ms ease;
-  }
-  .home-page .community-review:hover { transform: translateY(-4px); box-shadow: var(--momo-depth-shadow); }
-  .home-page .hero-banner {
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(circle at 92% 12%, rgba(255,212,59,.2), transparent 30%),
-      linear-gradient(135deg, rgba(255,255,255,.84), rgba(255,250,236,.72));
-    border: 1px solid var(--momo-glass-stroke);
-    box-shadow: var(--momo-glass-shadow);
-    backdrop-filter: blur(18px) saturate(140%);
-  }
-  .home-page .hero-banner::after {
-    position: absolute; right: -90px; bottom: -140px; width: 300px; height: 300px;
-    content: ""; border: 1px solid rgba(194,155,38,.2); border-radius: 50%;
-    box-shadow: 0 0 0 24px rgba(194,155,38,.045), 0 0 0 54px rgba(194,155,38,.025);
-    pointer-events: none;
   }
 
   /* Movie detail and person detail */
