@@ -26,7 +26,7 @@ export const ChatPanel = styled.section`
   min-height: 0;
   border: 1px solid #d8d0c2;
   border-radius: 16px;
-  background: #fffdf8;
+  background: var(--momo-surface)df8;
   box-shadow: 0 12px 36px rgba(35, 28, 18, 0.22);
 
   @media (max-width: 600px) {
@@ -72,7 +72,7 @@ export const WindowActionButton = styled.button`
   height: 30px;
   border: 0;
   border-radius: 10px;
-  color: #fff;
+  color: var(--momo-surface);
   background: #493a2b;
   cursor: pointer;
   font-size: 20px;
@@ -148,7 +148,7 @@ export const MessageBubble = styled.p`
   padding: 9px 12px;
   overflow-wrap: anywhere;
   border-radius: ${({ $isOwn }) => ($isOwn ? "14px 14px 4px 14px" : "14px 14px 14px 4px")};
-  color: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "#887f75" : $isOwn ? "#fffdf8" : "#241f19")};
+  color: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "#887f75" : $isOwn ? "var(--momo-surface)df8" : "#241f19")};
   background: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "#eeeae4" : $isOwn ? "#66513b" : "#f0e8dc")};
   line-height: 1.45;
   white-space: pre-wrap;
@@ -252,7 +252,7 @@ export const SendButton = styled.button`
   padding: 9px 12px;
   border: 0;
   border-radius: 10px;
-  color: #fff;
+  color: var(--momo-surface);
   background: #493a2b;
   cursor: pointer;
 
@@ -314,7 +314,7 @@ export const ChatLauncher = styled.button`
   padding: 13px 18px;
   border: 0;
   border-radius: 24px;
-  color: #fff;
+  color: var(--momo-surface);
   background: #493a2b;
   cursor: pointer;
 `;
