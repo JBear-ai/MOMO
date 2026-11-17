@@ -346,7 +346,7 @@ export const PosterWrap = styled.div`
     transition: transform .42s cubic-bezier(.2,.7,.2,1);
   }
   &:hover {
-    border-color: rgba(205,166,44,.78);
+    border-color: rgba(105,128,115,.55);
     box-shadow: 0 15px 28px rgba(54,45,28,.16), inset 0 1px rgba(255,255,255,.96);
     transform: perspective(950px) rotateX(1.5deg) translateY(-2px);
   }
@@ -360,19 +360,21 @@ export const Rank = styled.span`
   z-index: 3;
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255,255,255,.92);
-  border-radius: 11px 11px 11px 4px;
-  background: linear-gradient(145deg, rgba(255,253,242,.96), rgba(255,243,203,.9));
-  box-shadow: 0 5px 12px rgba(28,22,14,.24), inset 0 1px rgba(255,255,255,.98);
-  color: #564211;
-  font-size: 17px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,.58);
+  border-radius: 7px;
+  background: rgba(29,36,32,.74);
+  box-shadow: 0 5px 11px rgba(18,24,20,.2), inset 0 1px rgba(255,255,255,.24);
+  color: #FFFFFF;
+  font-size: 15px;
   line-height: 1;
-  font-weight: 950;
+  font-weight: 850;
   font-style: normal;
   font-variant-numeric: tabular-nums;
-  transition: transform 220ms cubic-bezier(.2,.72,.2,1), box-shadow 220ms ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 200ms ease, background 200ms ease;
 `;
 
 export const MovieInfo = styled.div`
