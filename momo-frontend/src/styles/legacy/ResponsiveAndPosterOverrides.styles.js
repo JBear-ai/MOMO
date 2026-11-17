@@ -162,7 +162,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   aspect-ratio: 2 / 3;
   overflow: hidden;
   border-radius: 8px;
-  background: #f0f0f0;
+  background: var(--momo-note);
 }
 
 .my-review-poster img {
@@ -265,7 +265,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   aspect-ratio: 2 / 3;
   overflow: hidden;
   border-radius: 5px;
-  background: #f0f0f0;
+  background: var(--momo-note);
 }
 
 .all-review-poster img {
