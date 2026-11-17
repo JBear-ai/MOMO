@@ -181,6 +181,16 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   expect(saveButton.color).toBe("rgb(41, 40, 32)");
   expect(saveButton.radius).toBe("10px");
 
+  // 입력 필드에 포커스를 주며 바뀐 스크롤 위치를 초기화해 sticky nav와 제목이 겹치지 않는지 확인한다.
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const desktopHeadingGap = await page.evaluate(() => {
+    const nav = document.querySelector(".momo-app-header").getBoundingClientRect();
+    const heading = document.querySelector(".profile-edit-heading").getBoundingClientRect();
+    return heading.top - nav.bottom;
+  });
+  expect(desktopHeadingGap).toBeGreaterThanOrEqual(0);
+  await expect(page.locator(".profile-edit-heading")).toBeInViewport();
+
   // 성공한 화면도 CI artifact로 보관해 실제 헤더 색과 형태를 확인할 수 있게 한다.
   await page.screenshot({
     path: "test-results/profile-edit-design-desktop.png",
@@ -188,6 +198,15 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   });
 
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const mobileHeadingGap = await page.evaluate(() => {
+    const nav = document.querySelector(".momo-app-header").getBoundingClientRect();
+    const heading = document.querySelector(".profile-edit-heading").getBoundingClientRect();
+    return heading.top - nav.bottom;
+  });
+  expect(mobileHeadingGap).toBeGreaterThanOrEqual(0);
+  await expect(page.locator(".profile-edit-heading")).toBeInViewport();
+
   const mobileEditColumns = await page.locator(".profile-form-buttons").evaluate(
     (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
