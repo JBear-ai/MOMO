@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 /* 홈은 큰 장식보다 영화 발견과 기록 흐름을 먼저 보여준다. */
-export const HomePage = styled.div`
+export const HomePage = styled.div.attrs({ className: "home-page" })`
   display: flex;
   flex-direction: column;
   gap: clamp(38px, 4.6vw, 62px);
   width: 100%;
   padding-bottom: 48px;
   color: var(--momo-text);
+  perspective: 1200px;
   animation: momo-home-enter .52s cubic-bezier(.2,.72,.2,1) both;
   @keyframes momo-home-enter {
     from { opacity: 0; transform: translate3d(0, 12px, 0); }
@@ -38,27 +39,33 @@ export const FeatureSection = styled.section`
   min-height: 350px;
   align-items: stretch;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .9);
+  border: 1px solid rgba(255, 255, 255, .96);
   border-radius: 24px;
-  background: linear-gradient(135deg, rgba(255,255,255,.82), rgba(255,250,236,.76));
-  box-shadow: 0 18px 48px rgba(68, 53, 22, .09), inset 0 1px rgba(255,255,255,.95);
+  background:
+    linear-gradient(90deg, transparent 0 34px, rgba(201,117,104,.13) 34px 35px, transparent 35px),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(117,145,177,.075) 32px, transparent 33px),
+    linear-gradient(135deg, rgba(255,255,255,.88), rgba(255,249,230,.82));
+  box-shadow: 0 3px 6px rgba(68,53,22,.035), 0 18px 42px rgba(68,53,22,.09), 0 30px 58px rgba(68,53,22,.04), inset 0 1px rgba(255,255,255,.98);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
   transition: box-shadow 300ms ease, transform 300ms ease;
   &:hover {
-    box-shadow: 0 24px 58px rgba(68, 53, 22, .13), inset 0 1px rgba(255,255,255,.98);
-    transform: translateY(-2px);
+    box-shadow: 0 26px 58px rgba(68, 53, 22, .14), inset 0 1px rgba(255,255,255,.99);
+    transform: translateY(-3px) rotateX(.35deg);
   }
   &::before {
     position: absolute;
-    z-index: -1;
-    top: -110px;
-    left: -80px;
-    width: 300px;
-    height: 300px;
-    border: 1px solid rgba(214, 166, 20, .16);
-    border-radius: 50%;
-    box-shadow: 0 0 0 24px rgba(214, 166, 20, .045), 0 0 0 50px rgba(214, 166, 20, .025);
+    z-index: 3;
+    top: 10px;
+    left: clamp(42px, 5vw, 66px);
+    width: 78px;
+    height: 20px;
+    border: 1px solid rgba(201,166,103,.18);
+    background: rgba(255,224,151,.48);
+    box-shadow: 0 2px 5px rgba(91,70,35,.06);
     content: "";
     pointer-events: none;
+    transform: rotate(-2.5deg);
   }
   @media (max-width: 760px) {
     grid-template-columns: 1fr;
@@ -74,17 +81,19 @@ export const FeatureInfo = styled.div`
   z-index: 1;
   padding: clamp(28px, 3.2vw, 44px);
   background:
+    linear-gradient(90deg, transparent 0 30px, rgba(201,117,104,.16) 30px 31px, transparent 31px),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(117,145,177,.1) 32px, transparent 33px),
     radial-gradient(circle at 12% 12%, rgba(255, 212, 59, .22), transparent 34%),
-    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.58));
+    linear-gradient(145deg, rgba(255,255,255,.86), rgba(255,250,236,.7));
   &::after {
     position: absolute;
-    right: -58px;
-    bottom: -76px;
-    width: 210px;
-    height: 210px;
-    border: 1px solid rgba(191, 155, 42, .17);
+    right: 28px;
+    bottom: 26px;
+    width: 88px;
+    height: 88px;
+    border: 1px solid rgba(191,155,42,.18);
     border-radius: 50%;
-    box-shadow: 0 0 0 18px rgba(191, 155, 42, .045), 0 0 0 38px rgba(191, 155, 42, .025);
+    box-shadow: 0 0 0 12px rgba(191,155,42,.045), 0 0 0 27px rgba(191,155,42,.025);
     content: "";
     pointer-events: none;
   }
@@ -168,13 +177,27 @@ export const FeatureVisual = styled.div`
     width: min(76%, 500px);
     padding: 20px 22px 19px;
     color: #fff;
-    border: 1px solid rgba(255,255,255,.42);
-    border-radius: 17px;
-    background: linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.08));
-    box-shadow: 0 12px 36px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.42);
-    backdrop-filter: blur(18px) saturate(145%);
+    border: 1px solid rgba(255,255,255,.62);
+    border-radius: 18px;
+    background:
+      linear-gradient(145deg, rgba(255,255,255,.31), rgba(255,250,230,.14)),
+      rgba(31,27,21,.2);
+    box-shadow: 0 16px 42px rgba(0,0,0,.24), 0 3px 8px rgba(0,0,0,.12), inset 0 1px rgba(255,255,255,.58);
+    backdrop-filter: blur(22px) saturate(155%);
     -webkit-backdrop-filter: blur(18px) saturate(145%);
     animation: momo-glass-arrive .7s cubic-bezier(.2,.7,.2,1) both;
+    &::before {
+      position: absolute;
+      top: -8px;
+      right: 28px;
+      width: 58px;
+      height: 16px;
+      content: "";
+      border: 1px solid rgba(255,255,255,.3);
+      background: rgba(255,255,255,.18);
+      transform: rotate(3deg);
+      pointer-events: none;
+    }
     @keyframes momo-glass-arrive {
       from { opacity: 0; transform: translate3d(0, 14px, 0) scale(.985); }
       to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
@@ -284,7 +307,8 @@ export const SectionHeading = styled.div`
   gap: 18px;
   margin-bottom: 20px;
   padding-bottom: 13px;
-  border-bottom: 1px solid var(--momo-border-strong);
+  border-bottom: 1px solid rgba(172,153,113,.34);
+  position: relative;
   h2 {
     margin: 0;
     font-size: clamp(21px, 2vw, 26px);
@@ -331,11 +355,12 @@ export const PosterWrap = styled.div`
   aspect-ratio: 2 / 2.85;
   overflow: hidden;
   background: var(--momo-note);
-  border-radius: 11px;
-  border: 1px solid var(--momo-border);
-  box-shadow: var(--momo-shadow-xs);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.96);
+  box-shadow: 0 8px 22px rgba(54,45,28,.1), inset 0 1px rgba(255,255,255,.98);
   transition: border-color 240ms ease, box-shadow 240ms ease, transform 240ms ease;
-  transform: perspective(900px) rotateX(0deg);
+  transform: perspective(900px) rotateX(0deg) translateZ(0);
+  transform-style: preserve-3d;
   &::after {
     position: absolute;
     z-index: 1;
@@ -354,9 +379,9 @@ export const PosterWrap = styled.div`
     transition: transform .42s cubic-bezier(.2,.7,.2,1);
   }
   &:hover {
-    border-color: rgba(205, 166, 44, .72);
-    box-shadow: 0 13px 26px rgba(54, 45, 28, .15);
-    transform: perspective(900px) rotateX(1.5deg);
+    border-color: rgba(205,166,44,.78);
+    box-shadow: 0 15px 28px rgba(54,45,28,.16), inset 0 1px rgba(255,255,255,.96);
+    transform: perspective(950px) rotateX(1.5deg) translateY(-2px);
   }
   &:hover::after { opacity: .28; }
 `;
@@ -401,8 +426,11 @@ export const GenreList = styled.div`
     padding: 0 16px;
     border: 1px solid rgba(255,255,255,.92);
     border-radius: 13px;
-    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.72));
-    box-shadow: 0 5px 15px rgba(54,45,28,.045), inset 0 1px rgba(255,255,255,.9);
+    background:
+      linear-gradient(90deg, transparent 0 14px, rgba(201,117,104,.11) 14px 15px, transparent 15px),
+      repeating-linear-gradient(0deg, transparent 0 25px, rgba(117,145,177,.09) 26px, transparent 27px),
+      linear-gradient(145deg, rgba(255,255,255,.86), rgba(255,250,236,.78));
+    box-shadow: 0 5px 15px rgba(54,45,28,.055), inset 0 1px rgba(255,255,255,.98);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: var(--momo-text-soft);
@@ -428,17 +456,22 @@ export const BrandLine = styled.div`
   justify-content: space-between;
   gap: 24px;
   padding: 24px 28px;
-  background: #292820;
-  border-radius: 14px;
-  color: #FFFEFA;
+  border: 1px solid rgba(255,255,255,.94);
+  border-radius: 18px;
+  color: var(--momo-text);
+  background:
+    linear-gradient(90deg, transparent 0 28px, rgba(201,117,104,.14) 28px 29px, transparent 29px),
+    repeating-linear-gradient(0deg, transparent 0 29px, rgba(117,145,177,.085) 30px, transparent 31px),
+    linear-gradient(145deg, rgba(255,255,255,.88), rgba(255,246,218,.86));
+  box-shadow: 0 12px 28px rgba(64,51,30,.08), inset 0 1px rgba(255,255,255,.98);
   h2 {
     margin: 0;
     font-size: clamp(19px, 2.4vw, 25px);
     letter-spacing: -.04em;
     font-weight: 800;
-    color: #FFFEFA;
+    color: var(--momo-text);
   }
-  p { margin: 5px 0 0; color: rgba(255,255,255,.68); font-size: 13px; }
+  p { margin: 5px 0 0; color: var(--momo-muted); font-size: 13px; }
   @media (max-width: 600px) { align-items: flex-start; flex-direction: column; padding: 22px; }
 `;
 
