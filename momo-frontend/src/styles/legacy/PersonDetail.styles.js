@@ -93,7 +93,7 @@ const PersonDetailStyles = createGlobalStyle`
 }
 
 .movie-detail-page > .detail-content-section > .people-list > .person-chip > div:last-child > span {
-  color: var(--momo-muted)666;
+  color: var(--momo-muted);
   font-size: 13px;
 }
 
