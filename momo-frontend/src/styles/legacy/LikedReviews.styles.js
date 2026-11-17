@@ -20,11 +20,11 @@ const LikedReviewsStyles = createGlobalStyle`
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding: 28px 32px;
+  padding: clamp(26px, 3.4vw, 42px);
   margin-bottom: 24px;
   background: linear-gradient(120deg, var(--momo-note), rgba(255,255,255,.9));
   border: 1px solid var(--momo-note-border);
-  border-radius: var(--momo-radius-lg);
+  border-radius: 24px;
 }
 
 .liked-reviews-eyebrow {
@@ -39,7 +39,7 @@ const LikedReviewsStyles = createGlobalStyle`
 .liked-reviews-heading h1 {
   margin: 0 0 8px;
   color: var(--momo-text);
-  font-size: 30px;
+  font-size: clamp(30px, 4vw, 40px);
   font-weight: 800;
 }
 
@@ -58,7 +58,7 @@ const LikedReviewsStyles = createGlobalStyle`
 
 /* 흰색 메인 카드 */
 .liked-reviews-card {
-  padding: 28px;
+  padding: clamp(20px, 2.8vw, 34px);
   background: var(--momo-surface);
   border: 1px solid var(--momo-border);
   border-radius: var(--momo-radius-lg);

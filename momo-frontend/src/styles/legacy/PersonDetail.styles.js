@@ -30,9 +30,9 @@ const PersonDetailStyles = createGlobalStyle`
 
 .movie-detail-page > .detail-content-section > .people-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   align-items: stretch;
-  gap: 20px;
+  gap: 22px;
 }
 
 .movie-detail-page > .detail-content-section > .people-list > .person-chip {
@@ -41,11 +41,11 @@ const PersonDetailStyles = createGlobalStyle`
   flex-direction: column;
   align-items: stretch;
   gap: 10px;
-  padding: 12px;
+  padding: 14px;
   overflow: hidden;
   background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
   border: 1px solid var(--momo-border);
-  border-radius: 16px;
+  border-radius: 18px;
   box-shadow: var(--momo-shadow-xs);
   cursor: default;
   transition:
@@ -63,7 +63,7 @@ const PersonDetailStyles = createGlobalStyle`
 .movie-detail-page > .detail-content-section > .people-list > .person-chip > img {
   display: block;
   width: 100%;
-  height: 250px;
+  height: 270px;
   object-fit: cover;
   border-radius: 6px;
 }

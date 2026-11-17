@@ -8,9 +8,9 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 
 .review-detail-page {
   width: 100%;
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 30px 0 80px;
+  padding: 12px 0 88px;
   color: var(--momo-text);
 }
 
@@ -73,7 +73,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 
 .review-detail-title {
   margin: 0 0 22px;
-  font-size: clamp(24px, 4vw, 32px);
+  font-size: clamp(28px, 4vw, 40px);
   font-weight: 800;
   line-height: 1.45;
   overflow-wrap: anywhere;
@@ -123,7 +123,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 .review-detail-movie strong {
   display: block;
   overflow-wrap: anywhere;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 800;
 }
 
@@ -167,7 +167,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   border-radius: 10px;
   color: var(--momo-text);
   font-size: 15px;
-  line-height: 2;
+  line-height: 2.05;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }

@@ -20,12 +20,12 @@ const MyReviewsStyles = createGlobalStyle`
   justify-content: space-between;
   gap: 20px;
 
-  padding: 36px;
+  padding: clamp(28px, 3.5vw, 44px);
   margin-bottom: 30px;
 
   background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
-  border-radius: 14px;
+  border-radius: 24px;
 }
 
 .my-reviews-eyebrow {
@@ -41,7 +41,7 @@ const MyReviewsStyles = createGlobalStyle`
   margin: 0 0 10px;
 
   color: var(--momo-text);
-  font-size: 30px;
+  font-size: clamp(30px, 4vw, 40px);
   font-weight: 800;
 }
 
@@ -64,10 +64,10 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-reviews-card {
-  padding: 28px;
+  padding: clamp(20px, 2.8vw, 34px);
   background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius-lg);
+  border-radius: 22px;
   box-shadow: var(--momo-shadow-sm);
 }
 
