@@ -113,8 +113,8 @@ const Main = styled.main`
 
 const Footer = styled.footer`
   padding: 44px 8%;
-  background-color: #efe8da;
-  color: #595042;
+  background-color: var(--momo-note);
+  color: var(--momo-text-soft);
   border-top: 1px solid var(--momo-border);
   box-sizing: border-box;
   width: 100%;
