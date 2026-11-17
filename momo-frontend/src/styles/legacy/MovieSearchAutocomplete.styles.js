@@ -16,7 +16,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     width: 100%;
     box-sizing: border-box;
     padding: 6px 16px;
-    background: var(--momo-surface)aec;
+    background: var(--momo-note);
     border: 1px solid var(--momo-note-border);
     border-radius: 20px;
     transition: all 0.2s ease;
@@ -97,7 +97,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   .momo-search-result:hover,
   .momo-search-result:focus-visible,
   .momo-search-result.is-active {
-    background: var(--momo-surface)aec;
+    background: var(--momo-note);
     outline: none;
   }
 
