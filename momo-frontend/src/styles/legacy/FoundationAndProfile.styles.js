@@ -365,6 +365,40 @@ body {
   }
 }
 
+
+/* Product refinement: profile pages use clear information groups, not decorative panels. */
+.profile-page { max-width: 1120px; padding-top: 8px; }
+.profile-container { gap: 20px; }
+.profile-heading h1 { font-size: clamp(27px, 3vw, 34px); letter-spacing: -.04em; }
+.profile-card {
+  padding: clamp(20px, 2.6vw, 30px);
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
+  border-radius: 15px;
+  box-shadow: var(--momo-shadow-xs);
+}
+.profile-card::before { left: 0; right: auto; width: 4px; height: 34px; background: var(--momo-accent); }
+.profile-card-heading { margin-bottom: 20px; }
+.profile-card-heading h2 { font-size: 18px; letter-spacing: -.025em; }
+.profile-button { min-height: 40px; border-radius: 8px; box-shadow: none; }
+.profile-button:hover { transform: translateY(-1px); }
+.profile-avatar { width: 68px; height: 68px; box-shadow: none; }
+.profile-activity-grid { gap: 12px; }
+.profile-activity-item {
+  min-height: 148px;
+  padding: 18px 12px;
+  background: #FFFAEC;
+  border-radius: 12px;
+  box-shadow: none;
+}
+.profile-activity-item:hover { box-shadow: var(--momo-shadow-sm); }
+.profile-form { gap: 10px; }
+.profile-form input { min-height: 44px; border-radius: 8px; }
+@media (max-width: 600px) {
+  .profile-card { padding: 19px 16px; }
+  .profile-activity-item { min-height: 118px; }
+}
+
 `;
 
 export default FoundationAndProfileStyles;
