@@ -1343,7 +1343,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .profile-edit-page .profile-edit-image-kicker {
     margin: 0 0 2px;
-    color: #48644F;
+    color: #3F5D47;
     font-size: 10px;
     font-weight: 900;
     letter-spacing: .16em;
