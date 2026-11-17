@@ -353,8 +353,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
 
   /* Favorite action: a translucent bookmark, not a decorative star. */
-  #root .favorite-page .favorite-star,
-  #root .home-page .favorite-star {
+  #root .favorite-star {
     display: grid;
     place-items: center;
     width: 42px;
