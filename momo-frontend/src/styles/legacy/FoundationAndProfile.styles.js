@@ -127,15 +127,15 @@ body {
 }
 
 .profile-delete-button {
-  background: var(--momo-surface)5F5;
-  border-color: #EED2D2;
-  color: #C53030;
+  background: var(--momo-danger-bg);
+  border-color: var(--momo-dislike-border);
+  color: var(--momo-danger);
   text-decoration: none;
 }
 
 /* 회원 탈퇴 버튼 - 활성화 상태에서만 호버 적용 (추가 / 11.02 )*/
 .profile-delete-button:not(:disabled):hover {
-  background: #fed7d7;
+  background: var(--momo-dislike-bg-hover);
 }
 
 /* 체크박스 선택 전 - 비활성화 */
