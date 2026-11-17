@@ -26,7 +26,7 @@ export const ChatPanel = styled.section`
   min-height: 0;
   border: 1px solid var(--momo-border-strong);
   border-radius: 16px;
-  background: var(--momo-surface)df8;
+  background: var(--momo-surface-raised);
   box-shadow: 0 12px 36px rgba(35, 28, 18, 0.22);
 
   @media (max-width: 600px) {
@@ -148,8 +148,8 @@ export const MessageBubble = styled.p`
   padding: 9px 12px;
   overflow-wrap: anywhere;
   border-radius: ${({ $isOwn }) => ($isOwn ? "14px 14px 4px 14px" : "14px 14px 14px 4px")};
-  color: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-muted)" : $isOwn ? "var(--momo-surface)df8" : "var(--momo-text)")};
-  background: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-note)ae4" : $isOwn ? "var(--momo-text-soft)" : "var(--momo-note)")};
+  color: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-muted)" : $isOwn ? "var(--momo-surface-raised)" : "var(--momo-text)")};
+  background: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-note)" : $isOwn ? "var(--momo-text-soft)" : "var(--momo-note)")};
   line-height: 1.45;
   white-space: pre-wrap;
   font-style: ${({ $isDeleted }) => ($isDeleted ? "italic" : "normal")};
@@ -220,7 +220,7 @@ export const SecondaryButton = styled.button`
   border: 0;
   border-radius: 9px;
   color: var(--momo-text-soft);
-  background: var(--momo-note)5d7;
+  background: var(--momo-border);
   cursor: pointer;
 `;
 
