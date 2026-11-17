@@ -17,15 +17,20 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     box-sizing: border-box;
     min-height: 44px;
     padding: 6px 16px;
-    background: var(--momo-note);
-    border: 1px solid var(--momo-note-border);
+    background: rgba(255, 254, 250, .66);
+    border: 1px solid rgba(255,255,255,.94);
     border-radius: var(--momo-radius-pill);
-    transition: all 0.2s ease;
+    box-shadow: 0 6px 18px rgba(54,45,28,.055), inset 0 1px rgba(255,255,255,.96);
+    backdrop-filter: blur(16px) saturate(145%);
+    -webkit-backdrop-filter: blur(16px) saturate(145%);
+    transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   }
 
   .momo-search-form:focus-within {
-    border-color: var(--momo-accent);
-    box-shadow: 0 0 0 3px rgba(255, 212, 59, 0.2);
+    border-color: rgba(214, 166, 20, .72);
+    background: rgba(255, 255, 255, .9);
+    box-shadow: 0 0 0 4px rgba(255, 212, 59, 0.2), 0 9px 24px rgba(54,45,28,.08);
+    transform: translateY(-1px);
   }
 
   /* 검색 입력 */
@@ -70,10 +75,10 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     max-height: 390px;
     overflow-y: auto;
     box-sizing: border-box;
-    background: rgba(255, 254, 250, .97);
-    border: 1px solid var(--momo-border);
-    border-radius: 16px;
-    box-shadow: var(--momo-shadow-lg);
+    background: rgba(255, 254, 250, .78);
+    border: 1px solid rgba(255,255,255,.96);
+    border-radius: 18px;
+    box-shadow: 0 22px 52px rgba(54,45,28,.16), inset 0 1px rgba(255,255,255,.96);
     backdrop-filter: blur(16px) saturate(125%);
     -webkit-backdrop-filter: blur(18px) saturate(130%);
   }
@@ -88,9 +93,10 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     padding: 10px 12px;
     border: none;
     border-bottom: 1px solid var(--momo-border);
-    background: var(--momo-surface);
+    background: rgba(255, 254, 250, .42);
     text-align: left;
     cursor: pointer;
+    transition: background 160ms ease, padding-left 160ms ease;
   }
 
   .momo-search-result:last-child {
@@ -100,7 +106,8 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   .momo-search-result:hover,
   .momo-search-result:focus-visible,
   .momo-search-result.is-active {
-    background: var(--momo-note);
+    background: rgba(255, 250, 236, .92);
+    padding-left: 16px;
     outline: none;
   }
 
