@@ -162,7 +162,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   min-height: 180px;
   padding: 28px;
   margin: 0;
-  background: var(--momo-surface)CF4;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
   border-radius: 10px;
   color: var(--momo-text);
