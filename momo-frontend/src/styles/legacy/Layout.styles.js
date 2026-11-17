@@ -117,14 +117,16 @@ const Navigation = styled.nav`
     position: relative;
     display: inline-flex;
     align-items: center;
-    min-height: 36px;
-    padding: 0 13px;
-    color: var(--momo-muted);
-    border: 1px solid transparent;
-    border-radius: 999px;
+    min-height: 38px;
+    padding: 0 14px;
+    color: #625B4F;
+    border: 1px solid rgba(255,255,255,.88);
+    border-radius: 11px;
+    background: rgba(255,255,255,.48);
+    box-shadow: 0 3px 9px rgba(58,48,30,.035), inset 0 1px rgba(255,255,255,.94);
     text-decoration: none;
     font-size: 12px;
-    font-weight: 750;
+    font-weight: 800;
     white-space: nowrap;
     transition:
       color 180ms ease,
@@ -133,18 +135,18 @@ const Navigation = styled.nav`
       box-shadow 180ms ease,
       border-color 180ms ease;
     &:hover {
-      color: var(--momo-text);
-      border-color: rgba(255,255,255,.94);
-      background: rgba(255,255,255,.64);
-      box-shadow: 0 4px 12px rgba(58,48,30,.055), inset 0 1px rgba(255,255,255,.96);
+      color: #373126;
+      border-color: rgba(223,201,157,.72);
+      background: rgba(255,254,248,.88);
+      box-shadow: 0 7px 15px rgba(58,48,30,.08), inset 0 1px rgba(255,255,255,.98);
       transform: translateY(-2px);
     }
   }
   a.active {
-    color: #72591F;
-    border-color: rgba(224,190,103,.44);
-    background: linear-gradient(145deg, rgba(255,245,205,.94), rgba(255,250,230,.75));
-    box-shadow: 0 4px 12px rgba(133,101,29,.09), inset 0 1px rgba(255,255,255,.98);
+    color: #59430F;
+    border-color: rgba(211,174,82,.7);
+    background: linear-gradient(145deg, rgba(255,242,194,.98), rgba(255,250,232,.9));
+    box-shadow: 0 5px 13px rgba(133,101,29,.12), inset 0 1px rgba(255,255,255,1);
     font-weight: 900;
   }
   @media (max-width: 900px) {
@@ -172,18 +174,30 @@ const UserArea = styled.div`
 
 const ActionButton = styled.button`
   position: relative;
-  min-height: 36px;
-  padding: 0 15px;
+  position: relative;
+  min-height: 38px;
+  padding: 0 16px;
   overflow: hidden;
-  border: 1px solid rgba(222,183,72,.75);
-  border-radius: 10px;
-  background: linear-gradient(145deg, #FFE58E, #F5D05C);
-  color: #5C4818;
-  font-size: 11px;
+  border: 1px solid rgba(218,178,75,.82);
+  border-radius: 11px;
+  background:
+    linear-gradient(145deg, rgba(255,236,159,.98), rgba(246,207,83,.98));
+  color: #51400F;
+  font-size: 12px;
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 5px 13px rgba(154,116,25,.15), inset 0 1px rgba(255,255,255,.8);
+  box-shadow: 0 5px 13px rgba(154,116,25,.14), inset 0 1px rgba(255,255,255,.86);
   transition: transform 180ms cubic-bezier(.2,.72,.2,1), box-shadow 180ms ease, filter 180ms ease;
+  &::before {
+    position: absolute;
+    top: 1px;
+    left: 16%;
+    width: 68%;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent);
+    pointer-events: none;
+  }
   &:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 9px 18px rgba(154,116,25,.2), inset 0 1px rgba(255,255,255,.9);
