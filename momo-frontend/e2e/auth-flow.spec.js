@@ -101,6 +101,14 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(page.locator(".profile-edit-page")).toBeVisible();
   await expect(page.getByRole("heading", { level: 1, name: "프로필 수정" })).toBeVisible();
 
+  // 사용자 정보는 API에서 비동기로 채워진다. 이메일 응답이 비어 있으면 가입 시 사용한 이메일로 검증한다.
+  await expect(page.locator("#edit-nickname")).not.toHaveValue("");
+  const profileEmail = page.locator("#edit-email");
+  if (!(await profileEmail.inputValue())) {
+    await profileEmail.fill(email);
+  }
+  await expect(page.locator(".profile-edit-submit")).toBeEnabled();
+
   const profileEditCanvas = await page.locator(".profile-edit-page").evaluate((element) => {
     const style = getComputedStyle(element);
     return { background: style.backgroundColor, image: style.backgroundImage };
@@ -108,13 +116,37 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   expect(profileEditCanvas.background).toBe("rgb(245, 242, 235)");
   expect(profileEditCanvas.image).toContain("linear-gradient");
 
+  const brandTokens = await page.evaluate(() => {
+    const root = getComputedStyle(document.documentElement);
+    const body = getComputedStyle(document.body);
+    return {
+      background: root.getPropertyValue("--momo-bg").trim(),
+      note: root.getPropertyValue("--momo-note").trim(),
+      accent: root.getPropertyValue("--momo-accent").trim(),
+      border: root.getPropertyValue("--momo-border").trim(),
+      bodyBackground: body.backgroundColor,
+    };
+  });
+  expect(brandTokens.background).toBe("#F5F2EB");
+  expect(brandTokens.note).toBe("#FFFAEC");
+  expect(brandTokens.accent).toBe("#FFD43B");
+  expect(brandTokens.border).toBe("#E9DFC5");
+  expect(brandTokens.bodyBackground).toBe("rgb(245, 242, 235)");
+
+  await expect(page.locator(".momo-app-header")).toBeVisible();
   const profileEditHero = await page.locator(".profile-edit-heading").evaluate((element) => {
     const paper = getComputedStyle(element, "::before");
     const fold = getComputedStyle(element, "::after");
     const title = getComputedStyle(element.querySelector("h1"));
     return {
       paperColor: paper.backgroundColor,
+      paperBackground: paper.backgroundImage,
       paperShape: paper.clipPath,
+      paperDisplay: paper.display,
+      paperZIndex: paper.zIndex,
+      foldContent: fold.content,
+      foldDisplay: fold.display,
+      foldZIndex: fold.zIndex,
       foldedCorner: fold.backgroundImage,
       title: title.color,
       highlight: title.backgroundImage,
@@ -122,7 +154,13 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     };
   });
   expect(profileEditHero.paperColor).toBe("rgb(255, 250, 236)");
+  expect(profileEditHero.paperBackground).toContain("linear-gradient");
   expect(profileEditHero.paperShape).toContain("polygon");
+  expect(profileEditHero.paperDisplay).not.toBe("none");
+  expect(profileEditHero.paperZIndex).toBe("0");
+  expect(profileEditHero.foldContent).not.toBe("none");
+  expect(profileEditHero.foldDisplay).not.toBe("none");
+  expect(profileEditHero.foldZIndex).toBe("0");
   expect(profileEditHero.foldedCorner).toContain("linear-gradient");
   expect(profileEditHero.title).toBe("rgb(41, 40, 32)");
   expect(profileEditHero.highlight).toContain("linear-gradient");
@@ -133,7 +171,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     return { background: style.backgroundImage, border: style.borderColor };
   });
   expect(profilePortraitStage.background).toContain("linear-gradient");
-  expect(profilePortraitStage.border).toBe("rgb(233, 223, 197)");
+  expect(profilePortraitStage.border).toBe("rgb(227, 206, 131)");
 
   const saveButton = await page.locator(".profile-edit-submit").evaluate((element) => {
     const style = getComputedStyle(element);
@@ -143,12 +181,41 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   expect(saveButton.color).toBe("rgb(41, 40, 32)");
   expect(saveButton.radius).toBe("10px");
 
+  // 입력 필드에 포커스를 주며 바뀐 스크롤 위치를 초기화해 sticky nav와 제목이 겹치지 않는지 확인한다.
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const desktopHeadingGap = await page.evaluate(() => {
+    const nav = document.querySelector(".momo-app-header").getBoundingClientRect();
+    const heading = document.querySelector(".profile-edit-heading").getBoundingClientRect();
+    return heading.top - nav.bottom;
+  });
+  expect(desktopHeadingGap).toBeGreaterThanOrEqual(0);
+  await expect(page.locator(".profile-edit-heading")).toBeInViewport();
+
+  // 성공한 화면도 CI artifact로 보관해 실제 헤더 색과 형태를 확인할 수 있게 한다.
+  await page.screenshot({
+    path: "test-results/profile-edit-design-desktop.png",
+    fullPage: true,
+  });
+
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const mobileHeadingGap = await page.evaluate(() => {
+    const nav = document.querySelector(".momo-app-header").getBoundingClientRect();
+    const heading = document.querySelector(".profile-edit-heading").getBoundingClientRect();
+    return heading.top - nav.bottom;
+  });
+  expect(mobileHeadingGap).toBeGreaterThanOrEqual(0);
+  await expect(page.locator(".profile-edit-heading")).toBeInViewport();
+
   const mobileEditColumns = await page.locator(".profile-form-buttons").evaluate(
     (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
   expect(mobileEditColumns).toBe(2);
   await expect(page.locator(".profile-edit-cancel")).toBeVisible();
+  await page.screenshot({
+    path: "test-results/profile-edit-design-mobile.png",
+    fullPage: true,
+  });
   await page.setViewportSize({ width: 1280, height: 800 });
 
   await page.goto("/");

@@ -1,35 +1,35 @@
 import { createGlobalStyle } from "styled-components";
 
-// MOMO 공통 색상과 간격: 낮은 채도, 충분한 명도 대비, 제한된 강조색
+// MOMO 원본 브랜드 팔레트: 웜 크림, 메모지 아이보리, 형광펜 옐로
 const GlobalTokensStyles = createGlobalStyle`
   :root {
     color-scheme: light;
 
-    /* Paper / desk */
-    --momo-bg: #ECEAE3;
-    --momo-surface: #F8F7F2;
-    --momo-surface-raised: #FCFBF7;
-    --momo-note: #F2EFE6;
-    --momo-note-strong: #E8E2D3;
+    /* Paper / memo */
+    --momo-bg: #F5F2EB;
+    --momo-surface: #FFFAEC;
+    --momo-surface-raised: #FFFEFA;
+    --momo-note: #FFFAEC;
+    --momo-note-strong: #FFF1B2;
 
-    /* Brand accent: highlighter yellow is replaced by muted archival brass */
-    --momo-accent: #B49A68;
-    --momo-accent-hover: #967D50;
-    --momo-accent-soft: #E9E1CF;
-    --momo-accent-ink: #4B4333;
+    /* Brand accent: MOMO highlighter yellow */
+    --momo-accent: #FFD43B;
+    --momo-accent-hover: #F3C72E;
+    --momo-accent-soft: #FFF1B2;
+    --momo-accent-ink: #292820;
 
     /* Typography */
-    --momo-text: #292D2B;
-    --momo-text-soft: #484E49;
-    --momo-muted: #676D67;
-    --momo-placeholder: #747A73;
-    --momo-link: #56645C;
+    --momo-text: #292820;
+    --momo-text-soft: #494333;
+    --momo-muted: #6A6251;
+    --momo-placeholder: #776F62;
+    --momo-link: #715713;
 
     /* Borders and feedback */
-    --momo-border: #D9D7CE;
-    --momo-border-strong: #C6C4B9;
-    --momo-note-border: #D8D2C4;
-    --momo-focus: rgba(91, 111, 101, .36);
+    --momo-border: #E9DFC5;
+    --momo-border-strong: #D8C99F;
+    --momo-note-border: #E9DFC5;
+    --momo-focus: rgba(198, 161, 43, .45);
     --momo-like-bg: #EEF0E8;
     --momo-like-bg-hover: #E3E8DB;
     --momo-like-border: #A8B19A;
@@ -47,9 +47,9 @@ const GlobalTokensStyles = createGlobalStyle`
     --momo-shadow-sm: 0 5px 16px rgba(39, 43, 39, .055);
     --momo-shadow: 0 12px 30px rgba(39, 43, 39, .075);
     --momo-shadow-lg: 0 20px 46px rgba(39, 43, 39, .105);
-    --momo-glass: rgba(250, 249, 245, .7);
+    --momo-glass: rgba(255, 250, 236, .76);
     --momo-glass-border: rgba(255, 255, 255, .78);
-    --momo-header-glass: rgba(247, 246, 240, .82);
+    --momo-header-glass: rgba(255, 250, 236, .84);
 
     /* Layout */
     --momo-radius-sm: 8px;
@@ -73,7 +73,7 @@ const GlobalTokensStyles = createGlobalStyle`
     --momo-space-12: 48px;
     --momo-transition-fast: 150ms cubic-bezier(.2, .7, .2, 1);
     --momo-transition-ui: 220ms cubic-bezier(.2, .7, .2, 1);
-    --momo-ring: 0 0 0 3px rgba(91, 111, 101, .16);
+    --momo-ring: 0 0 0 3px rgba(255, 212, 59, .22);
   }
 
   html, body, #root { min-height: 100%; }
