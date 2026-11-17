@@ -87,7 +87,7 @@ const LikedReviewsStyles = createGlobalStyle`
 
 .liked-reviews-toolbar > span {
   padding: 7px 12px;
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
   border-radius: 8px;
   color: var(--momo-link);
@@ -112,7 +112,7 @@ const LikedReviewsStyles = createGlobalStyle`
 }
 
 .liked-review-item:hover {
-  background: var(--momo-surface)cf4;
+  background: var(--momo-note);
 }
 
 /* 영화 포스터 */
@@ -209,7 +209,7 @@ const LikedReviewsStyles = createGlobalStyle`
   padding: 8px 11px;
   border: 1px solid var(--momo-dislike-border);
   border-radius: 8px;
-  background: var(--momo-surface)7f7;
+  background: var(--momo-dislike-bg);
   color: var(--momo-danger);
   font-size: 11px;
   font-weight: 700;
@@ -304,7 +304,7 @@ const LikedReviewsStyles = createGlobalStyle`
 }
 
 .profile-liked-reviews-link:hover {
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
   border-color: var(--momo-accent);
 }
 
