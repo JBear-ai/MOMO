@@ -56,6 +56,22 @@ const GlobalTokensStyles = createGlobalStyle`
     --momo-content-width: 1320px;
     --momo-page-gutter: clamp(16px, 4vw, 56px);
     --momo-section-gap: clamp(36px, 5vw, 72px);
+    --momo-font-display: clamp(2rem, 4vw, 3.5rem);
+    --momo-font-title: clamp(1.35rem, 2.2vw, 1.85rem);
+    --momo-font-body: 0.9375rem;
+    --momo-line-body: 1.7;
+    --momo-space-1: 4px;
+    --momo-space-2: 8px;
+    --momo-space-3: 12px;
+    --momo-space-4: 16px;
+    --momo-space-6: 24px;
+    --momo-space-8: 32px;
+    --momo-space-10: 40px;
+    --momo-space-12: 48px;
+    --momo-transition-fast: 160ms cubic-bezier(.2, .7, .2, 1);
+    --momo-transition-ui: 240ms cubic-bezier(.2, .7, .2, 1);
+    --momo-ring: 0 0 0 3px rgba(118, 90, 10, .2);
+    --momo-header-glass: rgba(255, 254, 250, .82);
   }
 
   html, body, #root { min-height: 100%; }
@@ -69,11 +85,15 @@ const GlobalTokensStyles = createGlobalStyle`
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
       system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
       "Noto Sans KR", "Malgun Gothic", sans-serif;
-    letter-spacing: -.01em;
+    letter-spacing: -.012em;
+    line-height: var(--momo-line-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   button, input, textarea, select { font: inherit; }
+  a { color: inherit; }
+  img { max-width: 100%; }
+  button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
   button { color: inherit; }
   button:disabled { cursor: not-allowed; opacity: .52; }
   :focus-visible {
