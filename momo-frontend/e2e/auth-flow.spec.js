@@ -96,6 +96,46 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   ).toBeVisible();
   await page.setViewportSize({ width: 1280, height: 800 });
 
+  // 프로필 수정 페이지의 브랜드 컬러가 실제 브라우저 스타일에 반영되는지 확인한다.
+  await page.goto("/profile/edit");
+  await expect(page.locator(".profile-edit-page")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "프로필 수정" })).toBeVisible();
+
+  const profileEditHero = await page.locator(".profile-edit-heading").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      background: style.backgroundImage,
+      title: getComputedStyle(element.querySelector("h1")).color,
+      border: style.borderColor,
+    };
+  });
+  expect(profileEditHero.background).toContain("linear-gradient");
+  expect(profileEditHero.title).toBe("rgb(46, 71, 54)");
+  expect(profileEditHero.border).toBe("rgb(185, 205, 190)");
+
+  const profilePortraitStage = await page.locator(".profile-image-edit").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundImage, border: style.borderColor };
+  });
+  expect(profilePortraitStage.background).toContain("linear-gradient");
+  expect(profilePortraitStage.border).toBe("rgb(185, 208, 190)");
+
+  const saveButton = await page.locator(".profile-edit-submit").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundColor, color: style.color, radius: style.borderRadius };
+  });
+  expect(saveButton.background).toBe("rgb(94, 128, 102)");
+  expect(saveButton.color).toBe("rgb(255, 255, 255)");
+  expect(saveButton.radius).toBe("10px");
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileEditColumns = await page.locator(".profile-form-buttons").evaluate(
+    (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(mobileEditColumns).toBe(2);
+  await expect(page.locator(".profile-edit-cancel")).toBeVisible();
+  await page.setViewportSize({ width: 1280, height: 800 });
+
   await page.goto("/");
 
   // 첫 로그인 동기화 후 서버에 관심 영화를 추가해 계정별 저장을 확인한다.
