@@ -102,10 +102,10 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   justify-content: space-between;
   gap: 16px;
   margin: 24px 0;
-  padding: 18px 20px;
-  background: var(--momo-note);
+  padding: 22px 24px;
+  background: linear-gradient(135deg, var(--momo-note), #FFFDF6);
   border: 1px solid var(--momo-note-border);
-  border-radius: 10px;
+  border-radius: 18px;
 }
 
 .review-detail-movie-info {
