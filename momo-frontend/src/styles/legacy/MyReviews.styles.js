@@ -24,7 +24,7 @@ const MyReviewsStyles = createGlobalStyle`
   padding: 36px;
   margin-bottom: 30px;
 
-  background: #fffaf0;
+  background: var(--momo-surface)af0;
   border: 1px solid #f0dfbd;
   border-radius: 14px;
 }
@@ -32,7 +32,7 @@ const MyReviewsStyles = createGlobalStyle`
 .my-reviews-eyebrow {
   margin: 0 0 10px;
 
-  color: #b78000;
+  color: var(--momo-link);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 1px;
@@ -41,7 +41,7 @@ const MyReviewsStyles = createGlobalStyle`
 .my-reviews-heading h1 {
   margin: 0 0 10px;
 
-  color: #111;
+  color: var(--momo-text);
   font-size: 30px;
   font-weight: 800;
 }
@@ -49,12 +49,12 @@ const MyReviewsStyles = createGlobalStyle`
 .my-reviews-heading p {
   margin: 0;
 
-  color: #817565;
+  color: var(--momo-muted);
   font-size: 14px;
 }
 
 .my-reviews-heading > a {
-  color: #9c6c00;
+  color: var(--momo-link);
   font-size: 14px;
   font-weight: 800;
   text-decoration: none;
@@ -67,8 +67,8 @@ const MyReviewsStyles = createGlobalStyle`
 .my-reviews-card {
   padding: 30px;
 
-  background: #fff;
-  border: 1px solid #e5dfd6;
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
   border-radius: 14px;
 }
 
@@ -81,13 +81,13 @@ const MyReviewsStyles = createGlobalStyle`
   margin-bottom: 24px;
   padding-bottom: 18px;
 
-  border-bottom: 1px solid #e8e3dc;
+  border-bottom: 1px solid var(--momo-border);
 }
 
 .my-reviews-card-heading h2 {
   margin: 0 0 8px;
 
-  color: #111;
+  color: var(--momo-text);
   font-size: 20px;
   font-weight: 800;
 }
@@ -95,18 +95,18 @@ const MyReviewsStyles = createGlobalStyle`
 .my-reviews-card-heading p {
   margin: 0;
 
-  color: #817565;
+  color: var(--momo-muted);
   font-size: 13px;
 }
 
 .my-reviews-card-heading > span {
   padding: 7px 12px;
 
-  background: #fffaf0;
+  background: var(--momo-surface)af0;
   border: 1px solid #f0dfbd;
   border-radius: 8px;
 
-  color: #9c6c00;
+  color: var(--momo-link);
   font-size: 12px;
   font-weight: 800;
 }
@@ -126,16 +126,16 @@ const MyReviewsStyles = createGlobalStyle`
 
   padding: 22px 12px;
 
-  border-bottom: 1px solid #e8e3dc;
+  border-bottom: 1px solid var(--momo-border);
 
-  color: #111;
+  color: var(--momo-text);
   text-decoration: none;
 
   transition: background 0.15s ease;
 }
 
 .my-review-item:hover {
-  background: #fffcf4;
+  background: var(--momo-surface)cf4;
 }
 
 .my-review-info {
@@ -144,7 +144,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-review-movie {
-  color: #9c6c00;
+  color: var(--momo-link);
   font-size: 12px;
   font-weight: 800;
 }
@@ -152,7 +152,7 @@ const MyReviewsStyles = createGlobalStyle`
 .my-review-info h3 {
   margin: 8px 0;
 
-  color: #111;
+  color: var(--momo-text);
   font-size: 18px;
   font-weight: 800;
 }
@@ -175,7 +175,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-review-arrow {
-  color: #b78000;
+  color: var(--momo-link);
   font-size: 22px;
 }
 
@@ -195,7 +195,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-reviews-state a {
-  color: #9c6c00;
+  color: var(--momo-link);
   font-weight: 800;
   text-decoration: none;
 }
@@ -221,8 +221,8 @@ const MyReviewsStyles = createGlobalStyle`
 
   padding: 0 12px;
 
-  background: #fff;
-  border: 1px solid #e5dfd6;
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
   border-radius: 8px;
 
   color: #555;
@@ -232,9 +232,9 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-reviews-pagination button.active {
-  background: #ffd43b;
-  border-color: #ffd43b;
-  color: #111;
+  background: var(--momo-accent);
+  border-color: var(--momo-accent);
+  color: var(--momo-text);
 }
 
 .my-reviews-pagination button:disabled {
@@ -251,11 +251,11 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .profile-reviews-link:hover {
-  background: #fffaf0;
+  background: var(--momo-surface)af0;
 }
 
 .profile-reviews-count {
-  color: #b78000;
+  color: var(--momo-link);
   font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
@@ -270,7 +270,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .review-clickable-row:hover {
-  background: #fffaf0;
+  background: var(--momo-surface)af0;
 }
 
 .all-reviews-mobile-item {
@@ -278,7 +278,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .all-reviews-mobile-item:hover {
-  background: #fffaf0;
+  background: var(--momo-surface)af0;
 }
 
 `;
