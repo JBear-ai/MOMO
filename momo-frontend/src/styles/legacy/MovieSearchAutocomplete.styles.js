@@ -17,7 +17,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     box-sizing: border-box;
     padding: 6px 16px;
     background: var(--momo-surface)aec;
-    border: 1px solid #efe6d0;
+    border: 1px solid var(--momo-note-border);
     border-radius: 20px;
     transition: all 0.2s ease;
   }
@@ -49,7 +49,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     padding: 2px 4px;
     border: none;
     background: transparent;
-    color: #594400;
+    color: var(--momo-accent-ink);
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
@@ -84,7 +84,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     min-height: 84px;
     padding: 10px 12px;
     border: none;
-    border-bottom: 1px solid #f0ece4;
+    border-bottom: 1px solid var(--momo-border);
     background: var(--momo-surface);
     text-align: left;
     cursor: pointer;
@@ -112,7 +112,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     overflow: hidden;
     border: 1px solid var(--momo-border);
     border-radius: 5px;
-    background: #efece4;
+    background: var(--momo-note);
   }
 
   .momo-search-poster img {
