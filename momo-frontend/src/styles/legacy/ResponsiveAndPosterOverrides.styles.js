@@ -178,7 +178,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   height: 100%;
   align-items: center;
   justify-content: center;
-  color: #999;
+  color: var(--momo-placeholder);
   font-size: 12px;
   font-weight: 700;
 }
@@ -281,7 +281,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   height: 100%;
   align-items: center;
   justify-content: center;
-  color: #999;
+  color: var(--momo-placeholder);
   font-size: 9px;
   font-weight: 700;
 }
