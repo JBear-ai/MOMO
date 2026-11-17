@@ -623,7 +623,7 @@ function ProfileEdit() {
             {
               className: "signup-message",
               style: {
-                color: !nickname ? "#888" : isNickname ? "#2e9e4f" : "#e5484d",
+                color: !nickname ? "#647066" : isNickname ? "#2F7547" : "#B44646",
               },
             },
             !nickname
@@ -645,7 +645,7 @@ function ProfileEdit() {
             {
               className: "signup-message",
               style: {
-                color: !email ? "#888" : isEmail ? "#2e9e4f" : "#e5484d",
+                color: !email ? "#647066" : isEmail ? "#2F7547" : "#B44646",
               },
             },
             !email
@@ -679,7 +679,7 @@ function ProfileEdit() {
               className: "profile-edit-section-description",
               style: {
                 fontSize: "13px",
-                color: "#888",
+                color: "#647066",
                 marginBottom: "16px",
               },
             },
@@ -705,12 +705,12 @@ function ProfileEdit() {
               className: "signup-message",
               style: {
                 color: passwordCheckError
-                  ? "#e5484d"
+                  ? "#B44646"
                   : passwordCheckResult === true
-                    ? "#2e9e4f"
+                    ? "#2F7547"
                     : passwordCheckResult === false
-                      ? "#e5484d"
-                      : "#888",
+                      ? "#B44646"
+                      : "#647066",
               },
             },
             passwordChecking
@@ -742,12 +742,12 @@ function ProfileEdit() {
               className: "signup-message",
               style: {
                 color: !newPassword
-                  ? "#888"
+                  ? "#647066"
                   : isSamePassword
-                    ? "#e5484d"
+                    ? "#B44646"
                     : isPwd
-                      ? "#2e9e4f"
-                      : "#e5484d",
+                      ? "#2F7547"
+                      : "#B44646",
               },
             },
             !newPassword
@@ -777,10 +777,10 @@ function ProfileEdit() {
               className: "signup-message",
               style: {
                 color: !confirmPassword
-                  ? "#888"
+                  ? "#647066"
                   : isPwdCheck
-                    ? "#2e9e4f"
-                    : "#e5484d",
+                    ? "#2F7547"
+                    : "#B44646",
               },
             },
             !confirmPassword
