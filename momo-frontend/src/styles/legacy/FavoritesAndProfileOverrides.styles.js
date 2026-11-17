@@ -55,7 +55,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-star.is-active {
   background: rgba(255, 212, 59, 0.25);
   border-color: rgba(255, 212, 59, 0.7);
-  color: #ffd43b;
+  color: var(--momo-accent);
 }
 
 /* ========================================
@@ -64,26 +64,26 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .home-favorites-more {
   padding: 8px 12px;
-  border: 1px solid #e2dcce;
+  border: 1px solid var(--momo-border);
   border-radius: 8px;
-  background: #ffffff;
-  color: #4a453c;
+  background: var(--momo-surface);
+  color: var(--momo-text-soft);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
 }
 
 .home-favorites-more:hover {
-  border-color: #ffd43b;
-  background: #fff8dc;
+  border-color: var(--momo-accent);
+  background: var(--momo-note-strong);
 }
 
 .home-favorites-empty {
   padding: 32px 20px;
-  border: 1px dashed #e2dcce;
+  border: 1px dashed var(--momo-border);
   border-radius: 12px;
-  background: #ffffff;
-  color: #736e63;
+  background: var(--momo-surface);
+  color: var(--momo-muted);
   font-size: 13px;
   text-align: center;
 }
@@ -99,13 +99,13 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .profile-favorites-link:hover {
-  border-color: #ffd43b;
-  background: #fffdf4;
+  border-color: var(--momo-accent);
+  background: var(--momo-surface-raised);
 }
 
 .profile-favorites-count {
   flex-shrink: 0;
-  color: #a37e1c;
+  color: var(--momo-link);
   font-size: 12px;
   font-weight: 800;
 }
@@ -116,12 +116,12 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page {
   min-height: 100vh;
-  padding: 56px 24px 80px;
-  background: #faf9f6;
+  padding: 12px 0 64px;
+  background: transparent;
 }
 
 .favorite-page-container {
-  max-width: 1240px;
+  max-width: 1320px;
   margin: 0 auto;
 }
 
@@ -130,7 +130,12 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 32px;
+  padding: 30px 34px;
+  margin-bottom: 28px;
+  background: linear-gradient(120deg, var(--momo-note), rgba(255,255,255,.88));
+  border: 1px solid var(--momo-note-border);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .favorite-page-heading > div {
@@ -140,7 +145,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-page-heading .eyebrow {
   display: block;
   margin-bottom: 8px;
-  color: #a37e1c;
+  color: var(--momo-link);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -148,7 +153,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page-heading h1 {
   margin: 0 0 8px;
-  color: #1f1d1a;
+  color: var(--momo-text);
   font-size: clamp(26px, 4vw, 34px);
   font-weight: 800;
 }
@@ -156,17 +161,17 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-page-heading p,
 .favorite-list-toolbar p {
   margin: 0;
-  color: #736e63;
+  color: var(--momo-muted);
   font-size: 13px;
 }
 
 .favorite-back-button {
   flex-shrink: 0;
   padding: 10px 16px;
-  border: 1px solid #e2dcce;
+  border: 1px solid var(--momo-border);
   border-radius: 8px;
-  background: #ffffff;
-  color: #4a453c;
+  background: var(--momo-surface);
+  color: var(--momo-text-soft);
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
@@ -179,29 +184,40 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   gap: 16px;
   padding: 18px 0;
   margin-bottom: 22px;
-  border-top: 1px solid #e2dcce;
-  border-bottom: 1px solid #e2dcce;
+  border-top: 1px solid var(--momo-border);
+  border-bottom: 1px solid var(--momo-border);
 }
 
 .favorite-list-toolbar strong {
-  color: #1f1d1a;
+  color: var(--momo-text);
   font-size: 15px;
 }
 
 .favorite-list-toolbar strong span {
   margin-left: 6px;
-  color: #a37e1c;
+  color: var(--momo-link);
 }
 
 .favorite-page-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 24px 18px;
+  gap: 22px 18px;
 }
 
 .favorite-page-card {
   position: relative;
   min-width: 0;
+  padding: 10px;
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
+  border-radius: 18px;
+  box-shadow: var(--momo-shadow-xs);
+  transition: transform .2s ease, box-shadow .2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--momo-shadow-sm);
+  }
 }
 
 .favorite-page-poster {
@@ -210,9 +226,9 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   padding: 0;
   aspect-ratio: 2 / 2.85;
   overflow: hidden;
-  border: 1px solid #e2dcce;
+  border: 1px solid var(--momo-border);
   border-radius: 10px;
-  background: #efece4;
+  background: var(--momo-note);
   cursor: pointer;
 }
 
@@ -228,7 +244,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .favorite-page-poster > .favorite-page-open-button:focus-visible {
-  outline: 3px solid #a37e1c;
+  outline: 3px solid var(--momo-link);
   outline-offset: -3px;
 }
 
@@ -255,7 +271,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   justify-content: center;
   width: 100%;
   height: 100%;
-  color: #8c8578;
+  color: var(--momo-muted);
   font-size: 12px;
 }
 
@@ -266,7 +282,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-page-movie-info h3 {
   margin: 0;
   overflow: hidden;
-  color: #1f1d1a;
+  color: var(--momo-text);
   font-size: 15px;
   font-weight: 750;
   text-overflow: ellipsis;
@@ -275,21 +291,21 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page-movie-info p {
   margin: 6px 0 0;
-  color: #736e63;
+  color: var(--momo-muted);
   font-size: 12px;
 }
 
 .favorite-page-empty {
   padding: 64px 20px;
-  border: 1px dashed #e2dcce;
+  border: 1px dashed var(--momo-border);
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--momo-surface);
   text-align: center;
 }
 
 .favorite-empty-symbol {
   margin-bottom: 12px;
-  color: #a37e1c;
+  color: var(--momo-link);
   font-size: 42px;
 }
 
@@ -300,16 +316,16 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page-empty p {
   margin: 0 0 20px;
-  color: #736e63;
+  color: var(--momo-muted);
   font-size: 13px;
 }
 
 .favorite-page-empty button {
   padding: 11px 18px;
-  border: 1px solid #e2dcce;
+  border: 1px solid var(--momo-border);
   border-radius: 8px;
-  background: #ffd43b;
-  color: #594400;
+  background: var(--momo-accent);
+  color: var(--momo-accent-ink);
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
@@ -361,25 +377,25 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .favorite-back-button {
-  color: #62594e;
-  background: #fff;
-  border: 1px solid #e2dbd0;
+  color: var(--momo-text-soft);
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
 }
 
 .favorite-back-button:hover {
-  background: #f5f2eb;
-  border-color: #cfc4b5;
+  background: var(--momo-bg);
+  border-color: var(--momo-border-strong);
 }
 
 .favorite-browse-button {
-  color: #fff;
-  background: #66594b;
-  border: 1px solid #66594b;
+  color: var(--momo-surface);
+  background: var(--momo-text-soft);
+  border: 1px solid var(--momo-text-soft);
 }
 
 .favorite-browse-button:hover {
-  background: #514538;
-  border-color: #514538;
+  background: var(--momo-text-soft);
+  border-color: var(--momo-text-soft);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(50, 40, 30, 0.12);
 }
@@ -403,15 +419,15 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   padding: 30px 20px;
   margin: 20px 0;
 
-  background: #f5f2eb;
-  border: 1px solid #e2dbd0;
+  background: var(--momo-bg);
+  border: 1px solid var(--momo-border);
   border-radius: 16px;
 }
 
 .movie-score-label {
   font-size: 16px;
   font-weight: 600;
-  color: #81796e;
+  color: var(--momo-muted);
   margin-bottom: 12px;
 }
 
@@ -426,18 +442,18 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   font-size: 72px;
   font-weight: 800;
   line-height: 1;
-  color: #b58a45;
+  color: var(--momo-link);
 }
 
 .movie-score-value span {
   font-size: 22px;
-  color: #918779;
+  color: var(--momo-muted);
 }
 
 .movie-score-display p {
   margin: 12px 0 0;
   font-size: 14px;
-  color: #81796e;
+  color: var(--momo-muted);
 }
 
 /* =========================
@@ -453,7 +469,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #e5e5e5;
+  background-color: var(--momo-border);
   flex-shrink: 0;
 }
 
@@ -481,7 +497,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0;
+  background-color: var(--momo-note);
   margin: 0 auto 16px auto;
 }
 
@@ -494,7 +510,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .profile-image-preview span {
   font-size: 2rem;
   font-weight: bold;
-  color: #666;
+  color: var(--momo-muted);
 }
 
 .profile-image-buttons {

@@ -41,11 +41,11 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 .review-detail-card {
   position: relative;
   overflow: hidden;
-  padding: 36px;
-  background: var(--momo-surface);
+  padding: clamp(24px, 3vw, 40px);
+  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
   border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius);
-  box-shadow: var(--momo-shadow);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .review-detail-card::before {
@@ -102,10 +102,10 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   justify-content: space-between;
   gap: 16px;
   margin: 24px 0;
-  padding: 18px 20px;
-  background: var(--momo-note);
+  padding: 22px 24px;
+  background: linear-gradient(135deg, var(--momo-note), #FFFDF6);
   border: 1px solid var(--momo-note-border);
-  border-radius: 10px;
+  border-radius: 18px;
 }
 
 .review-detail-movie-info {
@@ -162,7 +162,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   min-height: 180px;
   padding: 28px;
   margin: 0;
-  background: #FFFCF4;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
   border-radius: 10px;
   color: var(--momo-text);
@@ -197,7 +197,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 }
 
 .review-detail-error {
-  color: #C0392B;
+  color: var(--momo-danger);
 }
 
 /* 모바일 */

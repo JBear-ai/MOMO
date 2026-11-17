@@ -18,19 +18,19 @@ body {
 ======================================== */
 .profile-page {
   width: 100%;
-  max-width: 820px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 30px 20px 80px;
+  padding: 12px 0 64px;
 }
 
 .profile-container {
   display: grid;
-  gap: 24px;
+  gap: 20px;
 }
 
 .profile-heading h1 {
-  margin: 0 0 6px;
-  font-size: 30px;
+  margin: 0 0 8px;
+  font-size: clamp(28px, 3vw, 36px);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--momo-text);
@@ -52,12 +52,13 @@ body {
 }
 
 .profile-card {
-  padding: 28px;
-  background: var(--momo-surface);
-  border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius);
-  box-shadow: var(--momo-shadow);
+  padding: clamp(22px, 3vw, 32px);
+  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
+  border: 1px solid var(--momo-glass-border);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
   position: relative;
+  overflow: hidden;
 }
 
 /* 메모지 감성 포인트 라인 */
@@ -68,7 +69,7 @@ body {
   left: 28px;
   right: 28px;
   height: 2px;
-  background: linear-gradient(90deg, var(--momo-accent) 0%, transparent 100%);
+  background: linear-gradient(90deg, var(--momo-accent), rgba(255,212,59,0));
   border-radius: 2px;
 }
 
@@ -127,15 +128,15 @@ body {
 }
 
 .profile-delete-button {
-  background: #FFF5F5;
-  border-color: #EED2D2;
-  color: #C53030;
+  background: var(--momo-danger-bg);
+  border-color: var(--momo-dislike-border);
+  color: var(--momo-danger);
   text-decoration: none;
 }
 
 /* 회원 탈퇴 버튼 - 활성화 상태에서만 호버 적용 (추가 / 11.02 )*/
 .profile-delete-button:not(:disabled):hover {
-  background: #fed7d7;
+  background: var(--momo-dislike-bg-hover);
 }
 
 /* 체크박스 선택 전 - 비활성화 */
@@ -207,7 +208,7 @@ body {
   display: grid;
   /* 화면이 좁을 때는 줄바꿈되거나 유연하게 줄어들고, 
      넓어질 때는 150px 이상 크기로 각 카드가 공간을 나눠 갖도록 설정 */
-  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   width: 100%;
 }
@@ -219,11 +220,11 @@ body {
   justify-content: center;
   gap: 10px;
   min-width: 0; /* 내부 텍스트나 flex 아이템이 칸을 뚫고 나가지 않게 방지 */
-  min-height: 145px;
-  padding: 20px 12px;
-  background: var(--momo-note);
+  min-height: 156px;
+  padding: 22px 14px;
+  background: linear-gradient(145deg, var(--momo-note), #FFFDF6);
   border: 1px solid var(--momo-note-border);
-  border-radius: 10px;
+  border-radius: 16px;
   text-align: center;
   text-decoration: none;
   color: var(--momo-text);

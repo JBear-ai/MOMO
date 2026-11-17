@@ -2,29 +2,101 @@ import styled from "styled-components";
 
 /* 전체 홈 화면: 포근하고 깨끗한 다이어리 미색 배경 */
 export const HomePage = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, .82fr);
+  gap: 28px;
   width: 100%;
-  background-color: #f8f6f0;
-  color: #2d2a26;
-  padding-bottom: 80px;
+  padding-bottom: 72px;
+  color: var(--momo-text);
+
+  > section:first-child,
+  > div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  > section:nth-of-type(2) {
+    grid-column: 1 / -1;
+  }
+
+  > section:nth-of-type(3) {
+    grid-column: 1;
+  }
+
+  > section:nth-of-type(4) {
+    grid-column: 2;
+  }
+
+  > section:not(:first-child) {
+    min-width: 0;
+    padding: 26px;
+    background: var(--momo-glass);
+    border: 1px solid var(--momo-glass-border);
+    border-radius: var(--momo-radius-lg);
+    box-shadow: var(--momo-shadow-sm);
+    backdrop-filter: blur(16px) saturate(125%);
+  }
+
+  > section:nth-of-type(4) > div:nth-child(2) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+
+    > section:nth-of-type(2),
+    > section:nth-of-type(3),
+    > section:nth-of-type(4) {
+      grid-column: 1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    gap: 16px;
+    padding-bottom: 44px;
+
+    > section:not(:first-child) {
+      padding: 18px 14px;
+      border-radius: var(--momo-radius);
+    }
+  }
 `;
 
 /* 메인 추천 영역: 배경과 부드럽게 이어지는 고급 메모지 카드 톤 */
 export const FeatureSection = styled.section`
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(300px, .78fr) minmax(0, 1.22fr);
   min-height: 440px;
   align-items: stretch;
-  margin-bottom: 80px;
-  background: #ffffff;
   overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid #e6e1d6;
-  box-shadow: 0 12px 32px -8px rgba(50, 44, 32, 0.05);
+  border: 1px solid var(--momo-glass-border);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 212, 59, .18), transparent 28rem),
+    linear-gradient(135deg, #FFFEFA 0%, #FFF9E8 54%, #F8F2E5 100%);
+  box-shadow: var(--momo-shadow-lg);
+
+  &::after {
+    position: absolute;
+    z-index: -1;
+    top: -120px;
+    left: 42%;
+    width: 360px;
+    height: 360px;
+    border: 1px solid rgba(214, 166, 20, .12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 28px rgba(214, 166, 20, .035), 0 0 0 58px rgba(214, 166, 20, .025);
+    content: "";
+    pointer-events: none;
+  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     min-height: auto;
-    margin-bottom: 54px;
+    margin-bottom: 0;
+    border-radius: 20px;
   }
 `;
 
@@ -33,7 +105,10 @@ export const FeatureInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 64px 48px;
+  position: relative;
+  z-index: 1;
+  padding: clamp(34px, 4vw, 58px) clamp(28px, 4vw, 52px);
+  background: linear-gradient(135deg, rgba(255,255,255,.76), rgba(255,250,236,.46));
 
   @media (max-width: 768px) {
     padding: 36px 24px;
@@ -43,8 +118,13 @@ export const FeatureInfo = styled.div`
 /* 상단 작은 문구 */
 export const Eyebrow = styled.span`
   display: block;
+  width: fit-content;
   margin-bottom: 18px;
-  color: #a37e1c; /* 차분하고 고급스러운 빈티지 골드 */
+  padding: 7px 11px;
+  color: var(--momo-accent-ink);
+  background: var(--momo-accent-soft);
+  border: 1px solid rgba(214, 166, 20, .22);
+  border-radius: var(--momo-radius-pill);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -54,20 +134,21 @@ export const Eyebrow = styled.span`
 /* 메인 제목 */
 export const FeatureTitle = styled.h1`
   margin: 0;
-  font-size: clamp(34px, 4vw, 54px);
-  line-height: 1.2;
+  font-size: clamp(34px, 4.2vw, 58px);
+  line-height: 1.12;
   letter-spacing: -0.04em;
   font-weight: 800;
-  color: #1f1d1a;
+  color: var(--momo-text);
   word-break: keep-all;
 `;
 
 /* 메인 설명 */
 export const FeatureDescription = styled.p`
   margin: 20px 0 0;
-  color: #736e63;
+  color: var(--momo-muted);
+  max-width: 34rem;
   font-size: 15px;
-  line-height: 1.8;
+  line-height: 1.85;
   word-break: keep-all;
 `;
 
@@ -79,7 +160,7 @@ export const FeatureVisual = styled.div`
   min-width: 0;
   min-height: 440px;
   overflow: hidden;
-  background: #efece4;
+  background: #E9E1D2;
 
   /* 추천작 컴포넌트 전체 */
   .recommend-banner {
@@ -125,7 +206,7 @@ export const FeatureVisual = styled.div`
     left: 40px;
     bottom: 44px;
     width: calc(100% - 80px);
-    color: #fff;
+    color: var(--momo-surface);
   }
 
   /* 오늘의 추천작 레이블 - 쨍한 노랑을 빼고 차분한 크림 옐로우로 고정 */
@@ -134,9 +215,9 @@ export const FeatureVisual = styled.div`
     margin-bottom: 8px;
     padding: 6px 12px;
     border-radius: 6px;
-    background: #f3e9c8;
-    color: #4a3800;
-    border: 1px solid #e5d7b5;
+    background: var(--momo-note-strong);
+    color: var(--momo-accent-ink);
+    border: 1px solid var(--momo-note-border);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.02em;
@@ -161,9 +242,9 @@ export const FeatureVisual = styled.div`
   /* 오늘의 추천작 버튼 - 쨍한 노랑을 빼고 차분한 크림 옐로우로 고정 */
   .recommend-button {
     padding: 11px 20px;
-    border: 1px solid #e5d7b5;
-    background: #f3e9c8;
-    color: #4a3800;
+    border: 1px solid var(--momo-note-border);
+    background: var(--momo-note-strong);
+    color: var(--momo-accent-ink);
     font-size: 13px;
     font-weight: 800;
     border-radius: 8px;
@@ -187,8 +268,8 @@ export const FeatureVisual = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
-    background: #faf8f2;
-    color: #736e63;
+    background: var(--momo-bg);
+    color: var(--momo-muted);
     font-size: 14px;
     font-weight: 600;
   }
@@ -217,10 +298,11 @@ export const FeatureVisual = styled.div`
 
 /* 공통 섹션 */
 export const Section = styled.section`
-  margin-bottom: 90px;
+  min-width: 0;
+  margin: 0;
 
   @media (max-width: 768px) {
-    margin-bottom: 60px;
+    margin: 0;
   }
 `;
 
@@ -230,26 +312,28 @@ export const SectionHeading = styled.div`
   justify-content: space-between;
   align-items: end;
   gap: 20px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--momo-border);
 
   h2 {
     margin: 0;
-    font-size: clamp(22px, 2.8vw, 30px);
+    font-size: clamp(21px, 2.4vw, 28px);
     letter-spacing: -0.04em;
     font-weight: 800;
-    color: #1f1d1a;
+    color: var(--momo-text);
   }
 
   p {
     margin: 6px 0 0;
-    color: #736e63;
+    color: var(--momo-muted);
     font-size: 13px;
   }
 `;
 
 /* 섹션 우측 설명 */
 export const MoreText = styled.span`
-  color: #8c8578;
+  color: var(--momo-muted);
   font-size: 13px;
   white-space: nowrap;
 `;
@@ -258,7 +342,7 @@ export const MoreText = styled.span`
 export const MovieGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 24px 18px;
+  gap: 22px 16px;
 
   @media (max-width: 1000px) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -284,7 +368,7 @@ export const MovieCard = styled.div`
   }
 
   &:focus-visible {
-    outline: 2px solid #a37e1c;
+    outline: 2px solid var(--momo-link);
     outline-offset: 5px;
   }
 `;
@@ -295,17 +379,23 @@ export const PosterWrap = styled.div`
   width: 100%;
   aspect-ratio: 2 / 2.85;
   overflow: hidden;
-  background: #efece4;
-  border-radius: 10px;
-  border: 1px solid #e2dcce;
-  box-shadow: 0 4px 12px rgba(50, 44, 32, 0.04);
+  background: var(--momo-note);
+  border-radius: 14px;
+  border: 1px solid var(--momo-border);
+  box-shadow: var(--momo-shadow-xs);
+  transition: border-color .2s ease, box-shadow .2s ease;
 
   img {
     width: 100%;
     height: 100%;
     display: block;
     object-fit: cover;
-    transition: transform 0.35s ease;
+    transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
+  }
+
+  &:hover {
+    border-color: var(--momo-border-strong);
+    box-shadow: var(--momo-shadow-sm);
   }
 `;
 
@@ -314,7 +404,7 @@ export const Rank = styled.span`
   position: absolute;
   left: 12px;
   bottom: 8px;
-  color: #ffffff;
+  color: var(--momo-surface);
   font-size: 32px;
   line-height: 1;
   font-weight: 900;
@@ -329,7 +419,7 @@ export const MovieInfo = styled.div`
   h3 {
     margin: 0;
     overflow: hidden;
-    color: #1f1d1a;
+    color: var(--momo-text);
     font-size: 15px;
     font-weight: 750;
     letter-spacing: -0.02em;
@@ -339,7 +429,7 @@ export const MovieInfo = styled.div`
 
   p {
     margin: 6px 0 0;
-    color: #736e63;
+    color: var(--momo-muted);
     font-size: 12px;
   }
 `;
@@ -351,11 +441,11 @@ export const GenreList = styled.div`
   gap: 10px;
 
   button {
-    padding: 11px 20px;
-    border: 1px solid #e2dcce;
+    padding: 12px 18px;
+    border: 1px solid var(--momo-border);
     border-radius: 999px;
-    background: #ffffff;
-    color: #4a453c;
+    background: var(--momo-surface);
+    color: var(--momo-text-soft);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -364,9 +454,9 @@ export const GenreList = styled.div`
   }
 
   button:hover {
-    border-color: #a37e1c;
-    background: #ffd43b;
-    color: #4a3800;
+    border-color: var(--momo-link);
+    background: var(--momo-accent);
+    color: var(--momo-accent-ink);
   }
 `;
 
@@ -376,21 +466,22 @@ export const BrandLine = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 36px 0;
-  border-top: 1px solid #e2dcce;
-  border-bottom: 1px solid #e2dcce;
+  padding: 28px 30px;
+  background: linear-gradient(110deg, var(--momo-note), rgba(255,255,255,.72));
+  border: 1px solid var(--momo-note-border);
+  border-radius: var(--momo-radius-lg);
 
   h2 {
     margin: 0;
     font-size: clamp(20px, 3vw, 26px);
     letter-spacing: -0.04em;
     font-weight: 800;
-    color: #1f1d1a;
+    color: var(--momo-text);
   }
 
   p {
     margin: 6px 0 0;
-    color: #736e63;
+    color: var(--momo-muted);
     font-size: 13px;
   }
 
@@ -407,7 +498,7 @@ export const EmptyPoster = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
-  color: #8c8578;
+  color: var(--momo-muted);
   font-size: 12px;
   font-weight: 600;
 `;
