@@ -305,7 +305,7 @@ function PersonDetail() {
             },
             person.biography || "등록된 인물 소개가 없습니다.",
           ),
-          person.biography && person.biography.length > 150 &&
+          person.biography && person.biography.trim().length > 90 &&
             React.createElement(
               "button",
               {
