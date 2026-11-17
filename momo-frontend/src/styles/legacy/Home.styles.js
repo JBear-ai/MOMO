@@ -19,10 +19,15 @@ export const FeatureSection = styled.section`
   min-height: 350px;
   align-items: stretch;
   overflow: hidden;
-  border: 1px solid #E6DDCB;
-  border-radius: 22px;
-  background: #FFF9E9;
-  box-shadow: var(--momo-shadow-sm);
+  border: 1px solid rgba(255, 255, 255, .9);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,.82), rgba(255,250,236,.76));
+  box-shadow: 0 18px 48px rgba(68, 53, 22, .09), inset 0 1px rgba(255,255,255,.95);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+  &:hover {
+    box-shadow: 0 24px 58px rgba(68, 53, 22, .13), inset 0 1px rgba(255,255,255,.98);
+    transform: translateY(-2px);
+  }
   &::before {
     position: absolute;
     z-index: -1;
@@ -49,7 +54,21 @@ export const FeatureInfo = styled.div`
   position: relative;
   z-index: 1;
   padding: clamp(28px, 3.2vw, 44px);
-  background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,250,236,.52));
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255, 212, 59, .22), transparent 34%),
+    linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.58));
+  &::after {
+    position: absolute;
+    right: -58px;
+    bottom: -76px;
+    width: 210px;
+    height: 210px;
+    border: 1px solid rgba(191, 155, 42, .17);
+    border-radius: 50%;
+    box-shadow: 0 0 0 18px rgba(191, 155, 42, .045), 0 0 0 38px rgba(191, 155, 42, .025);
+    content: "";
+    pointer-events: none;
+  }
   @media (max-width: 760px) { padding: 26px 24px 22px; }
 `;
 
@@ -118,22 +137,37 @@ export const FeatureVisual = styled.div`
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(90deg, rgba(20,18,14,.82), rgba(20,18,14,.38) 62%, rgba(20,18,14,.08));
+    background:
+      linear-gradient(90deg, rgba(20,18,14,.72), rgba(20,18,14,.24) 62%, rgba(20,18,14,.02)),
+      linear-gradient(0deg, rgba(20,18,14,.3), transparent 55%);
   }
   .recommend-content {
     position: absolute;
     z-index: 2;
-    left: clamp(24px, 3vw, 40px);
-    bottom: clamp(26px, 3vw, 38px);
-    width: min(78%, 520px);
+    left: clamp(20px, 2.6vw, 34px);
+    bottom: clamp(20px, 2.6vw, 34px);
+    width: min(76%, 500px);
+    padding: 20px 22px 19px;
     color: #fff;
+    border: 1px solid rgba(255,255,255,.42);
+    border-radius: 17px;
+    background: linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.08));
+    box-shadow: 0 12px 36px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.42);
+    backdrop-filter: blur(18px) saturate(145%);
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    animation: momo-glass-arrive .7s cubic-bezier(.2,.7,.2,1) both;
+    @keyframes momo-glass-arrive {
+      from { opacity: 0; transform: translate3d(0, 14px, 0) scale(.985); }
+      to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
   }
   .recommend-label {
     display: inline-block;
     margin-bottom: 9px;
     padding: 5px 9px;
-    border-radius: 5px;
-    background: var(--momo-accent);
+    border-radius: 999px;
+    background: rgba(255, 212, 59, .96);
+    box-shadow: 0 3px 12px rgba(0,0,0,.12);
     color: var(--momo-accent-ink);
     font-size: 11px;
     font-weight: 850;
@@ -161,9 +195,15 @@ export const FeatureVisual = styled.div`
     font-weight: 850;
     border-radius: 7px;
     cursor: pointer;
-    transition: background var(--momo-transition-fast), transform var(--momo-transition-fast);
+    border-radius: 999px;
+    box-shadow: 0 5px 16px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.55);
+    transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
   }
-  .recommend-button:hover { background: var(--momo-accent-hover); transform: translateY(-1px); }
+  .recommend-button:hover {
+    background: var(--momo-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+  }
   .recommend-state {
     position: absolute;
     inset: 0;
@@ -178,11 +218,28 @@ export const FeatureVisual = styled.div`
     font-size: 14px;
     font-weight: 650;
   }
-  &:hover .recommend-poster { transform: scale(1.025); }
+  &::after {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,.13) 45%, transparent 63%);
+    transform: translateX(-110%);
+    transition: transform .9s cubic-bezier(.2,.7,.2,1);
+  }
+  &:hover .recommend-poster { transform: scale(1.055); }
+  &:hover::after { transform: translateX(110%); }
   @media (max-width: 760px) {
     min-height: 300px;
     height: 300px;
-    .recommend-content { left: 22px; bottom: 22px; width: calc(100% - 44px); }
+    .recommend-content {
+      left: 14px;
+      bottom: 14px;
+      width: calc(100% - 28px);
+      padding: 16px;
+      box-sizing: border-box;
+    }
     .recommend-title { font-size: 26px; }
   }
 `;
@@ -190,6 +247,14 @@ export const FeatureVisual = styled.div`
 export const Section = styled.section`
   min-width: 0;
   margin: 0;
+  animation: momo-section-rise .58s cubic-bezier(.2,.7,.2,1) both;
+  @keyframes momo-section-rise {
+    from { opacity: 0; transform: translate3d(0, 16px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  &:nth-of-type(2) { animation-delay: 70ms; }
+  &:nth-of-type(3) { animation-delay: 140ms; }
+  &:nth-of-type(4) { animation-delay: 210ms; }
 `;
 
 export const SectionHeading = styled.div`
@@ -233,7 +298,10 @@ export const MovieGrid = styled.div`
 export const MovieCard = styled.div`
   min-width: 0;
   cursor: pointer;
-  &:hover img { transform: scale(1.035); }
+  transform: translateZ(0);
+  transition: transform 260ms cubic-bezier(.2,.7,.2,1);
+  &:hover { transform: translateY(-5px); }
+  &:hover img { transform: scale(1.065); }
   &:focus-visible { outline: 2px solid var(--momo-link); outline-offset: 5px; }
 `;
 
@@ -246,7 +314,18 @@ export const PosterWrap = styled.div`
   border-radius: 11px;
   border: 1px solid var(--momo-border);
   box-shadow: var(--momo-shadow-xs);
-  transition: border-color var(--momo-transition-fast), box-shadow var(--momo-transition-fast);
+  transition: border-color 240ms ease, box-shadow 240ms ease, transform 240ms ease;
+  transform: perspective(900px) rotateX(0deg);
+  &::after {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background: linear-gradient(125deg, rgba(255,255,255,.28), transparent 32%, transparent 68%, rgba(0,0,0,.08));
+    opacity: .72;
+    transition: opacity 240ms ease;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -254,7 +333,12 @@ export const PosterWrap = styled.div`
     object-fit: cover;
     transition: transform .42s cubic-bezier(.2,.7,.2,1);
   }
-  &:hover { border-color: var(--momo-border-strong); box-shadow: var(--momo-shadow-sm); }
+  &:hover {
+    border-color: rgba(205, 166, 44, .72);
+    box-shadow: 0 13px 26px rgba(54, 45, 28, .15);
+    transform: perspective(900px) rotateX(1.5deg);
+  }
+  &:hover::after { opacity: .28; }
 `;
 
 export const Rank = styled.span`
@@ -295,9 +379,12 @@ export const GenreList = styled.div`
     justify-content: space-between;
     min-height: 54px;
     padding: 0 16px;
-    border: 1px solid var(--momo-border);
-    border-radius: 10px;
-    background: var(--momo-surface);
+    border: 1px solid rgba(255,255,255,.92);
+    border-radius: 13px;
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.72));
+    box-shadow: 0 5px 15px rgba(54,45,28,.045), inset 0 1px rgba(255,255,255,.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: var(--momo-text-soft);
     font-size: 14px;
     font-weight: 700;
@@ -308,7 +395,8 @@ export const GenreList = styled.div`
     &:hover {
       border-color: #D6B33B;
       background: #FFF8DF;
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(54,45,28,.09), inset 0 1px rgba(255,255,255,.95);
     }
   }
   @media (max-width: 600px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
