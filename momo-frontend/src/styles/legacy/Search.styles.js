@@ -160,7 +160,7 @@ const RetryButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: var(--momo-surface)5d6;
+    background: var(--momo-note-strong);
     border-color: var(--momo-accent);
   }
 `;
