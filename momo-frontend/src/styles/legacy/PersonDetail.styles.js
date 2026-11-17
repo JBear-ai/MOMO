@@ -43,7 +43,7 @@ const PersonDetailStyles = createGlobalStyle`
   gap: 10px;
   padding: 12px;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--momo-surface);
   border: 1px solid var(--momo-border);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -54,7 +54,7 @@ const PersonDetailStyles = createGlobalStyle`
 }
 
 .movie-detail-page > .detail-content-section > .people-list > .person-chip:hover {
-  background: #ffffff;
+  background: var(--momo-surface);
   color: var(--momo-text);
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -74,7 +74,7 @@ const PersonDetailStyles = createGlobalStyle`
   height: 250px;
   align-items: center;
   justify-content: center;
-  background: #f0f0f0;
+  background: var(--momo-note);
   border-radius: 6px;
   font-size: 32px;
 }
@@ -122,7 +122,7 @@ const PersonDetailStyles = createGlobalStyle`
 }
 
 .movie-detail-page > .detail-content-section > .people-list + div > button:hover {
-  background: #f0f0f0;
+  background: var(--momo-note);
   border-color: #aaaaaa;
 }
 
