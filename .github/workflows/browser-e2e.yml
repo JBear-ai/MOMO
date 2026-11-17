@@ -99,8 +99,8 @@ jobs:
         working-directory: momo-frontend
         run: npx playwright test
 
-      - name: Upload browser evidence on failure
-        if: failure()
+      - name: Upload browser evidence and visual previews
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: momo-browser-e2e-evidence
