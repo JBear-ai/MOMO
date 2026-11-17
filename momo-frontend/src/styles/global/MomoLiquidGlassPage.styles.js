@@ -960,6 +960,177 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     transform: translateY(-1px);
   }
 
+  /* Search, archive lists and forms inherit the same calm material. */
+  #root .all-reviews-search-label {
+    color: #526258;
+  }
+  #root .all-reviews-search-select,
+  #root .all-reviews-search-input,
+  #root .momo-search-form,
+  #root .search-page input,
+  #root .search-page select,
+  #root main > input[type="search"],
+  #root .review-title-field input,
+  #root .review-content-field textarea,
+  #root .review-edit-title,
+  #root .review-edit-area textarea,
+  #root .review-comment-form textarea,
+  #root .signup-field input,
+  #root .profile-form input,
+  #root .profile-form textarea,
+  #root .profile-delete-page-card input {
+    border: 1px solid rgba(103,120,108,.25);
+    border-radius: 10px;
+    background: rgba(250,249,245,.76);
+    box-shadow: inset 0 1px rgba(255,255,255,.9);
+    color: #303833;
+  }
+  #root input::placeholder,
+  #root textarea::placeholder {
+    color: #737B73;
+  }
+  #root input:focus,
+  #root textarea:focus,
+  #root select:focus {
+    border-color: rgba(93,122,104,.56);
+    outline: none;
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 0 0 3px rgba(93,122,104,.13), 0 5px 14px rgba(39,43,39,.045);
+  }
+  #root .momo-search-form:focus-within {
+    border-color: rgba(93,122,104,.48);
+    box-shadow: 0 0 0 3px rgba(93,122,104,.12), 0 10px 22px rgba(39,43,39,.065);
+    transform: translateY(-1px);
+  }
+  #root .momo-search-dropdown {
+    border: 1px solid rgba(255,255,255,.86);
+    border-radius: 15px;
+    background: rgba(249,248,243,.92);
+    box-shadow: 0 16px 36px rgba(39,43,39,.12), inset 0 1px rgba(255,255,255,.94);
+    backdrop-filter: blur(22px) saturate(108%);
+    -webkit-backdrop-filter: blur(22px) saturate(108%);
+  }
+  #root .momo-search-result:hover {
+    background: rgba(101,126,111,.09);
+  }
+  #root .all-reviews-search-panel,
+  #root .all-reviews-search-form,
+  #root .all-reviews-search-toolbar {
+    border-color: rgba(255,255,255,.78);
+    border-radius: 14px;
+    background: rgba(247,246,240,.68);
+    box-shadow: inset 0 1px rgba(255,255,255,.88);
+    backdrop-filter: blur(18px) saturate(108%);
+    -webkit-backdrop-filter: blur(18px) saturate(108%);
+  }
+  #root .all-reviews-table-wrap {
+    border: 1px solid rgba(255,255,255,.82);
+    border-radius: 13px;
+    background: rgba(248,247,242,.62);
+    box-shadow: 0 8px 18px rgba(39,43,39,.045);
+  }
+  #root .all-reviews-table thead th {
+    border-bottom: 1px solid rgba(96,117,103,.2);
+    background: rgba(104,128,112,.12);
+    color: #4D6254;
+  }
+  #root .all-reviews-table tbody tr,
+  #root .all-reviews-table tbody tr:nth-child(even) {
+    background: rgba(250,249,245,.64);
+  }
+  #root .all-reviews-table tbody tr:hover {
+    background: rgba(105,128,114,.09);
+  }
+  #root .my-review-item,
+  #root .liked-review-item,
+  #root .all-reviews-mobile-item {
+    border: 1px solid rgba(255,255,255,.82);
+    border-radius: 13px;
+    background: rgba(248,247,242,.68);
+    box-shadow: 0 6px 15px rgba(39,43,39,.045), inset 0 1px rgba(255,255,255,.9);
+  }
+  #root .my-review-item:hover,
+  #root .liked-review-item:hover,
+  #root .all-reviews-mobile-item:hover {
+    background: rgba(255,255,255,.82);
+    box-shadow: 0 10px 20px rgba(39,43,39,.075);
+    transform: translateY(-2px);
+  }
+  #root .liked-review-unlike {
+    border: 1px solid rgba(137,107,105,.25);
+    border-radius: 9px;
+    background: rgba(137,107,105,.1);
+    color: #765855;
+  }
+  #root .liked-review-unlike:hover:not(:disabled) {
+    background: rgba(137,107,105,.16);
+    box-shadow: 0 5px 12px rgba(39,43,39,.05);
+  }
+  #root .profile-user {
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 14px;
+    background: rgba(250,249,245,.62);
+    box-shadow: inset 0 1px rgba(255,255,255,.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  #root .person-chip {
+    border-color: rgba(255,255,255,.82);
+    background: rgba(249,248,243,.66);
+    box-shadow: 0 3px 9px rgba(39,43,39,.045), inset 0 1px rgba(255,255,255,.9);
+    color: #4C5750;
+  }
+  #root .person-chip:hover {
+    background: rgba(255,255,255,.86);
+    box-shadow: 0 6px 13px rgba(39,43,39,.07);
+  }
+  #root .signup-card {
+    border: 1px solid rgba(255,255,255,.82);
+    border-radius: 20px;
+    background: rgba(248,247,242,.78);
+    box-shadow: 0 16px 38px rgba(39,43,39,.085), inset 0 1px rgba(255,255,255,.94);
+    backdrop-filter: blur(22px) saturate(108%);
+    -webkit-backdrop-filter: blur(22px) saturate(108%);
+  }
+  #root .signup-card-heading h1 {
+    color: #303833;
+  }
+  #root .signup-submit,
+  #root .all-reviews-search-submit {
+    min-height: 44px;
+    border: 1px solid rgba(94,119,103,.32);
+    border-radius: 10px;
+    background: rgba(101,126,111,.15);
+    box-shadow: 0 5px 12px rgba(39,43,39,.055), inset 0 1px rgba(255,255,255,.88);
+    color: #40574A;
+    font-weight: 800;
+  }
+  #root .signup-submit:hover:not(:disabled),
+  #root .all-reviews-search-submit:hover:not(:disabled) {
+    background: rgba(101,126,111,.22);
+    box-shadow: 0 8px 16px rgba(39,43,39,.075), inset 0 1px rgba(255,255,255,.94);
+    transform: translateY(-1px);
+  }
+  #root .signup-note-label {
+    border-color: rgba(101,126,111,.22);
+    background: rgba(101,126,111,.1);
+    color: #4D6254;
+  }
+  #root .review-write-toggle:hover {
+    background: rgba(101,126,111,.1);
+  }
+  #root .review-title-field input:focus,
+  #root .review-content-field textarea:focus,
+  #root .review-edit-title:focus,
+  #root .review-edit-area textarea:focus,
+  #root .review-comment-form textarea:focus,
+  #root .signup-field input:focus,
+  #root .profile-form input:focus,
+  #root .profile-form textarea:focus {
+    border-color: rgba(93,122,104,.56);
+    box-shadow: 0 0 0 3px rgba(93,122,104,.13);
+  }
+
   /* Small text is never faded into the glass. */
   #root .profile-heading p,
   #root .profile-card-heading p,
