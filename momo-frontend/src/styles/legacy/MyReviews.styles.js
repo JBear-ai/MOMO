@@ -24,7 +24,7 @@ const MyReviewsStyles = createGlobalStyle`
   padding: 36px;
   margin-bottom: 30px;
 
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
   border-radius: 14px;
 }
@@ -102,7 +102,7 @@ const MyReviewsStyles = createGlobalStyle`
 .my-reviews-card-heading > span {
   padding: 7px 12px;
 
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
   border-radius: 8px;
 
@@ -135,7 +135,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-review-item:hover {
-  background: var(--momo-surface)cf4;
+  background: var(--momo-note);
 }
 
 .my-review-info {
@@ -251,7 +251,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .profile-reviews-link:hover {
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
 }
 
 .profile-reviews-count {
@@ -270,7 +270,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .review-clickable-row:hover {
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
 }
 
 .all-reviews-mobile-item {
@@ -278,7 +278,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .all-reviews-mobile-item:hover {
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
 }
 
 `;
