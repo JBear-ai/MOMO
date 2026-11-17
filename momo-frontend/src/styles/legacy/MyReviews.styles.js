@@ -160,7 +160,7 @@ const MyReviewsStyles = createGlobalStyle`
 .my-review-info p {
   margin: 0 0 10px;
 
-  color: #6d665d;
+  color: var(--momo-text-soft);
   font-size: 14px;
   line-height: 1.6;
 
@@ -170,7 +170,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-review-date {
-  color: #999;
+  color: var(--momo-placeholder);
   font-size: 12px;
 }
 
