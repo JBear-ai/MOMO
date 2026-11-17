@@ -1605,6 +1605,690 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
       transition-duration: .01ms !important;
     }
   }
+
+  /* =========================================================
+     MOMO Brand Consistency — final cascade
+     Warm cream / memo ivory / highlighter yellow / warm ink.
+     Neutralizes legacy sage-gray page overrides.
+  ========================================================= */
+
+  :root {
+    --momo-glass-ink: #292820;
+    --momo-glass-muted: #6A6251;
+    --momo-glass-edge: rgba(233,223,197,.9);
+    --momo-glass-surface: rgba(255,250,236,.86);
+    --momo-glass-shadow: 0 14px 34px rgba(75,61,31,.085), inset 0 1px rgba(255,255,255,.96);
+    --momo-tone-film: #B38D19;
+    --momo-tone-write: #B38D19;
+    --momo-tone-like: #A85E54;
+    --momo-tone-search: #8A6A20;
+  }
+
+  /* Shared reading surfaces */
+  #root .profile-card,
+  #root .all-reviews-card,
+  #root .my-reviews-card,
+  #root .liked-reviews-card,
+  #root .review-detail-card,
+  #root .review-comment-card,
+  #root .detail-content-section,
+  #root .signup-card,
+  #root .favorite-page-empty,
+  #root .all-reviews-search-panel,
+  #root .all-reviews-search-form,
+  #root .all-reviews-search-toolbar {
+    border-color: rgba(233,223,197,.9);
+    background: rgba(255,250,236,.88);
+    box-shadow: 0 12px 30px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.96);
+  }
+
+  /* Header navigation remains quiet; active navigation receives the accent. */
+  #root .momo-app-header nav a {
+    border-color: rgba(233,223,197,.82);
+    background: rgba(255,250,236,.74);
+    color: #514833;
+  }
+  #root .momo-app-header nav a:hover {
+    border-color: rgba(214,180,63,.58);
+    background: rgba(255,212,59,.16);
+    color: #66510F;
+  }
+  #root .momo-app-header nav a.active {
+    border-color: rgba(214,180,63,.68);
+    background: rgba(255,212,59,.26);
+    color: #66510F;
+  }
+  #root .momo-app-header .momo-logout-button {
+    min-height: 36px;
+    padding: 0 13px;
+    border: 1px solid rgba(233,223,197,.9);
+    border-radius: 10px;
+    background: rgba(255,250,236,.78);
+    box-shadow: none;
+    color: #6A6251;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+  #root .momo-app-header .momo-logout-button:hover:not(:disabled) {
+    border-color: rgba(214,180,63,.62);
+    background: rgba(255,212,59,.16);
+    color: #66510F;
+    box-shadow: 0 4px 10px rgba(75,61,31,.06);
+    transform: none;
+  }
+
+  /* Page title panels share one warm paper treatment. */
+  #root .all-reviews-heading,
+  #root .my-reviews-heading,
+  #root .liked-reviews-heading,
+  #root .search-page-heading,
+  #root .favorite-page-heading {
+    --page-accent: #D6B43F;
+    border-color: rgba(233,223,197,.92);
+    background: linear-gradient(135deg, rgba(255,254,250,.96), rgba(255,250,236,.9));
+    box-shadow: 0 14px 32px rgba(75,61,31,.07), inset 0 1px rgba(255,255,255,.98);
+  }
+  #root .all-reviews-heading h1,
+  #root .my-reviews-heading h1,
+  #root .liked-reviews-heading h1,
+  #root .search-page-heading h1,
+  #root .favorite-page-heading h1 {
+    color: #292820;
+  }
+  #root .all-reviews-heading p,
+  #root .my-reviews-heading p,
+  #root .liked-reviews-heading p,
+  #root .search-page-heading p,
+  #root .favorite-page-heading p {
+    color: #6A6251;
+  }
+  #root .my-reviews-heading .my-reviews-eyebrow,
+  #root .liked-reviews-heading .liked-reviews-eyebrow,
+  #root .favorite-page-heading .favorite-page-eyebrow {
+    color: #80600E;
+  }
+  #root .page-back-link,
+  #root .favorite-back-button,
+  #root .review-detail-back {
+    border-color: rgba(233,223,197,.9);
+    background: rgba(255,250,236,.88);
+    color: #514833;
+  }
+
+  /* Favorites gallery: one consistent ivory surface, without gray/green variants. */
+  #root .favorite-page {
+    background: linear-gradient(180deg, rgba(255,212,59,.13), rgba(255,212,59,.035) 320px, transparent 620px), var(--momo-bg) !important;
+  }
+  #root .favorite-page-heading {
+    border-color: rgba(233,223,197,.92);
+    background: linear-gradient(135deg, rgba(255,254,250,.97), rgba(255,250,236,.9));
+  }
+  #root .favorite-page .favorite-list-toolbar {
+    border-bottom-color: rgba(214,180,63,.32);
+  }
+  #root .favorite-page .favorite-list-toolbar > span {
+    border-color: rgba(214,180,63,.52);
+    background: rgba(255,241,178,.58);
+    color: #66510F;
+  }
+  #root .favorite-page .favorite-page-card,
+  #root .favorite-page .favorite-page-card:nth-child(3n + 2),
+  #root .favorite-page .favorite-page-card:nth-child(3n) {
+    border-color: #E9DFC5;
+    background: rgba(255,250,236,.9) !important;
+    box-shadow: 0 8px 20px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.98);
+  }
+  #root .favorite-page .favorite-page-card:hover {
+    border-color: rgba(214,180,63,.62);
+    box-shadow: 0 14px 26px rgba(75,61,31,.1), inset 0 1px rgba(255,255,255,.98);
+  }
+  #root .favorite-page .favorite-page-poster {
+    border-color: rgba(233,223,197,.74);
+    background: rgba(255,254,250,.72);
+  }
+  #root .favorite-page .favorite-page-movie-info h3,
+  #root .favorite-page .favorite-page-empty h2 {
+    color: #292820;
+  }
+  #root .favorite-page .favorite-page-movie-info p,
+  #root .favorite-page .favorite-page-empty p {
+    color: #6A6251;
+  }
+  #root .favorite-page .favorite-empty-symbol {
+    color: #B38D19;
+  }
+  #root .favorite-page .favorite-page-empty {
+    border-color: rgba(214,180,63,.5);
+    background: rgba(255,250,236,.92);
+  }
+  #root .favorite-page .favorite-browse-button {
+    border-color: #D6B43F;
+    background: #FFD43B;
+    color: #292820;
+    box-shadow: 0 5px 12px rgba(179,141,25,.14);
+  }
+  #root .favorite-page .favorite-browse-button:hover {
+    background: #F3C72E;
+    color: #292820;
+  }
+
+  /* Profile activity cards: one memo-paper family, not three unrelated colors. */
+  #root .profile-page .profile-card:has(.profile-activity-grid) {
+    border-color: rgba(233,223,197,.92);
+    background: rgba(255,250,236,.9);
+  }
+  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading h2 {
+    color: #292820;
+  }
+  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading p {
+    color: #6A6251;
+  }
+  #root .profile-page .profile-activity-item,
+  #root .profile-page .profile-activity-item[data-tone="writing"],
+  #root .profile-page .profile-activity-item[data-tone="liked"],
+  #root .profile-page .profile-activity-item[data-tone="saved"] {
+    --activity-ink: #B38D19;
+    border-color: rgba(233,223,197,.92);
+    border-left: 3px solid #D6B43F;
+    border-radius: 15px;
+    background:
+      linear-gradient(90deg, transparent 0 25px, rgba(197,112,101,.11) 25px 26px, transparent 26px),
+      repeating-linear-gradient(0deg, transparent 0 29px, rgba(198,161,43,.11) 30px, transparent 31px),
+      linear-gradient(145deg, #FFFEFA, #FFFAEC);
+    color: #292820;
+    box-shadow: 0 8px 20px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.98);
+  }
+  #root .profile-page .profile-activity-item::before,
+  #root .profile-page .profile-activity-item::after {
+    content: "" !important;
+    display: block !important;
+  }
+  #root .profile-page .profile-activity-item:hover {
+    border-color: rgba(214,180,63,.7);
+    border-left-color: #D6B43F;
+    box-shadow: 0 14px 26px rgba(75,61,31,.105), inset 0 1px rgba(255,255,255,1);
+  }
+  #root .profile-page .profile-activity-icon {
+    border-color: rgba(233,223,197,.88);
+    background: rgba(255,254,250,.88);
+    color: #80600E;
+  }
+  #root .profile-page .profile-activity-item[data-tone="liked"] .profile-activity-icon {
+    color: #A85E54;
+  }
+  #root .profile-page .profile-activity-item h3,
+  #root .profile-page .profile-activity-count {
+    color: #292820;
+  }
+  #root .profile-page .profile-activity-unit,
+  #root .profile-page .profile-activity-footer p {
+    color: #6A6251;
+  }
+  #root .profile-page .profile-activity-footer {
+    border-top-color: rgba(214,180,63,.3);
+  }
+  #root .profile-page .profile-activity-arrow {
+    border-color: rgba(233,223,197,.9);
+    background: rgba(255,254,250,.88);
+    color: #80600E;
+  }
+  #root .profile-page .profile-activity-item:hover .profile-activity-arrow {
+    background: #FFF1B2;
+  }
+
+  /* Member deletion: clear destructive action, never a competing primary CTA. */
+  #root .profile-page .profile-delete-section {
+    border-color: rgba(229,184,173,.78);
+    background: rgba(255,250,236,.92);
+  }
+  #root .profile-delete-page-card {
+    border-color: rgba(229,184,173,.72);
+    background: linear-gradient(145deg, rgba(255,254,250,.96), rgba(255,250,236,.9));
+  }
+  #root .profile-delete-page-card h2 {
+    margin: 0 0 8px;
+    color: #292820;
+    font-size: 20px;
+    font-weight: 850;
+  }
+  #root .profile-delete-page-card > p {
+    color: #6A6251;
+    line-height: 1.7;
+  }
+  #root .profile-delete-page-card #delete-password {
+    min-height: 46px;
+    border: 1px solid #E9DFC5;
+    border-radius: 10px;
+    background: #FFFEFA;
+    color: #292820;
+  }
+  #root .profile-delete-check { color: #514833; }
+  #root .profile-delete-check input { accent-color: #D6B43F; }
+  #root .profile-delete-button {
+    border: 1px solid #E5B8AD;
+    border-radius: 10px;
+    background: #FFF1EC;
+    color: #8C3F38;
+    box-shadow: none;
+  }
+  #root .profile-delete-button:hover:not(:disabled) {
+    border-color: #D69D91;
+    background: #FFE5DC;
+    color: #793A34;
+  }
+  #root .profile-delete-button:disabled {
+    opacity: .62;
+    border-color: #E9DFC5;
+    background: #F1EADF;
+    color: #776F62;
+  }
+
+  /* Movie detail and audience rating: visible, layered glass in cream and yellow. */
+  #root .movie-detail-page .movie-detail-header {
+    border-color: rgba(233,223,197,.92);
+    background: linear-gradient(135deg, rgba(255,254,250,.96), rgba(255,250,236,.86));
+    box-shadow: 0 18px 42px rgba(75,61,31,.085), inset 0 1px rgba(255,255,255,.98);
+  }
+  #root .movie-detail-page .movie-detail-info .detail-rank {
+    border-color: rgba(214,180,63,.58);
+    background: rgba(255,241,178,.58);
+    color: #66510F;
+  }
+  #root .movie-detail-page .movie-detail-info h1 { color: #292820; }
+  #root .movie-detail-page .movie-detail-info > p {
+    border-color: rgba(233,223,197,.78);
+    background: rgba(255,250,236,.78);
+    color: #514833;
+  }
+  #root .movie-detail-page > .detail-content-section {
+    border-color: rgba(233,223,197,.9);
+    background: rgba(255,250,236,.88);
+  }
+  #root .movie-detail-page > .detail-content-section > h2 { color: #292820; }
+  #root .movie-detail-page > .detail-content-section > p { color: #514833; }
+  #root .movie-detail-page .movie-rating-panel {
+    display: flex !important;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 240px;
+    border: 1px solid rgba(214,180,63,.52);
+    border-radius: 19px;
+    background: rgba(255,250,236,.9);
+    box-shadow: 0 14px 32px rgba(75,61,31,.085), inset 0 1px rgba(255,255,255,.98);
+    backdrop-filter: blur(22px) saturate(125%);
+    -webkit-backdrop-filter: blur(22px) saturate(125%);
+  }
+  #root .movie-detail-page .movie-rating-panel::before {
+    content: "" !important;
+    display: block !important;
+    top: 8px;
+    right: 34px;
+    background: rgba(255,212,59,.5);
+    border-color: rgba(214,180,63,.35);
+  }
+  #root .movie-detail-page .rating-panel-heading {
+    border-bottom-color: rgba(214,180,63,.34);
+  }
+  #root .movie-detail-page .rating-panel-eyebrow,
+  #root .movie-detail-page .rating-panel-stamp { color: #80600E; }
+  #root .movie-detail-page .rating-panel-stamp {
+    border-color: rgba(214,180,63,.58);
+    background: rgba(255,241,178,.64);
+  }
+  #root .movie-detail-page .rating-label,
+  #root .movie-detail-page .movie-score-value strong { color: #292820; }
+  #root .movie-detail-page .rating-panel-description,
+  #root .movie-detail-page .rating-score-caption,
+  #root .movie-detail-page .rating-vote-summary,
+  #root .movie-detail-page .rating-distribution-heading,
+  #root .movie-detail-page .rating-distribution-legend { color: #6A6251; }
+  #root .movie-detail-page .movie-score-display,
+  #root .movie-detail-page .rating-distribution {
+    border-color: rgba(233,223,197,.82);
+    background: rgba(255,254,250,.78);
+  }
+  #root .movie-detail-page .rating-distribution-track {
+    border-color: rgba(214,180,63,.46);
+    background: rgba(233,223,197,.5);
+  }
+  #root .movie-detail-page .rating-distribution-track span {
+    background: linear-gradient(90deg, #D6A91B, #FFD43B);
+    box-shadow: 0 0 10px rgba(214,169,27,.18);
+  }
+  #root .movie-detail-page .rating-vote-button {
+    border-color: rgba(233,223,197,.9);
+    background: rgba(255,254,250,.86);
+    color: #514833;
+  }
+  #root .movie-detail-page .rating-vote-button.is-like,
+  #root .movie-detail-page .rating-vote-button.selected-like {
+    border-color: rgba(214,180,63,.7);
+    background: rgba(255,212,59,.22);
+    color: #66510F;
+  }
+  #root .movie-detail-page .rating-vote-button.is-dislike,
+  #root .movie-detail-page .rating-vote-button.selected-dislike {
+    border-color: rgba(229,184,173,.85);
+    background: rgba(255,241,236,.92);
+    color: #8B4F47;
+  }
+  #root .movie-detail-page .rating-vote-button.selected-like {
+    background: linear-gradient(145deg, #FFF1B2, #FFE58A);
+  }
+  #root .movie-detail-page .rating-vote-button.selected-dislike {
+    background: linear-gradient(145deg, #FFF1EC, #FFE5DC);
+  }
+  #root .movie-detail-page .rating-unavailable {
+    border-color: rgba(214,180,63,.55);
+    background: rgba(255,241,178,.42);
+    color: #66510F;
+  }
+  #root .movie-detail-page .rating-unavailable > span {
+    border-color: rgba(214,180,63,.4);
+    background: rgba(255,254,250,.9);
+    color: #80600E;
+  }
+
+  /* Warm inputs, search controls, tables and page metadata. */
+  #root .all-reviews-search-label { color: #66510F; }
+  #root .all-reviews-search-select,
+  #root .all-reviews-search-input,
+  #root .momo-search-form,
+  #root .search-page input,
+  #root .search-page select,
+  #root main > input[type="search"],
+  #root .review-title-field input,
+  #root .review-content-field textarea,
+  #root .review-edit-title,
+  #root .review-edit-area textarea,
+  #root .review-comment-form textarea,
+  #root .signup-field input,
+  #root .profile-form input,
+  #root .profile-form textarea,
+  #root .profile-delete-page-card input {
+    border-color: rgba(216,201,159,.9);
+    background: rgba(255,254,250,.9);
+    color: #292820;
+  }
+  #root input::placeholder,
+  #root textarea::placeholder { color: #776F62; }
+  #root input:focus,
+  #root textarea:focus,
+  #root select:focus,
+  #root .momo-search-form:focus-within {
+    border-color: rgba(198,161,43,.82);
+    box-shadow: 0 0 0 3px rgba(255,212,59,.2), 0 6px 16px rgba(75,61,31,.055);
+  }
+  #root .momo-search-dropdown {
+    border-color: rgba(233,223,197,.92);
+    background: rgba(255,250,236,.96);
+  }
+  #root .momo-search-result:hover { background: rgba(255,241,178,.38); }
+  #root .all-reviews-table thead th {
+    border-bottom-color: rgba(214,180,63,.4);
+    background: rgba(255,241,178,.52);
+    color: #66510F;
+  }
+  #root .all-reviews-table tbody tr:hover,
+  #root .my-review-item:hover,
+  #root .liked-review-item:hover,
+  #root .all-reviews-mobile-item:hover,
+  #root .review-comment-item:hover { background: rgba(255,241,178,.28); }
+  #root .home-page .movie-info h3 { color: #292820; }
+  #root .home-page .movie-info p,
+  #root .profile-heading p,
+  #root .profile-card-heading p,
+  #root .favorite-page-movie-info p,
+  #root .favorite-page-empty p,
+  #root .search-page-heading p,
+  #root .all-reviews-description { color: #6A6251; }
+  #root .detail-rank,
+  #root .all-reviews-page-info,
+  #root .favorite-list-toolbar > span {
+    border-color: rgba(214,180,63,.5);
+    background: rgba(255,241,178,.52);
+    color: #66510F;
+  }
+
+  /* Footer: the readable back cover of the same warm memo book. */
+  #root footer {
+    border-top: 1px solid rgba(233,223,197,.96);
+    background: linear-gradient(145deg, rgba(255,250,236,.98), rgba(245,242,235,.98));
+    color: #514833;
+    box-shadow: 0 -8px 24px rgba(75,61,31,.045), inset 0 1px rgba(255,255,255,.96);
+  }
+  #root footer p,
+  #root footer span,
+  #root footer a { color: #514833; }
+  #root footer h4 { color: #80600E; }
+  #root footer a:hover { color: #66510F; }
+  #root footer > div:first-child { border-bottom-color: rgba(214,180,63,.32); }
+  #root footer [class*="FooterBottom"] { color: #6A6251; }
+
+  @media (max-width: 600px) {
+    #root .profile-page .profile-activity-grid { grid-template-columns: 1fr; }
+    #root .profile-page .profile-activity-item { min-height: 190px; }
+    #root .movie-detail-page .rating-panel-main { grid-template-columns: 1fr; }
+    #root .movie-detail-page .rating-vote-button { min-height: 54px; }
+    #root footer { padding-top: 32px; }
+  }
+
+
+  /* Remaining shared components: bookmarks, forms, archives and reaction actions. */
+  #root .favorite-star {
+    border-color: rgba(233,223,197,.96);
+    background: rgba(255,250,236,.94);
+    color: #80600E;
+    box-shadow: 0 7px 17px rgba(75,61,31,.16), inset 0 1px rgba(255,255,255,.98);
+  }
+  #root .favorite-star:hover:not(:disabled) {
+    border-color: #D6B43F;
+    background: #FFF1B2;
+    color: #66510F;
+  }
+  #root .favorite-star.is-active {
+    border-color: rgba(214,180,63,.9);
+    background: #FFD43B;
+    color: #292820;
+    box-shadow: 0 7px 18px rgba(179,141,25,.2), inset 0 1px rgba(255,255,255,.8);
+  }
+  #root .favorite-star:focus-visible {
+    outline-color: rgba(198,161,43,.56);
+  }
+  #root .recommend-content .recommend-label {
+    border-color: rgba(255,255,255,.58);
+    background: rgba(41,40,32,.62);
+    color: #FFF1B2;
+  }
+  #root .recommend-content .recommend-button {
+    border-color: #D6B43F;
+    background: #FFD43B;
+    color: #292820;
+    box-shadow: 0 6px 14px rgba(75,61,31,.15), inset 0 1px rgba(255,255,255,.82);
+  }
+  #root .recommend-content .recommend-button:hover {
+    background: #F3C72E;
+    color: #292820;
+  }
+  #root .home-page .poster-rank,
+  #root .home-page .rank {
+    border-color: rgba(255,250,236,.8);
+    background: rgba(41,40,32,.84);
+    color: #FFF1B2;
+  }
+
+  #root .profile-button,
+  #root .page-back-link,
+  #root .favorite-back-button,
+  #root .detail-back-button,
+  #root .review-detail-back,
+  #root .people-more-button,
+  #root .person-bio-toggle,
+  #root .home-favorites-more {
+    border-color: rgba(233,223,197,.94);
+    background: rgba(255,250,236,.9);
+    color: #514833;
+  }
+  #root .profile-button:hover:not(:disabled),
+  #root .page-back-link:hover,
+  #root .favorite-back-button:hover,
+  #root .detail-back-button:hover,
+  #root .review-detail-back:hover,
+  #root .people-more-button:hover,
+  #root .person-bio-toggle:hover,
+  #root .home-favorites-more:hover {
+    border-color: rgba(214,180,63,.7);
+    background: rgba(255,241,178,.56);
+    color: #66510F;
+  }
+  #root .all-reviews-search-label { color: #66510F; }
+  #root .all-reviews-table-wrap,
+  #root .my-review-item,
+  #root .liked-review-item,
+  #root .all-reviews-mobile-item {
+    border-color: rgba(233,223,197,.92);
+    background: rgba(255,250,236,.88);
+    color: #292820;
+  }
+  #root .all-reviews-table tbody tr,
+  #root .all-reviews-table tbody tr:nth-child(even) {
+    background: rgba(255,250,236,.76);
+  }
+  #root .all-reviews-table thead th {
+    border-bottom-color: rgba(214,180,63,.4);
+    background: rgba(255,241,178,.56);
+    color: #66510F;
+  }
+  #root .all-reviews-table tbody tr:hover,
+  #root .my-review-item:hover,
+  #root .liked-review-item:hover,
+  #root .all-reviews-mobile-item:hover {
+    background: rgba(255,241,178,.32);
+  }
+  #root .liked-review-unlike {
+    border-color: rgba(229,184,173,.82);
+    background: rgba(255,241,236,.9);
+    color: #8B4F47;
+  }
+  #root .liked-review-unlike:hover:not(:disabled) {
+    background: #FFE5DC;
+  }
+  #root .profile-user {
+    border-color: rgba(233,223,197,.9);
+    background: rgba(255,250,236,.88);
+  }
+  #root .person-chip {
+    border-color: rgba(233,223,197,.9);
+    background: rgba(255,250,236,.86);
+    color: #514833;
+  }
+  #root .person-chip:hover {
+    background: rgba(255,241,178,.5);
+  }
+  #root .signup-card {
+    border-color: rgba(233,223,197,.94);
+    background: rgba(255,250,236,.92);
+  }
+  #root .signup-card-heading h1 { color: #292820; }
+  #root .signup-submit,
+  #root .all-reviews-search-submit {
+    border-color: #D6B43F;
+    background: #FFD43B;
+    color: #292820;
+    box-shadow: 0 5px 13px rgba(179,141,25,.14), inset 0 1px rgba(255,255,255,.84);
+  }
+  #root .signup-submit:hover:not(:disabled),
+  #root .all-reviews-search-submit:hover:not(:disabled) {
+    background: #F3C72E;
+    color: #292820;
+  }
+  #root .signup-note-label {
+    border-color: rgba(214,180,63,.48);
+    background: rgba(255,241,178,.55);
+    color: #66510F;
+  }
+  #root .review-write-toggle:hover {
+    background: rgba(255,241,178,.42);
+  }
+  #root .review-like-button,
+  #root .comment-like-button {
+    border-color: var(--momo-like-border);
+    background: var(--momo-like-bg);
+    color: var(--momo-like-text);
+  }
+  #root .review-dislike-button,
+  #root .comment-dislike-button {
+    border-color: var(--momo-dislike-border);
+    background: var(--momo-dislike-bg);
+    color: var(--momo-dislike-text);
+  }
+  #root .review-like-button:hover:not(:disabled),
+  #root .comment-like-button:hover:not(:disabled) {
+    background: var(--momo-like-bg-hover);
+  }
+  #root .review-dislike-button:hover:not(:disabled),
+  #root .comment-dislike-button:hover:not(:disabled) {
+    background: var(--momo-dislike-bg-hover);
+  }
+  #root .profile-heading h1,
+  #root .profile-card-heading h2,
+  #root .all-reviews-card-heading h2,
+  #root .my-reviews-card-heading h2,
+  #root .liked-reviews-card-heading h2 {
+    color: #292820;
+  }
+  #root .profile-heading p,
+  #root .profile-card-heading p,
+  #root .all-reviews-card-heading p,
+  #root .my-reviews-card-heading p,
+  #root .liked-reviews-card-heading p {
+    color: #6A6251;
+  }
+  #root a:focus-visible,
+  #root button:focus-visible,
+  #root input:focus-visible,
+  #root textarea:focus-visible,
+  #root select:focus-visible {
+    outline-color: rgba(198,161,43,.62);
+  }
+
+
+  /* Preserve danger semantics after the shared profile-button rule. */
+  #root .profile-page .profile-delete-button {
+    border-color: #E5B8AD;
+    background: #FFF1EC;
+    color: #8C3F38;
+    box-shadow: none;
+  }
+  #root .profile-page .profile-delete-button:hover:not(:disabled) {
+    border-color: #D69D91;
+    background: #FFE5DC;
+    color: #793A34;
+  }
+  #root .profile-page .profile-delete-button:disabled {
+    border-color: #E9DFC5;
+    background: #F1EADF;
+    color: #776F62;
+    opacity: .62;
+  }
+
+
+  /* The desktop rating metrics must use the complete card width, not a narrow content column. */
+  #root .movie-detail-page .rating-panel-main {
+    display: grid;
+    width: 100%;
+    max-width: none;
+    align-self: stretch;
+    grid-template-columns: minmax(200px, .82fr) minmax(0, 1.18fr);
+  }
+  @media (max-width: 600px) {
+    #root .movie-detail-page .rating-panel-main {
+      width: 100%;
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
 `;
 
 export default MomoLiquidGlassPageStyles;

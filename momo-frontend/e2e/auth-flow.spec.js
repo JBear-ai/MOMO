@@ -59,7 +59,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   const activityHeadingColor = await profileActivityCards.first().locator("h3").evaluate(
     (element) => getComputedStyle(element).color,
   );
-  expect(activityHeadingColor).toBe("rgb(48, 54, 51)");
+  expect(activityHeadingColor).toBe("rgb(41, 40, 32)");
 
   // 활동 카드는 과한 장식 대신 은은한 유리 재질과 낮은 채도 색을 사용한다.
   const activityGlass = await profileActivityCards.first().evaluate((element) => {
@@ -72,9 +72,9 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     };
   });
   expect(activityGlass.blur).toContain("blur(22px)");
-  expect(activityGlass.background).not.toContain("radial-gradient");
+  expect(activityGlass.background).toContain("repeating-linear-gradient");
   expect(activityGlass.radius).toBe("15px");
-  expect(activityGlass.leftBorder).toBe("rgb(136, 118, 83)");
+  expect(activityGlass.leftBorder).toBe("rgb(214, 180, 63)");
   await expect(profileActivityCards.locator(".profile-activity-icon svg")).toHaveCount(3);
 
   const headerNavRadius = await page.locator("header nav a").first().evaluate(
@@ -84,7 +84,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     (element) => getComputedStyle(element).borderRadius,
   );
   expect(headerNavRadius).toBe("11px");
-  expect(headerActionRadius).toBe("11px");
+  expect(headerActionRadius).toBe("10px");
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileActivityColumns = await page.locator(".profile-activity-grid").evaluate(
@@ -94,6 +94,67 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(
     profileActivityCards.first().locator(".profile-activity-footer p"),
   ).toBeVisible();
+  await page.setViewportSize({ width: 1280, height: 800 });
+
+
+  // Logout stays visually secondary; footer text remains readable on the warm paper surface.
+  const logoutStyle = await page.getByRole("button", { name: "로그아웃" }).evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundColor, border: style.borderColor, color: style.color };
+  });
+  expect(logoutStyle.background).toBe("rgba(255, 250, 236, 0.78)");
+  expect(logoutStyle.border).toBe("rgb(233, 223, 197)");
+  expect(logoutStyle.color).toBe("rgb(106, 98, 81)");
+
+  const footerStyle = await page.locator("footer").evaluate((element) => {
+    const style = getComputedStyle(element);
+    const description = getComputedStyle(element.querySelector("p"));
+    const link = getComputedStyle(element.querySelector("a"));
+    const bottom = getComputedStyle(element.lastElementChild);
+    return {
+      background: style.backgroundImage,
+      description: description.color,
+      link: link.color,
+      bottom: bottom.color,
+    };
+  });
+  expect(footerStyle.background).toContain("linear-gradient");
+  expect(footerStyle.description).toBe("rgb(81, 72, 51)");
+  expect(footerStyle.link).toBe("rgb(81, 72, 51)");
+  expect(footerStyle.bottom).toBe("rgb(106, 98, 81)");
+  await page.screenshot({
+    path: "test-results/profile-footer-logout-desktop.png",
+    fullPage: true,
+  });
+
+  // Verify the destructive flow and its visual hierarchy without submitting deletion.
+  await page.goto("/profile/delete");
+  await expect(page.getByRole("heading", { level: 1, name: "회원 탈퇴" })).toBeVisible();
+  const deleteButton = page.getByRole("button", { name: "탈퇴하기" });
+  await expect(deleteButton).toBeDisabled();
+  const disabledDeleteStyle = await deleteButton.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundColor, color: style.color };
+  });
+  expect(disabledDeleteStyle.background).toBe("rgb(241, 234, 223)");
+  expect(disabledDeleteStyle.color).toBe("rgb(119, 111, 98)");
+  await page.locator(".profile-delete-check input").check();
+  await expect(deleteButton).toBeEnabled();
+  const enabledDeleteStyle = await deleteButton.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundColor, color: style.color };
+  });
+  expect(enabledDeleteStyle.background).toBe("rgb(255, 241, 236)");
+  expect(enabledDeleteStyle.color).toBe("rgb(140, 63, 56)");
+  await page.screenshot({
+    path: "test-results/profile-delete-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({
+    path: "test-results/profile-delete-mobile.png",
+    fullPage: true,
+  });
   await page.setViewportSize({ width: 1280, height: 800 });
 
   // 프로필 수정 페이지의 브랜드 컬러가 실제 브라우저 스타일에 반영되는지 확인한다.
@@ -273,6 +334,25 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   });
   expect(favoriteGlassCard.blur).toContain("blur(18px)");
   expect(favoriteGlassCard.background).toBe("none");
+
+  const favoriteCardStyle = await page.locator(".favorite-page-card").evaluate((element) => {
+    const style = getComputedStyle(element);
+    const title = getComputedStyle(element.querySelector(".favorite-page-movie-info h3"));
+    return { background: style.backgroundColor, border: style.borderColor, title: title.color };
+  });
+  expect(favoriteCardStyle.background).toBe("rgba(255, 250, 236, 0.9)");
+  expect(favoriteCardStyle.border).toBe("rgb(233, 223, 197)");
+  expect(favoriteCardStyle.title).toBe("rgb(41, 40, 32)");
+  await page.screenshot({
+    path: "test-results/favorite-gallery-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({
+    path: "test-results/favorite-gallery-mobile.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 1280, height: 800 });
 
   // 관심 영화 화면의 버튼으로 서버 목록에서 삭제하고 빈 상태까지 반영되는지 확인한다.
   const favoriteDelete = page.waitForResponse((response) =>
@@ -470,6 +550,50 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   });
   expect(audienceGlass.blur).toContain("blur(22px)");
   expect(audienceGlass.background).toBe("none");
+
+  const ratingVisual = await page.locator(".movie-rating-panel").evaluate((element) => {
+    const panel = getComputedStyle(element);
+    const title = getComputedStyle(element.querySelector(".rating-label"));
+    const score = getComputedStyle(element.querySelector(".movie-score-value strong"));
+    const progress = getComputedStyle(element.querySelector(".rating-distribution-track span"));
+    const like = getComputedStyle(element.querySelector(".rating-vote-button.is-like"));
+    const dislike = getComputedStyle(element.querySelector(".rating-vote-button.is-dislike"));
+    return {
+      panelBackground: panel.backgroundColor,
+      panelBorder: panel.borderColor,
+      title: title.color,
+      score: score.color,
+      progress: progress.backgroundImage,
+      likeBackground: like.backgroundColor,
+      likeText: like.color,
+      dislikeBackground: dislike.backgroundColor,
+      dislikeText: dislike.color,
+      height: element.getBoundingClientRect().height,
+      contentWidth: element.querySelector(".rating-panel-main").getBoundingClientRect().width,
+      panelWidth: element.querySelector(".rating-panel-main").parentElement.clientWidth,
+    };
+  });
+  expect(ratingVisual.panelBackground).toBe("rgba(255, 250, 236, 0.9)");
+  expect(ratingVisual.panelBorder).toBe("rgba(214, 180, 63, 0.52)");
+  expect(ratingVisual.title).toBe("rgb(41, 40, 32)");
+  expect(ratingVisual.score).toBe("rgb(41, 40, 32)");
+  expect(ratingVisual.progress).toContain("linear-gradient");
+  expect(ratingVisual.likeBackground).toBe("rgba(255, 212, 59, 0.22)");
+  expect(ratingVisual.likeText).toBe("rgb(102, 81, 15)");
+  expect(ratingVisual.dislikeBackground).toBe("rgba(255, 241, 236, 0.92)");
+  expect(ratingVisual.dislikeText).toBe("rgb(139, 79, 71)");
+  expect(ratingVisual.height).toBeGreaterThan(240);
+  expect(ratingVisual.contentWidth).toBeGreaterThan(ratingVisual.panelWidth * 0.95);
+  await page.screenshot({
+    path: "test-results/movie-rating-mobile.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.screenshot({
+    path: "test-results/movie-rating-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
 
   // 영화 상세의 감독·배우도 세 줄 미리보기와 펼치기/접기 동작을 제공한다.
   const directorSection = page.locator(".people-section").nth(0);
