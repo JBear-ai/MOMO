@@ -20,12 +20,12 @@ const ReviewListStyles = createGlobalStyle`
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 30px 34px;
-  margin-bottom: 24px;
+  padding: clamp(28px, 3.5vw, 44px);
+  margin-bottom: 30px;
   background: linear-gradient(120deg, var(--momo-note), rgba(255,255,255,.88));
   border: 1px solid var(--momo-note-border);
-  border-radius: var(--momo-radius-lg);
-  box-shadow: var(--momo-shadow-sm);
+  border-radius: 26px;
+  box-shadow: 0 18px 46px rgba(54, 45, 28, .065);
   position: relative;
   overflow: hidden;
 }
@@ -50,7 +50,7 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-heading h1 {
   margin: 0 0 10px;
-  font-size: clamp(26px, 4vw, 34px);
+  font-size: clamp(30px, 4.2vw, 42px);
   font-weight: 800;
   letter-spacing: -0.03em;
 }
@@ -91,7 +91,7 @@ const ReviewListStyles = createGlobalStyle`
 
 /* 리뷰 목록 카드 */
 .all-reviews-card {
-  padding: 28px;
+  padding: clamp(20px, 2.8vw, 34px);
   background: var(--momo-surface);
   border: 1px solid var(--momo-border);
   border-radius: var(--momo-radius-lg);
@@ -125,7 +125,7 @@ const ReviewListStyles = createGlobalStyle`
   padding: 8px 12px;
   background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
-  border-radius: 7px;
+  border-radius: 10px;
   color: var(--momo-accent-ink);
   font-size: 12px;
   font-weight: 700;
@@ -134,7 +134,7 @@ const ReviewListStyles = createGlobalStyle`
 /* 전체 리뷰 검색 */
 .all-reviews-search {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) minmax(220px, 2fr) auto auto;
+  grid-template-columns: auto minmax(140px, .75fr) minmax(220px, 2fr) auto auto;
   align-items: center;
   gap: 10px;
   margin: 0 0 24px;
