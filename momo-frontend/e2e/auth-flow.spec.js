@@ -339,7 +339,7 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   });
   expect(movieHeroGlass.blur).toContain("blur(28px)");
   expect(movieHeroGlass.background).not.toContain("radial-gradient");
-  expect(movieHeroGlass.radius).toBe("24px");
+  expect(movieHeroGlass.radius).toBe("19px");
   expect(movieHeroGlass.columns.split(" ").length).toBe(1);
 
   const audienceGlass = await page.locator(".movie-rating-panel").evaluate((element) => {
