@@ -89,7 +89,7 @@ const ActionButton = styled.button`
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: var(--momo-surface)aec;
+    background-color: var(--momo-note);
     border-color: var(--momo-accent);
     transform: translateY(-1px);
   }
