@@ -41,11 +41,11 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 .review-detail-card {
   position: relative;
   overflow: hidden;
-  padding: 36px;
-  background: var(--momo-surface);
+  padding: clamp(24px, 3vw, 40px);
+  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
   border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius);
-  box-shadow: var(--momo-shadow);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .review-detail-card::before {
