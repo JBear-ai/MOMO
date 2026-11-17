@@ -25,7 +25,7 @@ const MyReviewsStyles = createGlobalStyle`
   margin-bottom: 30px;
 
   background: var(--momo-surface)af0;
-  border: 1px solid #f0dfbd;
+  border: 1px solid var(--momo-note-border);
   border-radius: 14px;
 }
 
@@ -103,7 +103,7 @@ const MyReviewsStyles = createGlobalStyle`
   padding: 7px 12px;
 
   background: var(--momo-surface)af0;
-  border: 1px solid #f0dfbd;
+  border: 1px solid var(--momo-note-border);
   border-radius: 8px;
 
   color: var(--momo-link);
@@ -190,7 +190,7 @@ const MyReviewsStyles = createGlobalStyle`
 
   min-height: 200px;
 
-  color: #777;
+  color: var(--momo-muted);
   text-align: center;
 }
 
@@ -201,7 +201,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-reviews-state.error {
-  color: #e53935;
+  color: var(--momo-danger);
 }
 
 /* 페이지네이션 */
@@ -225,7 +225,7 @@ const MyReviewsStyles = createGlobalStyle`
   border: 1px solid var(--momo-border);
   border-radius: 8px;
 
-  color: #555;
+  color: var(--momo-text-soft);
   font-weight: 700;
 
   cursor: pointer;
