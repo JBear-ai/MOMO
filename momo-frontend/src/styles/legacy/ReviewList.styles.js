@@ -139,7 +139,7 @@ const ReviewListStyles = createGlobalStyle`
   gap: 10px;
   margin: 0 0 24px;
   padding: 16px;
-  background: #FFFCF4;
+  background: var(--momo-surface)CF4;
   border: 1px solid var(--momo-note-border);
   border-radius: 10px;
 }
@@ -190,7 +190,7 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-search-submit:hover {
-  background: #F5C928;
+  background: var(--momo-accent-hover);
 }
 
 .all-reviews-search-reset {
@@ -296,7 +296,7 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-table tbody tr:hover {
-  background: #FFFCF4;
+  background: var(--momo-surface)CF4;
 }
 
 /* 로딩 / 오류 / 빈 목록 */
@@ -317,7 +317,7 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-error {
   color: #C0392B;
-  background: #FFF5F5;
+  background: var(--momo-surface)5F5;
   border-color: #EED2D2;
 }
 
