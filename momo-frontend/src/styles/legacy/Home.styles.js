@@ -4,9 +4,9 @@ import styled from "styled-components";
 export const HomePage = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1.18fr) minmax(320px, .82fr);
-  gap: 28px;
+  gap: clamp(18px, 2.4vw, 32px);
   width: 100%;
-  padding-bottom: 72px;
+  padding-bottom: clamp(52px, 6vw, 88px);
   color: var(--momo-text);
 
   > section:first-child,
@@ -28,10 +28,10 @@ export const HomePage = styled.div`
 
   > section:not(:first-child) {
     min-width: 0;
-    padding: 26px;
+    padding: clamp(20px, 2.6vw, 30px);
     background: var(--momo-glass);
     border: 1px solid var(--momo-glass-border);
-    border-radius: var(--momo-radius-lg);
+    border-radius: 24px;
     box-shadow: var(--momo-shadow-sm);
     backdrop-filter: blur(16px) saturate(125%);
   }
@@ -68,15 +68,15 @@ export const FeatureSection = styled.section`
   isolation: isolate;
   display: grid;
   grid-template-columns: minmax(300px, .78fr) minmax(0, 1.22fr);
-  min-height: 440px;
+  min-height: clamp(440px, 42vw, 560px);
   align-items: stretch;
   overflow: hidden;
   border: 1px solid var(--momo-glass-border);
-  border-radius: 26px;
+  border-radius: 28px;
   background:
     radial-gradient(circle at 12% 8%, rgba(255, 212, 59, .18), transparent 28rem),
     linear-gradient(135deg, #FFFEFA 0%, #FFF9E8 54%, #F8F2E5 100%);
-  box-shadow: var(--momo-shadow-lg);
+  box-shadow: 0 24px 64px rgba(54, 45, 28, .10);
 
   &::after {
     position: absolute;
@@ -134,7 +134,7 @@ export const Eyebrow = styled.span`
 /* 메인 제목 */
 export const FeatureTitle = styled.h1`
   margin: 0;
-  font-size: clamp(34px, 4.2vw, 58px);
+  font-size: clamp(36px, 4.6vw, 64px);
   line-height: 1.12;
   letter-spacing: -0.04em;
   font-weight: 800;
@@ -318,7 +318,7 @@ export const SectionHeading = styled.div`
 
   h2 {
     margin: 0;
-    font-size: clamp(21px, 2.4vw, 28px);
+    font-size: clamp(22px, 2.5vw, 30px);
     letter-spacing: -0.04em;
     font-weight: 800;
     color: var(--momo-text);
@@ -342,7 +342,7 @@ export const MoreText = styled.span`
 export const MovieGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 22px 16px;
+  gap: 26px 18px;
 
   @media (max-width: 1000px) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -380,7 +380,7 @@ export const PosterWrap = styled.div`
   aspect-ratio: 2 / 2.85;
   overflow: hidden;
   background: var(--momo-note);
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid var(--momo-border);
   box-shadow: var(--momo-shadow-xs);
   transition: border-color .2s ease, box-shadow .2s ease;
