@@ -240,6 +240,19 @@ const PaperGlassDesignStyles = createGlobalStyle`
     white-space: nowrap;
   }
 
+  /* One reading column width keeps archive pages aligned across routes. */
+  .all-reviews-page, .my-reviews-page, .liked-reviews-container,
+  .favorite-page-container, .profile-page, .search-page {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .all-reviews-page, .my-reviews-page, .liked-reviews-container,
+  .favorite-page-container, .profile-page, .search-page {
+    box-sizing: border-box;
+  }
+
   /* Common content headers and section rhythm. */
   .profile-heading h1 { font-size: clamp(27px,3vw,35px); letter-spacing: -.05em; }
   .profile-heading p { color: var(--momo-muted); }
@@ -509,6 +522,37 @@ const PaperGlassDesignStyles = createGlobalStyle`
   .people-more-button:hover, .person-bio-toggle:hover {
     transform: translateY(-2px);
     box-shadow: 0 9px 20px rgba(58,48,30,.11), inset 0 1px rgba(255,255,255,.98);
+  }
+
+  .movie-detail-info .person-meta-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 12px 0 6px;
+  }
+  .movie-detail-info .person-meta-details p {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 29px;
+    padding: 4px 10px;
+    border: 1px solid rgba(255,255,255,.96);
+    border-radius: 999px;
+    background: rgba(255,255,255,.66);
+    box-shadow: 0 3px 8px rgba(58,48,30,.045), inset 0 1px rgba(255,255,255,.98);
+    color: #806B45;
+    font-size: 11px;
+    font-weight: 750;
+  }
+  .movie-detail-info > .person-biography {
+    max-width: 68ch;
+    padding: 16px 18px 16px 40px;
+    border: 1px solid rgba(255,255,255,.94);
+    border-radius: 12px;
+    background:
+      linear-gradient(90deg, transparent 0 24px, rgba(201,117,104,.18) 24px 25px, transparent 25px),
+      repeating-linear-gradient(to bottom, rgba(255,252,240,.82) 0 27px, rgba(117,145,177,.13) 28px, rgba(255,252,240,.82) 29px);
+    box-shadow: inset 0 1px rgba(255,255,255,.96), 0 5px 13px rgba(63,50,28,.045);
   }
 
   /* Person page bio: three readable lines before expanding. */
