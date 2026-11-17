@@ -203,7 +203,7 @@ function SignUp() {
                               React.createElement(
                                           "p",
                                           {"className":"signup-message","style":{
-                                                            color: isIdOk ? "#2e9e4f" : "#e5484d",
+                                                            color: isIdOk ? "var(--momo-success)" : "var(--momo-danger)",
                                                           }},
                                           (getIdMessage())
                                         )
@@ -223,7 +223,7 @@ function SignUp() {
                               React.createElement(
                                           "p",
                                           {"className":"signup-message","style":{
-                                                            color: isEmail ? "#2e9e4f" : "#e5484d",
+                                                            color: isEmail ? "var(--momo-success)" : "var(--momo-danger)",
                                                           }},
                                           (inputEmail &&
                                                             (isEmail
@@ -246,7 +246,7 @@ function SignUp() {
                               React.createElement(
                                           "p",
                                           {"className":"signup-message","style":{
-                                                            color: isPwd ? "#2e9e4f" : "#e5484d",
+                                                            color: isPwd ? "var(--momo-success)" : "var(--momo-danger)",
                                                           }},
                                           (inputPwd &&
                                                             (isPwd
@@ -269,7 +269,7 @@ function SignUp() {
                               React.createElement(
                                           "p",
                                           {"className":"signup-message","style":{
-                                                            color: isPwdCheck ? "#2e9e4f" : "#e5484d",
+                                                            color: isPwdCheck ? "var(--momo-success)" : "var(--momo-danger)",
                                                           }},
                                           (inputPwdCheck &&
                                                             (isPwdCheck
@@ -292,7 +292,7 @@ function SignUp() {
                               React.createElement(
                                           "p",
                                           {"className":"signup-message","style":{
-                                                            color: isNickname ? "#2e9e4f" : "#e5484d",
+                                                            color: isNickname ? "var(--momo-success)" : "var(--momo-danger)",
                                                           }},
                                           (inputNickname &&
                                                             (isNickname
