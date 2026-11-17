@@ -406,10 +406,6 @@ export const Rank = styled.span`
   font-style: normal;
   font-variant-numeric: tabular-nums;
   transition: transform 220ms cubic-bezier(.2,.72,.2,1), box-shadow 220ms ease;
-  ${PosterWrap}:hover & {
-    transform: translateY(-3px) rotate(-3deg);
-    box-shadow: 0 9px 17px rgba(28,22,14,.28), inset 0 1px rgba(255,255,255,.98);
-  }
 `;
 
 export const MovieInfo = styled.div`
