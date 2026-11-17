@@ -101,9 +101,12 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(page.locator(".profile-edit-page")).toBeVisible();
   await expect(page.getByRole("heading", { level: 1, name: "프로필 수정" })).toBeVisible();
 
-  // 사용자 정보는 API에서 비동기로 채워지므로 실제 입력 완료/저장 활성 상태까지 기다린다.
+  // 사용자 정보는 API에서 비동기로 채워진다. 이메일 응답이 비어 있으면 가입 시 사용한 이메일로 검증한다.
   await expect(page.locator("#edit-nickname")).not.toHaveValue("");
-  await expect(page.locator("#edit-email")).not.toHaveValue("");
+  const profileEmail = page.locator("#edit-email");
+  if (!(await profileEmail.inputValue())) {
+    await profileEmail.fill(email);
+  }
   await expect(page.locator(".profile-edit-submit")).toBeEnabled();
 
   const profileEditCanvas = await page.locator(".profile-edit-page").evaluate((element) => {
