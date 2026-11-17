@@ -530,25 +530,6 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 
-
-/* Favorite collection gallery */
-.favorite-page { max-width:none; }
-.favorite-page-container { max-width:1440px; }
-.favorite-page-heading { position:relative; min-height:190px; display:flex; align-items:flex-end; padding:clamp(28px,4vw,54px); overflow:hidden; border:1px solid rgba(255,255,255,.82); border-radius:28px; background:radial-gradient(circle at 88% 20%,rgba(255,212,59,.3),transparent 20rem),repeating-linear-gradient(90deg,rgba(81,76,64,.025) 0 1px,transparent 1px 6px),linear-gradient(120deg,#FFFDF7,#F0E6D4); box-shadow:0 22px 48px rgba(54,45,28,.08); }
-.favorite-page-heading h1 { font-size:clamp(36px,4.8vw,62px); letter-spacing:-.07em; }
-.favorite-page-heading::after { content:"MY COLLECTION"; position:absolute; right:4%; bottom:18px; color:rgba(118,90,10,.1); font:900 clamp(30px,6vw,78px)/1 ui-monospace,monospace; letter-spacing:-.08em; }
-.favorite-list-toolbar { padding:18px 0; border-color:rgba(118,90,10,.18); }
-.favorite-page-grid { grid-template-columns:repeat(5,minmax(0,1fr)); gap:30px 20px; }
-.favorite-page-card { padding:9px; border:1px solid rgba(255,255,255,.9); border-radius:7px; background:rgba(255,254,250,.62); box-shadow:0 10px 24px rgba(54,45,28,.08); transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease; }
-.favorite-page-card:nth-child(3n + 2) { transform:translateY(12px) rotate(.35deg); }
-.favorite-page-card:hover { transform:translateY(-7px) rotate(0); box-shadow:0 20px 38px rgba(54,45,28,.15); }
-.favorite-page-poster { border:0; border-radius:3px; }
-.favorite-page-movie-info { padding:13px 5px 7px; }
-.favorite-page-movie-info h3 { font-size:14px; }
-.favorite-page-empty { padding:78px 24px; border-radius:22px; background:rgba(255,254,250,.72); box-shadow:0 16px 36px rgba(54,45,28,.055); }
-@media(max-width:900px) { .favorite-page-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
-@media(max-width:680px) { .favorite-page-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 13px; } .favorite-page-card:nth-child(3n + 2) { transform:none; } .favorite-page-heading::after { font-size:32px; } }
-
 `;
 
 export default FavoritesAndProfileOverridesStyles;
