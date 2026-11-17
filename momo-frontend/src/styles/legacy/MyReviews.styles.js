@@ -281,6 +281,32 @@ const MyReviewsStyles = createGlobalStyle`
   background: var(--momo-note);
 }
 
+
+/* Personal review archive: emphasize the writing, keep metadata quiet. */
+.my-reviews-page { max-width: 1240px; padding-top: 6px; }
+.my-reviews-heading {
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  background: #FFF9E9;
+  border-radius: 15px;
+}
+.my-reviews-heading h1 { font-size: clamp(26px, 3vw, 34px); letter-spacing: -.04em; }
+.my-reviews-card {
+  padding: clamp(18px, 2.5vw, 28px);
+  border-radius: 14px;
+  box-shadow: none;
+}
+.my-reviews-card-heading { margin-bottom: 16px; padding-bottom: 14px; }
+.my-review-item { padding: 18px 10px; border-radius: 8px; }
+.my-review-item:hover { background: #FFFAEC; }
+.my-review-info h3 { font-size: 16px; }
+.my-review-info p { white-space: normal; line-height: 1.65; }
+.my-reviews-pagination button { border-radius: 7px; }
+@media (max-width: 600px) {
+  .my-reviews-heading { padding: 20px 17px; }
+  .my-reviews-card { padding: 16px 13px; }
+}
+
 `;
 
 export default MyReviewsStyles;
