@@ -3,6 +3,7 @@ import GlobalTokensStyles from "./global/GlobalTokens.styles";
 import ProductExperienceStyles from "./global/ProductExperience.styles";
 import PaperGlassDesignStyles from "./global/PaperGlassDesign.styles";
 import PaperGlassDetailPolishStyles from "./global/PaperGlassDetailPolish.styles";
+import MomoLiquidGlassPageStyles from "./global/MomoLiquidGlassPage.styles";
 import GlobalResetStyles from "./global/GlobalReset.styles";
 import ToastNotificationStyles from "./global/ToastNotification.styles";
 import FoundationAndProfileStyles from "./legacy/FoundationAndProfile.styles";
@@ -47,6 +48,7 @@ function GlobalStyles() {
       <ProductExperienceStyles />
       <PaperGlassDesignStyles />
       <PaperGlassDetailPolishStyles />
+      <MomoLiquidGlassPageStyles />
     </>
   );
 }
