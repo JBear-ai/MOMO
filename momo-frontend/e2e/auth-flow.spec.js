@@ -59,7 +59,20 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   const activityHeadingColor = await profileActivityCards.first().locator("h3").evaluate(
     (element) => getComputedStyle(element).color,
   );
-  expect(activityHeadingColor).toBe("rgb(57, 51, 41)");
+  expect(activityHeadingColor).toBe("rgb(48, 44, 37)");
+
+  // 나의 영화 활동은 종이 스티커가 아니라 컬러가 비치는 Liquid Glass 타일이어야 한다.
+  const activityGlass = await profileActivityCards.first().evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      blur: style.backdropFilter,
+      background: style.backgroundImage,
+      radius: style.borderRadius,
+    };
+  });
+  expect(activityGlass.blur).toContain("blur(24px)");
+  expect(activityGlass.background).toContain("radial-gradient");
+  expect(activityGlass.radius).toBe("24px");
 
   const headerNavRadius = await page.locator("header nav a").first().evaluate(
     (element) => getComputedStyle(element).borderRadius,
@@ -112,13 +125,31 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await page.goto("/profile/favorites");
   await expect(page.getByText("관심 영화 E2E 테스트")).toBeVisible();
 
+  // 관심 영화 제목과 포스터 타일이 컬러 Liquid Glass로 렌더링되는지 확인한다.
+  const favoriteHeroGlass = await page.locator(".favorite-page-heading").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { blur: style.backdropFilter, background: style.backgroundImage };
+  });
+  expect(favoriteHeroGlass.blur).toContain("blur(30px)");
+  expect(favoriteHeroGlass.background).toContain("radial-gradient");
+  const favoritePageGlass = await page.locator(".favorite-page").evaluate(
+    (element) => getComputedStyle(element).backgroundImage,
+  );
+  expect(favoritePageGlass).toContain("radial-gradient");
+  const favoriteGlassCard = await page.locator(".favorite-page-card").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { blur: style.backdropFilter, background: style.backgroundImage };
+  });
+  expect(favoriteGlassCard.blur).toContain("blur(22px)");
+  expect(favoriteGlassCard.background).toContain("radial-gradient");
+
   // 관심 영화 화면의 버튼으로 서버 목록에서 삭제하고 빈 상태까지 반영되는지 확인한다.
   const favoriteDelete = page.waitForResponse((response) =>
     response.url().endsWith("/api/favorites/20261234") &&
     response.request().method() === "DELETE" &&
     response.ok(),
   );
-  await expect(page.getByRole("button", { name: "관심 영화 해제" })).toHaveText("★");
+  await expect(page.getByRole("button", { name: "관심 영화 해제" }).locator(".favorite-bookmark-icon")).toBeVisible();
   await page.getByRole("button", { name: "관심 영화 해제" }).click();
   await favoriteDelete;
   await expect(page.getByText("아직 등록한 관심 영화가 없습니다.")).toBeVisible();
@@ -286,6 +317,21 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   await expect(page.getByRole("heading", { level: 2, name: "관객 평점" })).toBeVisible();
   await expect(page.locator(".rating-distribution-track")).toBeVisible();
   await expect(page.locator(".detail-reaction-counts .rating-vote-button")).toHaveCount(2);
+
+  // 영화 상세 핵심 헤더가 다중 색상과 블러가 적용된 메인 글래스 패널인지 확인한다.
+  const movieHeroGlass = await page.locator(".movie-detail-header").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      blur: style.backdropFilter,
+      background: style.backgroundImage,
+      radius: style.borderRadius,
+      columns: style.gridTemplateColumns,
+    };
+  });
+  expect(movieHeroGlass.blur).toContain("blur(32px)");
+  expect(movieHeroGlass.background).toContain("radial-gradient");
+  expect(movieHeroGlass.radius).toBe("32px");
+  expect(movieHeroGlass.columns.split(" ").length).toBe(1);
 
   // 영화 상세의 감독·배우도 세 줄 미리보기와 펼치기/접기 동작을 제공한다.
   const directorSection = page.locator(".people-section").nth(0);
