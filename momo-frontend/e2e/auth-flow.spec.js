@@ -61,6 +61,25 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   );
   expect(activityHeadingColor).toBe("rgb(57, 51, 41)");
 
+  const headerNavRadius = await page.locator("header nav a").first().evaluate(
+    (element) => getComputedStyle(element).borderRadius,
+  );
+  const headerActionRadius = await page.getByRole("button", { name: "로그아웃" }).evaluate(
+    (element) => getComputedStyle(element).borderRadius,
+  );
+  expect(headerNavRadius).toBe("11px");
+  expect(headerActionRadius).toBe("11px");
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileActivityColumns = await page.locator(".profile-activity-grid").evaluate(
+    (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(mobileActivityColumns).toBe(1);
+  await expect(
+    profileActivityCards.first().locator(".profile-activity-footer p"),
+  ).toBeVisible();
+  await page.setViewportSize({ width: 1280, height: 800 });
+
   await page.goto("/");
 
   // 첫 로그인 동기화 후 서버에 관심 영화를 추가해 계정별 저장을 확인한다.
