@@ -17,15 +17,15 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   justify-content: center;
 
   box-sizing: border-box;
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   padding: 0;
 
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 50%;
 
   background: rgba(30, 30, 30, 0.38);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(10px) saturate(140%);
   -webkit-backdrop-filter: blur(6px);
 
   color: rgba(255, 255, 255, 0.9);
@@ -81,7 +81,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .home-favorites-empty {
   padding: 32px 20px;
   border: 1px dashed var(--momo-border);
-  border-radius: 12px;
+  border-radius: 16px;
   background: var(--momo-surface);
   color: var(--momo-muted);
   font-size: 13px;
@@ -121,7 +121,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .favorite-page-container {
-  max-width: 1320px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 
