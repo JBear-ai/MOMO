@@ -98,7 +98,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   expect(activityGlass.background).toContain("linear-gradient");
   expect(activityGlass.background).not.toContain("repeating-linear-gradient");
   expect(activityGlass.radius).toBe("15px");
-  expect(activityGlass.leftBorder).toBe("rgb(233, 223, 197)");
+  expect(activityGlass.leftBorder).toBe("rgba(233, 223, 197, 0.9)");
   await expect(profileActivityCards.locator(".profile-activity-icon svg")).toHaveCount(3);
 
   const activityPseudo = await profileActivityCards.first().evaluate((element) => ({
@@ -621,7 +621,11 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
       dislikeText: dislike.color,
       height: element.getBoundingClientRect().height,
       contentWidth: element.querySelector(".rating-panel-main").getBoundingClientRect().width,
-      panelWidth: element.querySelector(".rating-panel-main").parentElement.clientWidth,
+      panelContentWidth: (() => {
+        const parent = element.querySelector(".rating-panel-main").parentElement;
+        const style = getComputedStyle(parent);
+        return parent.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      })(),
     };
   });
   expect(ratingVisual.panelBackground).toBe("rgba(255, 250, 236, 0.9)");
@@ -634,7 +638,7 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   expect(ratingVisual.dislikeBackground).toBe("rgba(255, 241, 236, 0.92)");
   expect(ratingVisual.dislikeText).toBe("rgb(139, 79, 71)");
   expect(ratingVisual.height).toBeGreaterThan(240);
-  expect(ratingVisual.contentWidth).toBeGreaterThan(ratingVisual.panelWidth * 0.95);
+  expect(ratingVisual.contentWidth).toBeGreaterThan(ratingVisual.panelContentWidth * 0.95);
   await page.screenshot({
     path: "test-results/movie-rating-mobile.png",
     fullPage: true,
