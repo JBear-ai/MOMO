@@ -149,7 +149,7 @@ export const MessageBubble = styled.p`
   overflow-wrap: anywhere;
   border-radius: ${({ $isOwn }) => ($isOwn ? "14px 14px 4px 14px" : "14px 14px 14px 4px")};
   color: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "#887f75" : $isOwn ? "var(--momo-surface)df8" : "#241f19")};
-  background: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "#eeeae4" : $isOwn ? "#66513b" : "#f0e8dc")};
+  background: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-note)ae4" : $isOwn ? "#66513b" : "#f0e8dc")};
   line-height: 1.45;
   white-space: pre-wrap;
   font-style: ${({ $isDeleted }) => ($isDeleted ? "italic" : "normal")};
@@ -220,7 +220,7 @@ export const SecondaryButton = styled.button`
   border: 0;
   border-radius: 9px;
   color: #493a2b;
-  background: #eee5d7;
+  background: var(--momo-note)5d7;
   cursor: pointer;
 `;
 
