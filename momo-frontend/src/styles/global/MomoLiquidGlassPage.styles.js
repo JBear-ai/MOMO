@@ -1416,13 +1416,13 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .profile-edit-page .profile-edit-image-save {
     border: 1px solid #5E8066;
-    background: #66896E;
+    background: #587A60;
     color: #FFFFFF;
     box-shadow: 0 4px 10px rgba(61, 98, 68, .17);
   }
   #root .profile-edit-page .profile-edit-image-save:hover:not(:disabled) {
-    border-color: #486C52;
-    background: #55795E;
+    border-color: #395F45;
+    background: #4F7358;
     color: #FFFFFF;
   }
   #root .profile-edit-page .profile-edit-image-remove {
@@ -1517,13 +1517,13 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     transition: transform 170ms ease, box-shadow 170ms ease, background 170ms ease;
   }
   #root .profile-edit-page .profile-edit-submit {
-    border: 1px solid #4E7358;
-    background: #5E8066;
+    border: 1px solid #456C50;
+    background: #587A60;
     color: #FFFFFF;
     box-shadow: 0 6px 15px rgba(61, 98, 68, .2);
   }
   #root .profile-edit-page .profile-edit-submit:hover:not(:disabled) {
-    border-color: #3F654A;
+    border-color: #395F45;
     background: #4F7358;
     color: #FFFFFF;
     box-shadow: 0 9px 18px rgba(61, 98, 68, .24);
