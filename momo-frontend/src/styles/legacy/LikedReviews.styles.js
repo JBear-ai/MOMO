@@ -5,12 +5,12 @@ const LikedReviewsStyles = createGlobalStyle`
 /* 좋아요한 리뷰 페이지 */
 .liked-reviews-page {
   min-height: 100vh;
-  padding: 40px 20px 80px;
-  background: var(--momo-bg);
+  padding: 12px 0 64px;
+  background: transparent;
 }
 
 .liked-reviews-container {
-  max-width: 820px;
+  max-width: 980px;
   margin: 0 auto;
 }
 
@@ -20,7 +20,11 @@ const LikedReviewsStyles = createGlobalStyle`
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  margin-bottom: 28px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  background: linear-gradient(120deg, var(--momo-note), rgba(255,255,255,.9));
+  border: 1px solid var(--momo-note-border);
+  border-radius: var(--momo-radius-lg);
 }
 
 .liked-reviews-eyebrow {
@@ -54,11 +58,11 @@ const LikedReviewsStyles = createGlobalStyle`
 
 /* 흰색 메인 카드 */
 .liked-reviews-card {
-  padding: 30px;
+  padding: 28px;
   background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: 14px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 /* 카드 상단 */
@@ -106,8 +110,10 @@ const LikedReviewsStyles = createGlobalStyle`
   display: flex;
   align-items: center;
   gap: 18px;
-  padding: 22px 10px;
+  padding: 22px 12px;
   border-bottom: 1px solid var(--momo-border);
+  border-radius: 12px;
+  transition: background .18s ease, transform .18s ease;
   transition: background 0.2s ease;
 }
 
