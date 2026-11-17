@@ -101,7 +101,7 @@ const PersonDetailStyles = createGlobalStyle`
   width: fit-content;
   padding-left: 0;
   border-left: 0;
-  color: #444444;
+  color: var(--momo-text-soft);
   font-size: 13px;
 }
 
@@ -113,7 +113,7 @@ const PersonDetailStyles = createGlobalStyle`
 .movie-detail-page > .detail-content-section > .people-list + div > button {
   padding: 12px 24px;
   background: var(--momo-surface-raised);
-  border: 1px solid #cccccc;
+  border: 1px solid var(--momo-border-strong);
   border-radius: 6px;
   font-size: 15px;
   font-weight: 600;
@@ -123,7 +123,7 @@ const PersonDetailStyles = createGlobalStyle`
 
 .movie-detail-page > .detail-content-section > .people-list + div > button:hover {
   background: var(--momo-note);
-  border-color: #aaaaaa;
+  border-color: var(--momo-placeholder);
 }
 
 @media (max-width: 600px) {
