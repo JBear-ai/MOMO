@@ -201,7 +201,7 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-search-reset:hover {
   background: var(--momo-bg);
-  border-color: #BEB5A7;
+  border-color: var(--momo-border-strong);
 }
 
 /* 리뷰 테이블 */
@@ -316,9 +316,9 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-error {
-  color: #C0392B;
+  color: var(--momo-danger);
   background: var(--momo-surface)5F5;
-  border-color: #EED2D2;
+  border-color: var(--momo-dislike-border);
 }
 
 /* 모바일 리뷰 목록 */
