@@ -5,7 +5,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   .momo-search-area {
     position: relative;
     flex-shrink: 0;
-    width: 340px;
+    width: clamp(260px, 28vw, 380px);
     max-width: 100%;
   }
 
@@ -15,10 +15,11 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     align-items: center;
     width: 100%;
     box-sizing: border-box;
+    min-height: 44px;
     padding: 6px 16px;
     background: var(--momo-note);
     border: 1px solid var(--momo-note-border);
-    border-radius: 20px;
+    border-radius: var(--momo-radius-pill);
     transition: all 0.2s ease;
   }
 
@@ -73,7 +74,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     border: 1px solid var(--momo-border);
     border-radius: 16px;
     box-shadow: var(--momo-shadow-lg);
-    backdrop-filter: blur(18px) saturate(130%);
+    backdrop-filter: blur(16px) saturate(125%);
     -webkit-backdrop-filter: blur(18px) saturate(130%);
   }
 
@@ -83,7 +84,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     align-items: center;
     gap: 12px;
     width: 100%;
-    min-height: 84px;
+    min-height: 88px;
     padding: 10px 12px;
     border: none;
     border-bottom: 1px solid var(--momo-border);
