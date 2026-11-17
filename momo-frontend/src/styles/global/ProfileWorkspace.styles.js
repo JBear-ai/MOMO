@@ -24,8 +24,10 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   }
   #root .profile-dashboard .profile-heading h1,
   #root .profile-edit-page .profile-heading h1 {
-    margin: 0; color: #292820; font-size: clamp(29px, 3.2vw, 36px);
+    margin: 0; padding: 0; border: 0; background: none !important;
+    color: #292820; font-size: clamp(29px, 3.2vw, 36px);
     font-weight: 850; line-height: 1.16; letter-spacing: -.055em;
+    box-shadow: none;
   }
   #root .profile-dashboard .profile-heading p,
   #root .profile-edit-page .profile-heading p {
