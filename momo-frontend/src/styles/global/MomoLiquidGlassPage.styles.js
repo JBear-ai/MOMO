@@ -1537,11 +1537,11 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     transform: translateY(-1px);
   }
   #root .profile-edit-page .profile-edit-submit:disabled {
-    border-color: #E9DFC5;
-    background: #EDE5CF;
-    color: #746B52;
+    border-color: #D6B43F;
+    background: #FFD43B;
+    color: #292820;
     box-shadow: none;
-    opacity: .82;
+    opacity: .56;
   }
   #root .profile-edit-page .profile-edit-cancel {
     border: 1px solid #E9DFC5;
