@@ -189,10 +189,9 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
 
 /* Header command search */
 .momo-search-area { width:clamp(220px,28vw,390px); }
-.momo-search-area .momo-search-input,
-.momo-search-area input {
+.momo-search-form {
   min-height:48px;
-  padding:0 18px;
+  padding:5px 14px 5px 18px;
   border:1px solid rgba(216,206,186,.9);
   border-radius:7px 16px 7px 16px;
   background:rgba(255,255,255,.78);
@@ -200,12 +199,12 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   backdrop-filter:blur(14px);
   transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
 }
-.momo-search-area .momo-search-input:focus,
-.momo-search-area input:focus {
+.momo-search-form:focus-within {
   border-color:#9C791B;
   background:#FFFEFA;
   box-shadow:0 0 0 4px rgba(255,212,59,.18),0 10px 20px rgba(54,45,28,.07);
 }
+.momo-search-form .momo-search-input { min-height:36px; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; }
 .momo-search-dropdown {
   border:1px solid rgba(255,255,255,.9);
   border-radius:14px;
