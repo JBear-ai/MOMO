@@ -3,7 +3,7 @@ import styled from "styled-components";
 /* 전체 홈 화면: 포근하고 깨끗한 다이어리 미색 배경 */
 export const HomePage = styled.div`
   width: 100%;
-  background-color: #f8f6f0;
+  background-color: var(--momo-bg);
   color: #2d2a26;
   padding-bottom: 80px;
 `;
@@ -15,7 +15,7 @@ export const FeatureSection = styled.section`
   min-height: 440px;
   align-items: stretch;
   margin-bottom: 80px;
-  background: #ffffff;
+  background: var(--momo-surface);
   overflow: hidden;
   border-radius: 16px;
   border: 1px solid #e6e1d6;
@@ -44,7 +44,7 @@ export const FeatureInfo = styled.div`
 export const Eyebrow = styled.span`
   display: block;
   margin-bottom: 18px;
-  color: #a37e1c; /* 차분하고 고급스러운 빈티지 골드 */
+  color: var(--momo-link); /* 차분하고 고급스러운 빈티지 골드 */
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -58,14 +58,14 @@ export const FeatureTitle = styled.h1`
   line-height: 1.2;
   letter-spacing: -0.04em;
   font-weight: 800;
-  color: #1f1d1a;
+  color: var(--momo-text);
   word-break: keep-all;
 `;
 
 /* 메인 설명 */
 export const FeatureDescription = styled.p`
   margin: 20px 0 0;
-  color: #736e63;
+  color: var(--momo-muted);
   font-size: 15px;
   line-height: 1.8;
   word-break: keep-all;
@@ -125,7 +125,7 @@ export const FeatureVisual = styled.div`
     left: 40px;
     bottom: 44px;
     width: calc(100% - 80px);
-    color: #fff;
+    color: var(--momo-surface);
   }
 
   /* 오늘의 추천작 레이블 - 쨍한 노랑을 빼고 차분한 크림 옐로우로 고정 */
@@ -188,7 +188,7 @@ export const FeatureVisual = styled.div`
     width: 100%;
     height: 100%;
     background: #faf8f2;
-    color: #736e63;
+    color: var(--momo-muted);
     font-size: 14px;
     font-weight: 600;
   }
@@ -237,12 +237,12 @@ export const SectionHeading = styled.div`
     font-size: clamp(22px, 2.8vw, 30px);
     letter-spacing: -0.04em;
     font-weight: 800;
-    color: #1f1d1a;
+    color: var(--momo-text);
   }
 
   p {
     margin: 6px 0 0;
-    color: #736e63;
+    color: var(--momo-muted);
     font-size: 13px;
   }
 `;
@@ -284,7 +284,7 @@ export const MovieCard = styled.div`
   }
 
   &:focus-visible {
-    outline: 2px solid #a37e1c;
+    outline: 2px solid var(--momo-link);
     outline-offset: 5px;
   }
 `;
@@ -314,7 +314,7 @@ export const Rank = styled.span`
   position: absolute;
   left: 12px;
   bottom: 8px;
-  color: #ffffff;
+  color: var(--momo-surface);
   font-size: 32px;
   line-height: 1;
   font-weight: 900;
@@ -329,7 +329,7 @@ export const MovieInfo = styled.div`
   h3 {
     margin: 0;
     overflow: hidden;
-    color: #1f1d1a;
+    color: var(--momo-text);
     font-size: 15px;
     font-weight: 750;
     letter-spacing: -0.02em;
@@ -339,7 +339,7 @@ export const MovieInfo = styled.div`
 
   p {
     margin: 6px 0 0;
-    color: #736e63;
+    color: var(--momo-muted);
     font-size: 12px;
   }
 `;
@@ -354,7 +354,7 @@ export const GenreList = styled.div`
     padding: 11px 20px;
     border: 1px solid #e2dcce;
     border-radius: 999px;
-    background: #ffffff;
+    background: var(--momo-surface);
     color: #4a453c;
     font-size: 14px;
     font-weight: 600;
@@ -364,8 +364,8 @@ export const GenreList = styled.div`
   }
 
   button:hover {
-    border-color: #a37e1c;
-    background: #ffd43b;
+    border-color: var(--momo-link);
+    background: var(--momo-accent);
     color: #4a3800;
   }
 `;
@@ -385,12 +385,12 @@ export const BrandLine = styled.div`
     font-size: clamp(20px, 3vw, 26px);
     letter-spacing: -0.04em;
     font-weight: 800;
-    color: #1f1d1a;
+    color: var(--momo-text);
   }
 
   p {
     margin: 6px 0 0;
-    color: #736e63;
+    color: var(--momo-muted);
     font-size: 13px;
   }
 
