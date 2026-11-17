@@ -144,7 +144,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     const style = getComputedStyle(element);
     return { image: style.backgroundImage, color: style.backgroundColor };
   });
-  expect(favoritePageBackground.image).toBe("none");
+  expect(favoritePageBackground.image).toContain("linear-gradient");
   const favoriteGlassCard = await page.locator(".favorite-page-card").evaluate((element) => {
     const style = getComputedStyle(element);
     return { blur: style.backdropFilter, background: style.backgroundImage };
