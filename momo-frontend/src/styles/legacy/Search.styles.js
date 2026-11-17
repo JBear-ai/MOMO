@@ -42,7 +42,7 @@ const SearchInput = styled.input`
   }
 
   &::placeholder {
-    color: #948b7c;
+    color: var(--momo-placeholder);
   }
 `;
 
@@ -105,7 +105,7 @@ const Poster = styled.div`
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid var(--momo-border);
-  background: #efece4;
+  background: var(--momo-note);
 
   img {
     width: 100%;
