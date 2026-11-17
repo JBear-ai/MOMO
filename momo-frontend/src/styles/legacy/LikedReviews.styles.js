@@ -123,7 +123,7 @@ const LikedReviewsStyles = createGlobalStyle`
   overflow: hidden;
   border: 1px solid var(--momo-border);
   border-radius: 9px;
-  background: #f0ede6;
+  background: var(--momo-note);
 }
 
 .liked-review-poster img {
@@ -176,7 +176,7 @@ const LikedReviewsStyles = createGlobalStyle`
   display: -webkit-box;
   margin: 0 0 12px;
   overflow: hidden;
-  color: #6d665d;
+  color: var(--momo-text-soft);
   font-size: 13px;
   line-height: 1.6;
   -webkit-box-orient: vertical;
@@ -187,7 +187,7 @@ const LikedReviewsStyles = createGlobalStyle`
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  color: #999;
+  color: var(--momo-placeholder);
   font-size: 11px;
 }
 
@@ -207,17 +207,17 @@ const LikedReviewsStyles = createGlobalStyle`
 .liked-review-unlike {
   flex-shrink: 0;
   padding: 8px 11px;
-  border: 1px solid #f0dada;
+  border: 1px solid var(--momo-dislike-border);
   border-radius: 8px;
   background: var(--momo-surface)7f7;
-  color: #d04b4b;
+  color: var(--momo-danger);
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
 }
 
 .liked-review-unlike:hover {
-  background: #ffeaea;
+  background: var(--momo-dislike-bg-hover);
 }
 
 .liked-review-unlike:disabled {
@@ -249,7 +249,7 @@ const LikedReviewsStyles = createGlobalStyle`
 }
 
 .liked-empty-icon {
-  color: #d64c4c;
+  color: var(--momo-danger);
   font-size: 40px;
 }
 
