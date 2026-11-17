@@ -101,6 +101,13 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(page.locator(".profile-edit-page")).toBeVisible();
   await expect(page.getByRole("heading", { level: 1, name: "프로필 수정" })).toBeVisible();
 
+  const profileEditCanvas = await page.locator(".profile-edit-page").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundColor, image: style.backgroundImage };
+  });
+  expect(profileEditCanvas.background).toBe("rgb(245, 242, 235)");
+  expect(profileEditCanvas.image).toContain("linear-gradient");
+
   const profileEditHero = await page.locator(".profile-edit-heading").evaluate((element) => {
     const style = getComputedStyle(element);
     return {
@@ -110,22 +117,22 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     };
   });
   expect(profileEditHero.background).toContain("linear-gradient");
-  expect(profileEditHero.title).toBe("rgb(46, 71, 54)");
-  expect(profileEditHero.border).toBe("rgb(170, 200, 176)");
+  expect(profileEditHero.title).toBe("rgb(41, 40, 32)");
+  expect(profileEditHero.border).toBe("rgb(233, 223, 197)");
 
   const profilePortraitStage = await page.locator(".profile-image-edit").evaluate((element) => {
     const style = getComputedStyle(element);
     return { background: style.backgroundImage, border: style.borderColor };
   });
   expect(profilePortraitStage.background).toContain("linear-gradient");
-  expect(profilePortraitStage.border).toBe("rgb(170, 199, 175)");
+  expect(profilePortraitStage.border).toBe("rgb(233, 223, 197)");
 
   const saveButton = await page.locator(".profile-edit-submit").evaluate((element) => {
     const style = getComputedStyle(element);
     return { background: style.backgroundColor, color: style.color, radius: style.borderRadius };
   });
-  expect(saveButton.background).toBe("rgb(88, 122, 96)");
-  expect(saveButton.color).toBe("rgb(255, 255, 255)");
+  expect(saveButton.background).toBe("rgb(255, 212, 59)");
+  expect(saveButton.color).toBe("rgb(41, 40, 32)");
   expect(saveButton.radius).toBe("10px");
 
   await page.setViewportSize({ width: 390, height: 844 });
