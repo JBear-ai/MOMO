@@ -172,41 +172,70 @@ function Profile() {
             </div>
           </div>
 
-          {/* 영화 활동 3개 가로 배치 */}
+          {/* 영화 활동: 숫자와 이동 액션이 구분되는 메모 카드 */}
           <div className="profile-activity-grid">
-            {/* 작성한 리뷰 */}
             <Link
               to="/profile/reviews"
               className="profile-activity-item profile-reviews-link"
+              data-tone="writing"
             >
-              <span className="profile-activity-icon">✎</span>
+              <div className="profile-activity-top">
+                <span className="profile-activity-kicker">NOTE 01 · WRITE</span>
+                <span className="profile-activity-icon" aria-hidden="true">✎</span>
+              </div>
               <h3>작성한 리뷰</h3>
-              <strong>{reviewCount === null ? "-" : reviewCount} 개</strong>
-              <p>작성한 리뷰 보기 →</p>
+              <div className="profile-activity-count-row">
+                <strong className="profile-activity-count">
+                  {reviewCount === null ? "-" : reviewCount}
+                </strong>
+                <span className="profile-activity-unit">개</span>
+              </div>
+              <div className="profile-activity-footer">
+                <p>내가 남긴 영화 기록</p>
+                <span className="profile-activity-arrow" aria-hidden="true">↗</span>
+              </div>
             </Link>
 
-            {/* 좋아요한 리뷰 */}
             <Link
               to="/profile/liked-reviews"
               className="profile-activity-item profile-liked-reviews-link"
+              data-tone="liked"
             >
-              <span className="profile-activity-icon">♥</span>
+              <div className="profile-activity-top">
+                <span className="profile-activity-kicker">NOTE 02 · LIKE</span>
+                <span className="profile-activity-icon" aria-hidden="true">♥</span>
+              </div>
               <h3>좋아요한 리뷰</h3>
-              <strong>
-                {likedReviewCount === null ? "-" : likedReviewCount} 개
-              </strong>
-              <p>좋아요한 리뷰 보기 →</p>
+              <div className="profile-activity-count-row">
+                <strong className="profile-activity-count">
+                  {likedReviewCount === null ? "-" : likedReviewCount}
+                </strong>
+                <span className="profile-activity-unit">개</span>
+              </div>
+              <div className="profile-activity-footer">
+                <p>마음에 남은 다른 사람의 기록</p>
+                <span className="profile-activity-arrow" aria-hidden="true">↗</span>
+              </div>
             </Link>
 
-            {/* 관심 영화 */}
             <Link
               to="/profile/favorites"
               className="profile-activity-item profile-favorites-link"
+              data-tone="saved"
             >
-              <span className="profile-activity-icon">★</span>
+              <div className="profile-activity-top">
+                <span className="profile-activity-kicker">NOTE 03 · SAVE</span>
+                <span className="profile-activity-icon" aria-hidden="true">★</span>
+              </div>
               <h3>관심 영화</h3>
-              <strong>{favoriteCount} 편</strong>
-              <p>관심 영화 보기 →</p>
+              <div className="profile-activity-count-row">
+                <strong className="profile-activity-count">{favoriteCount}</strong>
+                <span className="profile-activity-unit">편</span>
+              </div>
+              <div className="profile-activity-footer">
+                <p>다시 보고 싶은 영화 모음</p>
+                <span className="profile-activity-arrow" aria-hidden="true">↗</span>
+              </div>
             </Link>
           </div>
         </section>
