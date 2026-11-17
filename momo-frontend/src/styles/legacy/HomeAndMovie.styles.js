@@ -240,7 +240,7 @@ const HomeAndMovieStyles = createGlobalStyle`
   width: 100%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-  background: #EAE3D2;
+  background: var(--momo-note);
   border-radius: 8px;
 }
 
@@ -305,7 +305,7 @@ const HomeAndMovieStyles = createGlobalStyle`
   position: relative;
   overflow: hidden;
   aspect-ratio: 2 / 3;
-  background: #EAE3D2;
+  background: var(--momo-note);
   border-radius: 8px;
 }
 
@@ -341,7 +341,7 @@ const HomeAndMovieStyles = createGlobalStyle`
   aspect-ratio: 2 / 3;
   padding: 12px;
   color: var(--momo-muted);
-  background: #EAE3D2;
+  background: var(--momo-note);
   border: 1px dashed var(--momo-border);
   border-radius: 8px;
   text-align: center;
@@ -361,7 +361,7 @@ const HomeAndMovieStyles = createGlobalStyle`
 }
 
 .error-message {
-  color: #C0392B;
+  color: var(--momo-danger);
 }
 
 /* ========================================
@@ -410,7 +410,7 @@ const HomeAndMovieStyles = createGlobalStyle`
   width: 100%;
   overflow: hidden;
   aspect-ratio: 2 / 3;
-  background: #EAE3D2;
+  background: var(--momo-note);
   border-radius: 10px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
