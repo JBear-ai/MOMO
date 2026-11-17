@@ -1227,14 +1227,14 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     #root .movie-detail-page .detail-reaction-counts { grid-template-columns: 1fr; }
   }
 
-  /* Profile edit: an unmistakable MOMO palette, not a grey-on-grey settings form. */
+    /* Profile edit: original MOMO memo paper and highlighter-yellow palette. */
   #root .profile-edit-page {
     max-width: 1080px;
     padding: clamp(24px, 3.6vw, 42px) 0 76px;
-    background:
-      linear-gradient(118deg, rgba(111, 151, 125, .23) 0%, rgba(111, 151, 125, 0) 42%),
-      linear-gradient(298deg, rgba(202, 145, 124, .19) 0%, rgba(202, 145, 124, 0) 44%);
     border-radius: 22px;
+    background:
+      linear-gradient(135deg, rgba(255,212,59,.12), transparent 38%),
+      #F5F2EB;
   }
   #root .profile-edit-page .profile-container {
     gap: 21px;
@@ -1250,10 +1250,10 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     gap: 5px;
     padding: 25px clamp(24px, 3.2vw, 38px);
     overflow: hidden;
-    border: 1px solid #AAC8B0;
+    border: 1px solid #E9DFC5;
     border-radius: 19px;
-    background: linear-gradient(112deg, #C9DFCD 0%, #DDE7D0 52%, #E8C6B5 100%);
-    box-shadow: 0 13px 28px rgba(53, 79, 60, .11), inset 0 1px rgba(255,255,255,.82);
+    background: linear-gradient(108deg, #FFF1B2 0%, #FFFAEC 52%, #F5F2EB 100%);
+    box-shadow: 0 12px 28px rgba(75, 61, 31, .09), inset 0 1px rgba(255,255,255,.96);
   }
   #root .profile-edit-page .profile-edit-heading::before {
     position: absolute;
@@ -1263,7 +1263,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     left: 0;
     width: 7px;
     content: "";
-    background: linear-gradient(180deg, #D6A347 0%, #668D70 100%);
+    background: #FFD43B;
   }
   #root .profile-edit-page .profile-edit-heading::after {
     position: absolute;
@@ -1273,17 +1273,14 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     bottom: 0;
     width: 92px;
     content: "";
-    border-right: 1px solid rgba(91, 122, 99, .13);
-    border-left: 1px solid rgba(91, 122, 99, .13);
-    background:
-      linear-gradient(90deg,
-        transparent 0 13px,
-        rgba(255,255,255,.22) 13px 15px,
-        transparent 15px 38px,
-        rgba(255,255,255,.22) 38px 40px,
-        transparent 40px 63px,
-        rgba(255,255,255,.22) 63px 65px,
-        transparent 65px);
+    border-right: 1px solid rgba(160, 129, 44, .13);
+    border-left: 1px solid rgba(160, 129, 44, .13);
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0 14px,
+      rgba(160,129,44,.08) 14px 16px,
+      transparent 16px 30px
+    );
     pointer-events: none;
   }
   #root .profile-edit-page .profile-edit-eyebrow {
@@ -1291,18 +1288,18 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     align-items: center;
     min-height: 25px;
     margin: 0 0 5px;
-    padding: 0 9px;
-    border: 1px solid rgba(66, 100, 77, .24);
+    padding: 0 10px;
+    border: 1px solid rgba(160, 124, 24, .24);
     border-radius: 5px;
-    background: rgba(255,255,255,.38);
-    color: #3F5D47;
+    background: #FFD43B;
+    color: #292820;
     font-size: 9px;
     font-weight: 900;
-    letter-spacing: .15em;
+    letter-spacing: .14em;
   }
   #root .profile-edit-page .profile-edit-heading h1 {
     margin: 0;
-    color: #2E4736;
+    color: #292820;
     font-size: clamp(28px, 3.1vw, 36px);
     font-weight: 900;
     line-height: 1.13;
@@ -1310,7 +1307,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .profile-edit-page .profile-edit-heading p {
     margin: 2px 0 0;
-    color: #3F5D47;
+    color: #625A45;
     font-size: 13px;
     font-weight: 600;
     line-height: 1.55;
@@ -1320,22 +1317,22 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     position: relative;
     padding: clamp(22px, 3.2vw, 36px);
     overflow: hidden;
-    border: 1px solid #CBD8CC;
+    border: 1px solid #E9DFC5;
     border-radius: 21px;
-    background: rgba(255, 253, 247, .91);
-    box-shadow: 0 16px 34px rgba(47, 67, 52, .085), inset 0 1px rgba(255,255,255,.96);
-    backdrop-filter: blur(22px) saturate(115%);
-    -webkit-backdrop-filter: blur(22px) saturate(115%);
+    background: rgba(255,250,236,.94);
+    box-shadow: 0 14px 32px rgba(75, 61, 31, .075), inset 0 1px rgba(255,255,255,.98);
+    backdrop-filter: blur(20px) saturate(112%);
+    -webkit-backdrop-filter: blur(20px) saturate(112%);
   }
   #root .profile-edit-page .profile-edit-card::before {
     top: 0;
     bottom: 0;
     left: 0;
     right: auto;
-    width: 6px;
+    width: 5px;
     height: auto;
     border-radius: 0;
-    background: linear-gradient(180deg, #D3A64F 0%, #82A68A 48%, #CD8F7E 100%);
+    background: #FFD43B;
   }
   #root .profile-edit-page .profile-edit-form {
     display: grid;
@@ -1343,7 +1340,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .profile-edit-page .profile-edit-image-kicker {
     margin: 0 0 2px;
-    color: #3F5D47;
+    color: #76601F;
     font-size: 10px;
     font-weight: 900;
     letter-spacing: .16em;
@@ -1356,19 +1353,19 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     width: 100%;
     margin: 0 0 14px;
     padding: 22px 18px 20px;
-    border: 1px solid #AAC7AF;
+    border: 1px solid #E9DFC5;
     border-radius: 17px;
-    background: linear-gradient(116deg, rgba(195, 220, 198, .97), rgba(229, 234, 205, .92) 58%, rgba(237, 201, 183, .96));
-    box-shadow: inset 0 1px rgba(255,255,255,.78), 0 5px 14px rgba(61, 92, 69, .06);
+    background: linear-gradient(115deg, #FFF0AD 0%, #FFFAEC 64%, #F5F2EB 100%);
+    box-shadow: inset 0 1px rgba(255,255,255,.96), 0 5px 14px rgba(75, 61, 31, .055);
   }
   #root .profile-edit-page .profile-image-preview {
     width: 116px;
     height: 116px;
     margin: 0;
-    border: 5px solid #FFFDF6;
+    border: 5px solid #FFD43B;
     border-radius: 50%;
-    background: #66866C;
-    box-shadow: 0 8px 18px rgba(52, 78, 59, .2), 0 0 0 1px rgba(91, 126, 98, .3);
+    background: #FFFAEC;
+    box-shadow: 0 7px 17px rgba(75, 61, 31, .16), 0 0 0 4px rgba(255,212,59,.18);
   }
   #root .profile-edit-page .profile-image-preview img {
     display: block;
@@ -1384,20 +1381,20 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     width: min(100%, 410px);
     min-height: 44px;
     padding: 5px;
-    border: 1px solid rgba(96, 126, 102, .28);
+    border: 1px solid #E9DFC5;
     border-radius: 10px;
-    background: rgba(255, 253, 247, .66);
-    color: #4C6251;
+    background: rgba(255,250,236,.88);
+    color: #514A36;
     font-size: 12px;
   }
   #root .profile-edit-page #profile-image-input::file-selector-button {
     min-height: 32px;
     margin-right: 10px;
     padding: 0 12px;
-    border: 1px solid #A9C0AC;
+    border: 1px solid #D6B43F;
     border-radius: 7px;
-    background: #E5EEE4;
-    color: #3E6047;
+    background: #FFD43B;
+    color: #292820;
     font-size: 11px;
     font-weight: 800;
     cursor: pointer;
@@ -1415,30 +1412,30 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     font-weight: 800;
   }
   #root .profile-edit-page .profile-edit-image-save {
-    border: 1px solid #5E8066;
-    background: #587A60;
-    color: #FFFFFF;
-    box-shadow: 0 4px 10px rgba(61, 98, 68, .17);
+    border: 1px solid #D6B43F;
+    background: #FFD43B;
+    color: #292820;
+    box-shadow: 0 4px 10px rgba(126, 98, 15, .14);
   }
   #root .profile-edit-page .profile-edit-image-save:hover:not(:disabled) {
-    border-color: #395F45;
-    background: #4F7358;
-    color: #FFFFFF;
+    border-color: #B38D19;
+    background: #F3C72E;
+    color: #292820;
   }
   #root .profile-edit-page .profile-edit-image-remove {
-    border: 1px solid #D5B5AA;
-    background: #F3E3DC;
-    color: #81574F;
+    border: 1px solid #E1CFC0;
+    background: #F6EDE4;
+    color: #795B4D;
   }
   #root .profile-edit-page .profile-edit-image-remove:hover:not(:disabled) {
-    border-color: #C99E91;
-    background: #EED6CD;
-    color: #73473F;
+    border-color: #D1B4A0;
+    background: #EFE0D3;
+    color: #62483D;
   }
 
   #root .profile-edit-page .profile-edit-form > label {
     margin-top: 7px;
-    color: #45614D;
+    color: #514A36;
     font-size: 12px;
     font-weight: 850;
     letter-spacing: -.01em;
@@ -1446,24 +1443,24 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .profile-edit-page .profile-edit-form > input {
     min-height: 47px;
     padding: 11px 14px;
-    border: 1px solid #CFD9CD;
+    border: 1px solid #E9DFC5;
     border-radius: 10px;
     background: #FFFEFA;
-    box-shadow: inset 0 1px 2px rgba(55, 74, 58, .035);
-    color: #303A32;
+    box-shadow: inset 0 1px 2px rgba(75, 61, 31, .035);
+    color: #292820;
     font-size: 14px;
     transition: border-color 170ms ease, box-shadow 170ms ease, background 170ms ease;
   }
   #root .profile-edit-page .profile-edit-form > input:read-only {
-    border-color: #D6DCCF;
-    background: #E9EDE5;
-    color: #687468;
+    border-color: #E9DFC5;
+    background: #F5F2EB;
+    color: #6D6654;
   }
   #root .profile-edit-page .profile-edit-form > input:focus {
-    border-color: #789A7E;
+    border-color: #C6A12B;
     outline: none;
     background: #FFFFFF;
-    box-shadow: 0 0 0 3px rgba(112, 151, 120, .17);
+    box-shadow: 0 0 0 3px rgba(255,212,59,.24);
   }
   #root .profile-edit-page .profile-edit-form > .signup-message {
     min-height: 15px;
@@ -1477,23 +1474,23 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     height: 2px;
     margin: 26px 0 13px !important;
     border: 0 !important;
-    background: linear-gradient(90deg, #C8A35D 0%, #9BB6A0 38%, rgba(155,182,160,0) 100%);
+    background: linear-gradient(90deg, #FFD43B 0%, #E9DFC5 56%, rgba(233,223,197,0) 100%);
   }
   #root .profile-edit-page .profile-edit-section-title {
     position: relative;
     margin: 0 0 4px !important;
     padding: 13px 16px;
-    border-left: 4px solid #C89D50;
+    border-left: 4px solid #FFD43B;
     border-radius: 0 10px 10px 0;
-    background: #EFE5CB;
-    color: #4D583F;
+    background: #F5F2EB;
+    color: #292820;
     font-size: 16px !important;
     font-weight: 900;
     letter-spacing: -.025em;
   }
   #root .profile-edit-page .profile-edit-section-description {
     margin: 0 0 10px !important;
-    color: #667064 !important;
+    color: #6A6251 !important;
     font-size: 12px !important;
     line-height: 1.6;
   }
@@ -1504,7 +1501,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     gap: 10px;
     margin-top: 20px !important;
     padding-top: 18px;
-    border-top: 1px solid #DCE2D7;
+    border-top: 1px solid #E9DFC5;
   }
   #root .profile-edit-page .profile-edit-submit,
   #root .profile-edit-page .profile-edit-cancel {
@@ -1517,35 +1514,35 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     transition: transform 170ms ease, box-shadow 170ms ease, background 170ms ease;
   }
   #root .profile-edit-page .profile-edit-submit {
-    border: 1px solid #456C50;
-    background: #587A60;
-    color: #FFFFFF;
-    box-shadow: 0 6px 15px rgba(61, 98, 68, .2);
+    border: 1px solid #D6B43F;
+    background: #FFD43B;
+    color: #292820;
+    box-shadow: 0 6px 15px rgba(126, 98, 15, .16);
   }
   #root .profile-edit-page .profile-edit-submit:hover:not(:disabled) {
-    border-color: #395F45;
-    background: #4F7358;
-    color: #FFFFFF;
-    box-shadow: 0 9px 18px rgba(61, 98, 68, .24);
+    border-color: #B38D19;
+    background: #F3C72E;
+    color: #292820;
+    box-shadow: 0 9px 18px rgba(126, 98, 15, .2);
     transform: translateY(-1px);
   }
   #root .profile-edit-page .profile-edit-submit:disabled {
-    border-color: #AAB9AA;
-    background: #AEBCAE;
-    color: rgba(255,255,255,.92);
+    border-color: #E9DFC5;
+    background: #EDE5CF;
+    color: #746B52;
     box-shadow: none;
-    opacity: .72;
+    opacity: .82;
   }
   #root .profile-edit-page .profile-edit-cancel {
-    border: 1px solid #D5B4A8;
-    background: #F1E1D9;
-    color: #81564D;
+    border: 1px solid #E9DFC5;
+    background: #F5F2EB;
+    color: #514A36;
     box-shadow: none;
   }
   #root .profile-edit-page .profile-edit-cancel:hover:not(:disabled) {
-    border-color: #C99D91;
-    background: #EBD4CA;
-    color: #744A42;
+    border-color: #D8C99F;
+    background: #EEE8DA;
+    color: #292820;
     transform: translateY(-1px);
   }
 
