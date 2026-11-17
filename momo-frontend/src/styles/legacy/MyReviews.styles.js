@@ -8,11 +8,10 @@ const MyReviewsStyles = createGlobalStyle`
 ================================================== */
 
 .my-reviews-page {
-  width: calc(100% - 40px);
+  width: 100%;
   max-width: 1320px;
-
   margin: 0 auto;
-  padding: 30px 0 80px;
+  padding: 12px 0 64px;
 }
 
 .my-reviews-heading {
@@ -65,11 +64,11 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-reviews-card {
-  padding: 30px;
-
+  padding: 28px;
   background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: 14px;
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .my-reviews-card-heading {
@@ -125,8 +124,9 @@ const MyReviewsStyles = createGlobalStyle`
   gap: 20px;
 
   padding: 22px 12px;
-
   border-bottom: 1px solid var(--momo-border);
+  border-radius: 12px;
+  transition: background .18s ease, transform .18s ease;
 
   color: var(--momo-text);
   text-decoration: none;
