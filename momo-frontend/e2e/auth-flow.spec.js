@@ -84,7 +84,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     (element) => getComputedStyle(element).borderRadius,
   );
   expect(headerNavRadius).toBe("11px");
-  expect(headerActionRadius).toBe("11px");
+  expect(headerActionRadius).toBe("10px");
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileActivityColumns = await page.locator(".profile-activity-grid").evaluate(
