@@ -39,13 +39,11 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 }
 
 .review-detail-card {
-  padding: 28px;
-
-  background: var(--momo-surface);
+  padding: clamp(20px, 3vw, 32px);
+  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
   border: 1px solid var(--momo-border);
-  border-radius: 16px;
-
-  box-shadow: 0 8px 24px rgba(45, 38, 26, 0.06);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .review-detail-top {
@@ -474,13 +472,11 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
 .review-comment-card {
   margin-top: 24px;
-  padding: 28px;
-
-  background: var(--momo-surface);
+  padding: clamp(20px, 3vw, 32px);
+  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
   border: 1px solid var(--momo-border);
-  border-radius: 16px;
-
-  box-shadow: 0 8px 24px rgba(45, 38, 26, 0.04);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .review-comment-heading {
