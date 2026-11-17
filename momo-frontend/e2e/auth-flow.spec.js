@@ -159,6 +159,21 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
             profileUrl: "",
             department: "director",
           },
+          ...Array.from({ length: 7 }, (_, index) => ({
+            personId: 322 + index,
+            name: `감독 미리보기 ${index + 2}`,
+            originalName: "",
+            profileUrl: "",
+            department: "director",
+          })),
+          ...Array.from({ length: 8 }, (_, index) => ({
+            personId: 400 + index,
+            name: `배우 미리보기 ${index + 1}`,
+            originalName: "",
+            profileUrl: "",
+            department: "actor",
+            role: `배역 ${index + 1}`,
+          })),
         ],
       }),
     }),
@@ -224,8 +239,26 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
     page.getByRole("heading", { level: 1, name: "필모그래피 이동 E2E" }),
   ).toBeVisible();
 
+  // 영화 상세의 감독·배우도 세 줄 미리보기와 펼치기/접기 동작을 제공한다.
+  const directorSection = page.locator(".people-section").nth(0);
+  const actorSection = page.locator(".people-section").nth(1);
+  const directorItems = directorSection.locator(".people-list-compact .person-chip");
+  const actorItems = actorSection.locator(".people-list-compact .person-chip");
+
+  await expect(directorItems).toHaveCount(6);
+  await directorSection.getByRole("button", { name: "감독 더보기 (6 / 8)" }).click();
+  await expect(directorItems).toHaveCount(8);
+  await directorSection.getByRole("button", { name: "감독 접기" }).click();
+  await expect(directorItems).toHaveCount(6);
+
+  await expect(actorItems).toHaveCount(6);
+  await actorSection.getByRole("button", { name: "배우 더보기 (6 / 8)" }).click();
+  await expect(actorItems).toHaveCount(8);
+  await actorSection.getByRole("button", { name: "배우 접기" }).click();
+  await expect(actorItems).toHaveCount(6);
+
   // 영화 상세의 TMDb 인물 ID가 이름 검색이 아닌 고유 ID 경로로 연결되는지 확인한다.
-  await page.getByRole("button", { name: "인물 연결 E2E" }).click();
+  await directorSection.getByRole("button", { name: /인물 연결 E2E/ }).click();
   await expect(page).toHaveURL(/\/person\/director\/321$/);
   await expect(
     page.getByRole("heading", { level: 1, name: "인물 연결 E2E" }),
