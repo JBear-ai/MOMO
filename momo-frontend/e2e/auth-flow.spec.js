@@ -106,7 +106,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     return { background: style.backgroundColor, image: style.backgroundImage };
   });
   expect(profileEditCanvas.background).toBe("rgb(245, 242, 235)");
-  expect(profileEditCanvas.image).toBe("none");
+  expect(profileEditCanvas.image).toContain("linear-gradient");
 
   const brandTokens = await page.evaluate(() => {
     const root = getComputedStyle(document.documentElement);
