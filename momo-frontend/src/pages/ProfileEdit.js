@@ -15,7 +15,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PWD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
 
-// 닉네임: 한글, 영문, 숫자 2~10자
+// 닉네임: 한글, 영문, 숫자 2~12자
 const NICKNAME_REGEX = /^[가-힣a-zA-Z0-9]{2,12}$/;
 
 function ProfileEditField({ id, label, input, message, state = "", wide = false }) {
@@ -631,11 +631,6 @@ function ProfileEdit() {
                     src: profilePreview || profileImageUrl,
                     alt: "프로필 이미지",
                   }),
-                ),
-                React.createElement(
-                  "label",
-                  { className: "profile-edit-file-label", htmlFor: "profile-image-input" },
-                  "사진 선택",
                 ),
                 React.createElement("input", {
                   id: "profile-image-input",
