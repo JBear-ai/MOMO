@@ -1735,7 +1735,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .favorite-page .favorite-page-card,
   #root .favorite-page .favorite-page-card:nth-child(3n + 2),
   #root .favorite-page .favorite-page-card:nth-child(3n) {
-    border-color: rgba(233,223,197,.88);
+    border-color: #E9DFC5;
     background: rgba(255,250,236,.9) !important;
     box-shadow: 0 8px 20px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.98);
   }
