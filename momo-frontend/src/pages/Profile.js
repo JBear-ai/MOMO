@@ -6,6 +6,47 @@ import AxiosApi from "../api/AxiosApi";
 import ProfileAvatar from "../components/ProfileAvatar";
 import { ProfileDeleteLink } from "../styles/legacy/Profile.styles";
 
+function ActivityIcon({ type }) {
+  const shared = {
+    viewBox: "0 0 28 28",
+    width: 20,
+    height: 20,
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.65,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true",
+    focusable: "false",
+  };
+
+  if (type === "writing") {
+    return (
+      <svg {...shared}>
+        <path d="m18.9 5.3 3.8 3.8M6 22l4.3-.9L22 9.4a2.7 2.7 0 0 0-3.8-3.8L6.5 17.7 6 22Z" />
+        <path d="M5 25h18" />
+      </svg>
+    );
+  }
+
+  if (type === "liked") {
+    return (
+      <svg {...shared}>
+        <path d="M23 9.3c0 5.2-9 11-9 11s-9-5.8-9-11a4.8 4.8 0 0 1 9-2.2 4.8 4.8 0 0 1 9 2.2Z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...shared}>
+      <path d="M6.5 4.75h15A2.25 2.25 0 0 1 23.75 7v2.4a2.6 2.6 0 0 0 0 5.2V17A2.25 2.25 0 0 1 21.5 19.25h-15A2.25 2.25 0 0 1 4.25 17v-2.4a2.6 2.6 0 0 0 0-5.2V7A2.25 2.25 0 0 1 6.5 4.75Z" />
+      <rect x="9.25" y="7.75" width="9.5" height="8.5" rx="1.2" />
+      <path d="m13 10.1 3.1 1.9-3.1 1.9v-3.8Z" />
+      <path d="M7 7.2v1.1M7 15.8v1.1M21 7.2v1.1M21 15.8v1.1" />
+    </svg>
+  );
+}
+
 function Profile() {
   const [userId, setUserId] = useState("");
   const [nickname, setNickname] = useState("");
@@ -180,8 +221,7 @@ function Profile() {
               data-tone="writing"
             >
               <div className="profile-activity-top">
-                <span className="profile-activity-kicker">NOTE 01 · WRITE</span>
-                <span className="profile-activity-icon" aria-hidden="true">✎</span>
+                <span className="profile-activity-icon"><ActivityIcon type="writing" /></span>
               </div>
               <h3>작성한 리뷰</h3>
               <div className="profile-activity-count-row">
@@ -202,8 +242,7 @@ function Profile() {
               data-tone="liked"
             >
               <div className="profile-activity-top">
-                <span className="profile-activity-kicker">NOTE 02 · LIKE</span>
-                <span className="profile-activity-icon" aria-hidden="true">♥</span>
+                <span className="profile-activity-icon"><ActivityIcon type="liked" /></span>
               </div>
               <h3>좋아요한 리뷰</h3>
               <div className="profile-activity-count-row">
@@ -224,8 +263,7 @@ function Profile() {
               data-tone="saved"
             >
               <div className="profile-activity-top">
-                <span className="profile-activity-kicker">NOTE 03 · SAVE</span>
-                <span className="profile-activity-icon" aria-hidden="true">★</span>
+                <span className="profile-activity-icon"><ActivityIcon type="saved" /></span>
               </div>
               <h3>관심 영화</h3>
               <div className="profile-activity-count-row">
