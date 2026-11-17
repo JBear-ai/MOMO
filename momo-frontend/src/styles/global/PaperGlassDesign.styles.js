@@ -392,28 +392,17 @@ const PaperGlassDesignStyles = createGlobalStyle`
     box-shadow: 0 8px 24px rgba(64,51,30,.055), inset 0 1px rgba(255,255,255,.98);
   }
   .detail-content-section > h2, .detail-section-heading h2 {
-    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 9px;
     margin: 0 0 18px;
-    padding-bottom: 9px;
+    padding: 0 1px 8px;
     color: var(--momo-text);
     font-size: 18px;
     font-weight: 900;
     letter-spacing: -.04em;
-  }
-  .detail-content-section > h2::after, .detail-section-heading h2::after {
-    position: absolute;
-    right: 0;
-    bottom: 2px;
-    left: 0;
-    height: 5px;
-    content: "";
-    border-radius: 999px;
-    background: rgba(255,212,82,.42);
-    transform: rotate(-.8deg);
-    z-index: -1;
+    background: linear-gradient(transparent 69%, rgba(255,212,82,.43) 69% 92%, transparent 92%);
+    background-repeat: no-repeat;
   }
   .detail-section-heading {
     display: flex;
@@ -701,6 +690,24 @@ const PaperGlassDesignStyles = createGlobalStyle`
       repeating-linear-gradient(to bottom, rgba(255,255,255,.82) 0 30px, rgba(130,151,173,.18) 31px, rgba(255,255,255,.82) 32px);
     background-attachment: local;
   }
+  .review-detail-movie {
+    position: relative;
+    border: 1px solid rgba(255,255,255,.96);
+    border-radius: 14px;
+    background:
+      linear-gradient(90deg, transparent 0 20px, rgba(201,117,104,.12) 20px 21px, transparent 21px),
+      repeating-linear-gradient(0deg, transparent 0 27px, rgba(117,145,177,.07) 28px, transparent 29px),
+      linear-gradient(145deg, rgba(255,255,255,.8), rgba(255,249,231,.82));
+    box-shadow: 0 7px 18px rgba(63,50,28,.065), inset 0 1px rgba(255,255,255,.98);
+  }
+  .review-detail-movie-poster {
+    padding: 4px;
+    border: 1px solid rgba(255,255,255,.96);
+    border-radius: 10px;
+    background: rgba(255,255,255,.72);
+    box-shadow: 0 6px 15px rgba(48,38,22,.12), inset 0 1px rgba(255,255,255,.98);
+  }
+  .review-detail-movie-poster img { border-radius: 6px; }
   .review-detail-content {
     position: relative;
     min-height: 200px;
@@ -787,7 +794,35 @@ const PaperGlassDesignStyles = createGlobalStyle`
   }
 
   /* Archive lists: poster mats, note rows, and aligned action bars. */
-  .all-reviews-table-wrap { overflow-x: auto; border: 1px solid rgba(219,202,165,.5); border-radius: 13px; }
+  .all-reviews-search {
+    display: grid;
+    align-items: end;
+    gap: 10px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,.94);
+    border-radius: 15px;
+    background:
+      linear-gradient(90deg, transparent 0 24px, rgba(201,117,104,.1) 24px 25px, transparent 25px),
+      repeating-linear-gradient(0deg, transparent 0 28px, rgba(117,145,177,.065) 29px, transparent 30px),
+      rgba(255,252,242,.76);
+    box-shadow: inset 0 1px rgba(255,255,255,.96), 0 5px 15px rgba(65,52,30,.045);
+    backdrop-filter: blur(14px);
+  }
+  .all-reviews-search-label { color: #76623B; font-size: 11px; font-weight: 850; }
+  .all-reviews-search-select, .all-reviews-search-input {
+    min-height: 42px;
+    border: 1px solid rgba(195,179,146,.68);
+    border-radius: 9px;
+    background: rgba(255,255,255,.78);
+    box-shadow: inset 0 1px 2px rgba(72,58,32,.025);
+    color: var(--momo-text);
+  }
+  .all-reviews-search-select:focus, .all-reviews-search-input:focus {
+    outline: none;
+    border-color: rgba(188,146,49,.86);
+    box-shadow: 0 0 0 3px rgba(255,212,82,.16);
+  }
+  .all-reviews-table-wrap { overflow-x: auto; border: 1px solid rgba(219,202,165,.5); border-radius: 13px; background: rgba(255,254,249,.58); }
   .all-reviews-table { border-collapse: separate; border-spacing: 0; }
   .all-reviews-table thead th {
     background: rgba(249,243,225,.94);
