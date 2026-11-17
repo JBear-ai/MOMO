@@ -197,7 +197,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 }
 
 .review-detail-error {
-  color: #C0392B;
+  color: var(--momo-danger);
 }
 
 /* 모바일 */
