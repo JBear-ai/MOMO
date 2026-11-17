@@ -8,6 +8,11 @@ export const HomePage = styled.div`
   width: 100%;
   padding-bottom: 48px;
   color: var(--momo-text);
+  animation: momo-home-enter .52s cubic-bezier(.2,.72,.2,1) both;
+  @keyframes momo-home-enter {
+    from { opacity: 0; transform: translate3d(0, 12px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
   > section, > div { min-width: 0; }
   .home-favorites-empty {
     border: 1px dashed rgba(177,157,111,.48);
