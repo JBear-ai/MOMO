@@ -111,14 +111,14 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   });
   expect(profileEditHero.background).toContain("linear-gradient");
   expect(profileEditHero.title).toBe("rgb(46, 71, 54)");
-  expect(profileEditHero.border).toBe("rgb(185, 205, 190)");
+  expect(profileEditHero.border).toBe("rgb(170, 200, 176)");
 
   const profilePortraitStage = await page.locator(".profile-image-edit").evaluate((element) => {
     const style = getComputedStyle(element);
     return { background: style.backgroundImage, border: style.borderColor };
   });
   expect(profilePortraitStage.background).toContain("linear-gradient");
-  expect(profilePortraitStage.border).toBe("rgb(185, 208, 190)");
+  expect(profilePortraitStage.border).toBe("rgb(170, 199, 175)");
 
   const saveButton = await page.locator(".profile-edit-submit").evaluate((element) => {
     const style = getComputedStyle(element);
