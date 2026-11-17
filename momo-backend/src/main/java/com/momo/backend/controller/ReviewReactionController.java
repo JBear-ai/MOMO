@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import com.momo.backend.security.MemberPrincipal;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ public class ReviewReactionController {
             Authentication authentication) {
 
         reactionService.saveReactions(
-                authentication.getName(),
+                MemberPrincipal.requireUserId(authentication),
                 reviewId,
                 liked
         );
@@ -43,7 +44,7 @@ public class ReviewReactionController {
             Authentication authentication) {
 
         reactionService.deleteReaction(
-                authentication.getName(),
+                MemberPrincipal.requireUserId(authentication),
                 reviewId
         );
 
@@ -57,7 +58,7 @@ public class ReviewReactionController {
             Authentication authentication) {
 
         return ResponseEntity.ok(
-                reactionService.getMyReaction(authentication.getName(), reviewId)
+                reactionService.getMyReaction(MemberPrincipal.requireUserId(authentication), reviewId)
         );
     }
 
@@ -87,7 +88,7 @@ public class ReviewReactionController {
 
         return ResponseEntity.ok(
                 reactionService.getMyLikedReviews(
-                        authentication.getName(),
+                        MemberPrincipal.requireUserId(authentication),
                         page
                 )
         );

@@ -16,6 +16,7 @@ public class KobisApiClient {
     private final ApiCallMetrics metrics;
     private final com.momo.backend.service.ApiCallBudgetService apiCallBudgetService;
 
+    @org.springframework.beans.factory.annotation.Autowired
     public KobisApiClient(
             @Value("${kobis.api.base-url}") String baseUrl,
             @Value("${kobis.api.key}") String apiKey,
@@ -24,17 +25,23 @@ public class KobisApiClient {
             ApiCallMetrics metrics,
             com.momo.backend.service.ApiCallBudgetService apiCallBudgetService) {
 
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(connectTimeout);
-        requestFactory.setReadTimeout(readTimeout);
+        this(configuredBuilder(baseUrl, connectTimeout, readTimeout), apiKey, metrics, apiCallBudgetService);
+    }
 
-        this.restClient = RestClient.builder()
-                .baseUrl(baseUrl)
-                .requestFactory(requestFactory)
-                .build();
+    // 네트워크 호출 없이 HTTP 전송을 모의 검증하도록 패키지 범위에서 builder를 주입받는다.
+    KobisApiClient(RestClient.Builder builder, String apiKey, ApiCallMetrics metrics,
+            com.momo.backend.service.ApiCallBudgetService apiCallBudgetService) {
+        this.restClient = builder.requestInterceptor(com.momo.backend.observability.ApiCallTrace.interceptor()).build();
         this.apiKey = apiKey;
         this.metrics = metrics;
         this.apiCallBudgetService = apiCallBudgetService;
+    }
+
+    private static RestClient.Builder configuredBuilder(String baseUrl, Duration connectTimeout, Duration readTimeout) {
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(connectTimeout);
+        requestFactory.setReadTimeout(readTimeout);
+        return RestClient.builder().baseUrl(baseUrl).requestFactory(requestFactory);
     }
 
     public String searchMovies(String keyword) {
@@ -106,9 +113,15 @@ public class KobisApiClient {
     }
 
     public String getDailyBoxOffice(String targetDate) {
+        return getDailyBoxOffice(targetDate,
+                com.momo.backend.service.ApiCallBudgetService.TrafficType.USER_SEARCH);
+    }
+
+    // 이력 사전 수집은 PREFETCH 예산을 사용해 사용자 검색에 예약된 호출량을 보호한다.
+    public String getDailyBoxOffice(String targetDate,
+            com.momo.backend.service.ApiCallBudgetService.TrafficType trafficType) {
         return metrics.record("KOBIS", "getDailyBoxOffice", () -> ExternalApiRetry.execute(() -> {
-            apiCallBudgetService.acquire(
-                    "KOBIS", com.momo.backend.service.ApiCallBudgetService.TrafficType.USER_SEARCH);
+            apiCallBudgetService.acquire("KOBIS", trafficType);
             return restClient.get()
                     .uri(uriBuilder -> uriBuilder.path("/boxoffice/searchDailyBoxOfficeList.json")
                             .queryParam("key", apiKey)
@@ -134,8 +147,4 @@ public class KobisApiClient {
         }));
     }
 
-    public String searchMoviesByGenre(int page) {
-        return searchCatalogMovies(page, 100, null, null,
-                com.momo.backend.service.ApiCallBudgetService.TrafficType.USER_SEARCH);
-    }
 }

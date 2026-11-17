@@ -14,13 +14,19 @@ import java.util.List;
 
 public interface MovieRepository extends JpaRepository<Movie, String> {
 
+    @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @Query("select m from Movie m where m.movieCode = :code")
+    java.util.Optional<Movie> findForPosterWrite(@Param("code") String code);
+
+    boolean existsByPosterUrl(String posterUrl);
+
     // 무결성 스케줄러가 검사한 파일 경로와 현재 DB 경로가 같을 때만 제거한다.
     // 검사와 복구 사이에 새 포스터가 저장된 경우 최신 경로를 덮어쓰지 않는다.
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
     @Query("""
             update Movie movie
-               set movie.posterUrl = null
+               set movie.posterUrl = null, movie.rowVersion = movie.rowVersion + 1
              where movie.movieCode = :movieCode
                and movie.posterUrl = :expectedPosterUrl
             """)
@@ -40,6 +46,21 @@ public interface MovieRepository extends JpaRepository<Movie, String> {
             String afterMovieCode
     );
 
+
+    // 후보를 먼저 좁힌 뒤 쉼표로 구분된 장르를 완전 일치로 비교한다.
+    // 저장된 장르명 내부 공백은 유지하고 앞뒤 공백만 제거한다.
+    @Query("""
+            select distinct movie.genre from Movie movie
+             where locate(lower(:genre), lower(movie.genre)) > 0
+            """)
+    List<String> findGenreValuesContaining(@Param("genre") String genre);
+
+    default boolean existsByGenreToken(String genre) {
+        return findGenreValuesContaining(genre).stream()
+                .flatMap(value -> java.util.Arrays.stream(value.split(",")))
+                .map(String::trim)
+                .anyMatch(genre::equalsIgnoreCase);
+    }
 
     Page<Movie> findByGenreContainingIgnoreCaseOrderByReleaseDateDescMovieCodeAsc(String genre, Pageable pageable);
 

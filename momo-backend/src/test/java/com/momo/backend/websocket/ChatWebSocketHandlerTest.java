@@ -33,6 +33,61 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ChatWebSocketHandlerTest {
 
+    @org.junit.jupiter.params.ParameterizedTest
+    @org.junit.jupiter.params.provider.ValueSource(strings = {"SEND", "IMAGE", "HISTORY", "SYNC", "DELETE"})
+    void deletedMemberCannotExecuteCommandsOnAnExistingConnection(String type) throws Exception {
+        var tokens = mock(TokenProvider.class);
+        var users = mock(UserRepository.class);
+        var messages = mock(ChatMessageService.class);
+        var handler = new ChatWebSocketHandler(new ObjectMapper(), tokens, users, messages, scheduler());
+        var socket = session();
+        var member = mock(User.class);
+        when(member.getUserId()).thenReturn(401L);
+        when(tokens.validateToken("member-token")).thenReturn(true);
+        when(tokens.getUserId("member-token")).thenReturn(401L);
+        when(tokens.getExpiration("member-token")).thenReturn(Instant.now().plusSeconds(60));
+        when(users.findById(401L)).thenReturn(java.util.Optional.of(member));
+        when(messages.getHistory(null, null)).thenReturn(new ChatHistoryPage(List.of(), false, null));
+        handler.handleTextMessage(socket, authFrame("member-token"));
+        org.mockito.Mockito.clearInvocations(messages, socket);
+        when(users.findById(401L)).thenReturn(java.util.Optional.empty());
+        handler.handleTextMessage(socket, new TextMessage("""
+                {"type":"%s","content":"blocked","imageId":"test-image","messageId":1}
+                """.formatted(type)));
+        org.mockito.Mockito.verifyNoInteractions(messages);
+        verify(socket).close(CloseStatus.POLICY_VIOLATION);
+        var frames = ArgumentCaptor.forClass(TextMessage.class);
+        verify(socket).sendMessage(frames.capture());
+        assertTrue(frames.getValue().getPayload().contains("MEMBER_NOT_FOUND"));
+    }
+
+    @Test
+    void signedTokenForANonexistentMemberCannotJoinThePublicRoom() throws Exception {
+        var tokens = mock(TokenProvider.class);
+        var users = mock(UserRepository.class);
+        var messages = mock(ChatMessageService.class);
+        var handler = new ChatWebSocketHandler(new ObjectMapper(), tokens, users, messages, scheduler());
+        var socket = session();
+        when(tokens.validateToken("old-token")).thenReturn(true);
+        when(tokens.getUserId("old-token")).thenReturn(401L);
+        when(users.findById(401L)).thenReturn(java.util.Optional.empty());
+        handler.handleTextMessage(socket, authFrame("old-token"));
+        org.mockito.Mockito.verifyNoInteractions(messages);
+        verify(socket).close(CloseStatus.POLICY_VIOLATION);
+    }
+
+    @Test
+    void unauthenticatedImageCommandCannotReachTheMessageService() throws Exception {
+        var tokens = mock(TokenProvider.class);
+        var users = mock(UserRepository.class);
+        var messages = mock(ChatMessageService.class);
+        var handler = new ChatWebSocketHandler(new ObjectMapper(), tokens, users, messages, scheduler());
+        var socket = session();
+        handler.handleTextMessage(socket, new TextMessage("{\"type\":\"IMAGE\",\"imageId\":\"test-image\"}"));
+        org.mockito.Mockito.verifyNoInteractions(tokens, users, messages);
+        verify(socket).close(CloseStatus.POLICY_VIOLATION);
+    }
+
     @Test
     void authenticatedImageCommandIsBroadcastToOtherAuthenticatedMembers() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -48,11 +103,11 @@ class ChatWebSocketHandlerTest {
         String imageId = "9c9bb1a8-f922-4ea1-8c41-2f2d987eadd1";
 
         when(tokenProvider.validateToken(any())).thenReturn(true);
-        when(tokenProvider.getLoginId("valid-access-token")).thenReturn("member1");
-        when(tokenProvider.getLoginId("recipient-token")).thenReturn("member2");
+        when(tokenProvider.getUserId("valid-access-token")).thenReturn(1L);
+        when(tokenProvider.getUserId("recipient-token")).thenReturn(2L);
         when(tokenProvider.getExpiration(any())).thenReturn(Instant.now().plusSeconds(60));
-        when(userRepository.findByLoginId("member1")).thenReturn(java.util.Optional.of(user));
-        when(userRepository.findByLoginId("member2")).thenReturn(java.util.Optional.of(recipientUser));
+        when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
+        when(userRepository.findById(2L)).thenReturn(java.util.Optional.of(recipientUser));
         when(user.getUserId()).thenReturn(1L);
         when(recipientUser.getUserId()).thenReturn(2L);
         when(user.getNickname()).thenReturn("회원1");
@@ -92,7 +147,7 @@ class ChatWebSocketHandlerTest {
         handler.handleTextMessage(session, new TextMessage(
                 "{\"type\":\"AUTH\",\"accessToken\":\"invalid-token\"}"));
 
-        verify(userRepository, never()).findByLoginId(any());
+        verify(userRepository, never()).findById(any());
         verify(messageService, never()).getHistory(any(), any());
         verify(session).close(any());
         verify(session).sendMessage(any(TextMessage.class));
@@ -111,9 +166,9 @@ class ChatWebSocketHandlerTest {
         User user = mock(User.class);
 
         when(tokenProvider.validateToken("valid-access-token")).thenReturn(true);
-        when(tokenProvider.getLoginId("valid-access-token")).thenReturn("member1");
+        when(tokenProvider.getUserId("valid-access-token")).thenReturn(1L);
         when(tokenProvider.getExpiration("valid-access-token")).thenReturn(Instant.now().plusSeconds(60));
-        when(userRepository.findByLoginId("member1")).thenReturn(java.util.Optional.of(user));
+        when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
         when(user.getUserId()).thenReturn(1L);
         when(messageService.getHistory(null, null)).thenReturn(new ChatHistoryPage(List.of(), false, null));
 
@@ -139,12 +194,12 @@ class ChatWebSocketHandlerTest {
         User observer = mock(User.class);
 
         when(tokenProvider.validateToken(any())).thenReturn(true);
-        when(tokenProvider.getLoginId("member-tab-1")).thenReturn("member1");
-        when(tokenProvider.getLoginId("member-tab-2")).thenReturn("member1");
-        when(tokenProvider.getLoginId("observer-token")).thenReturn("member2");
+        when(tokenProvider.getUserId("member-tab-1")).thenReturn(1L);
+        when(tokenProvider.getUserId("member-tab-2")).thenReturn(1L);
+        when(tokenProvider.getUserId("observer-token")).thenReturn(2L);
         when(tokenProvider.getExpiration(any())).thenReturn(Instant.now().plusSeconds(60));
-        when(userRepository.findByLoginId("member1")).thenReturn(java.util.Optional.of(member));
-        when(userRepository.findByLoginId("member2")).thenReturn(java.util.Optional.of(observer));
+        when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(member));
+        when(userRepository.findById(2L)).thenReturn(java.util.Optional.of(observer));
         when(member.getUserId()).thenReturn(1L);
         when(observer.getUserId()).thenReturn(2L);
         when(messageService.getHistory(null, null)).thenReturn(new ChatHistoryPage(List.of(), false, null));
@@ -185,9 +240,9 @@ class ChatWebSocketHandlerTest {
         User user = mock(User.class);
 
         when(tokenProvider.validateToken("valid-access-token")).thenReturn(true, true, true, false);
-        when(tokenProvider.getLoginId("valid-access-token")).thenReturn("member1");
+        when(tokenProvider.getUserId("valid-access-token")).thenReturn(1L);
         when(tokenProvider.getExpiration("valid-access-token")).thenReturn(Instant.now().plusSeconds(60));
-        when(userRepository.findByLoginId("member1")).thenReturn(java.util.Optional.of(user));
+        when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
         when(user.getUserId()).thenReturn(1L);
         when(messageService.getHistory(null, null)).thenReturn(new ChatHistoryPage(List.of(), false, null));
 
@@ -234,9 +289,9 @@ class ChatWebSocketHandlerTest {
         ArgumentCaptor<Runnable> expiry = ArgumentCaptor.forClass(Runnable.class);
 
         when(tokenProvider.validateToken("valid-access-token")).thenReturn(true);
-        when(tokenProvider.getLoginId("valid-access-token")).thenReturn("member1");
+        when(tokenProvider.getUserId("valid-access-token")).thenReturn(1L);
         when(tokenProvider.getExpiration("valid-access-token")).thenReturn(Instant.now().plusSeconds(60));
-        when(userRepository.findByLoginId("member1")).thenReturn(java.util.Optional.of(user));
+        when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
         when(user.getUserId()).thenReturn(1L);
         when(messageService.getHistory(null, null)).thenReturn(new ChatHistoryPage(List.of(), false, null));
 
@@ -247,6 +302,22 @@ class ChatWebSocketHandlerTest {
         expiry.getValue().run();
 
         verify(session).close(any());
+    }
+
+    @Test
+    void deletedMemberCannotAuthenticateEvenIfItsLoginIdWasReused() throws Exception {
+        TokenProvider tokens = mock(TokenProvider.class);
+        UserRepository users = mock(UserRepository.class);
+        ChatMessageService messages = mock(ChatMessageService.class);
+        ChatWebSocketHandler handler = new ChatWebSocketHandler(new ObjectMapper(), tokens, users, messages, scheduler());
+        WebSocketSession socket = session();
+        when(tokens.validateToken("old-member-access")).thenReturn(true);
+        when(tokens.getUserId("old-member-access")).thenReturn(10L);
+        when(users.findById(10L)).thenReturn(java.util.Optional.empty());
+        handler.handleTextMessage(socket, authFrame("old-member-access"));
+        verify(socket).close(any());
+        org.mockito.Mockito.verifyNoInteractions(messages);
+        verify(users, never()).findByLoginId(any());
     }
 
     private ScheduledExecutorService scheduler() {
@@ -266,5 +337,30 @@ class ChatWebSocketHandlerTest {
 
     private TextMessage authFrame(String token) {
         return new TextMessage("{\"type\":\"AUTH\",\"accessToken\":\"" + token + "\"}");
+    }
+
+    @Test
+    void deletedRecipientCannotReceiveNewMessages() throws Exception {
+        var tokens = mock(TokenProvider.class);
+        var users = mock(UserRepository.class);
+        var messages = mock(ChatMessageService.class);
+        var handler = new ChatWebSocketHandler(new ObjectMapper(), tokens, users, messages, scheduler());
+        var sender = session(); var recipient = session();
+        User one = mock(User.class); User two = mock(User.class);
+        when(one.getUserId()).thenReturn(1L); when(two.getUserId()).thenReturn(2L);
+        when(tokens.validateToken(any())).thenReturn(true);
+        when(tokens.getUserId("one")).thenReturn(1L); when(tokens.getUserId("two")).thenReturn(2L);
+        when(tokens.getExpiration(any())).thenReturn(Instant.now().plusSeconds(60));
+        when(users.findById(1L)).thenReturn(java.util.Optional.of(one));
+        when(users.findById(2L)).thenReturn(java.util.Optional.of(two));
+        when(messages.getHistory(null, null)).thenReturn(new ChatHistoryPage(List.of(), false, null));
+        handler.handleTextMessage(sender, authFrame("one"));
+        handler.handleTextMessage(recipient, authFrame("two"));
+        org.mockito.Mockito.clearInvocations(recipient);
+        when(users.findById(2L)).thenReturn(java.util.Optional.empty());
+        when(messages.send(one, "hello")).thenReturn(new ChatMessageResponse(1, 1, "one", false, "hello", Instant.now().toString()));
+        handler.handleTextMessage(sender, new TextMessage("{\"type\":\"SEND\",\"content\":\"hello\"}"));
+        verify(recipient, never()).sendMessage(any());
+        verify(recipient, org.mockito.Mockito.atLeastOnce()).close(any());
     }
 }

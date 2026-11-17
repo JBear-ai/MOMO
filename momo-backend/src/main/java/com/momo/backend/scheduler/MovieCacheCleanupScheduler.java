@@ -21,13 +21,16 @@ public class MovieCacheCleanupScheduler {
 
     @Scheduled(cron = "0 0 4 * * *", zone = "Asia/Seoul")
     public void deleteExpiredCaches() {
-        LocalDateTime retentionCutoff = LocalDateTime.now()
-                .minusDays(STALE_CACHE_RETENTION_DAYS);
-        int deleted = movieCacheRepository.deleteExpired(retentionCutoff);
+        try (var trace = com.momo.backend.observability.ApiCallTrace.open(
+                com.momo.backend.observability.ApiCallTrace.Source.SCHEDULER)) {
+            LocalDateTime retentionCutoff = LocalDateTime.now()
+                    .minusDays(STALE_CACHE_RETENTION_DAYS);
+            int deleted = movieCacheRepository.deleteExpired(retentionCutoff);
 
-        if (deleted > 0) {
-            log.info("만료 후 {}일이 지난 영화 API 캐시 {}건 삭제",
-                    STALE_CACHE_RETENTION_DAYS, deleted);
+            if (deleted > 0) {
+                log.info("만료 후 {}일이 지난 영화 API 캐시 {}건 삭제",
+                        STALE_CACHE_RETENTION_DAYS, deleted);
+            }
         }
     }
 }

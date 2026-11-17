@@ -45,9 +45,9 @@ public class RefreshTokenService {
             throw unauthorized("유효하지 않은 Refresh Token입니다.");
         }
 
-        String loginId = tokenProvider.getLoginId(requestToken);
+        Long userId = tokenProvider.getUserId(requestToken);
         // 회원 탈퇴·로그아웃과 동일하게 회원 행을 먼저 잠근 뒤 Refresh Token을 잠근다.
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> unauthorized("Refresh Token의 회원 정보를 찾을 수 없습니다."));
 
         RefreshToken storedToken = refreshTokenRepository.findByUserIdForUpdate(user.getUserId())
@@ -58,17 +58,17 @@ public class RefreshTokenService {
             throw unauthorized("Refresh Token이 일치하지 않습니다.");
         }
 
-        String newAccessToken = tokenProvider.createToken(loginId);
-        String newRefreshToken = tokenProvider.createRefreshToken(loginId);
+        String newAccessToken = tokenProvider.createToken(userId);
+        String newRefreshToken = tokenProvider.createRefreshToken(userId);
         // 신규 토큰은 원문 대신 SHA-256 해시만 DB에 저장한다.
         storedToken.rotate(hashToken(newRefreshToken));
 
         return new TokenRefreshResponse(newAccessToken, newRefreshToken);
     }
 
-    public void deleteByLoginId(String loginId) {
+    public void deleteByUserIdWithLock(Long userId) {
         // 토큰 재발급과 로그아웃이 동시에 실행될 때 회원 → Refresh Token 순서로 직렬화한다.
-        userRepository.findByLoginIdForUpdate(loginId)
+        userRepository.findByUserIdForUpdate(userId)
                 .ifPresent(user -> refreshTokenRepository.deleteByUser_UserId(user.getUserId()));
     }
 

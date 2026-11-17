@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AxiosApi, { storeLoginTokens } from "../api/AxiosApi";
@@ -57,7 +58,7 @@ function Login() {
 
       navigate("/", { replace: true });
     } catch (error) {
-      console.error("로그인 에러:", error);
+      console.error("로그인 에러:", safeRequestFailure(error));
 
       const message =
         error.response?.data?.message ||

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import com.momo.backend.security.MemberPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -20,14 +21,10 @@ public class MovieRatingController {
         @GetMapping("/my/liked")
         public ResponseEntity<java.util.List<Map<String, Object>>> getMyLikedMovies(
                         Authentication authentication) {
-                String loginId = authentication != null
-                                && authentication.isAuthenticated()
-                                && !"anonymousUser".equals(authentication.getName())
-                                ? authentication.getName()
-                                : null;
+                Long userId = MemberPrincipal.optionalUserId(authentication);
 
                 return ResponseEntity.ok(
-                                movieRatingService.getMyLikedMovies(loginId));
+                                movieRatingService.getMyLikedMovies(userId));
         }
 
         @GetMapping("/{movieCode:[A-Za-z0-9][A-Za-z0-9][A-Za-z0-9][A-Za-z0-9][A-Za-z0-9][A-Za-z0-9][A-Za-z0-9][A-Za-z0-9]}/rating")
@@ -35,13 +32,11 @@ public class MovieRatingController {
                         @PathVariable String movieCode,
                         Authentication authentication) {
 
-                String loginId = authentication != null
-                                ? authentication.getName()
-                                : null;
+                Long userId = MemberPrincipal.optionalUserId(authentication);
 
                 Map<String, Object> result = movieRatingService.getMovieRating(
                                 movieCode,
-                                loginId);
+                                userId);
 
                 return ResponseEntity.ok(result);
         }
@@ -53,7 +48,7 @@ public class MovieRatingController {
                         Authentication authentication) {
 
                 movieRatingService.saveRating(
-                                authentication.getName(),
+                                MemberPrincipal.requireUserId(authentication),
                                 movieCode,
                                 liked);
 
@@ -66,7 +61,7 @@ public class MovieRatingController {
                         Authentication authentication) {
 
                 movieRatingService.deleteRating(
-                                authentication.getName(),
+                                MemberPrincipal.requireUserId(authentication),
                                 movieCode);
 
                 return ResponseEntity.noContent().build();

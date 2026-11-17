@@ -19,6 +19,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     // JWT 생성 및 검증을 담당하는 클래스
     private final TokenProvider tokenProvider;
+    private final com.momo.backend.repository.UserRepository userRepository;
 
     // 1. HTTP 요청이 들어오면 JWT 인증 처리
     @Override
@@ -38,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
             String token = header.substring(7);
 
             // 4. JWT 서명, 만료 여부와 Access Token 유형 검증
-            if (tokenProvider.validateToken(token)) {
+            if (tokenProvider.validateToken(token) && userRepository.existsById(tokenProvider.getUserId(token))) {
 
                 // 5. 검증된 JWT로 로그인 사용자 인증 정보 설정
                 SecurityContextHolder.getContext()

@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
@@ -292,7 +293,7 @@ function Search() {
           !controller.signal.aborted &&
           generation === generationRef.current
         ) {
-          console.error("영화 검색 실패:", err);
+          console.error("영화 검색 실패:", safeRequestFailure(err));
           setError("영화 목록을 불러오는 중 오류가 발생했습니다.");
         }
       } finally {
@@ -480,7 +481,7 @@ function Search() {
           err.name !== "CanceledError" &&
           !cancelled
         ) {
-          console.error("포스터 상태 조회 실패:", err);
+          console.error("포스터 상태 조회 실패:", safeRequestFailure(err));
 
           // 일시적인 상태 조회 오류도 최대 재시도 횟수 안에서만 확인한다.
           scheduleNextPoll();

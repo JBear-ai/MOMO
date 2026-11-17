@@ -26,7 +26,7 @@ class MovieRatingServiceTest {
         Movie movie = mock(Movie.class);
 
         when(user.getUserId()).thenReturn(7L);
-        when(userRepository.findByLoginIdForUpdate("member"))
+        when(userRepository.findByUserIdForUpdate(7L))
                 .thenReturn(Optional.of(user));
         when(movieRepository.findById("20261234"))
                 .thenReturn(Optional.of(movie));
@@ -36,10 +36,10 @@ class MovieRatingServiceTest {
         MovieRatingService service = new MovieRatingService(
                 ratingRepository, movieRepository, userRepository, mock(MovieService.class));
 
-        service.saveRating("member", "20261234", true);
+        service.saveRating(7L, "20261234", true);
 
-        verify(userRepository).findByLoginIdForUpdate("member");
-        verify(userRepository, never()).findByLoginId("member");
+        verify(userRepository).findByUserIdForUpdate(7L);
+        verify(userRepository, never()).findById(7L);
         verify(ratingRepository).save(any(MovieRating.class));
     }
 
@@ -53,7 +53,7 @@ class MovieRatingServiceTest {
         MovieRating existing = mock(MovieRating.class);
 
         when(user.getUserId()).thenReturn(7L);
-        when(userRepository.findByLoginIdForUpdate("member"))
+        when(userRepository.findByUserIdForUpdate(7L))
                 .thenReturn(Optional.of(user));
         when(movieRepository.findById("20261234"))
                 .thenReturn(Optional.of(movie));
@@ -63,9 +63,9 @@ class MovieRatingServiceTest {
         MovieRatingService service = new MovieRatingService(
                 ratingRepository, movieRepository, userRepository, mock(MovieService.class));
 
-        service.saveRating("member", "20261234", false);
+        service.saveRating(7L, "20261234", false);
 
-        verify(userRepository).findByLoginIdForUpdate("member");
+        verify(userRepository).findByUserIdForUpdate(7L);
         verify(existing).updateRating(false);
         verify(ratingRepository, never()).save(any(MovieRating.class));
     }
@@ -80,7 +80,7 @@ class MovieRatingServiceTest {
         when(movieRepository.existsById("20261234")).thenReturn(true);
         when(ratingRepository.countByMovie_MovieCodeAndLiked("20261234", true)).thenReturn(8L);
         when(ratingRepository.countByMovie_MovieCodeAndLiked("20261234", false)).thenReturn(2L);
-        when(userRepository.findByLoginId("member")).thenReturn(Optional.of(user));
+        when(userRepository.findById(7L)).thenReturn(Optional.of(user));
         when(user.getUserId()).thenReturn(7L);
         when(ratingRepository.findByUser_UserIdAndMovie_MovieCode(7L, "20261234"))
                 .thenReturn(Optional.of(rating));
@@ -89,7 +89,7 @@ class MovieRatingServiceTest {
         MovieRatingService service = new MovieRatingService(
                 ratingRepository, movieRepository, userRepository, mock(MovieService.class));
 
-        Map<String, Object> result = service.getMovieRating("20261234", "member");
+        Map<String, Object> result = service.getMovieRating("20261234", 7L);
 
         assertEquals(8L, result.get("likeCount"));
         assertEquals(2L, result.get("dislikeCount"));

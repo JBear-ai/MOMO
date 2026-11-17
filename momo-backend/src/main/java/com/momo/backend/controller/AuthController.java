@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.security.core.Authentication;
+import com.momo.backend.security.MemberPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.http.MediaType;
@@ -70,8 +71,8 @@ public class AuthController {
                                 dto.getLoginId(),
                                 dto.getPassword());
 
-                String accessToken = tokenProvider.createToken(user.getLoginId());
-                String refreshToken = tokenProvider.createRefreshToken(user.getLoginId());
+                String accessToken = tokenProvider.createToken(user.getUserId());
+                String refreshToken = tokenProvider.createRefreshToken(user.getUserId());
 
                 refreshTokenService.saveOrReplace(user, refreshToken);
 
@@ -94,7 +95,7 @@ public class AuthController {
                         Authentication authentication) {
 
                 User user = authService.getLoginUser(
-                                authentication.getName());
+                                MemberPrincipal.requireUserId(authentication));
 
                 return ResponseEntity.ok(new UserResponse(user));
         }
@@ -107,7 +108,7 @@ public class AuthController {
                         Authentication authentication) {
 
                 UserResponse response = authService.updateMyInfo(
-                                authentication.getName(),
+                                MemberPrincipal.requireUserId(authentication),
                                 dto);
 
                 return ResponseEntity.ok(response);
@@ -122,7 +123,7 @@ public class AuthController {
 
                 // 회원 탈퇴 처리
                 authService.deleteMyAccount(
-                                authentication.getName(),
+                                MemberPrincipal.requireUserId(authentication),
                                 dto.password());
 
                 // 인증 정보 제거
@@ -136,8 +137,8 @@ public class AuthController {
         public ResponseEntity<Void> logout(
                         Authentication authentication) {
 
-                refreshTokenService.deleteByLoginId(
-                                authentication.getName());
+                refreshTokenService.deleteByUserIdWithLock(
+                                MemberPrincipal.requireUserId(authentication));
 
                 SecurityContextHolder.clearContext();
 
@@ -151,7 +152,7 @@ public class AuthController {
                         Authentication authentication) {
 
                 long count = authService.getMyLikeCount(
-                                authentication.getName());
+                                MemberPrincipal.requireUserId(authentication));
 
                 return ResponseEntity.ok(count);
         }
@@ -175,7 +176,7 @@ public class AuthController {
                         Authentication authentication) {
 
                 boolean result = authService.checkCurrentPassword(
-                                authentication.getName(),
+                                MemberPrincipal.requireUserId(authentication),
                                 dto.currentPassword());
 
                 return ResponseEntity.ok(result);
@@ -189,7 +190,7 @@ public class AuthController {
 
                 // 로그인한 회원의 프로필 이미지를 Firebase Storage에 업로드
                 UserResponse response = authService.updateProfileImage(
-                                authentication.getName(),
+                                MemberPrincipal.requireUserId(authentication),
                                 file);
 
                 return ResponseEntity.ok(response);
@@ -202,7 +203,7 @@ public class AuthController {
 
                 // 로그인한 회원의 프로필 이미지 정보를 제거
                 UserResponse response = authService.removeProfileImage(
-                                authentication.getName());
+                                MemberPrincipal.requireUserId(authentication));
 
                 return ResponseEntity.ok(response);
         }
@@ -212,15 +213,15 @@ public class AuthController {
         public ResponseEntity<byte[]> getProfileImage(
                         Authentication authentication) {
 
-                String loginId = authentication.getName();
+                Long userId = MemberPrincipal.requireUserId(authentication);
 
-                byte[] image = authService.getProfileImage(loginId);
+                byte[] image = authService.getProfileImage(userId);
 
                 if (image == null || image.length == 0) {
                         return ResponseEntity.notFound().build();
                 }
 
-                String contentType = authService.getProfileImageContentType(loginId);
+                String contentType = authService.getProfileImageContentType(userId);
 
                 if (contentType == null) {
                         return ResponseEntity.notFound().build();

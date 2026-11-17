@@ -26,6 +26,10 @@ public class Movie {
     @Column(length = 20)
     private String movieCode;
 
+    @Version
+    @Column(name = "row_version", nullable = false, columnDefinition = "bigint not null default 0")
+    private Long rowVersion;
+
     // 영화 기본정보
     private String title;
     private String titleEn;
@@ -115,7 +119,7 @@ public class Movie {
     }
 
     public void markOverviewAttempted(LocalDateTime attemptedAt) {
-        this.overviewAttemptedAt = attemptedAt;
+        this.overviewAttemptedAt = later(this.overviewAttemptedAt, attemptedAt);
     }
 
     public void updateOverview(String overview) {
@@ -130,7 +134,7 @@ public class Movie {
     }
 
     public void markPosterMigrationAttempted(LocalDateTime attemptedAt) {
-        this.posterMigrationAttemptedAt = attemptedAt;
+        this.posterMigrationAttemptedAt = later(this.posterMigrationAttemptedAt, attemptedAt);
     }
 
     // KOBIS에서 가져온 영화 정보로 Movie 객체 생성
@@ -150,6 +154,24 @@ public class Movie {
 
         this.supplementVerified = false;
         this.supplementSources = "KOBIS";
+    }
+
+    /** 외부 정보 보완 시 호출자 트랜잭션이 관리하는 Movie 원본을 변경하지 않도록 복사한다. */
+    public Movie enrichmentCopy() {
+        Movie copy = new Movie(movieCode, title, titleEn, releaseDate, showTime, genre, director, actors, watchGrade);
+        copy.overview = overview;
+        copy.overviewAttemptedAt = overviewAttemptedAt;
+        copy.supplementVerified = supplementVerified;
+        copy.supplementSources = supplementSources;
+        copy.supplementAttemptedAt = supplementAttemptedAt;
+        copy.kobisDetailAttemptedAt = kobisDetailAttemptedAt;
+        return copy;
+    }
+
+    public void initializeSupplementState(boolean verified, String sources) {
+        if (rowVersion != null) throw new IllegalStateException("Only a new Movie can initialize supplement state");
+        this.supplementVerified = verified;
+        this.supplementSources = sources;
     }
 
     // KOBIS에서 누락된 항목만 외부 API 정보로 보완
@@ -185,9 +207,12 @@ public class Movie {
             this.supplementSources = "KOBIS";
         }
 
-        if (source != null && !source.isBlank()
-                && !this.supplementSources.contains(source)) {
-            this.supplementSources += "," + source;
+        if (source != null && !source.isBlank()) {
+            var sources = new java.util.LinkedHashSet<String>();
+            for (String value : (this.supplementSources + "," + source).split(",")) {
+                if (!value.isBlank()) sources.add(value.trim());
+            }
+            this.supplementSources = String.join(",", sources);
         }
 
         return true;
@@ -201,7 +226,7 @@ public class Movie {
 
     // KMDb/TMDb 외부 보완 시도 시각
     public void markSupplementAttempted(LocalDateTime attemptedAt) {
-        this.supplementAttemptedAt = attemptedAt;
+        this.supplementAttemptedAt = later(this.supplementAttemptedAt, attemptedAt);
     }
 
     public boolean canAttemptKobisDetail(LocalDateTime now) {
@@ -210,7 +235,11 @@ public class Movie {
     }
 
     public void markKobisDetailAttempted(LocalDateTime attemptedAt) {
-        this.kobisDetailAttemptedAt = attemptedAt;
+        this.kobisDetailAttemptedAt = later(this.kobisDetailAttemptedAt, attemptedAt);
+    }
+
+    private static LocalDateTime later(LocalDateTime current, LocalDateTime candidate) {
+        return candidate != null && (current == null || candidate.isAfter(current)) ? candidate : current;
     }
 
     // 기존 값이 비어 있고 새로운 값이 존재하는지 확인

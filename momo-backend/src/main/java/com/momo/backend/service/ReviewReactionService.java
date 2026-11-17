@@ -28,10 +28,10 @@ public class ReviewReactionService {
     private final UserRepository userRepository;
 
     // 로그인한 사용자의 리뷰 좋아요/싫어요 저장 및 변경
-    public void saveReactions(String loginId, Long reviewId, Boolean liked) {
+    public void saveReactions(Long userId, Long reviewId, Boolean liked) {
 
         // 로그인한 회원 조회
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",
@@ -63,10 +63,10 @@ public class ReviewReactionService {
     }
 
     // 로그인한 사용자의 리뷰 반응 취소
-    public void deleteReaction(String loginId, Long reviewId) {
+    public void deleteReaction(Long userId, Long reviewId) {
 
         // 로그인한 회원 조회
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",
@@ -93,8 +93,8 @@ public class ReviewReactionService {
 
     // 로그인 회원이 특정 리뷰에 남긴 반응 조회 (없으면 null)
     @Transactional(readOnly = true)
-    public Boolean getMyReaction(String loginId, Long reviewId) {
-        User user = userRepository.findByLoginId(loginId)
+    public Boolean getMyReaction(Long userId, Long reviewId) {
+        User user = userRepository.findById(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",
@@ -134,12 +134,12 @@ public class ReviewReactionService {
     // 로그인한 회원이 좋아요한 리뷰 목록 조회
     @Transactional(readOnly = true)
     public Page<ReviewResponse> getMyLikedReviews(
-            String loginId,
+            Long userId,
             int page
     ) {
 
         // 로그인한 회원 조회
-        User user = userRepository.findByLoginId(loginId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",

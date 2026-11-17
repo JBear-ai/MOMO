@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import com.momo.backend.security.MemberPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -46,10 +47,10 @@ public class ChatImageController {
     }
 
     private User currentUser(Authentication authentication) {
-        if (authentication == null || authentication.getName() == null) {
+        if (MemberPrincipal.optionalUserId(authentication) == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인이 필요합니다.");
         }
-        return userRepository.findByLoginId(authentication.getName())
+        return userRepository.findById(MemberPrincipal.requireUserId(authentication))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "회원 정보를 찾을 수 없습니다."));
     }
 }

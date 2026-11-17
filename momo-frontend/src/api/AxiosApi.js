@@ -10,6 +10,28 @@ let authSessionVersion = 0;
 let refreshPromise = null;
 let isHandlingAuthExpired = false;
 
+export const getAuthSessionVersion = () => authSessionVersion;
+export const isAuthSessionCurrent = (version) => version === authSessionVersion;
+
+const sessionChangedError = () => {
+  const error = new Error("인증 상태가 이미 변경되었습니다.");
+  error.code = "MOMO_AUTH_SESSION_CHANGED";
+  return error;
+};
+
+// 사용자 정의·mock adapter를 유지하면서 실제 요청 전송 직전에 세션 변경을 차단한다.
+const guardSessionAdapter = (config) => {
+  if (config._momoSessionGuarded) return;
+  const adapter = config.adapter || axios.defaults?.adapter;
+  config.adapter = (requestConfig) => {
+    if (!isAuthSessionCurrent(requestConfig._momoAuthSessionVersion)) {
+      return Promise.reject(sessionChangedError());
+    }
+    return axios.getAdapter(adapter)(requestConfig);
+  };
+  config._momoSessionGuarded = true;
+};
+
 // 인증이 필요 없는 API
 const isExcludedAuthRequest = (url = "") => {
   const excludedPaths = [
@@ -48,7 +70,8 @@ export const storeLoginTokens = (accessToken, refreshToken) => {
 };
 
 // 로그아웃 및 회원 탈퇴 시 인증 정보 제거
-export const clearAuthSession = () => {
+export const clearAuthSession = (expectedSessionVersion = authSessionVersion) => {
+  if (!isAuthSessionCurrent(expectedSessionVersion)) return false;
   // 진행 중인 재발급 응답이 현재 세션을 덮어쓰지 못하도록 버전을 올린다.
   authSessionVersion += 1;
 
@@ -61,10 +84,12 @@ export const clearAuthSession = () => {
   refreshPromise = null;
 
   window.dispatchEvent(new Event("momo-auth-changed"));
+  return true;
 };
 
 // 인증 만료 처리
-const handleAuthExpired = (error) => {
+const handleAuthExpired = (error, expectedSessionVersion) => {
+  if (!isAuthSessionCurrent(expectedSessionVersion)) return;
   if (isHandlingAuthExpired) {
     if (error) {
       error.momoAuthExpiredHandled = true;
@@ -74,7 +99,7 @@ const handleAuthExpired = (error) => {
 
   isHandlingAuthExpired = true;
 
-  clearAuthSession();
+  clearAuthSession(expectedSessionVersion);
 
   if (error) {
     error.momoAuthExpiredHandled = true;
@@ -105,7 +130,9 @@ const reissueAccessToken = () => {
 
   // finally에서 이전 Promise가 새 세션의 Promise를 지우지 않도록 참조를 비교한다.
   const currentPromise = axios
-    .post(`${HM_DOMAIN}/api/auth/reissue`, { refreshToken })
+    .post(`${HM_DOMAIN}/api/auth/reissue`, { refreshToken }, {
+      _momoAuthSessionVersion: requestedSessionVersion,
+    })
     .then((response) => {
       // 이전 세션에서 시작한 응답은 현재 로그인 토큰을 덮어쓸 수 없다.
       if (authSessionVersion !== requestedSessionVersion) {
@@ -150,12 +177,20 @@ axios.interceptors.request.use(
 
     const isPublicAuthRequest = isExcludedAuthRequest(config.url);
 
+    if (isMomoApi && config._momoAuthSessionVersion !== undefined
+        && !isAuthSessionCurrent(config._momoAuthSessionVersion)) {
+      throw sessionChangedError();
+    }
+
     if (isMomoApi && accessToken && !isPublicAuthRequest) {
       setAuthorization(config, accessToken);
 
-      config._momoAuthSessionVersion = authSessionVersion;
+      if (config._momoAuthSessionVersion === undefined) {
+        config._momoAuthSessionVersion = authSessionVersion;
+      }
     }
 
+    if (isMomoApi && config._momoAuthSessionVersion !== undefined) guardSessionAdapter(config);
     return config;
   },
   (error) => Promise.reject(error),
@@ -166,7 +201,13 @@ axios.interceptors.request.use(
 // ========================================
 
 axios.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    const version = response.config?._momoAuthSessionVersion;
+    if (version !== undefined && !isAuthSessionCurrent(version)) {
+      return Promise.reject(sessionChangedError());
+    }
+    return response;
+  },
 
   async (error) => {
     const status = error.response?.status;
@@ -177,6 +218,11 @@ axios.interceptors.response.use(
     const sentAuthorization =
       originalRequest?.headers?.Authorization ||
       originalRequest?.headers?.get?.("Authorization");
+
+    if (originalRequest?._momoAuthSessionVersion !== undefined
+        && !isAuthSessionCurrent(originalRequest._momoAuthSessionVersion)) {
+      return Promise.reject(sessionChangedError());
+    }
 
     // 재발급 대상이 아닌 요청
     if (
@@ -189,21 +235,11 @@ axios.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    // 이전 로그인 세션의 요청 차단
-    if (
-      originalRequest._momoAuthSessionVersion !== undefined &&
-      originalRequest._momoAuthSessionVersion !== authSessionVersion
-    ) {
-      const sessionError = new Error("인증 상태가 이미 변경되었습니다.");
-
-      sessionError.code = "MOMO_AUTH_SESSION_CHANGED";
-
-      return Promise.reject(sessionError);
-    }
+    const requestedSessionVersion = originalRequest._momoAuthSessionVersion ?? authSessionVersion;
 
     // 이미 재시도한 요청이라면 인증 만료 처리
     if (originalRequest._retry) {
-      handleAuthExpired(error);
+      handleAuthExpired(error, requestedSessionVersion);
 
       return Promise.reject(error);
     }
@@ -222,8 +258,6 @@ axios.interceptors.response.use(
       return axios(originalRequest);
     }
 
-    const requestedSessionVersion = authSessionVersion;
-
     try {
       const newAccessToken = await reissueAccessToken();
 
@@ -241,13 +275,16 @@ axios.interceptors.response.use(
       // 기존 요청 한 번 재시도
       return axios(originalRequest);
     } catch (reissueError) {
+      if (!isAuthSessionCurrent(requestedSessionVersion)) {
+        return Promise.reject(sessionChangedError());
+      }
       // Refresh Token이 실제로 거부된 경우에만 세션을 종료한다.
       // 네트워크 오류나 서버 5xx는 로그인 정보를 보존해 재시도할 수 있게 한다.
       if (
         reissueError?.code === "MOMO_REFRESH_TOKEN_MISSING" ||
         reissueError?.response?.status === 401
       ) {
-        handleAuthExpired(reissueError);
+        handleAuthExpired(reissueError, requestedSessionVersion);
       }
 
       return Promise.reject(reissueError);

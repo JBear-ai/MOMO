@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import com.momo.backend.security.MemberPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Page;
@@ -57,7 +58,7 @@ public class ReviewController {
             Authentication authentication) {
 
         ReviewResponse response = reviewService.createReview(
-                authentication.getName(),
+                MemberPrincipal.requireUserId(authentication),
                 dto
         );
 
@@ -86,7 +87,7 @@ public class ReviewController {
 
         return ResponseEntity.ok(
                 reviewService.getMyReviews(
-                        authentication.getName(),
+                        MemberPrincipal.requireUserId(authentication),
                         page
                 )
         );
@@ -117,7 +118,7 @@ public class ReviewController {
 
         ReviewResponse response = reviewService.updateReview(
                 reviewId,
-                authentication.getName(),
+                MemberPrincipal.requireUserId(authentication),
                 dto
         );
 
@@ -133,7 +134,7 @@ public class ReviewController {
 
         reviewService.deleteReview(
                 reviewId,
-                authentication.getName()
+                MemberPrincipal.requireUserId(authentication)
         );
 
         return ResponseEntity.noContent().build();

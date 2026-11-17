@@ -39,11 +39,11 @@ public class CommentService {
     // 댓글 작성
     public CommentResponse createComment(
             Long reviewId,
-            String loginId,
+            Long userId,
             CommentRequest dto) {
 
         // 탈퇴와 댓글 작성이 겹치지 않도록 회원 행을 먼저 잠근다.
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() ->
                         new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
@@ -69,7 +69,7 @@ public class CommentService {
     public Page<CommentResponse> getComments(
             Long reviewId,
             int page,
-            String loginId) {
+            Long userId) {
 
         // 존재하지 않는 리뷰인지 확인
         if (!reviewRepository.existsById(reviewId)) {
@@ -78,8 +78,8 @@ public class CommentService {
 
         // 비회원도 댓글을 읽을 수 있으며, 이 경우 개인 반응은 null로 반환한다.
         Long currentUserId = null;
-        if (loginId != null && !loginId.isBlank()) {
-            currentUserId = userRepository.findByLoginId(loginId)
+        if (userId != null) {
+            currentUserId = userRepository.findById(userId)
                     .map(user -> user == null ? null : user.getUserId())
                     .orElse(null);
         }
@@ -143,11 +143,11 @@ public class CommentService {
     // 본인이 작성한 댓글 수정
     public CommentResponse updateComment(
             Long commentId,
-            String loginId,
+            Long userId,
             CommentRequest dto) {
 
         // 탈퇴와 댓글 수정을 직렬화한 뒤 댓글 행을 잠근다.
-        userRepository.findByLoginIdForUpdate(loginId)
+        userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
         Comment commentReference = commentRepository.findById(commentId)
@@ -162,8 +162,8 @@ public class CommentService {
                         new IllegalArgumentException("댓글을 찾을 수 없습니다."));
 
         // 댓글 작성자와 로그인 사용자 비교
-        if (!comment.getUser().getLoginId().equals(loginId)) {
-            throw new SecurityException(
+        if (!comment.getUser().getUserId().equals(userId)) {
+            throw new com.momo.backend.exception.CustomException("FORBIDDEN",
                     "본인이 작성한 댓글만 수정할 수 있습니다.");
         }
 
@@ -176,10 +176,10 @@ public class CommentService {
     // 본인이 작성한 댓글 삭제
     public void deleteComment(
             Long commentId,
-            String loginId) {
+            Long userId) {
 
         // 탈퇴와 댓글 삭제가 겹치지 않도록 회원을 먼저 잠근다.
-        userRepository.findByLoginIdForUpdate(loginId)
+        userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
 
         // 리뷰 삭제와 댓글 삭제가 동일한 부모 리뷰 행 잠금을 사용한다.
@@ -195,8 +195,8 @@ public class CommentService {
                         new IllegalArgumentException("댓글을 찾을 수 없습니다."));
 
         // 댓글 작성자와 로그인 사용자 비교
-        if (!comment.getUser().getLoginId().equals(loginId)) {
-            throw new SecurityException(
+        if (!comment.getUser().getUserId().equals(userId)) {
+            throw new com.momo.backend.exception.CustomException("FORBIDDEN",
                     "본인이 작성한 댓글만 삭제할 수 있습니다.");
         }
 

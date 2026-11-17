@@ -16,6 +16,9 @@ public class MovieCatalogSyncScheduler {
     // 한 번에 100개씩만 수집해 외부 API 호출량을 제한하고, 서버 재시작 후에도 다음 페이지부터 이어간다.
     @Scheduled(fixedDelayString = "${momo.catalog.sync.delay-ms:5000}")
     public void collectNextCatalogPage() {
-        catalogSyncService.syncNextPage();
+        try (var trace = com.momo.backend.observability.ApiCallTrace.open(
+                com.momo.backend.observability.ApiCallTrace.Source.SCHEDULER)) {
+            catalogSyncService.syncNextPage();
+        }
     }
 }

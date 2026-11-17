@@ -27,24 +27,30 @@ public class BoxOfficeScheduler {
 //    테스트용 자동 조회 필요시 주석 on/off
 //    @Scheduled(fixedDelay = 30000)
     public void updateDailyBoxOffice() {
+        try (var trace = com.momo.backend.observability.ApiCallTrace.open(
+                com.momo.backend.observability.ApiCallTrace.Source.SCHEDULER)) {
 
-        // 한국 시간 기준 어제 날짜
-        String targetDate = LocalDate.now(ZoneId.of("Asia/Seoul"))
-                .minusDays(1)
-                .format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+            // 한국 시간 기준 어제 날짜
+            String targetDate = LocalDate.now(ZoneId.of("Asia/Seoul"))
+                    .minusDays(1)
+                    .format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-        refreshDailyBoxOffice(targetDate, "예약 작업");
+            refreshDailyBoxOffice(targetDate, "예약 작업");
+        }
     }
 
     // 서버 시작 시 전날 박스오피스 확인
     @EventListener(ApplicationReadyEvent.class)
     public void checkBoxOfficeOnStartup() {
+        try (var trace = com.momo.backend.observability.ApiCallTrace.open(
+                com.momo.backend.observability.ApiCallTrace.Source.SCHEDULER)) {
 
-        String targetDate = LocalDate.now(ZoneId.of("Asia/Seoul"))
-                .minusDays(1)
-                .format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+            String targetDate = LocalDate.now(ZoneId.of("Asia/Seoul"))
+                    .minusDays(1)
+                    .format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-        refreshDailyBoxOffice(targetDate, "서버 시작");
+            refreshDailyBoxOffice(targetDate, "서버 시작");
+        }
     }
 
     // 외부 KOBIS 장애가 애플리케이션 기동이나 예약 작업을 중단시키지 않도록 격리한다.
