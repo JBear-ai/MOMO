@@ -36,7 +36,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .review-write-toggle:hover {
-  background: #F5EDD6;
+  background: var(--momo-note-strong);
 }
 
 .review-toggle-arrow {
@@ -116,7 +116,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 
 .review-title-field input::placeholder,
 .review-content-field textarea::placeholder {
-  color: #A39B8E;
+  color: var(--momo-placeholder);
 }
 
 /* 본문 입력창 */
@@ -499,9 +499,9 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
     margin-bottom: 16px;
     padding: 7px 14px;
     /* 쨍한 노랑 대신 부드럽고 차분한 크림 옐로우 톤 적용 */
-    background-color: #F3E9C8;
-    color: #4A3800;
-    border: 1px solid #E5D7B5;
+    background-color: var(--momo-note-strong);
+    color: var(--momo-accent-ink);
+    border: 1px solid var(--momo-note-border);
     border-radius: 6px;
     font-size: 12px;
     font-weight: 800;
@@ -537,11 +537,11 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 
 .recommend-button {
     padding: 13px 24px;
-    border: 1px solid #E5D7B5;
+    border: 1px solid var(--momo-note-border);
     border-radius: 8px;
     /* 버튼도 동일하게 차분한 크림 옐로우 톤 적용 */
-    background-color: #F3E9C8;
-    color: #4A3800;
+    background-color: var(--momo-note-strong);
+    color: var(--momo-accent-ink);
     font-size: 14px;
     font-weight: 800;
     cursor: pointer;
