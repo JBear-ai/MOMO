@@ -21,7 +21,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
 
   /* Quiet canvas: remove notebook grid and ambient bubble gradients. */
   html, body {
-    background: #ECEAE3 !important;
+    background: var(--momo-bg) !important;
     background-image: none !important;
   }
   body {
@@ -33,60 +33,60 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
 
   /* The app header is a restrained sheet of glass, not another decoration panel. */
-  #root header:not(.favorite-page-heading) {
-    border-bottom: 1px solid rgba(255,255,255,.72);
-    background: rgba(247,246,240,.82);
-    box-shadow: 0 7px 22px rgba(39,43,39,.055), inset 0 1px rgba(255,255,255,.86);
+  #root .momo-app-header {
+    border-bottom: 1px solid rgba(233,223,197,.72);
+    background: rgba(255,250,236,.88);
+    box-shadow: 0 7px 22px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.92);
     backdrop-filter: blur(24px) saturate(112%);
     -webkit-backdrop-filter: blur(24px) saturate(112%);
   }
-  #root header:not(.favorite-page-heading)::after {
+  #root .momo-app-header::after {
     content: none !important;
     display: none !important;
   }
-  #root header:not(.favorite-page-heading)::before {
+  #root .momo-app-header::before {
     background: linear-gradient(90deg, transparent, rgba(255,255,255,.92), transparent);
     opacity: .7;
   }
-  #root header nav a {
+  #root .momo-app-header nav a {
     min-height: 38px;
     padding: 0 13px;
-    border: 1px solid rgba(255,255,255,.74);
+    border: 1px solid rgba(233,223,197,.78);
     border-radius: 11px;
-    background: rgba(250,249,245,.48);
+    background: rgba(255,250,236,.74);
     box-shadow: inset 0 1px rgba(255,255,255,.82);
-    color: #4E554F;
+    color: #514A36;
     font-size: 12px;
     font-weight: 750;
     transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
   }
-  #root header nav a:hover {
-    border-color: rgba(128,143,132,.34);
-    background: rgba(255,255,255,.78);
-    color: #293D34;
+  #root .momo-app-header nav a:hover {
+    border-color: rgba(214,180,63,.48);
+    background: rgba(255,212,59,.2);
+    color: #51400F;
     transform: translateY(-1px);
     box-shadow: 0 5px 12px rgba(39,43,39,.06), inset 0 1px rgba(255,255,255,.95);
   }
-  #root header nav a.active {
-    border-color: rgba(105,128,115,.38);
-    background: rgba(105,128,115,.13);
-    color: #3F5D4C;
+  #root .momo-app-header nav a.active {
+    border-color: rgba(214,180,63,.58);
+    background: rgba(255,212,59,.3);
+    color: #51400F;
     box-shadow: inset 0 1px rgba(255,255,255,.84);
   }
-  #root header button {
+  #root .momo-app-header button {
     min-height: 38px;
     padding: 0 15px;
-    border: 1px solid rgba(100,119,107,.34);
+    border: 1px solid rgba(214,180,63,.5);
     border-radius: 11px;
-    background: rgba(102,126,111,.13);
-    box-shadow: inset 0 1px rgba(255,255,255,.85);
-    color: #405448;
+    background: rgba(255,212,59,.26);
+    box-shadow: inset 0 1px rgba(255,255,255,.92);
+    color: #51400F;
     font-size: 12px;
     font-weight: 800;
   }
-  #root header button:hover:not(:disabled) {
-    border-color: rgba(100,119,107,.5);
-    background: rgba(102,126,111,.2);
+  #root .momo-app-header button:hover:not(:disabled) {
+    border-color: rgba(179,141,25,.72);
+    background: rgba(255,212,59,.44);
     box-shadow: 0 5px 12px rgba(39,43,39,.07), inset 0 1px rgba(255,255,255,.9);
   }
 
@@ -1232,7 +1232,9 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     max-width: 1080px;
     padding: clamp(24px, 3.6vw, 42px) 0 76px;
     border-radius: 18px;
-    background: #F5F2EB;
+    background:
+      linear-gradient(135deg, rgba(255,212,59,.16), transparent 44%),
+      #F5F2EB;
   }
   #root .profile-edit-page .profile-container {
     gap: 21px;
@@ -1258,20 +1260,20 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .profile-edit-page .profile-edit-heading::before {
     position: absolute;
-    z-index: -2;
+    z-index: 0;
     inset: 9px 0 0;
     content: "";
-    background:
+    background-color: #FFFAEC;
+    background-image:
       linear-gradient(90deg, transparent 0 31px, rgba(196, 99, 82, .2) 31px 32px, transparent 32px),
-      repeating-linear-gradient(0deg, transparent 0 30px, rgba(127, 151, 177, .105) 30px 31px, transparent 31px 32px),
-      #FFFAEC;
+      repeating-linear-gradient(0deg, transparent 0 30px, rgba(127, 151, 177, .105) 30px 31px, transparent 31px 32px);
     clip-path: polygon(0 0, calc(100% - 43px) 0, 100% 43px, 100% 100%, 0 100%);
     filter: drop-shadow(0 10px 14px rgba(75, 61, 31, .13));
     pointer-events: none;
   }
   #root .profile-edit-page .profile-edit-heading::after {
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     top: 9px;
     right: 0;
     width: 43px;
