@@ -139,7 +139,7 @@ const ReviewListStyles = createGlobalStyle`
   gap: 10px;
   margin: 0 0 24px;
   padding: 16px;
-  background: var(--momo-surface)CF4;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
   border-radius: 10px;
 }
@@ -296,7 +296,7 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-table tbody tr:hover {
-  background: var(--momo-surface)CF4;
+  background: var(--momo-note);
 }
 
 /* 로딩 / 오류 / 빈 목록 */
