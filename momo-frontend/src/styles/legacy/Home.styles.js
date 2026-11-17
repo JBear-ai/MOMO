@@ -41,31 +41,14 @@ export const FeatureSection = styled.section`
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, .96);
   border-radius: 24px;
-  background:
-    linear-gradient(90deg, transparent 0 34px, rgba(201,117,104,.13) 34px 35px, transparent 35px),
-    repeating-linear-gradient(0deg, transparent 0 31px, rgba(117,145,177,.075) 32px, transparent 33px),
-    linear-gradient(135deg, rgba(255,255,255,.88), rgba(255,249,230,.82));
-  box-shadow: 0 3px 6px rgba(68,53,22,.035), 0 18px 42px rgba(68,53,22,.09), 0 30px 58px rgba(68,53,22,.04), inset 0 1px rgba(255,255,255,.98);
+  background: linear-gradient(132deg, rgba(250,249,245,.82), rgba(237,238,231,.64));
+  box-shadow: 0 16px 38px rgba(39,43,39,.085), inset 0 1px rgba(255,255,255,.92);
   backdrop-filter: blur(18px) saturate(130%);
   -webkit-backdrop-filter: blur(18px) saturate(130%);
   transition: box-shadow 300ms ease, transform 300ms ease;
   &:hover {
     box-shadow: 0 26px 58px rgba(68, 53, 22, .14), inset 0 1px rgba(255,255,255,.99);
     transform: translateY(-3px) rotateX(.35deg);
-  }
-  &::before {
-    position: absolute;
-    z-index: 3;
-    top: 10px;
-    left: clamp(42px, 5vw, 66px);
-    width: 78px;
-    height: 20px;
-    border: 1px solid rgba(201,166,103,.18);
-    background: rgba(255,224,151,.48);
-    box-shadow: 0 2px 5px rgba(91,70,35,.06);
-    content: "";
-    pointer-events: none;
-    transform: rotate(-2.5deg);
   }
   @media (max-width: 760px) {
     grid-template-columns: 1fr;
@@ -80,23 +63,7 @@ export const FeatureInfo = styled.div`
   position: relative;
   z-index: 1;
   padding: clamp(28px, 3.2vw, 44px);
-  background:
-    linear-gradient(90deg, transparent 0 30px, rgba(201,117,104,.16) 30px 31px, transparent 31px),
-    repeating-linear-gradient(0deg, transparent 0 31px, rgba(117,145,177,.1) 32px, transparent 33px),
-    radial-gradient(circle at 12% 12%, rgba(255, 212, 59, .22), transparent 34%),
-    linear-gradient(145deg, rgba(255,255,255,.86), rgba(255,250,236,.7));
-  &::after {
-    position: absolute;
-    right: 28px;
-    bottom: 26px;
-    width: 88px;
-    height: 88px;
-    border: 1px solid rgba(191,155,42,.18);
-    border-radius: 50%;
-    box-shadow: 0 0 0 12px rgba(191,155,42,.045), 0 0 0 27px rgba(191,155,42,.025);
-    content: "";
-    pointer-events: none;
-  }
+  background: linear-gradient(145deg, rgba(250,249,245,.84), rgba(239,240,233,.62));
   @media (max-width: 760px) { padding: 26px 24px 22px; }
 `;
 
@@ -105,9 +72,9 @@ export const Eyebrow = styled.span`
   width: fit-content;
   margin-bottom: 14px;
   padding: 6px 10px;
-  color: var(--momo-accent-ink);
-  background: var(--momo-accent-soft);
-  border: 1px solid rgba(214, 166, 20, .22);
+  color: #4D6255;
+  background: rgba(101,126,111,.13);
+  border: 1px solid rgba(101,126,111,.24);
   border-radius: 6px;
   font-size: 11px;
   font-weight: 800;
@@ -126,7 +93,7 @@ export const FeatureTitle = styled.h1`
 
 export const FeatureDescription = styled.p`
   margin: 16px 0 0;
-  color: var(--momo-muted);
+  color: #59615A;
   max-width: 30rem;
   font-size: 14px;
   line-height: 1.8;
