@@ -93,7 +93,7 @@ const PersonDetailStyles = createGlobalStyle`
 }
 
 .movie-detail-page > .detail-content-section > .people-list > .person-chip > div:last-child > span {
-  color: #666666;
+  color: var(--momo-muted)666;
   font-size: 13px;
 }
 
@@ -112,7 +112,7 @@ const PersonDetailStyles = createGlobalStyle`
 
 .movie-detail-page > .detail-content-section > .people-list + div > button {
   padding: 12px 24px;
-  background: #f9f9f9;
+  background: var(--momo-surface-raised);
   border: 1px solid #cccccc;
   border-radius: 6px;
   font-size: 15px;
