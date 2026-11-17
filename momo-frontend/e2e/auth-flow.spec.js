@@ -327,7 +327,7 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   await expect(page.locator(".rating-distribution-track")).toBeVisible();
   await expect(page.locator(".detail-reaction-counts .rating-vote-button")).toHaveCount(2);
 
-  // 영화 상세 핵심 헤더가 다중 색상과 블러가 적용된 메인 글래스 패널인지 확인한다.
+  // 영화 상세 헤더는 원형 광원 없이 절제된 반투명 글래스로 표현한다.
   const movieHeroGlass = await page.locator(".movie-detail-header").evaluate((element) => {
     const style = getComputedStyle(element);
     return {
@@ -337,10 +337,17 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
       columns: style.gridTemplateColumns,
     };
   });
-  expect(movieHeroGlass.blur).toContain("blur(32px)");
-  expect(movieHeroGlass.background).toContain("radial-gradient");
-  expect(movieHeroGlass.radius).toBe("32px");
+  expect(movieHeroGlass.blur).toContain("blur(28px)");
+  expect(movieHeroGlass.background).not.toContain("radial-gradient");
+  expect(movieHeroGlass.radius).toBe("24px");
   expect(movieHeroGlass.columns.split(" ").length).toBe(1);
+
+  const audienceGlass = await page.locator(".movie-rating-panel").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { blur: style.backdropFilter, background: style.backgroundImage };
+  });
+  expect(audienceGlass.blur).toContain("blur(22px)");
+  expect(audienceGlass.background).toBe("none");
 
   // 영화 상세의 감독·배우도 세 줄 미리보기와 펼치기/접기 동작을 제공한다.
   const directorSection = page.locator(".people-section").nth(0);
