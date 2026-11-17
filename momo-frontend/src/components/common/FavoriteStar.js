@@ -68,7 +68,10 @@ function FavoriteStar({ movie }) {
       "aria-busy": saving,
       title: favorite ? "관심 영화 해제" : "관심 영화 추가",
     },
-    favorite ? "★" : "☆",
+    React.createElement("span", {
+      className: "favorite-bookmark-icon",
+      "aria-hidden": "true",
+    }),
   );
 }
 
