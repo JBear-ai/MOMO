@@ -5,7 +5,10 @@ const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--momo-bg);
+  overflow-x: clip;
+  background:
+    radial-gradient(ellipse at 88% 12%, rgba(255, 212, 59, .08), transparent 32rem),
+    var(--momo-bg);
   color: var(--momo-text);
   letter-spacing: -0.01em;
 `;
@@ -16,18 +19,34 @@ const Container = styled.div`
 
 const Header = styled.header`
   position: sticky;
-  top: 0;
+  top: 12px;
   z-index: 100;
-  min-height: 76px;
-  padding: 0 8%;
+  width: calc(100% - 2 * clamp(12px, 3vw, 44px));
+  max-width: 1480px;
+  min-height: 72px;
+  margin: 12px auto 0;
+  padding: 0 clamp(18px, 2.6vw, 38px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  background-color: var(--momo-surface);
-  border-bottom: 1px solid var(--momo-border);
+  gap: 22px;
+  background: rgba(255, 254, 250, .86);
+  border: 1px solid rgba(255, 255, 255, .92);
+  border-radius: 20px;
   box-sizing: border-box;
-  box-shadow: 0 4px 20px -4px rgba(45, 38, 26, 0.03);
+  box-shadow: 0 10px 30px rgba(54, 45, 28, .075), inset 0 1px 0 rgba(255,255,255,.9);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+
+  @media (max-width: 768px) {
+    top: 8px;
+    width: calc(100% - 20px);
+    min-height: 64px;
+    margin-top: 8px;
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    border-radius: 16px;
+  }
 `;
 
 const Logo = styled(Link)`
@@ -39,8 +58,12 @@ const Logo = styled(Link)`
 const LogoImage = styled.img`
   display: block;
   width: auto;
-  height: 38px;
+  height: 36px;
   object-fit: contain;
+
+  @media (max-width: 768px) {
+    height: 32px;
+  }
 `;
 
 const Navigation = styled.nav`
@@ -48,49 +71,77 @@ const Navigation = styled.nav`
   align-items: center;
   justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 6px;
+  padding: 5px;
+  border: 1px solid rgba(229, 222, 209, .72);
+  border-radius: var(--momo-radius-pill);
+  background: rgba(245, 242, 235, .62);
 
   a {
+    padding: 9px 13px;
     color: var(--momo-muted);
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    transition: color 0.15s ease;
+    font-size: 13px;
+    font-weight: 650;
+    white-space: nowrap;
+    border-radius: var(--momo-radius-pill);
+    transition: color .18s ease, background .18s ease, box-shadow .18s ease;
 
     &:hover {
       color: var(--momo-text);
+      background: rgba(255,255,255,.72);
     }
   }
 
   a.active {
-    color: var(--momo-text);
+    color: var(--momo-accent-ink);
+    background: var(--momo-accent);
     font-weight: 800;
+    box-shadow: 0 2px 8px rgba(140, 105, 0, .12);
+  }
+
+  @media (max-width: 768px) {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 2px;
+    padding: 3px;
+
+    a { padding: 8px 10px; font-size: 12px; }
   }
 `;
 
 const UserArea = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 13px;
+
+  @media (max-width: 768px) {
+    margin-left: auto;
+    gap: 8px;
+  }
 `;
 
 const ActionButton = styled.button`
-  padding: 8px 16px;
-  border: 1px solid var(--momo-border);
-  border-radius: 8px;
-  background-color: var(--momo-surface);
-  color: var(--momo-text);
-  font-size: 13px;
-  font-weight: 700;
+  min-height: 38px;
+  padding: 8px 15px;
+  border: 1px solid var(--momo-accent);
+  border-radius: var(--momo-radius-pill);
+  background: var(--momo-accent);
+  color: var(--momo-accent-ink);
+  font-size: 12px;
+  font-weight: 800;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: var(--momo-note);
-    border-color: var(--momo-accent);
+    background-color: var(--momo-accent-hover);
+    border-color: var(--momo-accent-hover);
     transform: translateY(-1px);
   }
 
@@ -102,9 +153,16 @@ const ActionButton = styled.button`
 
 const Main = styled.main`
   flex: 1;
-  padding: 40px 8%;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(28px, 3.6vw, 52px) clamp(16px, 4vw, 56px) 64px;
   box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    padding-top: 24px;
+    padding-bottom: 44px;
+  }
 `;
 
 // ========================================
@@ -112,10 +170,11 @@ const Main = styled.main`
 // ========================================
 
 const Footer = styled.footer`
-  padding: 44px 8%;
-  background-color: var(--momo-note);
+  padding: 44px clamp(18px, 5vw, 80px) 28px;
+  background:
+    linear-gradient(180deg, rgba(255,250,236,.82), var(--momo-note));
   color: var(--momo-text-soft);
-  border-top: 1px solid var(--momo-border);
+  border-top: 1px solid var(--momo-note-border);
   box-sizing: border-box;
   width: 100%;
 `;
