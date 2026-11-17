@@ -164,7 +164,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .review-form-actions button:hover:not(:disabled) {
-  background: #F5C928;
+  background: var(--momo-accent-hover);
   transform: translateY(-1px);
 }
 
