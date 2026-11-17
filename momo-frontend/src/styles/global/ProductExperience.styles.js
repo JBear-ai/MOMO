@@ -378,7 +378,37 @@ const ProductExperienceStyles = createGlobalStyle`
   .profile-form input, .profile-form textarea, .profile-delete-page-card input {
     min-height: 46px; border-radius: 10px; border: 1px solid rgba(201,188,160,.72);
     background: rgba(255,255,255,.84);
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
   }
+  .profile-form input:focus, .profile-form textarea:focus, .profile-delete-page-card input:focus {
+    background: #fff; border-color: rgba(205,166,44,.8);
+    box-shadow: 0 0 0 4px rgba(255,212,59,.16);
+  }
+  .profile-image-preview {
+    border: 1px solid rgba(255,255,255,.94);
+    box-shadow: 0 12px 26px rgba(53,43,24,.12);
+    transition: transform 240ms var(--momo-ease-out), box-shadow 240ms ease;
+  }
+  .profile-image-preview:hover { transform: translateY(-3px) rotate(-1deg); box-shadow: 0 18px 34px rgba(53,43,24,.16); }
+  .profile-image-buttons button { border-radius: 9px; transition: transform 180ms var(--momo-ease-out), box-shadow 180ms ease; }
+  .profile-image-buttons button:hover { transform: translateY(-2px); }
+
+  /* Favorites: saved-state feedback is immediate but restrained. */
+  .favorite-star {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,.86);
+    border-radius: 50%;
+    background: rgba(255,254,250,.78);
+    box-shadow: 0 7px 18px rgba(36,29,17,.16), inset 0 1px rgba(255,255,255,.95);
+    backdrop-filter: blur(14px);
+    transition: transform 200ms var(--momo-ease-out), background 200ms ease, box-shadow 200ms ease;
+  }
+  .favorite-star:hover { transform: translateY(-2px) scale(1.07); box-shadow: 0 11px 24px rgba(36,29,17,.2); }
+  .favorite-star.is-active { background: rgba(255,212,59,.92); border-color: rgba(255,255,255,.96); }
+  .favorite-star:active { transform: scale(.92); }
 
   /* Favorites: clean poster gallery with subtle depth */
   .favorite-page-container { max-width: 1240px; }
