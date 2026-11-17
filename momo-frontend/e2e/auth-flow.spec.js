@@ -118,7 +118,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     response.request().method() === "DELETE" &&
     response.ok(),
   );
-  await expect(page.getByRole("button", { name: "관심 영화 해제" })).toHaveText("★");
+  await expect(page.getByRole("button", { name: "관심 영화 해제" }).locator(".favorite-bookmark-icon")).toBeVisible();
   await page.getByRole("button", { name: "관심 영화 해제" }).click();
   await favoriteDelete;
   await expect(page.getByText("아직 등록한 관심 영화가 없습니다.")).toBeVisible();
