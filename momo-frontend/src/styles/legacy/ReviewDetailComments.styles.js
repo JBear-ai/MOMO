@@ -34,7 +34,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 }
 
 .review-detail-back:hover {
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
   border-color: var(--momo-accent);
 }
 
@@ -125,7 +125,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 }
 
 .review-action-button:hover {
-  background: var(--momo-surface)9ec;
+  background: var(--momo-note);
   border-color: var(--momo-link);
 }
 
@@ -135,7 +135,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 }
 
 .review-action-button.delete:hover {
-  background: var(--momo-surface)0f0;
+  background: var(--momo-danger-bg);
 }
 
 /* 리뷰 수정 */
@@ -213,7 +213,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   padding: 20px;
   margin: 20px 0;
 
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
   border-radius: 12px;
 }
@@ -329,7 +329,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
   padding: 24px;
 
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
   border-radius: 12px;
 
@@ -623,7 +623,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 }
 
 .review-comment-actions button:hover {
-  background: var(--momo-surface)af0;
+  background: var(--momo-note);
 }
 
 .review-comment-actions button.delete {
