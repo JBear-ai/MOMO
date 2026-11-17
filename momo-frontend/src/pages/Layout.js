@@ -188,7 +188,7 @@ function Layout() {
                   <strong>{nickname}</strong>님
                 </p>
 
-                <ActionButton onClick={handleLogout} disabled={logoutLoading}>
+                <ActionButton className="momo-logout-button" onClick={handleLogout} disabled={logoutLoading}>
                   {logoutLoading ? "로그아웃 중..." : "로그아웃"}
                 </ActionButton>
               </UserArea>
