@@ -11,19 +11,6 @@ const Container = styled.div`
   isolation: isolate;
   color: var(--momo-text);
   background: transparent;
-  &::before {
-    position: fixed;
-    z-index: -1;
-    inset: 0;
-    content: "";
-    pointer-events: none;
-    opacity: .24;
-    background:
-      linear-gradient(rgba(116,145,178,.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(116,145,178,.1) 1px, transparent 1px);
-    background-size: 34px 34px;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,.58), transparent 88%);
-  }
 `;
 
 const Header = styled.header`
@@ -39,15 +26,10 @@ const Header = styled.header`
   gap: clamp(14px, 2vw, 26px);
   box-sizing: border-box;
   border-bottom: 1px solid rgba(255,255,255,.9);
-  background:
-    linear-gradient(100deg, rgba(255,255,255,.82), rgba(255,252,241,.7)),
-    rgba(255,254,249,.74);
-  box-shadow:
-    0 8px 24px rgba(62,49,28,.07),
-    0 1px 0 rgba(255,255,255,.96),
-    inset 0 -1px rgba(190,172,135,.18);
-  backdrop-filter: blur(24px) saturate(150%);
-  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  background: rgba(247,246,240,.82);
+  box-shadow: 0 7px 22px rgba(39,43,39,.055), inset 0 1px rgba(255,255,255,.86);
+  backdrop-filter: blur(24px) saturate(112%);
+  -webkit-backdrop-filter: blur(24px) saturate(112%);
   transition: box-shadow 220ms ease, background 220ms ease;
   &::before {
     position: absolute;
@@ -57,20 +39,6 @@ const Header = styled.header`
     height: 1px;
     content: "";
     background: linear-gradient(90deg, transparent, rgba(255,255,255,.98), transparent);
-    pointer-events: none;
-  }
-  &::after {
-    position: absolute;
-    top: 0;
-    left: clamp(112px, 16vw, 220px);
-    width: 72px;
-    height: 13px;
-    content: "";
-    border-right: 1px solid rgba(201,166,103,.16);
-    border-left: 1px solid rgba(201,166,103,.16);
-    background: rgba(255,224,151,.34);
-    box-shadow: 0 2px 5px rgba(91,70,35,.045);
-    transform: rotate(-1.5deg);
     pointer-events: none;
   }
   @media (max-width: 900px) {
@@ -119,11 +87,11 @@ const Navigation = styled.nav`
     align-items: center;
     min-height: 38px;
     padding: 0 14px;
-    color: #625B4F;
-    border: 1px solid rgba(255,255,255,.88);
+    color: #4E554F;
+    border: 1px solid rgba(255,255,255,.74);
     border-radius: 11px;
-    background: rgba(255,255,255,.48);
-    box-shadow: 0 3px 9px rgba(58,48,30,.035), inset 0 1px rgba(255,255,255,.94);
+    background: rgba(250,249,245,.48);
+    box-shadow: inset 0 1px rgba(255,255,255,.82);
     text-decoration: none;
     font-size: 12px;
     font-weight: 800;
@@ -135,18 +103,18 @@ const Navigation = styled.nav`
       box-shadow 180ms ease,
       border-color 180ms ease;
     &:hover {
-      color: #373126;
-      border-color: rgba(223,201,157,.72);
-      background: rgba(255,254,248,.88);
-      box-shadow: 0 7px 15px rgba(58,48,30,.08), inset 0 1px rgba(255,255,255,.98);
+      color: #293D34;
+      border-color: rgba(128,143,132,.34);
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 5px 12px rgba(39,43,39,.06), inset 0 1px rgba(255,255,255,.95);
       transform: translateY(-2px);
     }
   }
   a.active {
-    color: #59430F;
-    border-color: rgba(211,174,82,.7);
-    background: linear-gradient(145deg, rgba(255,242,194,.98), rgba(255,250,232,.9));
-    box-shadow: 0 5px 13px rgba(133,101,29,.12), inset 0 1px rgba(255,255,255,1);
+    color: #3F5D4C;
+    border-color: rgba(105,128,115,.38);
+    background: rgba(105,128,115,.13);
+    box-shadow: inset 0 1px rgba(255,255,255,.84);
     font-weight: 900;
   }
   @media (max-width: 900px) {
@@ -174,19 +142,17 @@ const UserArea = styled.div`
 
 const ActionButton = styled.button`
   position: relative;
-  position: relative;
   min-height: 38px;
   padding: 0 16px;
   overflow: hidden;
-  border: 1px solid rgba(218,178,75,.82);
+  border: 1px solid rgba(100,119,107,.34);
   border-radius: 11px;
-  background:
-    linear-gradient(145deg, rgba(255,236,159,.98), rgba(246,207,83,.98));
-  color: #51400F;
+  background: rgba(102,126,111,.13);
+  color: #405448;
   font-size: 12px;
   font-weight: 900;
   cursor: pointer;
-  box-shadow: 0 5px 13px rgba(154,116,25,.14), inset 0 1px rgba(255,255,255,.86);
+  box-shadow: inset 0 1px rgba(255,255,255,.85);
   transition: transform 180ms cubic-bezier(.2,.72,.2,1), box-shadow 180ms ease, filter 180ms ease;
   &::before {
     position: absolute;
@@ -200,8 +166,9 @@ const ActionButton = styled.button`
   }
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 9px 18px rgba(154,116,25,.2), inset 0 1px rgba(255,255,255,.9);
-    filter: saturate(1.05);
+    border-color: rgba(100,119,107,.5);
+    background: rgba(102,126,111,.2);
+    box-shadow: 0 5px 12px rgba(39,43,39,.07), inset 0 1px rgba(255,255,255,.9);
   }
   &:active:not(:disabled) { transform: translateY(0) scale(.98); }
   &:disabled { cursor: not-allowed; opacity: .58; }
