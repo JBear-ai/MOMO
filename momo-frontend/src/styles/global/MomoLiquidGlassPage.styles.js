@@ -1227,89 +1227,99 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     #root .movie-detail-page .detail-reaction-counts { grid-template-columns: 1fr; }
   }
 
-    /* Profile edit: original MOMO memo paper and highlighter-yellow palette. */
+    /* Profile edit: shaped memo paper with MOMO's original cream and highlighter yellow. */
   #root .profile-edit-page {
     max-width: 1080px;
     padding: clamp(24px, 3.6vw, 42px) 0 76px;
-    border-radius: 22px;
-    background:
-      linear-gradient(135deg, rgba(255,212,59,.12), transparent 38%),
-      #F5F2EB;
+    border-radius: 18px;
+    background: #F5F2EB;
   }
   #root .profile-edit-page .profile-container {
     gap: 21px;
   }
+
+  /* The heading is a memo sheet with a folded corner, not a generic rounded card. */
   #root .profile-edit-page .profile-edit-heading {
     position: relative;
     isolation: isolate;
     display: flex;
-    min-height: 146px;
+    min-height: 164px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 5px;
-    padding: 25px clamp(24px, 3.2vw, 38px);
-    overflow: hidden;
-    border: 1px solid #E9DFC5;
-    border-radius: 19px;
-    background: linear-gradient(108deg, #FFF1B2 0%, #FFFAEC 52%, #F5F2EB 100%);
-    box-shadow: 0 12px 28px rgba(75, 61, 31, .09), inset 0 1px rgba(255,255,255,.96);
+    gap: 6px;
+    margin: 0 12px 2px 0;
+    padding: 31px 44px 29px 58px;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
   }
   #root .profile-edit-page .profile-edit-heading::before {
     position: absolute;
-    z-index: -1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 7px;
+    z-index: -2;
+    inset: 9px 0 0;
     content: "";
-    background: #FFD43B;
+    background:
+      linear-gradient(90deg, transparent 0 31px, rgba(196, 99, 82, .2) 31px 32px, transparent 32px),
+      repeating-linear-gradient(0deg, transparent 0 30px, rgba(127, 151, 177, .105) 30px 31px, transparent 31px 32px),
+      #FFFAEC;
+    clip-path: polygon(0 0, calc(100% - 43px) 0, 100% 43px, 100% 100%, 0 100%);
+    filter: drop-shadow(0 10px 14px rgba(75, 61, 31, .13));
+    pointer-events: none;
   }
   #root .profile-edit-page .profile-edit-heading::after {
     position: absolute;
     z-index: -1;
-    top: 0;
-    right: 34px;
-    bottom: 0;
-    width: 92px;
+    top: 9px;
+    right: 0;
+    width: 43px;
+    height: 43px;
     content: "";
-    border-right: 1px solid rgba(160, 129, 44, .13);
-    border-left: 1px solid rgba(160, 129, 44, .13);
-    background: repeating-linear-gradient(
-      90deg,
-      transparent 0 14px,
-      rgba(160,129,44,.08) 14px 16px,
-      transparent 16px 30px
-    );
+    border-left: 1px solid rgba(147, 111, 27, .28);
+    border-bottom: 1px solid rgba(147, 111, 27, .28);
+    background: linear-gradient(135deg, #FFE98F 0%, #FFD43B 70%, #E8B91D 100%);
+    clip-path: polygon(0 0, 100% 100%, 100% 0);
     pointer-events: none;
   }
   #root .profile-edit-page .profile-edit-eyebrow {
+    position: relative;
+    z-index: 1;
     display: inline-flex;
     align-items: center;
-    min-height: 25px;
-    margin: 0 0 5px;
-    padding: 0 10px;
-    border: 1px solid rgba(160, 124, 24, .24);
-    border-radius: 5px;
+    min-height: 23px;
+    margin: 0 0 4px;
+    padding: 0 9px;
+    border: 1px solid #E2BE39;
+    border-radius: 2px;
     background: #FFD43B;
     color: #292820;
     font-size: 9px;
     font-weight: 900;
-    letter-spacing: .14em;
+    letter-spacing: .13em;
   }
   #root .profile-edit-page .profile-edit-heading h1 {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    width: fit-content;
     margin: 0;
+    padding: 0 .08em .09em 0;
+    background: linear-gradient(transparent 61%, rgba(255,212,59,.9) 61% 92%, transparent 92%);
     color: #292820;
-    font-size: clamp(28px, 3.1vw, 36px);
+    font-size: clamp(29px, 3.2vw, 37px);
     font-weight: 900;
-    line-height: 1.13;
+    line-height: 1.18;
     letter-spacing: -.05em;
   }
   #root .profile-edit-page .profile-edit-heading p {
-    margin: 2px 0 0;
+    position: relative;
+    z-index: 1;
+    margin: 3px 0 0;
     color: #625A45;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 650;
     line-height: 1.55;
   }
 
@@ -1318,21 +1328,16 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     padding: clamp(22px, 3.2vw, 36px);
     overflow: hidden;
     border: 1px solid #E9DFC5;
-    border-radius: 21px;
-    background: rgba(255,250,236,.94);
-    box-shadow: 0 14px 32px rgba(75, 61, 31, .075), inset 0 1px rgba(255,255,255,.98);
-    backdrop-filter: blur(20px) saturate(112%);
-    -webkit-backdrop-filter: blur(20px) saturate(112%);
+    border-left: 5px solid #FFD43B;
+    border-radius: 4px 18px 4px 18px;
+    background: rgba(255,250,236,.96);
+    box-shadow: 0 14px 30px rgba(75, 61, 31, .075), inset 0 1px rgba(255,255,255,.98);
+    backdrop-filter: blur(18px) saturate(108%);
+    -webkit-backdrop-filter: blur(18px) saturate(108%);
   }
   #root .profile-edit-page .profile-edit-card::before {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: auto;
-    width: 5px;
-    height: auto;
-    border-radius: 0;
-    background: #FFD43B;
+    content: none !important;
+    display: none !important;
   }
   #root .profile-edit-page .profile-edit-form {
     display: grid;
@@ -1346,6 +1351,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     letter-spacing: .16em;
   }
   #root .profile-edit-page .profile-image-edit {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1353,9 +1359,11 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     width: 100%;
     margin: 0 0 14px;
     padding: 22px 18px 20px;
-    border: 1px solid #E9DFC5;
-    border-radius: 17px;
-    background: linear-gradient(115deg, #FFF0AD 0%, #FFFAEC 64%, #F5F2EB 100%);
+    border: 1px solid #E3CE83;
+    border-radius: 5px 15px 5px 15px;
+    background:
+      linear-gradient(90deg, #FFD43B 0 8px, transparent 8px),
+      linear-gradient(115deg, #FFF0AD 0%, #FFFAEC 68%, #F5F2EB 100%);
     box-shadow: inset 0 1px rgba(255,255,255,.96), 0 5px 14px rgba(75, 61, 31, .055);
   }
   #root .profile-edit-page .profile-image-preview {
@@ -1365,7 +1373,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     border: 5px solid #FFD43B;
     border-radius: 50%;
     background: #FFFAEC;
-    box-shadow: 0 7px 17px rgba(75, 61, 31, .16), 0 0 0 4px rgba(255,212,59,.18);
+    box-shadow: 0 7px 17px rgba(75, 61, 31, .16), 0 0 0 4px rgba(255,212,59,.2);
   }
   #root .profile-edit-page .profile-image-preview img {
     display: block;
@@ -1382,8 +1390,8 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     min-height: 44px;
     padding: 5px;
     border: 1px solid #E9DFC5;
-    border-radius: 10px;
-    background: rgba(255,250,236,.88);
+    border-radius: 8px;
+    background: rgba(255,250,236,.92);
     color: #514A36;
     font-size: 12px;
   }
@@ -1392,7 +1400,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     margin-right: 10px;
     padding: 0 12px;
     border: 1px solid #D6B43F;
-    border-radius: 7px;
+    border-radius: 4px;
     background: #FFD43B;
     color: #292820;
     font-size: 11px;
@@ -1407,7 +1415,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .profile-edit-page .profile-image-buttons .profile-button {
     min-height: 38px;
     padding: 0 15px;
-    border-radius: 9px;
+    border-radius: 7px;
     font-size: 11px;
     font-weight: 800;
   }
@@ -1444,7 +1452,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     min-height: 47px;
     padding: 11px 14px;
     border: 1px solid #E9DFC5;
-    border-radius: 10px;
+    border-radius: 7px;
     background: #FFFEFA;
     box-shadow: inset 0 1px 2px rgba(75, 61, 31, .035);
     color: #292820;
@@ -1481,7 +1489,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     margin: 0 0 4px !important;
     padding: 13px 16px;
     border-left: 4px solid #FFD43B;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 8px 8px 0;
     background: #F5F2EB;
     color: #292820;
     font-size: 16px !important;
@@ -1508,7 +1516,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     min-width: 112px;
     min-height: 46px;
     padding: 0 22px;
-    border-radius: 10px;
+    border-radius: 7px;
     font-size: 13px;
     font-weight: 850;
     transition: transform 170ms ease, box-shadow 170ms ease, background 170ms ease;
@@ -1551,18 +1559,26 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
       padding: 18px 0 48px;
     }
     #root .profile-edit-page .profile-edit-heading {
-      min-height: 128px;
-      padding: 22px 20px 22px 24px;
-      border-radius: 15px;
+      min-height: 145px;
+      margin-right: 5px;
+      padding: 28px 26px 24px 49px;
+    }
+    #root .profile-edit-page .profile-edit-heading::before {
+      inset: 8px 0 0;
+      background:
+        linear-gradient(90deg, transparent 0 25px, rgba(196, 99, 82, .2) 25px 26px, transparent 26px),
+        repeating-linear-gradient(0deg, transparent 0 27px, rgba(127, 151, 177, .105) 27px 28px, transparent 28px 29px),
+        #FFFAEC;
+      clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);
     }
     #root .profile-edit-page .profile-edit-heading::after {
-      right: 14px;
-      width: 48px;
-      opacity: .55;
+      top: 8px;
+      width: 32px;
+      height: 32px;
     }
     #root .profile-edit-page .profile-edit-card {
       padding: 20px 16px 18px;
-      border-radius: 16px;
+      border-radius: 4px 14px 4px 14px;
     }
     #root .profile-edit-page .profile-image-edit {
       padding: 20px 12px 17px;
