@@ -166,7 +166,7 @@ function Layout() {
 
   return (
     <Container>
-      <Header>
+      <Header className="momo-app-header">
         <Logo to="/" aria-label="MOMO 홈">
           <LogoImage src={textlogo} alt="MOMO" />
         </Logo>
