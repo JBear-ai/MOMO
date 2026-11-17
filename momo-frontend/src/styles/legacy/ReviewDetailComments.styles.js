@@ -325,11 +325,11 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 .review-detail-content {
   min-height: 120px;
 
-  padding: 24px;
+  padding: 26px;
 
-  background: var(--momo-note);
+  background: linear-gradient(135deg, var(--momo-note), #FFFDF6);
   border: 1px solid var(--momo-note-border);
-  border-radius: 12px;
+  border-radius: 18px;
 
   color: var(--momo-text);
   font-size: 16px;
