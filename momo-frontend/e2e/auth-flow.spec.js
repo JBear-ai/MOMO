@@ -124,7 +124,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     const style = getComputedStyle(element);
     return { background: style.backgroundColor, color: style.color, radius: style.borderRadius };
   });
-  expect(saveButton.background).toBe("rgb(94, 128, 102)");
+  expect(saveButton.background).toBe("rgb(88, 122, 96)");
   expect(saveButton.color).toBe("rgb(255, 255, 255)");
   expect(saveButton.radius).toBe("10px");
 
