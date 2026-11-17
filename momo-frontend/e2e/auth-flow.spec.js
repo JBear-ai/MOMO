@@ -43,6 +43,26 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(page.getByRole("button", { name: "로그아웃" })).toBeVisible();
   await initialFavoritesSync;
 
+  // 마이페이지의 세 활동 카드가 실제 카드 구조와 개수 배지를 유지하는지 확인한다.
+  await page.goto("/profile");
+  const profileActivityCards = page.locator(".profile-activity-item");
+  await expect(profileActivityCards).toHaveCount(3);
+  await expect(profileActivityCards.nth(0).locator(".profile-activity-count-row")).toBeVisible();
+  await expect(profileActivityCards.nth(1).locator(".profile-activity-footer")).toBeVisible();
+  await expect(profileActivityCards.nth(2).getByRole("heading", { name: "관심 영화" })).toBeVisible();
+
+  const activityGridColumns = await page.locator(".profile-activity-grid").evaluate(
+    (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(activityGridColumns).toBe(3);
+
+  const activityHeadingColor = await profileActivityCards.first().locator("h3").evaluate(
+    (element) => getComputedStyle(element).color,
+  );
+  expect(activityHeadingColor).toBe("rgb(57, 51, 41)");
+
+  await page.goto("/");
+
   // 첫 로그인 동기화 후 서버에 관심 영화를 추가해 계정별 저장을 확인한다.
   const favoriteStatus = await page.evaluate(async (movie) => {
     const response = await fetch("http://127.0.0.1:8111/api/favorites", {
@@ -79,6 +99,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     response.request().method() === "DELETE" &&
     response.ok(),
   );
+  await expect(page.getByRole("button", { name: "관심 영화 해제" })).toHaveText("★");
   await page.getByRole("button", { name: "관심 영화 해제" }).click();
   await favoriteDelete;
   await expect(page.getByText("아직 등록한 관심 영화가 없습니다.")).toBeVisible();
@@ -243,6 +264,9 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   await expect(
     page.getByRole("heading", { level: 1, name: "필모그래피 이동 E2E" }),
   ).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "관객 평점" })).toBeVisible();
+  await expect(page.locator(".rating-distribution-track")).toBeVisible();
+  await expect(page.locator(".detail-reaction-counts .rating-vote-button")).toHaveCount(2);
 
   // 영화 상세의 감독·배우도 세 줄 미리보기와 펼치기/접기 동작을 제공한다.
   const directorSection = page.locator(".people-section").nth(0);
@@ -272,4 +296,40 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   await expect(
     page.getByRole("heading", { level: 1, name: "인물 연결 E2E" }),
   ).toBeVisible();
+});
+
+
+test("KOBIS 영화 코드가 없는 영화에도 관객 평점 영역이 안내 상태로 표시된다", async ({ page }) => {
+  await page.route("**/api/movies/resolve/555", (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        tmdbId: 555,
+        movieCode: null,
+        title: "평점 안내 상태 E2E",
+        titleEn: "Rating Availability E2E",
+        releaseDate: "2026-11-12",
+        runningTime: "105",
+        genre: "드라마",
+        director: "테스트 감독",
+        actors: ["테스트 배우"],
+        watchGrade: "전체 관람가",
+        overview: "관객 평가 데이터 연결이 아직 없는 영화입니다.",
+        posterUrl: "",
+      }),
+    }),
+  );
+
+  await page.goto("/movie/555");
+
+  await expect(
+    page.getByRole("heading", { level: 1, name: "평점 안내 상태 E2E" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "관객 평점" })).toBeVisible();
+  await expect(page.locator(".movie-score-value strong")).toHaveText("—");
+  await expect(page.locator(".rating-unavailable")).toContainText(
+    "관객 평가 기능과 아직 연결되지 않았습니다.",
+  );
+  await expect(page.locator(".detail-reaction-counts")).toHaveCount(0);
 });
