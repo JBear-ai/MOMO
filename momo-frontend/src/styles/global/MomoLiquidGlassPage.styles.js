@@ -2273,6 +2273,22 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     opacity: .62;
   }
 
+
+  /* The desktop rating metrics must use the complete card width, not a narrow content column. */
+  #root .movie-detail-page .rating-panel-main {
+    display: grid;
+    width: 100%;
+    max-width: none;
+    align-self: stretch;
+    grid-template-columns: minmax(200px, .82fr) minmax(0, 1.18fr);
+  }
+  @media (max-width: 600px) {
+    #root .movie-detail-page .rating-panel-main {
+      width: 100%;
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
 `;
 
 export default MomoLiquidGlassPageStyles;
