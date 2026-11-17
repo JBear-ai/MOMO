@@ -109,16 +109,24 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   expect(profileEditCanvas.image).toContain("linear-gradient");
 
   const profileEditHero = await page.locator(".profile-edit-heading").evaluate((element) => {
-    const style = getComputedStyle(element);
+    const paper = getComputedStyle(element, "::before");
+    const fold = getComputedStyle(element, "::after");
+    const title = getComputedStyle(element.querySelector("h1"));
     return {
-      background: style.backgroundImage,
-      title: getComputedStyle(element.querySelector("h1")).color,
-      border: style.borderColor,
+      paperColor: paper.backgroundColor,
+      paperShape: paper.clipPath,
+      foldedCorner: fold.backgroundImage,
+      title: title.color,
+      highlight: title.backgroundImage,
+      outerRadius: getComputedStyle(element).borderRadius,
     };
   });
-  expect(profileEditHero.background).toContain("linear-gradient");
+  expect(profileEditHero.paperColor).toBe("rgb(255, 250, 236)");
+  expect(profileEditHero.paperShape).toContain("polygon");
+  expect(profileEditHero.foldedCorner).toContain("linear-gradient");
   expect(profileEditHero.title).toBe("rgb(41, 40, 32)");
-  expect(profileEditHero.border).toBe("rgb(233, 223, 197)");
+  expect(profileEditHero.highlight).toContain("linear-gradient");
+  expect(profileEditHero.outerRadius).toBe("0px");
 
   const profilePortraitStage = await page.locator(".profile-image-edit").evaluate((element) => {
     const style = getComputedStyle(element);
