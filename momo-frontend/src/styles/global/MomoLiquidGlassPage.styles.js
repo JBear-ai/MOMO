@@ -309,7 +309,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .favorite-page {
     min-height: 100vh;
     padding: 22px 0 72px;
-    background: transparent;
+    background: linear-gradient(180deg, rgba(99,122,114,.105), rgba(99,122,114,.035) 300px, transparent 620px);
   }
   #root .favorite-page-container {
     width: min(1240px, calc(100% - 48px));
