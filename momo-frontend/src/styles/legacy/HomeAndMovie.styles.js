@@ -619,6 +619,33 @@ const HomeAndMovieStyles = createGlobalStyle`
   font-size: 12px;
 }
 
+
+/* Product refinement: movie detail hierarchy and cast browsing. */
+.movie-detail-page { max-width: 1280px; }
+.movie-detail-header {
+  gap: clamp(22px, 3vw, 36px);
+  padding: clamp(20px, 2.8vw, 32px);
+  border-radius: 17px;
+  box-shadow: var(--momo-shadow-xs);
+}
+.movie-detail-poster { border-radius: 11px; box-shadow: var(--momo-shadow); }
+.movie-detail-info h1 { font-size: clamp(27px, 3vw, 38px); line-height: 1.2; }
+.detail-content-section {
+  margin-top: 22px;
+  padding: clamp(20px, 2.6vw, 30px);
+  border-radius: 15px;
+  box-shadow: none;
+}
+.detail-content-section > h2 { font-size: 20px; margin-bottom: 18px; }
+.person-chip { border-radius: 7px; background: #FFFAEC; }
+.person-filmography { padding: 20px; border-radius: 12px; }
+.filmography-item { border-radius: 8px; }
+@media (max-width: 700px) {
+  .movie-detail-header { grid-template-columns: minmax(0, 1fr); }
+  .movie-detail-poster { width: min(58%, 230px); margin: 0 auto; }
+  .detail-content-section { margin-top: 16px; }
+}
+
 `;
 
 export default HomeAndMovieStyles;

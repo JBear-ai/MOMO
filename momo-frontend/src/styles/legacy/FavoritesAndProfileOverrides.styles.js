@@ -530,6 +530,35 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 
+
+/* Favorites: let the poster be the main surface, not another nested card. */
+.favorite-page-container { max-width: 1280px; }
+.favorite-page-heading {
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  background: #FFF9E9;
+  border-radius: 15px;
+  box-shadow: none;
+}
+.favorite-page-heading h1 { font-size: clamp(26px, 3vw, 34px); letter-spacing: -.04em; }
+.favorite-page-grid { gap: 24px 18px; }
+.favorite-page-card {
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+}
+.favorite-page-card:hover { transform: translateY(-3px); box-shadow: none; }
+.favorite-page-poster { border-radius: 10px; box-shadow: var(--momo-shadow-xs); }
+.favorite-page-movie-info { padding: 10px 2px 0; }
+.favorite-page-movie-info h3 { font-size: 14px; }
+.home-favorites-empty { border-radius: 10px; background: rgba(255,254,250,.65); }
+@media (max-width: 600px) {
+  .favorite-page-heading { padding: 20px 17px; }
+  .favorite-page-grid { gap: 18px 12px; }
+}
+
 `;
 
 export default FavoritesAndProfileOverridesStyles;

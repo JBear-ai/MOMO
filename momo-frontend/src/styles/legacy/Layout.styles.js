@@ -6,46 +6,38 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   overflow-x: clip;
-  background:
-    radial-gradient(ellipse at 88% 12%, rgba(255, 212, 59, .08), transparent 32rem),
-    var(--momo-bg);
+  background: var(--momo-bg);
   color: var(--momo-text);
-  letter-spacing: -0.01em;
 `;
-
-// ========================================
-// 헤더
-// ========================================
 
 const Header = styled.header`
   position: sticky;
-  top: 12px;
+  top: 0;
   z-index: 100;
-  width: calc(100% - 2 * clamp(12px, 3vw, 44px));
-  max-width: 1480px;
-  min-height: 76px;
-  margin: 12px auto 0;
-  padding: 0 clamp(18px, 2.6vw, 38px);
+  width: 100%;
+  min-height: 72px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 56px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: clamp(14px, 2vw, 28px);
   background: var(--momo-header-glass);
-  border: 1px solid rgba(255, 255, 255, .92);
-  border-radius: 22px;
+  border-bottom: 1px solid rgba(215, 205, 187, .72);
   box-sizing: border-box;
-  box-shadow: 0 8px 28px rgba(54, 45, 28, .055), inset 0 1px 0 rgba(255,255,255,.94);
-  backdrop-filter: blur(18px) saturate(125%);
-  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  box-shadow: 0 3px 16px rgba(54, 45, 28, .035);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
 
-  @media (max-width: 768px) {
-    top: 8px;
-    width: calc(100% - 20px);
-    min-height: 64px;
-    margin-top: 8px;
-    padding: 10px 14px;
+  @media (max-width: 900px) {
+    min-height: 68px;
+    padding: 10px 20px;
     flex-wrap: wrap;
-    border-radius: 16px;
+    gap: 10px 16px;
+  }
+  @media (max-width: 600px) {
+    padding: 10px 14px;
+    gap: 8px 12px;
   }
 `;
 
@@ -53,17 +45,15 @@ const Logo = styled(Link)`
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  text-decoration: none;
 `;
 
 const LogoImage = styled.img`
   display: block;
   width: auto;
-  height: 36px;
+  height: 34px;
   object-fit: contain;
-
-  @media (max-width: 768px) {
-    height: 32px;
-  }
+  @media (max-width: 600px) { height: 30px; }
 `;
 
 const Navigation = styled.nav`
@@ -71,110 +61,76 @@ const Navigation = styled.nav`
   align-items: center;
   justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 6px;
-  padding: 5px;
-  border: 1px solid rgba(229, 222, 209, .72);
-  border-radius: var(--momo-radius-pill);
-  background: rgba(245, 242, 235, .62);
+  gap: 4px;
 
   a {
-    padding: 10px 14px;
+    position: relative;
+    padding: 10px 13px;
     color: var(--momo-muted);
     text-decoration: none;
     font-size: 13px;
     font-weight: 650;
     white-space: nowrap;
-    border-radius: var(--momo-radius-pill);
-    transition: color .18s ease, background .18s ease, box-shadow .18s ease;
-
-    &:hover {
-      color: var(--momo-text);
-      background: rgba(255,255,255,.72);
-    }
+    border-radius: 9px;
+    transition: color var(--momo-transition-fast), background var(--momo-transition-fast);
+    &:hover { color: var(--momo-text); background: #F5F1E8; }
   }
-
   a.active {
     color: var(--momo-accent-ink);
-    background: var(--momo-accent);
+    background: var(--momo-accent-soft);
     font-weight: 800;
-    box-shadow: 0 2px 8px rgba(140, 105, 0, .12);
   }
-
-  @media (max-width: 768px) {
-    order: 3;
+  @media (max-width: 900px) {
+    order: 4;
     width: 100%;
-    justify-content: center;
+    justify-content: flex-start;
     overflow-x: auto;
     flex-wrap: nowrap;
-    gap: 2px;
-    padding: 3px;
-
-    a { padding: 8px 10px; font-size: 12px; }
+    padding: 2px 0 4px;
+    border-top: 1px solid var(--momo-border);
+    a { padding: 8px 12px; }
   }
 `;
 
 const UserArea = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   white-space: nowrap;
   font-size: 13px;
-
-  @media (max-width: 768px) {
-    margin-left: auto;
-    gap: 8px;
-  }
+  @media (max-width: 600px) { margin-left: auto; gap: 7px; }
 `;
 
 const ActionButton = styled.button`
   min-height: 38px;
   padding: 8px 15px;
   border: 1px solid var(--momo-accent);
-  border-radius: var(--momo-radius-pill);
+  border-radius: 9px;
   background: var(--momo-accent);
   color: var(--momo-accent-ink);
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: var(--momo-accent-hover);
-    border-color: var(--momo-accent-hover);
-    transform: translateY(-1px);
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
+  transition: background var(--momo-transition-fast), transform var(--momo-transition-fast);
+  &:hover { background: var(--momo-accent-hover); transform: translateY(-1px); }
+  &:disabled { cursor: not-allowed; opacity: .6; }
 `;
 
 const Main = styled.main`
   flex: 1;
   width: 100%;
-  max-width: 1600px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: clamp(32px, 4vw, 60px) clamp(18px, 4.2vw, 64px) 76px;
+  padding: clamp(28px, 3.5vw, 48px) var(--momo-page-gutter) 72px;
   box-sizing: border-box;
-
-  @media (max-width: 600px) {
-    padding-top: 24px;
-    padding-bottom: 44px;
-  }
+  @media (max-width: 600px) { padding-top: 22px; padding-bottom: 44px; }
 `;
 
-// ========================================
-// 푸터
-// ========================================
-
 const Footer = styled.footer`
-  padding: 52px clamp(18px, 5vw, 80px) 30px;
-  background:
-    linear-gradient(180deg, rgba(255,250,236,.82), var(--momo-note));
+  padding: 42px var(--momo-page-gutter) 24px;
+  background: #F0EBDD;
   color: var(--momo-text-soft);
-  border-top: 1px solid var(--momo-note-border);
+  border-top: 1px solid var(--momo-border);
   box-sizing: border-box;
   width: 100%;
 `;
@@ -183,37 +139,27 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 40px;
+  gap: 36px;
   width: 100%;
-  max-width: 1320px;
-  margin: 0 auto 28px;
-  padding-bottom: 28px;
+  max-width: 1280px;
+  margin: 0 auto 24px;
+  padding-bottom: 24px;
   border-bottom: 1px solid var(--momo-border);
   box-sizing: border-box;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-  }
+  @media (max-width: 768px) { flex-direction: column; align-items: flex-start; gap: 22px; }
 `;
 
 const FooterLeft = styled.div`
   display: flex;
   align-items: center;
-  gap: 28px;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
+  gap: 24px;
+  @media (max-width: 600px) { flex-direction: column; align-items: flex-start; gap: 10px; }
 `;
 
 const FooterLogo = styled.img`
   display: block;
   width: auto;
-  height: 28px;
+  height: 27px;
   object-fit: contain;
   flex-shrink: 0;
 `;
@@ -222,58 +168,43 @@ const FooterDesc = styled.p`
   margin: 0;
   color: var(--momo-muted);
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.55;
   max-width: 380px;
   word-break: keep-all;
-  border-left: 1px solid var(--momo-border);
-  padding-left: 20px;
-
-  @media (max-width: 600px) {
-    border-left: none;
-    padding-left: 0;
-  }
+  border-left: 1px solid var(--momo-border-strong);
+  padding-left: 18px;
+  @media (max-width: 600px) { border-left: 0; padding-left: 0; }
 `;
 
 const FooterRight = styled.div`
   display: flex;
-  gap: 48px;
-
-  @media (max-width: 480px) {
-    flex-direction: column;
-    gap: 20px;
-  }
+  gap: 42px;
+  @media (max-width: 480px) { flex-direction: column; gap: 18px; }
 `;
 
 const FooterColumn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
+  gap: 8px;
   h4 {
     margin: 0 0 4px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     color: var(--momo-text);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    letter-spacing: .04em;
   }
-
-  span,
-  a {
+  span, a {
     color: var(--momo-muted);
     font-size: 13px;
     text-decoration: none;
-    transition: color 0.15s ease;
-
-    &:hover {
-      color: var(--momo-text);
-    }
+    transition: color var(--momo-transition-fast);
+    &:hover { color: var(--momo-text); }
   }
 `;
 
 const FooterBottom = styled.div`
   width: 100%;
-  max-width: 1320px;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -281,12 +212,7 @@ const FooterBottom = styled.div`
   font-size: 12px;
   color: var(--momo-placeholder);
   box-sizing: border-box;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-  }
+  @media (max-width: 600px) { flex-direction: column; gap: 7px; text-align: center; }
 `;
 
 export { Container };
