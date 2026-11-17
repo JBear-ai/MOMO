@@ -27,7 +27,6 @@ function GlobalStyles() {
   return (
     <>
       <GlobalTokensStyles />
-      <ProductExperienceStyles />
       <GlobalResetStyles />
       <ToastNotificationStyles />
       <FoundationAndProfileStyles />
@@ -43,6 +42,7 @@ function GlobalStyles() {
       <ResponsiveAndPosterOverridesStyles />
       <PersonDetailStyles />
       <ChatPopupGlobalStyles />
+      <ProductExperienceStyles />
     </>
   );
 }
