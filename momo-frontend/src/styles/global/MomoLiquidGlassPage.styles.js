@@ -2272,6 +2272,13 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     color: #776F62;
     opacity: .62;
   }
+  #root .profile-page .profile-delete-button:not(:disabled) {
+    border-color: #E5B8AD !important;
+    background: #FFF1EC !important;
+    color: #8C3F38 !important;
+    opacity: 1 !important;
+    cursor: pointer;
+  }
 
 
   /* The desktop rating metrics must use the complete card width, not a narrow content column. */
