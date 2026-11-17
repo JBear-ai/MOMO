@@ -191,7 +191,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
 .my-review-movie {
   display: block;
   margin-bottom: 8px;
-  color: #777;
+  color: var(--momo-muted);
   font-size: 13px;
   font-weight: 600;
 }
@@ -228,7 +228,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 12px;
-  color: #777;
+  color: var(--momo-muted);
   font-size: 13px;
 }
 
@@ -239,7 +239,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
 }
 
 .my-review-stats strong {
-  color: #333;
+  color: var(--momo-text);
   font-weight: 700;
 }
 
@@ -294,7 +294,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  color: #777;
+  color: var(--momo-muted);
   font-size: 12px;
   white-space: nowrap;
 }
@@ -329,12 +329,12 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 12px;
-  color: #777;
+  color: var(--momo-muted);
   font-size: 12px;
 }
 
 .all-review-mobile-stats strong {
-  color: #333;
+  color: var(--momo-text);
 }
 
 @media (max-width: 600px) {
