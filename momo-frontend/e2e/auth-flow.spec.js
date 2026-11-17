@@ -163,7 +163,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     return { background: style.backgroundImage, border: style.borderColor };
   });
   expect(profilePortraitStage.background).toContain("linear-gradient");
-  expect(profilePortraitStage.border).toBe("rgb(233, 223, 197)");
+  expect(profilePortraitStage.border).toBe("rgb(227, 206, 131)");
 
   const saveButton = await page.locator(".profile-edit-submit").evaluate((element) => {
     const style = getComputedStyle(element);
