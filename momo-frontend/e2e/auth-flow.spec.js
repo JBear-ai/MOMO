@@ -103,7 +103,7 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
           birthday: null,
           deathday: null,
           placeOfBirth: null,
-          biography: "인물 ID 연결 검증",
+          biography: "이 인물은 영화 제작과 연출 분야에서 오랜 기간 활동해 왔으며 다양한 장르의 작품을 통해 관객과 만났습니다. 작품의 서사와 인물의 감정을 세밀하게 다루는 연출을 선보이며 동료 창작자들과 협업했습니다. 이 소개 문장은 모바일과 데스크톱에서 세 줄 이후 접히는지 확인하기 위한 브라우저 테스트 문구입니다. 소개 더보기 버튼으로 전체 내용을 확인하고 다시 접을 수 있어야 합니다.",
           knownForDepartment: "Directing",
         },
         filmography: [
@@ -114,6 +114,13 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
             posterUrl: "",
             role: "Director",
           },
+          ...Array.from({ length: 7 }, (_, index) => ({
+            tmdbId: 889 + index,
+            title: `필모그래피 테스트 ${index + 2}`,
+            releaseDate: "2026-11-12",
+            posterUrl: "",
+            role: "Director",
+          })),
         ],
       }),
     }),
@@ -191,6 +198,22 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   await expect(
     page.getByRole("heading", { level: 1, name: "인물 연결 E2E" }),
   ).toBeVisible();
+
+  // 긴 인물 소개는 세 줄 미리보기에서 펼치고 다시 접을 수 있어야 한다.
+  const biography = page.locator(".person-biography");
+  await expect(biography).not.toHaveClass(/is-expanded/);
+  await page.getByRole("button", { name: "소개 더보기" }).click();
+  await expect(biography).toHaveClass(/is-expanded/);
+  await page.getByRole("button", { name: "접기" }).click();
+  await expect(biography).not.toHaveClass(/is-expanded/);
+
+  // 필모그래피는 두 열 기준 세 줄(6편)만 먼저 보여주고 더보기/접기가 가능해야 한다.
+  const filmographyItems = page.locator(".filmography-list [role='button']");
+  await expect(filmographyItems).toHaveCount(6);
+  await page.getByRole("button", { name: "필모그래피 더보기 (6 / 8)" }).click();
+  await expect(filmographyItems).toHaveCount(8);
+  await page.getByRole("button", { name: "접기" }).click();
+  await expect(filmographyItems).toHaveCount(6);
 
   await page.getByRole("button", {
     name: "필모그래피 이동 E2E 영화 상세정보 보기",
