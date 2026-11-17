@@ -116,12 +116,12 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page {
   min-height: 100vh;
-  padding: 56px 24px 80px;
-  background: var(--momo-bg);
+  padding: 12px 0 64px;
+  background: transparent;
 }
 
 .favorite-page-container {
-  max-width: 1240px;
+  max-width: 1320px;
   margin: 0 auto;
 }
 
@@ -130,7 +130,12 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 32px;
+  padding: 30px 34px;
+  margin-bottom: 28px;
+  background: linear-gradient(120deg, var(--momo-note), rgba(255,255,255,.88));
+  border: 1px solid var(--momo-note-border);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .favorite-page-heading > div {
@@ -196,12 +201,23 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-page-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 24px 18px;
+  gap: 22px 18px;
 }
 
 .favorite-page-card {
   position: relative;
   min-width: 0;
+  padding: 10px;
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
+  border-radius: 18px;
+  box-shadow: var(--momo-shadow-xs);
+  transition: transform .2s ease, box-shadow .2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--momo-shadow-sm);
+  }
 }
 
 .favorite-page-poster {
