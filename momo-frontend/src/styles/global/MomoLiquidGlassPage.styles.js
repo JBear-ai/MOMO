@@ -5,7 +5,7 @@ import { createGlobalStyle } from "styled-components";
  * Quiet cinema-inspired surfaces: restrained color, real translucent glass,
  * editorial hierarchy and poster-led composition. No decorative bubbles or tape.
  */
-const MomoLiquidGlassPageStyles = createGlobalStyle\`
+const MomoLiquidGlassPageStyles = createGlobalStyle`
   :root {
     --momo-glass-ink: #292D2B;
     --momo-glass-muted: #676D67;
@@ -1027,6 +1027,6 @@ const MomoLiquidGlassPageStyles = createGlobalStyle\`
       transition-duration: .01ms !important;
     }
   }
-\`;
+`;
 
 export default MomoLiquidGlassPageStyles;
