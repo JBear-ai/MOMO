@@ -1518,7 +1518,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     min-width: 112px;
     min-height: 46px;
     padding: 0 22px;
-    border-radius: 7px;
+    border-radius: 10px;
     font-size: 13px;
     font-weight: 850;
     transition: transform 170ms ease, box-shadow 170ms ease, background 170ms ease;
