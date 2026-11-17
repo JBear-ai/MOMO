@@ -8,9 +8,9 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-page {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1480px;
   margin: 0 auto;
-  padding: 30px 0 80px;
+  padding: 12px 0 64px;
   color: var(--momo-text);
 }
 
@@ -20,12 +20,12 @@ const ReviewListStyles = createGlobalStyle`
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 36px;
-  margin-bottom: 32px;
-  background: var(--momo-note);
+  padding: 30px 34px;
+  margin-bottom: 24px;
+  background: linear-gradient(120deg, var(--momo-note), rgba(255,255,255,.88));
   border: 1px solid var(--momo-note-border);
-  border-radius: var(--momo-radius);
-  box-shadow: var(--momo-shadow);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
   position: relative;
   overflow: hidden;
 }
@@ -91,11 +91,11 @@ const ReviewListStyles = createGlobalStyle`
 
 /* 리뷰 목록 카드 */
 .all-reviews-card {
-  padding: 30px;
+  padding: 28px;
   background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius);
-  box-shadow: var(--momo-shadow);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .all-reviews-card-heading {
@@ -139,7 +139,7 @@ const ReviewListStyles = createGlobalStyle`
   gap: 10px;
   margin: 0 0 24px;
   padding: 16px;
-  background: #FFFCF4;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
   border-radius: 10px;
 }
@@ -190,7 +190,7 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-search-submit:hover {
-  background: #F5C928;
+  background: var(--momo-accent-hover);
 }
 
 .all-reviews-search-reset {
@@ -201,7 +201,7 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-search-reset:hover {
   background: var(--momo-bg);
-  border-color: #BEB5A7;
+  border-color: var(--momo-border-strong);
 }
 
 /* 리뷰 테이블 */
@@ -296,7 +296,7 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-table tbody tr:hover {
-  background: #FFFCF4;
+  background: var(--momo-note);
 }
 
 /* 로딩 / 오류 / 빈 목록 */
@@ -316,9 +316,9 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-error {
-  color: #C0392B;
-  background: #FFF5F5;
-  border-color: #EED2D2;
+  color: var(--momo-danger);
+  background: var(--momo-danger-bg);
+  border-color: var(--momo-dislike-border);
 }
 
 /* 모바일 리뷰 목록 */

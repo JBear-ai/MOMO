@@ -16,14 +16,14 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     width: 100%;
     box-sizing: border-box;
     padding: 6px 16px;
-    background: #fffaec;
-    border: 1px solid #efe6d0;
+    background: var(--momo-note);
+    border: 1px solid var(--momo-note-border);
     border-radius: 20px;
     transition: all 0.2s ease;
   }
 
   .momo-search-form:focus-within {
-    border-color: #ffd43b;
+    border-color: var(--momo-accent);
     box-shadow: 0 0 0 3px rgba(255, 212, 59, 0.2);
   }
 
@@ -34,12 +34,12 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     border: none;
     outline: none;
     background: transparent;
-    color: #1c1a17;
+    color: var(--momo-text);
     font-size: 14px;
   }
 
   .momo-search-input::placeholder {
-    color: #948b7c;
+    color: var(--momo-placeholder);
   }
 
   /* 검색 버튼 */
@@ -49,14 +49,14 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     padding: 2px 4px;
     border: none;
     background: transparent;
-    color: #594400;
+    color: var(--momo-accent-ink);
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
   }
 
   .momo-search-button:hover {
-    color: #1c1a17;
+    color: var(--momo-text);
   }
 
   /* 자동완성 목록 */
@@ -69,10 +69,12 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     max-height: 390px;
     overflow-y: auto;
     box-sizing: border-box;
-    background: #ffffff;
-    border: 1px solid #e2dbd0;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(45, 38, 26, 0.12);
+    background: rgba(255, 254, 250, .97);
+    border: 1px solid var(--momo-border);
+    border-radius: 16px;
+    box-shadow: var(--momo-shadow-lg);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
   }
 
   /* 영화 검색 결과 */
@@ -84,8 +86,8 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     min-height: 84px;
     padding: 10px 12px;
     border: none;
-    border-bottom: 1px solid #f0ece4;
-    background: #ffffff;
+    border-bottom: 1px solid var(--momo-border);
+    background: var(--momo-surface);
     text-align: left;
     cursor: pointer;
   }
@@ -97,7 +99,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   .momo-search-result:hover,
   .momo-search-result:focus-visible,
   .momo-search-result.is-active {
-    background: #fffaec;
+    background: var(--momo-note);
     outline: none;
   }
 
@@ -110,9 +112,9 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     width: 42px;
     height: 60px;
     overflow: hidden;
-    border: 1px solid #e2dbd0;
+    border: 1px solid var(--momo-border);
     border-radius: 5px;
-    background: #efece4;
+    background: var(--momo-note);
   }
 
   .momo-search-poster img {
@@ -128,7 +130,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     justify-content: center;
     width: 100%;
     height: 100%;
-    color: #948b7c;
+    color: var(--momo-placeholder);
     font-size: 18px;
   }
 
@@ -144,7 +146,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
 
   .momo-search-title {
     overflow: hidden;
-    color: #1c1a17;
+    color: var(--momo-text);
     font-size: 14px;
     font-weight: 700;
     white-space: nowrap;
@@ -153,7 +155,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
 
   .momo-search-meta {
     overflow: hidden;
-    color: #948b7c;
+    color: var(--momo-placeholder);
     font-size: 11px;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -162,7 +164,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   /* 검색 상태 */
   .momo-search-message {
     padding: 18px 12px;
-    color: #787062;
+    color: var(--momo-muted);
     font-size: 13px;
     text-align: center;
   }

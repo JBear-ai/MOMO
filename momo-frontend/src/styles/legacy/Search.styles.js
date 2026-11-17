@@ -5,7 +5,7 @@ const SearchPage = styled.div`
   max-width: 1320px;
   margin: 0 auto;
   padding-bottom: 60px;
-  color: #1c1a17;
+  color: var(--momo-text);
 `;
 
 const SearchHeading = styled.div`
@@ -20,37 +20,37 @@ const SearchHeading = styled.div`
 
   p {
     margin: 0;
-    color: #787062;
+    color: var(--momo-muted);
     font-size: 14px;
   }
 `;
 
 const SearchInput = styled.input`
   width: 100%;
-  padding: 17px 20px;
+  padding: 18px 22px;
   box-sizing: border-box;
-  border: 1px solid #e2dbd0;
-  border-radius: 12px;
-  background: #ffffff;
-  color: #1c1a17;
+  border: 1px solid var(--momo-border);
+  border-radius: var(--momo-radius-lg);
+  background: var(--momo-surface);
+  color: var(--momo-text);
   font-size: 15px;
   outline: none;
 
   &:focus {
-    border-color: #ffd43b;
+    border-color: var(--momo-accent);
     box-shadow: 0 0 0 3px rgba(255, 212, 59, 0.18);
   }
 
   &::placeholder {
-    color: #948b7c;
+    color: var(--momo-placeholder);
   }
 `;
 
 const MovieGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 28px 18px;
-  margin-top: 36px;
+  gap: 22px 16px;
+  margin-top: 28px;
 
   @media (max-width: 1000px) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -93,7 +93,7 @@ const MovieCard = styled.div`
   }
 
   &:focus-visible {
-    outline: 2px solid #a37e1c;
+    outline: 2px solid var(--momo-link);
     outline-offset: 4px;
   }
 `;
@@ -104,8 +104,8 @@ const Poster = styled.div`
   aspect-ratio: 2 / 2.85;
   overflow: hidden;
   border-radius: 10px;
-  border: 1px solid #e2dbd0;
-  background: #efece4;
+  border: 1px solid var(--momo-border);
+  background: var(--momo-note);
 
   img {
     width: 100%;
@@ -124,14 +124,14 @@ const MovieInfo = styled.div`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: #1c1a17;
+    color: var(--momo-text);
     font-size: 15px;
     font-weight: 750;
   }
 
   p {
     margin: 6px 0 0;
-    color: #787062;
+    color: var(--momo-muted);
     font-size: 12px;
   }
 `;
@@ -139,29 +139,29 @@ const MovieInfo = styled.div`
 const SearchMessage = styled.div`
   padding: 70px 0;
   text-align: center;
-  color: #787062;
+  color: var(--momo-muted);
   font-size: 14px;
 `;
 
 const LoadingMessage = styled.div`
   padding: 35px 0;
   text-align: center;
-  color: #787062;
+  color: var(--momo-muted);
   font-size: 13px;
 `;
 
 const RetryButton = styled.button`
   margin-top: 12px;
   padding: 9px 18px;
-  border: 1px solid #e2dbd0;
+  border: 1px solid var(--momo-border);
   border-radius: 8px;
-  background: #ffffff;
-  color: #1c1a17;
+  background: var(--momo-surface);
+  color: var(--momo-text);
   cursor: pointer;
 
   &:hover {
-    background: #fff5d6;
-    border-color: #ffd43b;
+    background: var(--momo-note-strong);
+    border-color: var(--momo-accent);
   }
 `;
 
