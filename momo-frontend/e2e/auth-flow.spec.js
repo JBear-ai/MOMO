@@ -569,6 +569,8 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
       dislikeBackground: dislike.backgroundColor,
       dislikeText: dislike.color,
       height: element.getBoundingClientRect().height,
+      contentWidth: element.querySelector(".rating-panel-main").getBoundingClientRect().width,
+      panelWidth: element.querySelector(".rating-panel-main").parentElement.clientWidth,
     };
   });
   expect(ratingVisual.panelBackground).toBe("rgba(255, 250, 236, 0.9)");
@@ -581,6 +583,7 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   expect(ratingVisual.dislikeBackground).toBe("rgba(255, 241, 236, 0.92)");
   expect(ratingVisual.dislikeText).toBe("rgb(139, 79, 71)");
   expect(ratingVisual.height).toBeGreaterThan(240);
+  expect(ratingVisual.contentWidth).toBeGreaterThan(ratingVisual.panelWidth * 0.95);
   await page.screenshot({
     path: "test-results/movie-rating-mobile.png",
     fullPage: true,
