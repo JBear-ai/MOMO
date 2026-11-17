@@ -389,13 +389,27 @@ export const PosterWrap = styled.div`
 export const Rank = styled.span`
   position: absolute;
   left: 10px;
-  bottom: 8px;
-  color: #fff;
-  font-size: 30px;
+  bottom: 10px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,.92);
+  border-radius: 11px 11px 11px 4px;
+  background: linear-gradient(145deg, rgba(255,253,242,.96), rgba(255,243,203,.9));
+  box-shadow: 0 5px 12px rgba(28,22,14,.24), inset 0 1px rgba(255,255,255,.98);
+  color: #564211;
+  font-size: 17px;
   line-height: 1;
-  font-weight: 900;
-  font-style: italic;
-  text-shadow: 0 2px 8px rgba(0,0,0,.7);
+  font-weight: 950;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  transition: transform 220ms cubic-bezier(.2,.72,.2,1), box-shadow 220ms ease;
+  ${PosterWrap}:hover & {
+    transform: translateY(-3px) rotate(-3deg);
+    box-shadow: 0 9px 17px rgba(28,22,14,.28), inset 0 1px rgba(255,255,255,.98);
+  }
 `;
 
 export const MovieInfo = styled.div`
