@@ -127,7 +127,7 @@ body {
 }
 
 .profile-delete-button {
-  background: #FFF5F5;
+  background: var(--momo-surface)5F5;
   border-color: #EED2D2;
   color: #C53030;
   text-decoration: none;
