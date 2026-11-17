@@ -26,7 +26,7 @@ const Header = styled.header`
   gap: clamp(14px, 2vw, 26px);
   box-sizing: border-box;
   border-bottom: 1px solid rgba(255,255,255,.9);
-  background: rgba(247,246,240,.82);
+  background: rgba(255,250,236,.88);
   box-shadow: 0 7px 22px rgba(39,43,39,.055), inset 0 1px rgba(255,255,255,.86);
   backdrop-filter: blur(24px) saturate(112%);
   -webkit-backdrop-filter: blur(24px) saturate(112%);
@@ -87,7 +87,7 @@ const Navigation = styled.nav`
     align-items: center;
     min-height: 38px;
     padding: 0 14px;
-    color: #4E554F;
+    color: #514833;
     border: 1px solid rgba(255,255,255,.74);
     border-radius: 11px;
     background: rgba(250,249,245,.48);
@@ -103,17 +103,17 @@ const Navigation = styled.nav`
       box-shadow 180ms ease,
       border-color 180ms ease;
     &:hover {
-      color: #293D34;
-      border-color: rgba(128,143,132,.34);
-      background: rgba(255,255,255,.78);
+      color: #66510F;
+      border-color: rgba(214,180,63,.48);
+      background: rgba(255,250,236,.94);
       box-shadow: 0 5px 12px rgba(39,43,39,.06), inset 0 1px rgba(255,255,255,.95);
       transform: translateY(-2px);
     }
   }
   a.active {
-    color: #3F5D4C;
-    border-color: rgba(105,128,115,.38);
-    background: rgba(105,128,115,.13);
+    color: #66510F;
+    border-color: rgba(214,180,63,.62);
+    background: rgba(255,212,59,.24);
     box-shadow: inset 0 1px rgba(255,255,255,.84);
     font-weight: 900;
   }
@@ -124,7 +124,7 @@ const Navigation = styled.nav`
     overflow-x: auto;
     flex-wrap: nowrap;
     padding: 5px 0 3px;
-    border-top: 1px solid rgba(174,155,115,.2);
+    border-top: 1px solid rgba(233,223,197,.82);
     a { min-height: 33px; padding: 0 12px; }
   }
 `;
@@ -145,10 +145,10 @@ const ActionButton = styled.button`
   min-height: 38px;
   padding: 0 16px;
   overflow: hidden;
-  border: 1px solid rgba(100,119,107,.34);
+  border: 1px solid rgba(233,223,197,.92);
   border-radius: 11px;
-  background: rgba(102,126,111,.13);
-  color: #405448;
+  background: rgba(255,250,236,.82);
+  color: #6A6251;
   font-size: 12px;
   font-weight: 900;
   cursor: pointer;
@@ -166,8 +166,8 @@ const ActionButton = styled.button`
   }
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    border-color: rgba(100,119,107,.5);
-    background: rgba(102,126,111,.2);
+    border-color: rgba(214,180,63,.58);
+    background: rgba(255,212,59,.16);
     box-shadow: 0 5px 12px rgba(39,43,39,.07), inset 0 1px rgba(255,255,255,.9);
   }
   &:active:not(:disabled) { transform: translateY(0) scale(.98); }
@@ -196,8 +196,8 @@ const Footer = styled.footer`
   overflow: hidden;
   box-sizing: border-box;
   border-top: 1px solid rgba(255,255,255,.9);
-  background: rgba(239,239,232,.72);
-  color: #4F5851;
+  background: rgba(255,250,236,.94);
+  color: #514833;
   box-shadow: 0 -6px 20px rgba(39,43,39,.035), inset 0 1px rgba(255,255,255,.86);
   backdrop-filter: blur(18px) saturate(108%);
   -webkit-backdrop-filter: blur(18px) saturate(108%);
@@ -212,7 +212,7 @@ const FooterContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto 24px;
   padding-bottom: 24px;
-  border-bottom: 1px solid rgba(171,153,116,.28);
+  border-bottom: 1px solid rgba(233,223,197,.9);
   box-sizing: border-box;
   @media (max-width: 768px) { flex-direction: column; align-items: flex-start; gap: 22px; }
 `;
@@ -240,7 +240,7 @@ const FooterDesc = styled.p`
   line-height: 1.65;
   max-width: 380px;
   word-break: keep-all;
-  border-left: 1px solid rgba(171,153,116,.42);
+  border-left: 1px solid rgba(233,223,197,.95);
   padding-left: 18px;
   @media (max-width: 600px) { border-left: 0; padding-left: 0; }
 `;
@@ -259,7 +259,7 @@ const FooterColumn = styled.div`
     margin: 0 0 4px;
     font-size: 11px;
     font-weight: 900;
-    color: #77643E;
+    color: #80600E;
     letter-spacing: .09em;
     text-transform: uppercase;
   }
@@ -280,7 +280,7 @@ const FooterBottom = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
-  color: #948873;
+  color: #6A6251;
   box-sizing: border-box;
   p { margin: 0; }
   @media (max-width: 600px) { flex-direction: column; gap: 7px; text-align: center; }

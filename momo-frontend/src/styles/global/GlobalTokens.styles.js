@@ -30,17 +30,17 @@ const GlobalTokensStyles = createGlobalStyle`
     --momo-border-strong: #D8C99F;
     --momo-note-border: #E9DFC5;
     --momo-focus: rgba(198, 161, 43, .45);
-    --momo-like-bg: #EEF0E8;
-    --momo-like-bg-hover: #E3E8DB;
-    --momo-like-border: #A8B19A;
-    --momo-like-text: #43513F;
-    --momo-dislike-bg: #F3EBE8;
-    --momo-dislike-bg-hover: #EBDDD8;
-    --momo-dislike-border: #C4A29A;
-    --momo-dislike-text: #80534C;
-    --momo-danger: #965A53;
-    --momo-danger-bg: #F4EDEA;
-    --momo-success: #526D5D;
+    --momo-like-bg: #FFF3C5;
+    --momo-like-bg-hover: #FFE99A;
+    --momo-like-border: #D8B44E;
+    --momo-like-text: #66510F;
+    --momo-dislike-bg: #FFF1EC;
+    --momo-dislike-bg-hover: #FFE5DC;
+    --momo-dislike-border: #E5B8AD;
+    --momo-dislike-text: #8B4F47;
+    --momo-danger: #8C3F38;
+    --momo-danger-bg: #FFF0EB;
+    --momo-success: #77601C;
 
     /* Material */
     --momo-shadow-xs: 0 1px 2px rgba(39, 43, 39, .035);
