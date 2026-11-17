@@ -342,6 +342,30 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 }
 
 
+
+/* Handwritten-note canvas */
+.review-detail-page { max-width:1120px; }
+.review-detail-card {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(220px,.38fr);
+  column-gap:clamp(24px,4vw,56px);
+  padding:clamp(28px,4vw,58px);
+  border:1px solid rgba(255,255,255,.86);
+  border-radius:26px;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 35px,rgba(214,166,20,.065) 35px 36px),
+    linear-gradient(135deg,#FFFEFA,#FFF9E9);
+  box-shadow:0 24px 56px rgba(54,45,28,.09);
+}
+.review-detail-card::before { left:0; right:auto; top:0; bottom:0; width:5px; height:auto; background:linear-gradient(#FFD43B,rgba(255,212,59,.08)); }
+.review-detail-top,.review-detail-content-section,.review-detail-reactions,.review-detail-updated { grid-column:1 / -1; }
+.review-detail-title { font-size:clamp(34px,4.5vw,54px); line-height:1.12; letter-spacing:-.06em; }
+.review-detail-movie { grid-column:1 / -1; display:grid; grid-template-columns:92px minmax(0,1fr); align-items:center; gap:20px; margin:28px 0; padding:18px; border-radius:14px; background:rgba(255,255,255,.66); box-shadow:0 10px 24px rgba(54,45,28,.06); }
+.review-detail-movie-poster { width:92px; min-width:92px; height:132px; border:5px solid white; border-radius:4px; box-shadow:0 8px 16px rgba(54,45,28,.15); }
+.review-detail-content { min-height:220px; padding:30px 34px; border:0; border-radius:4px 14px 4px 14px; background:rgba(255,255,255,.55); line-height:2.05; }
+.review-detail-reactions { margin-top:26px; }
+@media(max-width:680px) { .review-detail-card { display:block; padding:28px 20px; } .review-detail-movie { grid-template-columns:72px minmax(0,1fr); } .review-detail-movie-poster { width:72px; min-width:72px; height:104px; } .review-detail-content { padding:22px 18px; } }
+
 `;
 
 export default ReviewDetailAndRatingStyles;
