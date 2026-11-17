@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import SafeImage from "../components/common/SafeImage";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -75,7 +76,7 @@ function ReviewDetail() {
         response.data.page?.totalElements ?? response.data.totalElements ?? response.data.content?.length ?? 0,
       );
     } catch (err) {
-      console.error("댓글 목록 조회 실패:", err);
+      console.error("댓글 목록 조회 실패:", safeRequestFailure(err));
     }
   };
 
@@ -87,7 +88,7 @@ function ReviewDetail() {
       setLikeCount(response.data.likeCount || 0);
       setDislikeCount(response.data.dislikeCount || 0);
     } catch (err) {
-      console.error("리뷰 반응 개수 조회 실패:", err);
+      console.error("리뷰 반응 개수 조회 실패:", safeRequestFailure(err));
     }
   };
 
@@ -135,7 +136,7 @@ function ReviewDetail() {
           setComments(data.content || []);
           setCommentsTotal(data.page?.totalElements ?? data.totalElements ?? data.content?.length ?? 0);
         } else {
-          console.error("댓글 조회 실패:", results[0].reason);
+          console.error("댓글 조회 실패:", safeRequestFailure(results[0].reason));
         }
 
         // 로그인 사용자
@@ -160,7 +161,7 @@ function ReviewDetail() {
                 reactionError.name !== "CanceledError" &&
                 reactionError.response?.status !== 401
               ) {
-                console.error("내 리뷰 반응 조회 실패:", reactionError);
+                console.error("내 리뷰 반응 조회 실패:", safeRequestFailure(reactionError));
               }
               setMyReaction(null);
             }
@@ -179,21 +180,21 @@ function ReviewDetail() {
           setLikeCount(data.likeCount || 0);
           setDislikeCount(data.dislikeCount || 0);
         } else {
-          console.error("반응 개수 조회 실패:", results[2].reason);
+          console.error("반응 개수 조회 실패:", safeRequestFailure(results[2].reason));
         }
 
         // 영화 정보
         if (results[3].status === "fulfilled" && results[3].value) {
           setMovie(results[3].value.data);
         } else if (results[3].status === "rejected") {
-          console.error("영화 정보 조회 실패:", results[3].reason);
+          console.error("영화 정보 조회 실패:", safeRequestFailure(results[3].reason));
         }
 
         // 영화 포스터
         if (results[4].status === "fulfilled" && results[4].value) {
           setPosterUrl(results[4].value.data.posterUrl || "");
         } else if (results[4].status === "rejected") {
-          console.error("영화 포스터 조회 실패:", results[4].reason);
+          console.error("영화 포스터 조회 실패:", safeRequestFailure(results[4].reason));
         }
       } catch (err) {
         if (
@@ -203,7 +204,7 @@ function ReviewDetail() {
           err.name === "CanceledError"
         ) return;
 
-        console.error("리뷰 상세 조회 실패:", err);
+        console.error("리뷰 상세 조회 실패:", safeRequestFailure(err));
 
         if (err.response?.status === 404) {
           setError("존재하지 않는 리뷰입니다.");
@@ -268,7 +269,7 @@ function ReviewDetail() {
 
       await fetchReview();
     } catch (err) {
-      console.error("리뷰 수정 실패:", err);
+      console.error("리뷰 수정 실패:", safeRequestFailure(err));
 
       if (err.response?.status === 403) {
         alert("본인이 작성한 리뷰만 수정할 수 있습니다.");
@@ -300,7 +301,7 @@ function ReviewDetail() {
 
       navigate("/reviews", { replace: true });
     } catch (err) {
-      console.error("리뷰 삭제 실패:", err);
+      console.error("리뷰 삭제 실패:", safeRequestFailure(err));
 
       if (err.response?.status === 403) {
         alert("본인이 작성한 리뷰만 삭제할 수 있습니다.");
@@ -339,7 +340,7 @@ function ReviewDetail() {
 
       await fetchComments();
     } catch (err) {
-      console.error("댓글 작성 실패:", err);
+      console.error("댓글 작성 실패:", safeRequestFailure(err));
 
       if (err.response?.status === 401) {
         alert("로그인이 필요합니다.");
@@ -383,7 +384,7 @@ function ReviewDetail() {
 
       await fetchComments();
     } catch (err) {
-      console.error("댓글 수정 실패:", err);
+      console.error("댓글 수정 실패:", safeRequestFailure(err));
 
       if (err.response?.status === 403) {
         alert("본인이 작성한 댓글만 수정할 수 있습니다.");
@@ -409,7 +410,7 @@ function ReviewDetail() {
       }
       await fetchComments();
     } catch (err) {
-      console.error("댓글 반응 처리 실패:", err);
+      console.error("댓글 반응 처리 실패:", safeRequestFailure(err));
       alert(err.response?.data?.message || "댓글 반응 처리에 실패했습니다.");
     }
   };
@@ -425,7 +426,7 @@ function ReviewDetail() {
 
       await fetchComments();
     } catch (err) {
-      console.error("댓글 삭제 실패:", err);
+      console.error("댓글 삭제 실패:", safeRequestFailure(err));
 
       if (err.response?.status === 403) {
         alert("본인이 작성한 댓글만 삭제할 수 있습니다.");
@@ -454,7 +455,7 @@ function ReviewDetail() {
 
       await fetchReactionCounts();
     } catch (err) {
-      console.error("리뷰 반응 처리 실패:", err);
+      console.error("리뷰 반응 처리 실패:", safeRequestFailure(err));
 
       if (err.response?.status === 401) {
         alert("로그인이 필요합니다.");

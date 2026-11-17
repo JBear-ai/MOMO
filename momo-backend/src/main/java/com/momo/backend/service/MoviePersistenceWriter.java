@@ -20,6 +20,36 @@ public class MoviePersistenceWriter {
     private final MovieRepository movieRepository;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public Movie applyDetail(MovieDetailUpdate update, boolean requireExisting) {
+        Movie movie = movieRepository.findById(update.movieCode()).orElse(null);
+        if (movie == null) {
+            if (requireExisting) throw new IllegalStateException("Movie no longer exists: " + update.movieCode());
+            movie = update.create();
+            update.apply(movie);
+            return movieRepository.saveAndFlush(movie);
+        }
+        update.apply(movie);
+        movieRepository.flush();
+        return movie;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
+    public Movie readCurrent(String movieCode) {
+        Movie movie = movieRepository.findById(movieCode).orElseThrow();
+        if (movie.getTitle() == null || movie.getTitle().isBlank())
+            throw new IllegalStateException("Invalid current Movie");
+        return movie;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void applyBoxOffice(String movieCode, int rank, String date, boolean daily) {
+        Movie movie = movieRepository.findById(movieCode).orElseThrow();
+        if (daily) movie.markBoxOfficeEntered(rank, date);
+        else movie.markWeeklyBoxOfficeEntered(rank, date);
+        movieRepository.flush();
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void saveOrSupplement(MovieSearchResponse item) {
         Movie existing = movieRepository.findById(item.movieCode()).orElse(null);
         if (existing != null) {

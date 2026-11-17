@@ -26,10 +26,10 @@ public class CommentReactionService {
     private final UserRepository userRepository;
 
     // 로그인한 사용자의 댓글 좋아요/싫어요 저장 및 변경
-    public void saveReaction(String loginId, Long commentId, Boolean liked) {
+    public void saveReaction(Long userId, Long commentId, Boolean liked) {
 
         // 로그인한 회원 조회
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",
@@ -69,10 +69,10 @@ public class CommentReactionService {
     }
 
     // 로그인한 사용자의 댓글 반응 취소
-    public void deleteReaction(String loginId, Long commentId) {
+    public void deleteReaction(Long userId, Long commentId) {
 
         // 로그인한 회원 조회
-        User user = userRepository.findByLoginIdForUpdate(loginId)
+        User user = userRepository.findByUserIdForUpdate(userId)
                 .orElseThrow(() ->
                         new CustomException(
                                 "USER_NOT_FOUND",

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import com.momo.backend.security.MemberPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class FavoriteMovieController {
             Authentication authentication
     ) {
         return ResponseEntity.ok(
-                favoriteMovieService.getFavorites(authentication.getName())
+                favoriteMovieService.getFavorites(MemberPrincipal.requireUserId(authentication))
         );
     }
 
@@ -34,7 +35,7 @@ public class FavoriteMovieController {
             Authentication authentication
     ) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                favoriteMovieService.addFavorite(authentication.getName(), request)
+                favoriteMovieService.addFavorite(MemberPrincipal.requireUserId(authentication), request)
         );
     }
 
@@ -43,7 +44,7 @@ public class FavoriteMovieController {
             @PathVariable String movieCode,
             Authentication authentication
     ) {
-        favoriteMovieService.removeFavorite(authentication.getName(), movieCode);
+        favoriteMovieService.removeFavorite(MemberPrincipal.requireUserId(authentication), movieCode);
         return ResponseEntity.noContent().build();
     }
 }

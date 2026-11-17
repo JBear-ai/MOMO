@@ -51,7 +51,7 @@ class MovieServiceConcurrentDetailTest {
 
         when(movieRepository.findById(movieCode))
                 .thenAnswer(invocation -> Optional.ofNullable(persistedMovie.get()));
-        when(movieRepository.save(any(Movie.class))).thenAnswer(invocation -> {
+        when(movieRepository.saveAndFlush(any(Movie.class))).thenAnswer(invocation -> {
             Movie movie = invocation.getArgument(0);
             persistedMovie.set(movie);
             return movie;
@@ -73,7 +73,7 @@ class MovieServiceConcurrentDetailTest {
                 movieRepository,
                 mock(MovieCacheRepository.class),
                 mock(MoviePosterCacheService.class),
-                mock(MoviePersistenceService.class),
+                new MoviePersistenceService(new MoviePersistenceWriter(movieRepository)),
                 mock(MoviePosterCacheRepository.class),
                 mock(MovieExternalIdMappingRepository.class),
                 mock(PosterFileStorageService.class),
@@ -106,8 +106,6 @@ class MovieServiceConcurrentDetailTest {
 
         verify(kobisApiClient, times(1)).getMovieDetail(movieCode);
 
-        ArgumentCaptor<Movie> savedMovieCaptor = ArgumentCaptor.forClass(Movie.class);
-        verify(movieRepository, times(2)).save(savedMovieCaptor.capture());
-        assertSame(savedMovieCaptor.getAllValues().get(0), savedMovieCaptor.getAllValues().get(1));
+        verify(movieRepository, times(1)).saveAndFlush(any(Movie.class));
     }
 }

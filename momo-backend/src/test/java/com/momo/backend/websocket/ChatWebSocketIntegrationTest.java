@@ -49,13 +49,56 @@ class ChatWebSocketIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private com.momo.backend.service.ChatMessageService chatMessages;
+
+    @Test
+    void deletingMemberInIsolatedDatabaseBlocksExistingWebSocketSend() throws Exception {
+        String suffix=UUID.randomUUID().toString().replace("-", "");
+        User user=userRepository.saveAndFlush(new User("d"+suffix.substring(0,12), "test-hash",
+                "d"+suffix.substring(0,8),suffix+"@example.test"));
+        String token=tokenProvider.createToken(user.getUserId());
+        BlockingQueue<String> frames=new LinkedBlockingQueue<>();
+        var closed=new java.util.concurrent.CompletableFuture<Integer>();
+        WebSocket socket=HttpClient.newHttpClient().newWebSocketBuilder()
+                .buildAsync(URI.create("ws://localhost:"+port+"/ws/chat"),new WebSocket.Listener(){
+                    private final StringBuilder partial=new StringBuilder();
+                    @Override public void onOpen(WebSocket ws){ws.request(1);}
+                    @Override public java.util.concurrent.CompletionStage<?> onText(WebSocket ws,CharSequence data,boolean last){
+                        partial.append(data);
+                        if(last){frames.offer(partial.toString());partial.setLength(0);}
+                        ws.request(1);return null;
+                    }
+                    @Override public java.util.concurrent.CompletionStage<?> onClose(WebSocket ws,int code,String reason){
+                        closed.complete(code);return null;
+                    }
+                }).get(5,TimeUnit.SECONDS);
+        try {
+            socket.sendText("{\"type\":\"AUTH\",\"accessToken\":\""+token+"\"}",true).get(5,TimeUnit.SECONDS);
+            for(String expected:new String[]{"AUTHENTICATED","HISTORY","PRESENCE"}) {
+                String frame=frames.poll(5,TimeUnit.SECONDS);
+                assertNotNull(frame);
+                org.junit.jupiter.api.Assertions.assertEquals(expected,objectMapper.readTree(frame).path("type").asString());
+            }
+            userRepository.deleteById(user.getUserId());
+            org.junit.jupiter.api.Assertions.assertFalse(userRepository.existsById(user.getUserId()));
+            socket.sendText("{\"type\":\"SEND\",\"content\":\"blocked-after-withdrawal\"}",true).get(5,TimeUnit.SECONDS);
+            String rejected=frames.poll(5,TimeUnit.SECONDS);
+            assertNotNull(rejected);
+            assertTrue(rejected.contains("MEMBER_NOT_FOUND"));
+            org.junit.jupiter.api.Assertions.assertEquals(1008,closed.get(5,TimeUnit.SECONDS));
+            org.junit.jupiter.api.Assertions.assertFalse(chatMessages.getHistory(null,50).messages().stream()
+                    .anyMatch(m->"blocked-after-withdrawal".equals(m.content())));
+        } finally {socket.abort();}
+    }
+
     @Test
     void authenticatedMemberReceivesHistoryAndCanBroadcastUnicodeMessage() throws Exception {
         String suffix = UUID.randomUUID().toString().replace("-", "");
         User user = userRepository.saveAndFlush(
                 new User("chat" + suffix.substring(0, 12), "test-password-hash", "채팅" + suffix.substring(0, 8),
                         suffix.substring(0, 12) + "@example.test"));
-        String accessToken = tokenProvider.createToken(user.getLoginId());
+        String accessToken = tokenProvider.createToken(user.getUserId());
         BlockingQueue<String> incomingFrames = new LinkedBlockingQueue<>();
         WebSocket socket = null;
 

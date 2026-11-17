@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "./safeRequestFailure";
 import AxiosApi from "../api/AxiosApi";
 
 const FAVORITES_KEY_PREFIX = "momo-favorite-movies:";
@@ -50,7 +51,7 @@ export function getFavoriteMovies(userId = getCurrentFavoriteUserId()) {
     const parsedFavorites = JSON.parse(localStorage.getItem(storageKey) || "[]");
     return Array.isArray(parsedFavorites) ? parsedFavorites : [];
   } catch (error) {
-    console.error("관심 영화 조회 실패:", error);
+    console.error("관심 영화 조회 실패:", safeRequestFailure(error));
     return [];
   }
 }
@@ -203,7 +204,7 @@ export function toggleFavoriteMovie(
   try {
     return saveFavoriteCache(userId, updatedFavorites);
   } catch (error) {
-    console.error("관심 영화 저장 실패:", error);
+    console.error("관심 영화 저장 실패:", safeRequestFailure(error));
     return favorites;
   }
 }

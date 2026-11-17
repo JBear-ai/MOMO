@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useEffect, useState } from "react";
 import SafeImage from "../components/common/SafeImage";
 import { useNavigate } from "react-router-dom";
@@ -115,7 +116,7 @@ function Home() {
             error.code !== "ERR_CANCELED" &&
             error.name !== "CanceledError"
           ) {
-            console.error("포스터 상태 조회 실패:", error);
+            console.error("포스터 상태 조회 실패:", safeRequestFailure(error));
             refreshPosterStatuses(movieCodes, attempt + 1);
           }
         }
@@ -161,7 +162,7 @@ function Home() {
           error.code !== "ERR_CANCELED" &&
           error.name !== "CanceledError"
         ) {
-          console.error("박스오피스 조회 실패:", error);
+          console.error("박스오피스 조회 실패:", safeRequestFailure(error));
           setMovies([]);
         }
       } finally {

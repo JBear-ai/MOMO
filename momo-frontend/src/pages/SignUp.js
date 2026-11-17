@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../textlogo.png";
@@ -119,7 +120,7 @@ function SignUp() {
         alert("회원가입에 실패했습니다.");
       }
     } catch (error) {
-      console.error("회원가입 오류:", error);
+      console.error("회원가입 오류:", safeRequestFailure(error));
       alert("회원가입 중 오류가 발생했습니다.");
     }
   };

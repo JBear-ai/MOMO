@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useState, useEffect } from "react";
 import SafeImage from "../components/common/SafeImage";
 import { useParams, useNavigate } from "react-router-dom";
@@ -144,7 +145,7 @@ function MovieDetail() {
             posterUrl = posterResponse.data?.posterUrl || posterUrl;
           } catch (posterError) {
             if (posterError.code === "ERR_CANCELED") throw posterError;
-            console.warn("포스터 조회 실패:", posterError);
+            console.warn("포스터 조회 실패:", safeRequestFailure(posterError));
           }
         }
 
@@ -156,7 +157,7 @@ function MovieDetail() {
             moviePeople = Array.isArray(peopleResponse.data) ? peopleResponse.data : [];
           } catch (peopleError) {
             if (peopleError.code === "ERR_CANCELED") throw peopleError;
-            console.warn("영화 인물 프로필 조회 실패:", peopleError);
+            console.warn("영화 인물 프로필 조회 실패:", safeRequestFailure(peopleError));
           }
         }
 
@@ -172,7 +173,7 @@ function MovieDetail() {
 
       } catch (requestError) {
         if (!active || requestError.code === "ERR_CANCELED") return;
-        console.error("영화 상세정보 조회 실패:", requestError);
+        console.error("영화 상세정보 조회 실패:", safeRequestFailure(requestError));
         setError(
           requestError.response?.data?.message ||
             requestError.message ||
@@ -234,7 +235,7 @@ function MovieDetail() {
             posterError.code !== "ERR_CANCELED" &&
             posterError.name !== "CanceledError"
           ) {
-            console.warn("영화 상세 포스터 상태 조회 실패:", posterError);
+            console.warn("영화 상세 포스터 상태 조회 실패:", safeRequestFailure(posterError));
             refreshPoster(attempt + 1);
           }
         }
@@ -282,7 +283,7 @@ function MovieDetail() {
       if (reviewsResult.status === "fulfilled") {
         setReviews(reviewsResult.value.data?.content || []);
       } else if (reviewsResult.reason?.code !== "ERR_CANCELED") {
-        console.error("영화 메모 조회 실패:", reviewsResult.reason);
+        console.error("영화 메모 조회 실패:", safeRequestFailure(reviewsResult.reason));
         setReviewError("영화 메모를 불러오지 못했습니다.");
       }
 
@@ -296,7 +297,7 @@ function MovieDetail() {
           myRating: data.myRating ?? null,
         });
       } else if (ratingResult.reason?.code !== "ERR_CANCELED") {
-        console.error("영화 평가 조회 실패:", ratingResult.reason);
+        console.error("영화 평가 조회 실패:", safeRequestFailure(ratingResult.reason));
         setRatingError("영화 평가를 불러오지 못했습니다.");
       }
     }
@@ -401,13 +402,13 @@ function MovieDetail() {
       try {
         await refreshMovieRating();
       } catch (refreshError) {
-        console.error("평가 저장 후 최신 집계 조회 실패:", refreshError);
+        console.error("평가 저장 후 최신 집계 조회 실패:", safeRequestFailure(refreshError));
         setRatingError(
           "평가는 저장됐지만 최신 집계를 불러오지 못했습니다. 새로고침해 주세요.",
         );
       }
     } catch (error) {
-      console.error("영화 평가 처리 실패:", error);
+      console.error("영화 평가 처리 실패:", safeRequestFailure(error));
       setRatingSummary(previousSummary);
 
       if (error.response?.status === 401) {
@@ -465,7 +466,7 @@ function MovieDetail() {
       setReviewText("");
       setIsReviewOpen(false);
     } catch (error) {
-      console.error("리뷰 등록 실패:", error);
+      console.error("리뷰 등록 실패:", safeRequestFailure(error));
 
       if (error.response?.status === 401) {
         setReviewError("리뷰를 등록하려면 로그인이 필요합니다.");

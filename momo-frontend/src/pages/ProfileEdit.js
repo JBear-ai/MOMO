@@ -1,3 +1,4 @@
+import { safeRequestFailure } from "../utils/safeRequestFailure";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
@@ -106,7 +107,7 @@ function ProfileEdit() {
       } catch (error) {
         if (!active || error.code === "ERR_CANCELED" || error.name === "CanceledError") return;
 
-        console.error("회원정보 및 프로필 이미지 조회 실패:", error);
+        console.error("회원정보 및 프로필 이미지 조회 실패:", safeRequestFailure(error));
 
         if (error.response?.status === 401) {
           navigate("/login", { replace: true });
@@ -206,7 +207,7 @@ function ProfileEdit() {
 
       return isMatched;
     } catch (error) {
-      console.error("현재 비밀번호 검증 실패:", error);
+      console.error("현재 비밀번호 검증 실패:", safeRequestFailure(error));
 
       // 최신 요청의 오류만 반영
       if (requestId === passwordCheckRequestId.current) {
@@ -319,7 +320,7 @@ function ProfileEdit() {
 
       alert("프로필 이미지가 변경되었습니다.");
     } catch (error) {
-      console.error("프로필 이미지 업로드 실패:", error);
+      console.error("프로필 이미지 업로드 실패:", safeRequestFailure(error));
 
       const status = error.response?.status;
       const errorCode = error.response?.data?.code;
@@ -371,7 +372,7 @@ function ProfileEdit() {
 
       alert("프로필 이미지가 삭제되었습니다.");
     } catch (error) {
-      console.error("프로필 이미지 삭제 실패:", error);
+      console.error("프로필 이미지 삭제 실패:", safeRequestFailure(error));
 
       const errorMessage =
         error.response?.data?.message ||
@@ -513,7 +514,7 @@ function ProfileEdit() {
 
       navigate("/profile", { replace: true });
     } catch (error) {
-      console.error("회원정보 수정 실패:", error);
+      console.error("회원정보 수정 실패:", safeRequestFailure(error));
 
       const errorMessage =
         error.response?.data?.message ||

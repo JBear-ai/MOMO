@@ -51,18 +51,22 @@ public class TokenProvider {
     }
 
     // 2. 로그인 성공 시 Access Token 생성
-    public String createToken(String loginId) {
+    public String createToken(Long userId) {
 
-        return createToken(loginId, ACCESS_TOKEN_TYPE, accessExpMs);
+        return createToken(userId, ACCESS_TOKEN_TYPE, accessExpMs);
     }
 
     // 3. 로그인 및 재발급 성공 시 Refresh Token 생성
-    public String createRefreshToken(String loginId) {
+    public String createRefreshToken(Long userId) {
 
-        return createToken(loginId, REFRESH_TOKEN_TYPE, refreshExpMs);
+        return createToken(userId, REFRESH_TOKEN_TYPE, refreshExpMs);
     }
 
-    private String createToken(String loginId, String tokenType, long expirationMs) {
+    private String createToken(Long userId, String tokenType, long expirationMs) {
+
+        if (userId == null || userId <= 0) {
+            throw new IllegalArgumentException("Invalid member ID");
+        }
 
         // 토큰 발급 시간
         long now = System.currentTimeMillis();
@@ -72,7 +76,8 @@ public class TokenProvider {
 
         // 토큰 유형을 명시하여 Refresh Token이 일반 API 인증에 사용되지 않도록 한다.
         return Jwts.builder()
-                .subject(loginId)
+                .subject(userId.toString())
+                .claim("ver", 2)
                 .claim(TOKEN_TYPE_CLAIM, tokenType)
                 .id(UUID.randomUUID().toString())
                 .issuedAt(new Date(now))
@@ -97,6 +102,7 @@ public class TokenProvider {
 
         try {
             Claims claims = parseClaims(token);
+            readUserId(claims);
             return expectedType.equals(claims.get(TOKEN_TYPE_CLAIM, String.class));
 
         } catch (ExpiredJwtException e) {
@@ -115,20 +121,26 @@ public class TokenProvider {
         // JWT에 저장된 사용자 정보 추출
         Claims claims = parseClaims(token);
 
-        // MOMO는 loginId를 사용자 식별값으로 사용
-        // Spring Security 연결
-        String loginId = claims.getSubject();
-
-        // 검증된 사용자의 인증 객체 생성
+        if (!ACCESS_TOKEN_TYPE.equals(claims.get(TOKEN_TYPE_CLAIM, String.class))) {
+            throw new IllegalArgumentException("Access token required");
+        }
         return new UsernamePasswordAuthenticationToken(
-                loginId,
-                null,
-                Collections.emptyList());
+                new MemberPrincipal(readUserId(claims)), null, Collections.emptyList());
     }
 
-    // 7. 검증된 JWT에서 로그인 아이디 추출
-    public String getLoginId(String token) {
-        return parseClaims(token).getSubject();
+    public Long getUserId(String token) {
+        return readUserId(parseClaims(token));
+    }
+
+    private Long readUserId(Claims claims) {
+        if (!Integer.valueOf(2).equals(claims.get("ver", Integer.class))) {
+            throw new IllegalArgumentException("Unsupported token version");
+        }
+        String subject = claims.getSubject();
+        if (subject == null || !subject.matches("[1-9][0-9]*")) {
+            throw new IllegalArgumentException("Invalid member ID");
+        }
+        return Long.valueOf(subject);
     }
 
     /** 검증된 Access Token의 만료 시각을 WebSocket 연결 수명 관리에 제공한다. */

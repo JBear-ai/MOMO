@@ -84,4 +84,52 @@ describe("TodayRecommend poster recovery", () => {
       "/posters/20260001-test.jpg",
     );
   });
+
+  test("does not log the access token when a recommendation request fails", async () => {
+    const error = Object.assign(new Error("request failed"), {
+      code: "ERR_BAD_RESPONSE",
+      response: { status: 503 },
+      config: { headers: { Authorization: "Bearer test-access-token" } },
+    });
+    AxiosApi.boxOfficeRecommendations.mockRejectedValue(error);
+    const consoleError = jest.spyOn(console, "error").mockImplementation(() => {});
+
+    try {
+      render(React.createElement(TodayRecommend));
+
+      await act(async () => {
+        for (let i = 0; i < 12; i += 1) {
+          await Promise.resolve();
+        }
+      });
+
+      expect(consoleError).toHaveBeenCalled();
+      expect(JSON.stringify(consoleError.mock.calls)).not.toContain("test-access-token");
+    } finally {
+      consoleError.mockRestore();
+    }
+  });
+
+  test.each(["empty", "unsupported"])("falls back to all candidates after %s genre results", async (mode) => {
+    localStorage.setItem("accessToken", "test-session");
+    AxiosApi.myLikedMovies.mockResolvedValue({ data: [{ movieCode: "20260002", genre: "드라마" }] });
+    AxiosApi.boxOfficeRecommendations.mockImplementation((genre) => {
+      if (genre) return mode === "empty"
+        ? Promise.resolve({ data: [] })
+        : Promise.reject({ response: { status: 400 } });
+      return Promise.resolve({ data: [{ movieCode: "20260001", title: "추천 영화", releaseDate: "20200101", genre: "드라마", posterUrl: "/posters/fallback.jpg" }] });
+    });
+    const warning = jest.spyOn(console, "warn").mockImplementation(() => {});
+    try {
+      render(React.createElement(TodayRecommend));
+      await act(async () => {
+        for (let i = 0; i < 20; i += 1) await Promise.resolve();
+      });
+      expect(AxiosApi.boxOfficeRecommendations).toHaveBeenCalledWith("드라마", expect.any(AbortSignal));
+      expect(AxiosApi.boxOfficeRecommendations).toHaveBeenCalledWith(null, expect.any(AbortSignal));
+      expect(screen.getByAltText("추천 영화").getAttribute("src")).toContain("/posters/fallback.jpg");
+    } finally {
+      warning.mockRestore();
+    }
+  });
 });
