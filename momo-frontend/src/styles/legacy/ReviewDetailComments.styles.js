@@ -22,7 +22,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   margin-bottom: 12px;
 
   background: var(--momo-surface);
-  border: 1px solid #d8d8d8;
+  border: 1px solid var(--momo-border);
   border-radius: 9px;
 
   color: var(--momo-text);
@@ -35,7 +35,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
 .review-detail-back:hover {
   background: var(--momo-surface)af0;
-  border-color: #d5a22c;
+  border-color: var(--momo-accent);
 }
 
 .review-detail-card {
@@ -66,7 +66,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 .review-detail-eyebrow {
   margin: 0 0 10px;
 
-  color: #ae7600;
+  color: var(--momo-link);
   font-size: 14px;
   font-weight: 800;
 }
@@ -93,7 +93,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
 .review-detail-meta span {
   padding-right: 12px;
-  border-right: 1px solid #e5e5e5;
+  border-right: 1px solid var(--momo-border);
 }
 
 .review-detail-meta span:last-child {
@@ -257,7 +257,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   display: block;
   margin-bottom: 8px;
 
-  color: #6b6254;
+  color: var(--momo-text-soft);
   font-size: 12px;
   font-weight: 800;
 }
@@ -687,7 +687,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 .review-comment-empty {
   padding: 40px 20px;
 
-  color: #888;
+  color: var(--momo-muted);
   text-align: center;
   font-size: 14px;
 }
