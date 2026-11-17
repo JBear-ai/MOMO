@@ -322,9 +322,11 @@ function MovieDetail() {
   const totalCount = ratingSummary.totalCount || 0;
   const myRating = ratingSummary.myRating;
 
-  // 좋아요 비율을 5점 만점 평점으로 환산
+  // 좋아요 비율을 5점 만점 평점과 긍정 비율로 환산한다.
   const movieScore =
-    totalCount > 0 ? ((likeCount / totalCount) * 5).toFixed(2) : "0.00";
+    totalCount > 0 ? ((likeCount / totalCount) * 5).toFixed(2) : "—";
+  const positivePercent =
+    totalCount > 0 ? Math.round((likeCount / totalCount) * 100) : 0;
 
   // =========================================================
   // 7. 영화 평가 갱신
@@ -623,73 +625,166 @@ function MovieDetail() {
         React.createElement("h2", null, "줄거리"),
         React.createElement("p", null, movie.overview),
       ),
-    movie.movieCode && React.createElement(
+    React.createElement(
       "section",
-      { className: "movie-rating-panel" },
-      React.createElement("h2", { className: "rating-label" }, "관객 평점"),
+      {
+        className: `movie-rating-panel ${movie.movieCode ? "" : "is-unavailable"}`,
+        "aria-labelledby": "movie-audience-rating-title",
+      },
       React.createElement(
         "div",
-        { className: "movie-score-display" },
+        { className: "rating-panel-heading" },
         React.createElement(
           "div",
-          { className: "movie-score-value" },
-          React.createElement("strong", null, movieScore),
-          React.createElement("span", null, "/ 5.00"),
+          { className: "rating-panel-title-group" },
+          React.createElement("span", { className: "rating-panel-eyebrow" }, "MOMO AUDIENCE NOTE"),
+          React.createElement(
+            "h2",
+            { className: "rating-label", id: "movie-audience-rating-title" },
+            "관객 평점",
+          ),
+          React.createElement(
+            "p",
+            { className: "rating-panel-description" },
+            "관객이 남긴 반응을 한눈에 확인해 보세요.",
+          ),
         ),
         React.createElement(
-          "p",
-          null,
-          "총 ",
-          formatNumber(totalCount),
-          "명이 평가했습니다.",
+          "span",
+          { className: "rating-panel-stamp" },
+          movie.movieCode ? "COMMUNITY SCORE" : "INFO PENDING",
         ),
       ),
       React.createElement(
         "div",
-        { className: "detail-reaction-counts" },
+        { className: "rating-panel-main" },
         React.createElement(
-          "button",
-          {
-            type: "button",
-            className: `detail-reaction-count ${
-              myRating === true ? "selected-like" : ""
-            }`,
-            onClick: () => handleMovieRating(true),
-            disabled: isRatingSubmitting,
-            "aria-pressed": myRating === true,
-          },
-          React.createElement("span", null, "👍 좋아요"),
-          React.createElement("strong", null, formatNumber(likeCount)),
+          "div",
+          { className: "movie-score-display" },
+          React.createElement(
+            "div",
+            { className: "movie-score-value" },
+            React.createElement("strong", null, movieScore),
+            React.createElement("span", null, "/ 5.00"),
+          ),
+          React.createElement(
+            "p",
+            { className: "rating-vote-summary" },
+            totalCount > 0
+              ? `총 ${formatNumber(totalCount)}명이 평가했습니다.`
+              : "아직 등록된 관객 평가가 없습니다.",
+          ),
+          React.createElement(
+            "span",
+            { className: "rating-score-caption" },
+            totalCount > 0 ? "좋아요 반응을 5점 척도로 환산한 점수" : "첫 번째 평가를 기다리고 있어요",
+          ),
         ),
         React.createElement(
-          "button",
-          {
-            type: "button",
-            className: `detail-reaction-count ${
-              myRating === false ? "selected-dislike" : ""
-            }`,
-            onClick: () => handleMovieRating(false),
-            disabled: isRatingSubmitting,
-            "aria-pressed": myRating === false,
-          },
-          React.createElement("span", null, "👎 싫어요"),
-          React.createElement("strong", null, formatNumber(dislikeCount)),
+          "div",
+          { className: "rating-distribution" },
+          React.createElement(
+            "div",
+            { className: "rating-distribution-heading" },
+            React.createElement("span", null, "긍정 평가 비율"),
+            React.createElement(
+              "strong",
+              null,
+              totalCount > 0 ? `${positivePercent}%` : "집계 대기",
+            ),
+          ),
+          React.createElement(
+            "div",
+            {
+              className: "rating-distribution-track",
+              role: "progressbar",
+              "aria-label": "긍정 평가 비율",
+              "aria-valuemin": 0,
+              "aria-valuemax": 100,
+              "aria-valuenow": positivePercent,
+            },
+            React.createElement("span", {
+              style: { width: `${positivePercent}%` },
+            }),
+          ),
+          React.createElement(
+            "div",
+            { className: "rating-distribution-legend" },
+            React.createElement(
+              "span",
+              null,
+              React.createElement("i", { className: "rating-legend-dot is-like", "aria-hidden": "true" }),
+              "좋아요 ",
+              formatNumber(likeCount),
+            ),
+            React.createElement(
+              "span",
+              null,
+              React.createElement("i", { className: "rating-legend-dot is-dislike", "aria-hidden": "true" }),
+              "싫어요 ",
+              formatNumber(dislikeCount),
+            ),
+          ),
         ),
       ),
-      React.createElement(
-        "p",
-        { className: "detail-total-count" },
-        "전체 평가 수: ",
-        React.createElement("strong", null, formatNumber(totalCount)),
-      ),
-      isRatingSubmitting &&
-        React.createElement(
-          "p",
-          { className: "rating-status" },
-          "평가를 저장하고 있습니다.",
-        ),
-      ratingError &&
-        React.createElement("p", { className: "people-empty" }, ratingError),
+      movie.movieCode
+        ? React.createElement(
+            React.Fragment,
+            null,
+            React.createElement(
+              "div",
+              { className: "detail-reaction-counts" },
+              React.createElement(
+                "button",
+                {
+                  type: "button",
+                  className: `detail-reaction-count rating-vote-button is-like ${myRating === true ? "selected-like" : ""}`,
+                  onClick: () => handleMovieRating(true),
+                  disabled: isRatingSubmitting,
+                  "aria-pressed": myRating === true,
+                },
+                React.createElement("span", null, "좋아요"),
+                React.createElement("strong", null, formatNumber(likeCount)),
+              ),
+              React.createElement(
+                "button",
+                {
+                  type: "button",
+                  className: `detail-reaction-count rating-vote-button is-dislike ${myRating === false ? "selected-dislike" : ""}`,
+                  onClick: () => handleMovieRating(false),
+                  disabled: isRatingSubmitting,
+                  "aria-pressed": myRating === false,
+                },
+                React.createElement("span", null, "싫어요"),
+                React.createElement("strong", null, formatNumber(dislikeCount)),
+              ),
+            ),
+            React.createElement(
+              "p",
+              { className: "detail-total-count" },
+              "전체 평가 수 ",
+              React.createElement("strong", null, formatNumber(totalCount)),
+              "명",
+            ),
+            isRatingSubmitting &&
+              React.createElement(
+                "p",
+                { className: "rating-status" },
+                "평가를 저장하고 있습니다.",
+              ),
+            ratingError &&
+              React.createElement("p", { className: "rating-error" }, ratingError),
+          )
+        : React.createElement(
+            "div",
+            { className: "rating-unavailable" },
+            React.createElement("span", { "aria-hidden": "true" }, "✎"),
+            React.createElement(
+              "p",
+              null,
+              "이 영화는 관객 평가 기능과 아직 연결되지 않았습니다.",
+            ),
+          ),
     ),
     React.createElement(
       "section",
