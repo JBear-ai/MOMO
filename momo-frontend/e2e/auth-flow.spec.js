@@ -147,7 +147,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     return { background: style.backgroundColor, border: style.borderColor, color: style.color };
   });
   expect(logoutStyle.background).toBe("rgba(255, 250, 236, 0.78)");
-  expect(logoutStyle.border).toBe("rgb(233, 223, 197)");
+  expect(logoutStyle.border).toBe("rgba(233, 223, 197, 0.9)");
   expect(logoutStyle.color).toBe("rgb(106, 98, 81)");
 
   const footerStyle = await page.locator("footer").evaluate((element) => {
