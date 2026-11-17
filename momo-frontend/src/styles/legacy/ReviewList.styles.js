@@ -8,9 +8,9 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-page {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1480px;
   margin: 0 auto;
-  padding: 30px 0 80px;
+  padding: 12px 0 64px;
   color: var(--momo-text);
 }
 
@@ -20,12 +20,12 @@ const ReviewListStyles = createGlobalStyle`
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 36px;
-  margin-bottom: 32px;
-  background: var(--momo-note);
+  padding: 30px 34px;
+  margin-bottom: 24px;
+  background: linear-gradient(120deg, var(--momo-note), rgba(255,255,255,.88));
   border: 1px solid var(--momo-note-border);
-  border-radius: var(--momo-radius);
-  box-shadow: var(--momo-shadow);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
   position: relative;
   overflow: hidden;
 }
@@ -91,11 +91,11 @@ const ReviewListStyles = createGlobalStyle`
 
 /* 리뷰 목록 카드 */
 .all-reviews-card {
-  padding: 30px;
+  padding: 28px;
   background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius);
-  box-shadow: var(--momo-shadow);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .all-reviews-card-heading {
