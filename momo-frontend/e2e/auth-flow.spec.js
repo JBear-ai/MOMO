@@ -91,6 +91,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
 });
 
 test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확히 연결된다", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.route("**/api/persons/by-id/director/321", (route) =>
     route.fulfill({
       status: 200,
@@ -225,6 +226,10 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   // 필모그래피는 두 열 기준 세 줄(6편)만 먼저 보여주고 더보기/접기가 가능해야 한다.
   const filmographyItems = page.locator(".filmography-list [role='button']");
   await expect(filmographyItems).toHaveCount(6);
+  const filmographyColumns = await page.locator(".filmography-list").evaluate(
+    (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(filmographyColumns).toBe(2);
   await page.getByRole("button", { name: "필모그래피 더보기 (6 / 8)" }).click();
   await expect(filmographyItems).toHaveCount(8);
   await page.getByRole("button", { name: "접기" }).click();
@@ -246,6 +251,10 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   const actorItems = actorSection.locator(".people-list-compact .person-chip");
 
   await expect(directorItems).toHaveCount(6);
+  const peopleColumns = await directorSection.locator(".people-list-compact").evaluate(
+    (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(peopleColumns).toBe(2);
   await directorSection.getByRole("button", { name: "감독 더보기 (6 / 8)" }).click();
   await expect(directorItems).toHaveCount(8);
   await directorSection.getByRole("button", { name: "감독 접기" }).click();
