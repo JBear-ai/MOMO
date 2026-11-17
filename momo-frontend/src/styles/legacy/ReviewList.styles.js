@@ -317,7 +317,7 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-error {
   color: var(--momo-danger);
-  background: var(--momo-surface)5F5;
+  background: var(--momo-danger-bg);
   border-color: var(--momo-dislike-border);
 }
 
