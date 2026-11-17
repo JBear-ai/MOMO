@@ -534,25 +534,27 @@ function ProfileEdit() {
 
   return React.createElement(
     "main",
-    { className: "profile-page" },
+    { className: "profile-page profile-edit-page" },
     React.createElement(
       "section",
       { className: "profile-container" },
       React.createElement(
         "header",
-        { className: "profile-heading" },
+        { className: "profile-heading profile-edit-heading" },
+        React.createElement("span", { className: "profile-edit-eyebrow" }, "MOMO MEMBER · 01"),
         React.createElement("h1", null, "프로필 수정"),
         React.createElement("p", null, "회원 정보를 수정할 수 있습니다."),
       ),
       React.createElement(
         "section",
-        { className: "profile-card" },
+        { className: "profile-card profile-edit-card" },
         React.createElement(
           "form",
-          { className: "profile-form", onSubmit: handleSave },
+          { className: "profile-form profile-edit-form", onSubmit: handleSave },
           React.createElement(
             "div",
             { className: "profile-image-edit" },
+            React.createElement("p", { className: "profile-edit-image-kicker" }, "PROFILE PORTRAIT"),
             React.createElement(
               "div",
               { className: "profile-image-preview" },
@@ -581,7 +583,7 @@ function ProfileEdit() {
                 "button",
                 {
                   type: "button",
-                  className: "profile-button",
+                  className: "profile-button profile-edit-image-save",
                   onClick: handleProfileImageUpload,
                   disabled:
                     !profileFile || profileImageUploading || isSubmitting,
@@ -593,7 +595,7 @@ function ProfileEdit() {
                   "button",
                   {
                     type: "button",
-                    className: "profile-button profile-button-secondary",
+                    className: "profile-button profile-button-secondary profile-edit-image-remove",
                     onClick: handleProfileImageDelete,
                     disabled: profileImageUploading || isSubmitting,
                   },
@@ -621,7 +623,7 @@ function ProfileEdit() {
             {
               className: "signup-message",
               style: {
-                color: !nickname ? "#888" : isNickname ? "#2e9e4f" : "#e5484d",
+                color: !nickname ? "#647066" : isNickname ? "#2F7547" : "#B44646",
               },
             },
             !nickname
@@ -643,7 +645,7 @@ function ProfileEdit() {
             {
               className: "signup-message",
               style: {
-                color: !email ? "#888" : isEmail ? "#2e9e4f" : "#e5484d",
+                color: !email ? "#647066" : isEmail ? "#2F7547" : "#B44646",
               },
             },
             !email
@@ -653,6 +655,7 @@ function ProfileEdit() {
                 : "이메일 형식이 올바르지 않습니다.",
           ),
           React.createElement("hr", {
+            className: "profile-edit-divider",
             style: {
               margin: "24px 0",
               border: "0",
@@ -662,6 +665,7 @@ function ProfileEdit() {
           React.createElement(
             "h3",
             {
+              className: "profile-edit-section-title",
               style: {
                 marginBottom: "16px",
                 fontSize: "1.1rem",
@@ -672,9 +676,10 @@ function ProfileEdit() {
           React.createElement(
             "p",
             {
+              className: "profile-edit-section-description",
               style: {
                 fontSize: "13px",
-                color: "#888",
+                color: "#647066",
                 marginBottom: "16px",
               },
             },
@@ -700,12 +705,12 @@ function ProfileEdit() {
               className: "signup-message",
               style: {
                 color: passwordCheckError
-                  ? "#e5484d"
+                  ? "#B44646"
                   : passwordCheckResult === true
-                    ? "#2e9e4f"
+                    ? "#2F7547"
                     : passwordCheckResult === false
-                      ? "#e5484d"
-                      : "#888",
+                      ? "#B44646"
+                      : "#647066",
               },
             },
             passwordChecking
@@ -737,12 +742,12 @@ function ProfileEdit() {
               className: "signup-message",
               style: {
                 color: !newPassword
-                  ? "#888"
+                  ? "#647066"
                   : isSamePassword
-                    ? "#e5484d"
+                    ? "#B44646"
                     : isPwd
-                      ? "#2e9e4f"
-                      : "#e5484d",
+                      ? "#2F7547"
+                      : "#B44646",
               },
             },
             !newPassword
@@ -772,10 +777,10 @@ function ProfileEdit() {
               className: "signup-message",
               style: {
                 color: !confirmPassword
-                  ? "#888"
+                  ? "#647066"
                   : isPwdCheck
-                    ? "#2e9e4f"
-                    : "#e5484d",
+                    ? "#2F7547"
+                    : "#B44646",
               },
             },
             !confirmPassword
@@ -791,7 +796,7 @@ function ProfileEdit() {
               "button",
               {
                 type: "submit",
-                className: "profile-button",
+                className: "profile-button profile-edit-submit",
                 disabled: !isAllValid || profileImageUploading,
               },
               isSubmitting ? "저장 중..." : "저장",
@@ -800,7 +805,7 @@ function ProfileEdit() {
               "button",
               {
                 type: "button",
-                className: "profile-button profile-button-secondary",
+                className: "profile-button profile-button-secondary profile-edit-cancel",
                 onClick: () => navigate("/profile"),
                 disabled: isSubmitting,
               },
