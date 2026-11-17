@@ -196,24 +196,11 @@ const Footer = styled.footer`
   overflow: hidden;
   box-sizing: border-box;
   border-top: 1px solid rgba(255,255,255,.9);
-  background:
-    linear-gradient(90deg, transparent 0 36px, rgba(201,117,104,.12) 36px 37px, transparent 37px),
-    repeating-linear-gradient(0deg, transparent 0 29px, rgba(117,145,177,.08) 30px, transparent 31px),
-    linear-gradient(145deg, rgba(247,242,229,.96), rgba(239,232,216,.96));
-  color: var(--momo-text-soft);
-  box-shadow: 0 -8px 24px rgba(62,49,28,.035), inset 0 1px rgba(255,255,255,.95);
-  &::before {
-    position: absolute;
-    top: 0;
-    left: clamp(35px, 8vw, 110px);
-    width: 74px;
-    height: 15px;
-    content: "";
-    border-right: 1px solid rgba(201,166,103,.16);
-    border-left: 1px solid rgba(201,166,103,.16);
-    background: rgba(255,224,151,.35);
-    transform: rotate(1.5deg);
-  }
+  background: rgba(239,239,232,.72);
+  color: #4F5851;
+  box-shadow: 0 -6px 20px rgba(39,43,39,.035), inset 0 1px rgba(255,255,255,.86);
+  backdrop-filter: blur(18px) saturate(108%);
+  -webkit-backdrop-filter: blur(18px) saturate(108%);
 `;
 
 const FooterContainer = styled.div`
