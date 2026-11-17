@@ -55,7 +55,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-star.is-active {
   background: rgba(255, 212, 59, 0.25);
   border-color: rgba(255, 212, 59, 0.7);
-  color: #ffd43b;
+  color: var(--momo-accent);
 }
 
 /* ========================================
@@ -66,7 +66,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   padding: 8px 12px;
   border: 1px solid #e2dcce;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--momo-surface);
   color: #4a453c;
   font-size: 12px;
   font-weight: 700;
@@ -74,16 +74,16 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .home-favorites-more:hover {
-  border-color: #ffd43b;
-  background: #fff8dc;
+  border-color: var(--momo-accent);
+  background: var(--momo-surface)8dc;
 }
 
 .home-favorites-empty {
   padding: 32px 20px;
   border: 1px dashed #e2dcce;
   border-radius: 12px;
-  background: #ffffff;
-  color: #736e63;
+  background: var(--momo-surface);
+  color: var(--momo-muted);
   font-size: 13px;
   text-align: center;
 }
@@ -99,13 +99,13 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .profile-favorites-link:hover {
-  border-color: #ffd43b;
-  background: #fffdf4;
+  border-color: var(--momo-accent);
+  background: var(--momo-surface)df4;
 }
 
 .profile-favorites-count {
   flex-shrink: 0;
-  color: #a37e1c;
+  color: var(--momo-link);
   font-size: 12px;
   font-weight: 800;
 }
@@ -140,7 +140,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-page-heading .eyebrow {
   display: block;
   margin-bottom: 8px;
-  color: #a37e1c;
+  color: var(--momo-link);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -156,7 +156,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-page-heading p,
 .favorite-list-toolbar p {
   margin: 0;
-  color: #736e63;
+  color: var(--momo-muted);
   font-size: 13px;
 }
 
@@ -165,7 +165,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   padding: 10px 16px;
   border: 1px solid #e2dcce;
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--momo-surface);
   color: #4a453c;
   font-size: 13px;
   font-weight: 700;
@@ -190,7 +190,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-list-toolbar strong span {
   margin-left: 6px;
-  color: #a37e1c;
+  color: var(--momo-link);
 }
 
 .favorite-page-grid {
@@ -228,7 +228,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .favorite-page-poster > .favorite-page-open-button:focus-visible {
-  outline: 3px solid #a37e1c;
+  outline: 3px solid var(--momo-link);
   outline-offset: -3px;
 }
 
@@ -275,7 +275,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page-movie-info p {
   margin: 6px 0 0;
-  color: #736e63;
+  color: var(--momo-muted);
   font-size: 12px;
 }
 
@@ -283,13 +283,13 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   padding: 64px 20px;
   border: 1px dashed #e2dcce;
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--momo-surface);
   text-align: center;
 }
 
 .favorite-empty-symbol {
   margin-bottom: 12px;
-  color: #a37e1c;
+  color: var(--momo-link);
   font-size: 42px;
 }
 
@@ -300,7 +300,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page-empty p {
   margin: 0 0 20px;
-  color: #736e63;
+  color: var(--momo-muted);
   font-size: 13px;
 }
 
@@ -308,7 +308,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   padding: 11px 18px;
   border: 1px solid #e2dcce;
   border-radius: 8px;
-  background: #ffd43b;
+  background: var(--momo-accent);
   color: #594400;
   font-size: 13px;
   font-weight: 800;
@@ -362,17 +362,17 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-back-button {
   color: #62594e;
-  background: #fff;
-  border: 1px solid #e2dbd0;
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
 }
 
 .favorite-back-button:hover {
-  background: #f5f2eb;
+  background: var(--momo-bg);
   border-color: #cfc4b5;
 }
 
 .favorite-browse-button {
-  color: #fff;
+  color: var(--momo-surface);
   background: #66594b;
   border: 1px solid #66594b;
 }
@@ -403,8 +403,8 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   padding: 30px 20px;
   margin: 20px 0;
 
-  background: #f5f2eb;
-  border: 1px solid #e2dbd0;
+  background: var(--momo-bg);
+  border: 1px solid var(--momo-border);
   border-radius: 16px;
 }
 
@@ -494,7 +494,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .profile-image-preview span {
   font-size: 2rem;
   font-weight: bold;
-  color: #666;
+  color: var(--momo-muted);
 }
 
 .profile-image-buttons {
