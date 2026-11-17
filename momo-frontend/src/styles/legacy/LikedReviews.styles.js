@@ -88,7 +88,7 @@ const LikedReviewsStyles = createGlobalStyle`
 .liked-reviews-toolbar > span {
   padding: 7px 12px;
   background: var(--momo-surface)af0;
-  border: 1px solid #f0dfbd;
+  border: 1px solid var(--momo-note-border);
   border-radius: 8px;
   color: var(--momo-link);
   font-size: 12px;
@@ -233,13 +233,13 @@ const LikedReviewsStyles = createGlobalStyle`
   justify-content: center;
   gap: 12px;
   min-height: 250px;
-  color: #777;
+  color: var(--momo-muted);
   text-align: center;
 }
 
 .liked-reviews-state h3 {
   margin: 0;
-  color: #222;
+  color: var(--momo-text);
   font-size: 17px;
 }
 
@@ -261,7 +261,7 @@ const LikedReviewsStyles = createGlobalStyle`
 }
 
 .liked-reviews-state.error {
-  color: #e53935;
+  color: var(--momo-danger);
 }
 
 /* 페이지네이션 */
@@ -280,7 +280,7 @@ const LikedReviewsStyles = createGlobalStyle`
   border: 1px solid var(--momo-border);
   border-radius: 8px;
   background: var(--momo-surface);
-  color: #555;
+  color: var(--momo-text-soft);
   font-weight: 700;
   cursor: pointer;
 }
