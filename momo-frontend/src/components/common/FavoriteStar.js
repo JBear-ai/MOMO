@@ -68,7 +68,7 @@ function FavoriteStar({ movie }) {
       "aria-busy": saving,
       title: favorite ? "관심 영화 해제" : "관심 영화 추가",
     },
-    "🎬",
+    favorite ? "★" : "☆",
   );
 }
 
