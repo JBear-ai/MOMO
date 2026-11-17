@@ -544,30 +544,26 @@ const PaperGlassDesignStyles = createGlobalStyle`
     font-size: 11px;
     font-weight: 750;
   }
-  .movie-detail-info > .person-biography {
+  .movie-detail-page .movie-detail-info > p.person-biography {
+    display: -webkit-box;
     max-width: 68ch;
+    margin: 12px 0 0;
     padding: 16px 18px 16px 40px;
+    overflow: hidden;
     border: 1px solid rgba(255,255,255,.94);
     border-radius: 12px;
     background:
       linear-gradient(90deg, transparent 0 24px, rgba(201,117,104,.18) 24px 25px, transparent 25px),
       repeating-linear-gradient(to bottom, rgba(255,252,240,.82) 0 27px, rgba(117,145,177,.13) 28px, rgba(255,252,240,.82) 29px);
     box-shadow: inset 0 1px rgba(255,255,255,.96), 0 5px 13px rgba(63,50,28,.045);
-  }
-
-  /* Person page bio: three readable lines before expanding. */
-  .person-biography {
-    margin: 12px 0 0;
     color: var(--momo-text-soft);
     font-size: 13px;
     line-height: 1.85;
     white-space: pre-line;
-    display: -webkit-box;
-    overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
   }
-  .person-biography.is-expanded {
+  .movie-detail-page .movie-detail-info > p.person-biography.is-expanded {
     display: block;
     overflow: visible;
   }
