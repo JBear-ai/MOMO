@@ -351,20 +351,6 @@ const LikedReviewsStyles = createGlobalStyle`
   }
 }
 
-
-/* Liked reviews as a two-column note wall */
-.liked-reviews-page { max-width:1440px; margin:0 auto; }
-.liked-reviews-container { max-width:1240px; }
-.liked-reviews-heading { min-height:190px; padding:clamp(28px,4vw,54px); border:1px solid rgba(255,255,255,.8); border-radius:26px; background:radial-gradient(circle at 90% 20%,rgba(255,212,59,.3),transparent 18rem),linear-gradient(120deg,#FFFDF7,#F0E6D4); box-shadow:0 22px 48px rgba(54,45,28,.08); }
-.liked-reviews-heading h1 { font-size:clamp(34px,4.4vw,56px); letter-spacing:-.06em; }
-.liked-reviews-card { border:0; border-radius:22px; background:rgba(255,254,250,.8); box-shadow:0 16px 36px rgba(54,45,28,.065); }
-.liked-reviews-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
-.liked-review-item { min-width:0; align-items:flex-start; padding:18px; border:1px solid rgba(229,222,209,.86); border-radius:16px; background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,250,236,.74)); box-shadow:0 8px 20px rgba(54,45,28,.045); }
-.liked-review-item:hover { background:#FFF7DF; transform:translateY(-3px); }
-.liked-review-poster { width:86px; height:126px; border:5px solid white; border-radius:4px; box-shadow:0 8px 16px rgba(54,45,28,.12); }
-.liked-review-title { font-size:16px; letter-spacing:-.035em; }
-@media(max-width:760px) { .liked-reviews-list { grid-template-columns:1fr; } }
-
 `;
 
 export default LikedReviewsStyles;

@@ -597,29 +597,6 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
     }
 }
 
-
-/* Split-screen authentication and tactile memo composer */
-.signup-page { display:flex; align-items:center; justify-content:center; max-width:1080px; min-height:min(760px,calc(100vh - 160px)); padding:36px 0 60px; }
-.signup-page > .signup-wrapper { display:grid; grid-template-columns:minmax(220px,.82fr) minmax(0,1.18fr); align-items:center; gap:clamp(24px,4vw,56px); width:100%; }
-.signup-page .signup-brand { grid-column:1; grid-row:1; align-self:end; }
-.signup-page .signup-card { grid-column:2; grid-row:1 / span 2; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:26px; position:relative; padding:clamp(28px,4vw,54px); border:1px solid rgba(255,255,255,.86); border-radius:26px; background:rgba(255,254,250,.82); box-shadow:0 26px 64px rgba(54,45,28,.1); backdrop-filter:blur(18px); }
-.signup-page .signup-card::before { content:"M"; position:absolute; right:24px; top:-38px; color:rgba(255,212,59,.22); font:900 160px/1 Georgia,serif; pointer-events:none; }
-.signup-page .signup-card-heading { grid-column:1; grid-row:1 / span 2; padding:0; margin:0; background:transparent; border:0; }
-.signup-page .signup-card-heading h1 { font-size:clamp(30px,3.6vw,44px); line-height:1.13; letter-spacing:-.06em; }
-.signup-page .signup-card-heading p { max-width:320px; line-height:1.9; }
-.signup-page .signup-note-label { flex-wrap:wrap; }
-.signup-page .signup-card form,.signup-page .signup-footer { grid-column:2; }
-.signup-page .signup-card form { grid-row:1; }
-.signup-page .signup-footer { grid-row:2; align-self:start; margin-top:0; }
-.signup-page .signup-field input { min-height:50px; border-radius:7px 14px 7px 14px; background:rgba(255,255,255,.88); }
-.signup-page .signup-submit { min-height:54px; border:1px solid #D6AD27; border-radius:7px 16px 7px 16px; box-shadow:0 9px 18px rgba(140,105,0,.16),inset 0 1px 0 rgba(255,255,255,.5); }
-.signup-page .signup-bottom-caption { margin-top:18px; text-align:center; }
-.review-write-section { border:1px solid rgba(214,166,20,.25); border-radius:18px; background:linear-gradient(145deg,#FFF8E4,#FFFDF7); box-shadow:0 16px 36px rgba(54,45,28,.07); }
-.review-write-toggle { min-height:72px; padding:20px 25px; font-size:14px; }
-.review-write-content { padding:clamp(22px,3vw,38px); background:rgba(255,254,250,.78); }
-.review-form-actions button { min-height:48px; border-radius:7px 15px 7px 15px; box-shadow:0 8px 16px rgba(140,105,0,.14); }
-@media(max-width:760px) { .signup-page { display:flex; flex-direction:column; align-items:stretch; min-height:0; padding:20px 0 48px; } .signup-page > .signup-wrapper { display:flex; flex-direction:column; gap:20px; } .signup-page .signup-card { display:flex; flex-direction:column; align-items:stretch; gap:20px; padding:24px 18px; } .signup-page .signup-card-heading { width:100%; } .signup-page .signup-card form,.signup-page .signup-footer { width:100%; } .signup-page .signup-brand { align-self:flex-start; } }
-
 `;
 
 export default ReviewComposerAuthRecommendStyles;

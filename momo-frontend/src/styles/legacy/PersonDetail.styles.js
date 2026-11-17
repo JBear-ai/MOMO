@@ -141,19 +141,6 @@ const PersonDetailStyles = createGlobalStyle`
     height: 210px;
   }
 }
-
-/* Person profile and filmography gallery */
-.movie-detail-page:has(.person-meta-details) .movie-detail-header { min-height:430px; }
-.movie-detail-page:has(.person-meta-details) .movie-detail-poster { width:min(100%,280px); aspect-ratio:3 / 4; }
-.movie-detail-page:has(.person-meta-details) .movie-detail-info h1 { font-size:clamp(36px,4.8vw,62px); }
-.movie-detail-page:has(.person-meta-details) .people-list { grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:18px; }
-.movie-detail-page:has(.person-meta-details) .person-chip { padding:8px; border-radius:7px; background:rgba(255,255,255,.72); }
-.movie-detail-page:has(.person-meta-details) .person-chip img { height:230px; border-radius:3px; box-shadow:0 8px 18px rgba(54,45,28,.1); }
-.movie-detail-page:has(.person-meta-details) .person-chip > div { display:grid; gap:5px; padding:4px 6px 8px; }
-.movie-detail-page:has(.person-meta-details) .person-chip strong { font-size:13px; }
-.movie-detail-page:has(.person-meta-details) .person-chip span { color:var(--momo-muted); font-size:11px; }
-@media(max-width:600px) { .movie-detail-page:has(.person-meta-details) .movie-detail-poster { width:min(62%,220px); } }
-
 `;
 
 export default PersonDetailStyles;
