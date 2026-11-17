@@ -7,10 +7,10 @@ import { createGlobalStyle } from "styled-components";
  */
 const MomoLiquidGlassPageStyles = createGlobalStyle`
   :root {
-    --momo-glass-ink: #292D2B;
-    --momo-glass-muted: #676D67;
-    --momo-glass-edge: rgba(255,255,255,.78);
-    --momo-glass-surface: rgba(248,247,242,.7);
+    --momo-glass-ink: #292820;
+    --momo-glass-muted: #6A6251;
+    --momo-glass-edge: rgba(255,255,255,.84);
+    --momo-glass-surface: rgba(255,250,236,.76);
     --momo-glass-shadow: 0 12px 30px rgba(39,43,39,.075), inset 0 1px rgba(255,255,255,.9);
     --momo-glass-ease: cubic-bezier(.2,.72,.2,1);
     --momo-tone-film: #637A72;
