@@ -306,19 +306,19 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .signup-card {
-  padding: 36px;
-  background: var(--momo-surface);
+  padding: clamp(22px, 3vw, 36px);
+  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
   border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius);
-  box-shadow: var(--momo-shadow);
+  border-radius: var(--momo-radius-lg);
+  box-shadow: var(--momo-shadow-sm);
 }
 
 .signup-card-heading {
   padding: 26px;
   margin-bottom: 28px;
-  background: var(--momo-note);
+  background: linear-gradient(135deg, var(--momo-note), #FFFDF6);
   border: 1px solid var(--momo-note-border);
-  border-radius: 10px;
+  border-radius: 16px;
 }
 
 .signup-eyebrow {
