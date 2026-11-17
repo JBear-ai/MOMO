@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const SearchPage = styled.div`
+const SearchPage = styled.div.attrs({ className: "search-page" })`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
@@ -8,7 +8,7 @@ const SearchPage = styled.div`
   color: var(--momo-text);
 `;
 
-const SearchHeading = styled.div`
+const SearchHeading = styled.div.attrs({ className: "search-page-heading" })`
   display: flex;
   align-items: end;
   justify-content: space-between;
