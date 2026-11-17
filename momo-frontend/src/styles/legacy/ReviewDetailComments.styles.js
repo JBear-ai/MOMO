@@ -87,7 +87,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   align-items: center;
   gap: 12px;
 
-  color: #555;
+  color: var(--momo-text-soft);
   font-size: 14px;
 }
 
@@ -114,7 +114,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   padding: 10px 18px;
 
   background: var(--momo-surface);
-  border: 1px solid #d5d5d5;
+  border: 1px solid var(--momo-border);
   border-radius: 10px;
 
   color: var(--momo-text);
@@ -126,12 +126,12 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
 .review-action-button:hover {
   background: var(--momo-surface)9ec;
-  border-color: #c18a00;
+  border-color: var(--momo-link);
 }
 
 .review-action-button.delete {
-  color: #e53935;
-  border-color: #ffb4b4;
+  color: var(--momo-danger);
+  border-color: var(--momo-dislike-border);
 }
 
 .review-action-button.delete:hover {
@@ -147,7 +147,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   padding: 12px;
   margin-bottom: 12px;
 
-  border: 1px solid #e5d7b9;
+  border: 1px solid var(--momo-border-strong);
   border-radius: 8px;
 
   font-size: 24px;
@@ -166,7 +166,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
   padding: 18px;
 
-  border: 1px solid #e5d7b9;
+  border: 1px solid var(--momo-border-strong);
   border-radius: 10px;
 
   font-size: 15px;
@@ -199,8 +199,8 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
 .review-edit-buttons .cancel {
   background: var(--momo-surface);
-  border-color: #ddd;
-  color: #555;
+  border-color: var(--momo-border);
+  color: var(--momo-text-soft);
 }
 
 /* 영화 정보 */
@@ -214,7 +214,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   margin: 20px 0;
 
   background: var(--momo-surface)af0;
-  border: 1px solid #f0dfbd;
+  border: 1px solid var(--momo-note-border);
   border-radius: 12px;
 }
 
@@ -225,7 +225,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
   overflow: hidden;
 
-  background: #eee;
+  background: var(--momo-note);
   border-radius: 8px;
 }
 
@@ -272,7 +272,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
 .review-detail-movie-info > p {
   margin: 0 0 10px;
-  color: #777;
+  color: var(--momo-muted);
   font-size: 14px;
 }
 
@@ -283,13 +283,13 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
   margin-bottom: 12px;
 
-  color: #666;
+  color: var(--momo-muted);
   font-size: 13px;
 }
 
 .review-detail-movie-meta span {
   padding-right: 10px;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid var(--momo-border);
 }
 
 .review-detail-movie-meta span:last-child {
@@ -299,7 +299,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 .review-detail-movie-overview {
   margin: 10px 0;
 
-  color: #666;
+  color: var(--momo-muted);
   font-size: 13px;
   line-height: 1.6;
 }
@@ -330,7 +330,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   padding: 24px;
 
   background: var(--momo-surface)af0;
-  border: 1px solid #f0dfbd;
+  border: 1px solid var(--momo-note-border);
   border-radius: 12px;
 
   color: var(--momo-text);
@@ -514,10 +514,10 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   height: 44px;
   min-width: 44px;
 
-  background: #e8e8e8;
+  background: var(--momo-border);
   border-radius: 50%;
 
-  color: #777;
+  color: var(--momo-muted);
   font-size: 18px;
   font-weight: 800;
 }
@@ -528,7 +528,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
   padding: 13px 16px;
 
-  border: 1px solid #d5d5d5;
+  border: 1px solid var(--momo-border);
   border-radius: 10px;
 
   outline: none;
@@ -536,7 +536,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 }
 
 .review-comment-form input:focus {
-  border-color: #c18a00;
+  border-color: var(--momo-link);
 }
 
 .review-comment-form button {
@@ -598,7 +598,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 }
 
 .review-comment-meta > span {
-  color: #777;
+  color: var(--momo-muted);
   font-size: 12px;
 }
 
@@ -613,7 +613,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   padding: 6px 10px;
 
   background: var(--momo-surface);
-  border: 1px solid #ddd;
+  border: 1px solid var(--momo-border);
   border-radius: 7px;
 
   font-size: 12px;
@@ -627,14 +627,14 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 }
 
 .review-comment-actions button.delete {
-  color: #e53935;
-  border-color: #ffb4b4;
+  color: var(--momo-danger);
+  border-color: var(--momo-dislike-border);
 }
 
 .review-comment-content {
   margin: 0;
 
-  color: #222;
+  color: var(--momo-text);
   font-size: 15px;
   line-height: 1.7;
 
@@ -651,7 +651,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
   padding: 12px;
   margin-bottom: 10px;
 
-  border: 1px solid #e5d7b9;
+  border: 1px solid var(--momo-border-strong);
   border-radius: 8px;
 
   font-size: 14px;
@@ -680,8 +680,8 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 
 .review-comment-edit .cancel {
   background: var(--momo-surface);
-  color: #555;
-  border-color: #ddd;
+  color: var(--momo-text-soft);
+  border-color: var(--momo-border);
 }
 
 .review-comment-empty {
