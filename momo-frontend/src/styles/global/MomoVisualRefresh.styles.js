@@ -50,8 +50,20 @@ const MomoVisualRefreshStyles = createGlobalStyle`
   button:disabled { opacity: .48; cursor: not-allowed; }
 
   /* App shell and navigation */
+  #root > div { background: transparent !important; color: var(--momo-text); }
+  main > div { background-color: transparent !important; color: var(--momo-text); }
   header:not(.review-comment-heading) {
+    color: var(--momo-text);
+    background: rgba(10, 15, 29, .68);
     border-color: rgba(210,222,255,.12);
+    box-shadow: 0 12px 36px rgba(0,0,0,.16);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+  }
+  footer {
+    background: rgba(10, 15, 29, .58);
+    border-color: rgba(210,222,255,.12);
+    backdrop-filter: blur(20px);
   }
   nav a { transition: color .2s ease, opacity .2s ease; }
   main { color: var(--momo-text); }
