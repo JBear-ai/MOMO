@@ -27,6 +27,147 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     50% { transform: translate3d(-10px, 8px, 0) scale(1.035); }
   }
 
+  /* All route headings use one liquid material with route-specific ambient color. */
+  #root .all-reviews-heading,
+  #root .my-reviews-heading,
+  #root .liked-reviews-heading,
+  #root .search-page-heading {
+    --page-glow-a: rgba(255,211,111,.4);
+    --page-glow-b: rgba(169,188,211,.34);
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 26px;
+    min-height: 184px;
+    padding: clamp(26px, 3.8vw, 42px);
+    margin: 0 0 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 28px;
+    background:
+      radial-gradient(ellipse at 7% 0%, var(--page-glow-a), transparent 42%),
+      radial-gradient(ellipse at 94% 100%, var(--page-glow-b), transparent 45%),
+      linear-gradient(125deg, rgba(255,255,255,.7), rgba(255,250,236,.46));
+    box-shadow: 0 20px 48px rgba(65,52,31,.1), inset 0 1px rgba(255,255,255,.98);
+    backdrop-filter: blur(28px) saturate(165%);
+    -webkit-backdrop-filter: blur(28px) saturate(165%);
+  }
+
+  #root .all-reviews-heading { --page-glow-a: rgba(255,208,123,.42); --page-glow-b: rgba(172,190,215,.4); }
+  #root .my-reviews-heading { --page-glow-a: rgba(255,214,127,.46); --page-glow-b: rgba(158,185,164,.34); }
+  #root .liked-reviews-heading { --page-glow-a: rgba(225,164,166,.44); --page-glow-b: rgba(188,177,208,.34); }
+  #root .search-page-heading { --page-glow-a: rgba(169,193,218,.42); --page-glow-b: rgba(167,193,174,.38); }
+
+  #root .all-reviews-heading::before,
+  #root .my-reviews-heading::before,
+  #root .liked-reviews-heading::before,
+  #root .search-page-heading::before {
+    position: absolute;
+    z-index: -1;
+    top: -96px;
+    right: 8%;
+    width: 250px;
+    height: 250px;
+    content: "";
+    border: 1px solid rgba(255,255,255,.48);
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 28%, rgba(255,255,255,.72), rgba(255,255,255,.06) 46%, transparent 70%);
+    box-shadow: inset 0 1px rgba(255,255,255,.72), 0 16px 34px rgba(84,67,40,.07);
+    pointer-events: none;
+  }
+
+  #root .all-reviews-heading::after,
+  #root .my-reviews-heading::after,
+  #root .liked-reviews-heading::after,
+  #root .search-page-heading::after {
+    position: absolute;
+    z-index: 0;
+    top: -30%;
+    bottom: -30%;
+    left: -45%;
+    width: 22%;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.42), transparent);
+    filter: blur(3px);
+    transform: skewX(-18deg);
+    animation: momo-liquid-sheen 11s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  #root .all-reviews-heading > div,
+  #root .my-reviews-heading > div,
+  #root .liked-reviews-heading > div,
+  #root .search-page-heading > div {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+  }
+
+  #root .all-reviews-heading h1,
+  #root .my-reviews-heading h1,
+  #root .liked-reviews-heading h1,
+  #root .search-page-heading h1 {
+    margin: 0 0 9px;
+    color: #302C25;
+    font-size: clamp(29px, 3.7vw, 42px);
+    font-weight: 950;
+    line-height: 1.12;
+    letter-spacing: -.06em;
+    text-shadow: 0 1px rgba(255,255,255,.52);
+  }
+
+  #root .all-reviews-heading p,
+  #root .my-reviews-heading p:not(.my-reviews-eyebrow),
+  #root .liked-reviews-heading p,
+  #root .search-page-heading p {
+    margin: 0;
+    color: #575044;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.75;
+  }
+
+  #root .my-reviews-heading .my-reviews-eyebrow,
+  #root .liked-reviews-heading .liked-reviews-eyebrow {
+    margin: 0 0 13px;
+    color: #6D5627;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .17em;
+  }
+
+  #root .my-reviews-heading > a,
+  #root .liked-reviews-heading > a {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 17px;
+    border: 1px solid rgba(255,255,255,.86);
+    border-radius: 14px;
+    background: rgba(255,255,255,.46);
+    box-shadow: 0 8px 18px rgba(67,53,31,.08), inset 0 1px rgba(255,255,255,.98);
+    color: #443D32;
+    font-size: 12px;
+    font-weight: 850;
+    text-decoration: none;
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    transition: transform 200ms var(--momo-glass-ease), box-shadow 200ms ease, background 200ms ease;
+  }
+
+  #root .my-reviews-heading > a:hover,
+  #root .liked-reviews-heading > a:hover {
+    background: rgba(255,255,255,.74);
+    box-shadow: 0 12px 24px rgba(67,53,31,.13), inset 0 1px rgba(255,255,255,1);
+    transform: translateY(-3px);
+  }
+
   /* Saved movies: give the page its own ambient color instead of a flat cream field. */
   #root .favorite-page {
     position: relative;
@@ -902,6 +1043,33 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .movie-detail-page > .detail-content-section > p {
     color: #575044;
     line-height: 1.8;
+  }
+
+  @media (max-width: 760px) {
+    #root .all-reviews-heading,
+    #root .my-reviews-heading,
+    #root .liked-reviews-heading,
+    #root .search-page-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 0;
+      padding: 26px 22px;
+      border-radius: 23px;
+    }
+    #root .all-reviews-heading::before,
+    #root .my-reviews-heading::before,
+    #root .liked-reviews-heading::before,
+    #root .search-page-heading::before {
+      top: -80px;
+      right: -70px;
+      width: 210px;
+      height: 210px;
+    }
+    #root .my-reviews-heading > a,
+    #root .liked-reviews-heading > a {
+      align-self: flex-start;
+    }
   }
 
   @media (max-width: 1050px) {
