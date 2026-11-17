@@ -51,6 +51,29 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(profileActivityCards.nth(1).locator(".profile-activity-footer")).toBeVisible();
   await expect(profileActivityCards.nth(2).getByRole("heading", { name: "관심 영화" })).toBeVisible();
 
+  // 마이페이지는 장식용 배경판이나 카드 안의 중첩 박스 없이 정보가 명확히 읽혀야 한다.
+  const dashboardCanvas = await page.locator(".profile-dashboard").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundColor, image: style.backgroundImage };
+  });
+  expect(dashboardCanvas.background).toBe("rgba(0, 0, 0, 0)");
+  expect(dashboardCanvas.image).toBe("none");
+
+  const overviewSurface = await page.locator(".profile-overview-card").evaluate((element) => {
+    const style = getComputedStyle(element);
+    const inner = getComputedStyle(element.querySelector(".profile-user"));
+    return {
+      radius: style.borderRadius,
+      background: style.backgroundColor,
+      innerBackground: inner.backgroundColor,
+      innerBorder: inner.borderTopWidth,
+    };
+  });
+  expect(overviewSurface.radius).toBe("20px");
+  expect(overviewSurface.background).toBe("rgba(255, 254, 250, 0.88)");
+  expect(overviewSurface.innerBackground).toBe("rgba(0, 0, 0, 0)");
+  expect(overviewSurface.innerBorder).toBe("0px");
+
   const activityGridColumns = await page.locator(".profile-activity-grid").evaluate(
     (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
@@ -59,7 +82,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   const activityHeadingColor = await profileActivityCards.first().locator("h3").evaluate(
     (element) => getComputedStyle(element).color,
   );
-  expect(activityHeadingColor).toBe("rgb(41, 40, 32)");
+  expect(activityHeadingColor).toBe("rgb(81, 72, 51)");
 
   // 활동 카드는 과한 장식 대신 은은한 유리 재질과 낮은 채도 색을 사용한다.
   const activityGlass = await profileActivityCards.first().evaluate((element) => {
@@ -71,11 +94,24 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
       leftBorder: style.borderLeftColor,
     };
   });
-  expect(activityGlass.blur).toContain("blur(22px)");
-  expect(activityGlass.background).toContain("repeating-linear-gradient");
+  expect(activityGlass.blur).toContain("blur(18px)");
+  expect(activityGlass.background).toContain("linear-gradient");
+  expect(activityGlass.background).not.toContain("repeating-linear-gradient");
   expect(activityGlass.radius).toBe("15px");
-  expect(activityGlass.leftBorder).toBe("rgb(214, 180, 63)");
+  expect(activityGlass.leftBorder).toBe("rgb(233, 223, 197)");
   await expect(profileActivityCards.locator(".profile-activity-icon svg")).toHaveCount(3);
+
+  const activityPseudo = await profileActivityCards.first().evaluate((element) => ({
+    before: getComputedStyle(element, "::before").display,
+    after: getComputedStyle(element, "::after").display,
+  }));
+  expect(activityPseudo.before).toBe("none");
+  expect(activityPseudo.after).toBe("none");
+
+  await page.screenshot({
+    path: "test-results/profile-dashboard-desktop.png",
+    fullPage: true,
+  });
 
   const headerNavRadius = await page.locator("header nav a").first().evaluate(
     (element) => getComputedStyle(element).borderRadius,
@@ -94,6 +130,14 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(
     profileActivityCards.first().locator(".profile-activity-footer p"),
   ).toBeVisible();
+  const mobileAccountRows = await page.locator(".profile-user-details").evaluate(
+    (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(mobileAccountRows).toBe(1);
+  await page.screenshot({
+    path: "test-results/profile-dashboard-mobile.png",
+    fullPage: true,
+  });
   await page.setViewportSize({ width: 1280, height: 800 });
 
 
@@ -174,8 +218,8 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     const style = getComputedStyle(element);
     return { background: style.backgroundColor, image: style.backgroundImage };
   });
-  expect(profileEditCanvas.background).toBe("rgb(245, 242, 235)");
-  expect(profileEditCanvas.image).toContain("linear-gradient");
+  expect(profileEditCanvas.background).toBe("rgba(0, 0, 0, 0)");
+  expect(profileEditCanvas.image).toBe("none");
 
   const brandTokens = await page.evaluate(() => {
     const root = getComputedStyle(document.documentElement);
@@ -200,39 +244,41 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     const fold = getComputedStyle(element, "::after");
     const title = getComputedStyle(element.querySelector("h1"));
     return {
-      paperColor: paper.backgroundColor,
-      paperBackground: paper.backgroundImage,
-      paperShape: paper.clipPath,
       paperDisplay: paper.display,
-      paperZIndex: paper.zIndex,
-      foldContent: fold.content,
       foldDisplay: fold.display,
-      foldZIndex: fold.zIndex,
-      foldedCorner: fold.backgroundImage,
       title: title.color,
-      highlight: title.backgroundImage,
-      outerRadius: getComputedStyle(element).borderRadius,
+      titleBackground: title.backgroundImage,
+      background: getComputedStyle(element).backgroundColor,
     };
   });
-  expect(profileEditHero.paperColor).toBe("rgb(255, 250, 236)");
-  expect(profileEditHero.paperBackground).toContain("linear-gradient");
-  expect(profileEditHero.paperShape).toContain("polygon");
-  expect(profileEditHero.paperDisplay).not.toBe("none");
-  expect(profileEditHero.paperZIndex).toBe("0");
-  expect(profileEditHero.foldContent).not.toBe("none");
-  expect(profileEditHero.foldDisplay).not.toBe("none");
-  expect(profileEditHero.foldZIndex).toBe("0");
-  expect(profileEditHero.foldedCorner).toContain("linear-gradient");
+  expect(profileEditHero.paperDisplay).toBe("none");
+  expect(profileEditHero.foldDisplay).toBe("none");
   expect(profileEditHero.title).toBe("rgb(41, 40, 32)");
-  expect(profileEditHero.highlight).toContain("linear-gradient");
-  expect(profileEditHero.outerRadius).toBe("0px");
+  expect(profileEditHero.titleBackground).toBe("none");
+  expect(profileEditHero.background).toBe("rgba(0, 0, 0, 0)");
 
-  const profilePortraitStage = await page.locator(".profile-image-edit").evaluate((element) => {
+  const photoSurface = await page.locator(".profile-edit-photo-card").evaluate((element) => {
     const style = getComputedStyle(element);
-    return { background: style.backgroundImage, border: style.borderColor };
+    const preview = getComputedStyle(element.querySelector(".profile-image-preview"));
+    return {
+      background: style.backgroundColor,
+      radius: style.borderRadius,
+      previewRadius: preview.borderRadius,
+      previewBorder: preview.borderColor,
+    };
   });
-  expect(profilePortraitStage.background).toContain("linear-gradient");
-  expect(profilePortraitStage.border).toBe("rgb(227, 206, 131)");
+  expect(photoSurface.background).toBe("rgba(255, 254, 250, 0.9)");
+  expect(photoSurface.radius).toBe("18px");
+  expect(photoSurface.previewRadius).toBe("50%");
+  expect(photoSurface.previewBorder).toBe("rgb(255, 243, 197)");
+
+  const editLayoutColumns = await page.locator(".profile-edit-layout").evaluate(
+    (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(editLayoutColumns).toBe(2);
+  await expect(page.locator(".profile-edit-details")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "기본 정보" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "비밀번호 변경" })).toBeVisible();
 
   const saveButton = await page.locator(".profile-edit-submit").evaluate((element) => {
     const style = getComputedStyle(element);
@@ -272,6 +318,11 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
   );
   expect(mobileEditColumns).toBe(2);
+  const mobileSettingsColumns = await page.locator(".profile-edit-layout").evaluate(
+    (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(mobileSettingsColumns).toBe(1);
+  await expect(page.locator(".profile-edit-photo-card")).toBeVisible();
   await expect(page.locator(".profile-edit-cancel")).toBeVisible();
   await page.screenshot({
     path: "test-results/profile-edit-design-mobile.png",
