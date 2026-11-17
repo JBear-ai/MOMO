@@ -86,6 +86,8 @@ function MovieDetail() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showAllDirectors, setShowAllDirectors] = useState(false);
+  const [showAllActors, setShowAllActors] = useState(false);
 
   // =========================================================
   // 2. 영화 평가 상태
@@ -129,6 +131,8 @@ function MovieDetail() {
         setLoading(true);
         setError("");
         setMovie(null);
+        setShowAllDirectors(false);
+        setShowAllActors(false);
 
         const detailResponse = await AxiosApi.movieDetailByIdentifier(id, controller.signal);
         const detailData = detailResponse.data;
@@ -689,41 +693,67 @@ function MovieDetail() {
     ),
     React.createElement(
       "section",
-      { className: "detail-content-section" },
-      React.createElement("h2", null, "감독"),
+      { className: "detail-content-section people-section" },
+      React.createElement(
+        "div",
+        { className: "detail-section-heading" },
+        React.createElement("h2", null, "감독"),
+        React.createElement("span", { className: "detail-section-count" }, `${directors.length}명`),
+      ),
       directors.length > 0
         ? React.createElement(
-            "div",
-            { className: "people-list" },
-            directors.map((person, index) =>
-              React.createElement(
-                "button",
-                {
-                  type: "button",
-                  className: "person-chip",
-                  key: `${person.name}-${index}`,
-                  onClick: () => moveToPersonDetail(person, "director"),
-                },
-                React.createElement(SafeImage, {
-                  src: person.profileUrl,
-                  alt: person.name,
-                  loading: "lazy",
-                  fallback: React.createElement(
-                    "div",
-                    null,
-                    React.createElement("span", null, "👤"),
+            React.Fragment,
+            null,
+            React.createElement(
+              "div",
+              { className: "people-list people-list-compact" },
+              directors
+                .slice(0, showAllDirectors ? directors.length : 6)
+                .map((person, index) =>
+                  React.createElement(
+                    "button",
+                    {
+                      type: "button",
+                      className: "person-chip",
+                      key: `${person.name}-${index}`,
+                      onClick: () => moveToPersonDetail(person, "director"),
+                    },
+                    React.createElement(SafeImage, {
+                      src: person.profileUrl,
+                      alt: person.name,
+                      loading: "lazy",
+                      fallback: React.createElement(
+                        "div",
+                        null,
+                        React.createElement("span", null, "👤"),
+                      ),
+                    }),
+                    React.createElement(
+                      "div",
+                      null,
+                      React.createElement("strong", null, person.name),
+                      person.originalName && person.originalName !== person.name
+                        ? React.createElement("span", null, person.originalName)
+                        : null,
+                    ),
                   ),
-                }),
+                ),
+            ),
+            directors.length > 6 &&
+              React.createElement(
+                "div",
+                { className: "people-list-actions" },
                 React.createElement(
-                  "div",
-                  null,
-                  React.createElement("strong", null, person.name),
-                  person.originalName && person.originalName !== person.name
-                    ? React.createElement("span", null, person.originalName)
-                    : null,
+                  "button",
+                  {
+                    type: "button",
+                    className: "people-more-button",
+                    onClick: () => setShowAllDirectors((value) => !value),
+                    "aria-expanded": showAllDirectors,
+                  },
+                  showAllDirectors ? "감독 접기" : `감독 더보기 (6 / ${directors.length})`,
                 ),
               ),
-            ),
           )
         : React.createElement(
             "p",
@@ -733,47 +763,73 @@ function MovieDetail() {
     ),
     React.createElement(
       "section",
-      { className: "detail-content-section" },
-      React.createElement("h2", null, "출연 배우"),
+      { className: "detail-content-section people-section" },
+      React.createElement(
+        "div",
+        { className: "detail-section-heading" },
+        React.createElement("h2", null, "출연 배우"),
+        React.createElement("span", { className: "detail-section-count" }, `${actors.length}명`),
+      ),
       actors.length > 0
         ? React.createElement(
-            "div",
-            { className: "people-list" },
-            actors.map((person, index) =>
-              React.createElement(
-                "button",
-                {
-                  type: "button",
-                  className: "person-chip",
-                  key: `${person.name}-${index}`,
-                  onClick: () => moveToPersonDetail(person, "actor"),
-                },
-                React.createElement(SafeImage, {
-                  src: person.profileUrl,
-                  alt: person.name,
-                  loading: "lazy",
-                  fallback: React.createElement(
-                    "div",
-                    null,
-                    React.createElement("span", null, "👤"),
-                  ),
-                }),
-                React.createElement(
-                  "div",
-                  null,
-                  React.createElement("strong", null, person.name),
-                  person.originalName && person.originalName !== person.name
-                    ? React.createElement("span", null, person.originalName)
-                    : null,
-                  person.role &&
+            React.Fragment,
+            null,
+            React.createElement(
+              "div",
+              { className: "people-list people-list-compact" },
+              actors
+                .slice(0, showAllActors ? actors.length : 6)
+                .map((person, index) =>
+                  React.createElement(
+                    "button",
+                    {
+                      type: "button",
+                      className: "person-chip",
+                      key: `${person.name}-${index}`,
+                      onClick: () => moveToPersonDetail(person, "actor"),
+                    },
+                    React.createElement(SafeImage, {
+                      src: person.profileUrl,
+                      alt: person.name,
+                      loading: "lazy",
+                      fallback: React.createElement(
+                        "div",
+                        null,
+                        React.createElement("span", null, "👤"),
+                      ),
+                    }),
                     React.createElement(
-                      "span",
-                      { className: "person-role" },
-                      person.role,
+                      "div",
+                      null,
+                      React.createElement("strong", null, person.name),
+                      person.originalName && person.originalName !== person.name
+                        ? React.createElement("span", null, person.originalName)
+                        : null,
+                      person.role &&
+                        React.createElement(
+                          "span",
+                          { className: "person-role" },
+                          person.role,
+                        ),
                     ),
+                  ),
+                ),
+            ),
+            actors.length > 6 &&
+              React.createElement(
+                "div",
+                { className: "people-list-actions" },
+                React.createElement(
+                  "button",
+                  {
+                    type: "button",
+                    className: "people-more-button",
+                    onClick: () => setShowAllActors((value) => !value),
+                    "aria-expanded": showAllActors,
+                  },
+                  showAllActors ? "배우 접기" : `배우 더보기 (6 / ${actors.length})`,
                 ),
               ),
-            ),
           )
         : React.createElement(
             "p",
