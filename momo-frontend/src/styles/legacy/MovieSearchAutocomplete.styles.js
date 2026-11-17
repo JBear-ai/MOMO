@@ -69,10 +69,12 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     max-height: 390px;
     overflow-y: auto;
     box-sizing: border-box;
-    background: var(--momo-surface);
+    background: rgba(255, 254, 250, .97);
     border: 1px solid var(--momo-border);
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(45, 38, 26, 0.12);
+    border-radius: 16px;
+    box-shadow: var(--momo-shadow-lg);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
   }
 
   /* 영화 검색 결과 */
