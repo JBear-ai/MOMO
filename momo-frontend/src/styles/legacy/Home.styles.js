@@ -9,6 +9,20 @@ export const HomePage = styled.div`
   padding-bottom: 48px;
   color: var(--momo-text);
   > section, > div { min-width: 0; }
+  .home-favorites-empty {
+    border: 1px dashed rgba(177,157,111,.48);
+    border-radius: 15px;
+    background: rgba(255,254,250,.68);
+    backdrop-filter: blur(12px);
+  }
+  .home-favorites-more {
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 999px;
+    background: rgba(255,254,250,.68);
+    box-shadow: 0 6px 18px rgba(53,43,24,.06), inset 0 1px rgba(255,255,255,.95);
+    transition: transform 180ms cubic-bezier(.2,.72,.2,1), box-shadow 180ms ease;
+    &:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(53,43,24,.1); }
+  }
 `;
 
 export const FeatureSection = styled.section`
@@ -229,6 +243,7 @@ export const FeatureVisual = styled.div`
     transition: transform .9s cubic-bezier(.2,.7,.2,1);
   }
   &:hover .recommend-poster { transform: scale(1.055); }
+  &:hover .recommend-content { box-shadow: 0 18px 44px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.5); }
   &:hover::after { transform: translateX(110%); }
   @media (max-width: 760px) {
     min-height: 300px;
