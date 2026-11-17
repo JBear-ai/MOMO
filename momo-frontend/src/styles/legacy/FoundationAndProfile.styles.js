@@ -18,14 +18,14 @@ body {
 ======================================== */
 .profile-page {
   width: 100%;
-  max-width: 980px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 12px 0 64px;
 }
 
 .profile-container {
   display: grid;
-  gap: 20px;
+  gap: 24px;
 }
 
 .profile-heading h1 {
@@ -56,7 +56,7 @@ body {
   background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
   border: 1px solid var(--momo-glass-border);
   border-radius: var(--momo-radius-lg);
-  box-shadow: var(--momo-shadow-sm);
+  box-shadow: 0 12px 34px rgba(54, 45, 28, .055);
   position: relative;
   overflow: hidden;
 }
@@ -220,7 +220,7 @@ body {
   justify-content: center;
   gap: 10px;
   min-width: 0; /* 내부 텍스트나 flex 아이템이 칸을 뚫고 나가지 않게 방지 */
-  min-height: 156px;
+  min-height: 168px;
   padding: 22px 14px;
   background: linear-gradient(145deg, var(--momo-note), #FFFDF6);
   border: 1px solid var(--momo-note-border);
