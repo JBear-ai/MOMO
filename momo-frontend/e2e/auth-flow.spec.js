@@ -186,8 +186,9 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(deleteButton).toBeEnabled();
   const enabledDeleteStyle = await deleteButton.evaluate((element) => {
     const style = getComputedStyle(element);
-    return { background: style.backgroundColor, color: style.color };
+    return { disabled: element.disabled, background: style.backgroundColor, color: style.color };
   });
+  expect(enabledDeleteStyle.disabled).toBe(false);
   expect(enabledDeleteStyle.background).toBe("rgb(255, 241, 236)");
   expect(enabledDeleteStyle.color).toBe("rgb(140, 63, 56)");
   await page.screenshot({
