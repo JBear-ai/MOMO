@@ -269,6 +269,42 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     transform: translateY(-1px);
   }
 
+  /* Each route has a restrained color atmosphere beyond its title panel. */
+  #root .favorite-page {
+    background: linear-gradient(180deg, rgba(99,122,114,.105), rgba(99,122,114,.035) 300px, transparent 620px);
+  }
+  #root .profile-page {
+    background: linear-gradient(180deg, rgba(108,128,111,.075), transparent 460px);
+  }
+  #root .all-reviews-page {
+    background: linear-gradient(180deg, rgba(136,121,95,.07), transparent 440px);
+  }
+  #root .my-reviews-page {
+    background: linear-gradient(180deg, rgba(108,128,111,.075), transparent 440px);
+  }
+  #root .liked-reviews-page,
+  #root .liked-reviews-container {
+    background: linear-gradient(180deg, rgba(137,107,105,.075), transparent 440px);
+  }
+  #root .search-page {
+    background: linear-gradient(180deg, rgba(102,121,131,.075), transparent 440px);
+  }
+  #root .all-reviews-heading {
+    background: linear-gradient(112deg, rgba(238,234,224,.88), rgba(250,249,245,.74) 72%);
+  }
+  #root .my-reviews-heading {
+    background: linear-gradient(112deg, rgba(232,238,231,.88), rgba(250,249,245,.74) 72%);
+  }
+  #root .liked-reviews-heading {
+    background: linear-gradient(112deg, rgba(241,232,229,.9), rgba(250,249,245,.74) 72%);
+  }
+  #root .search-page-heading {
+    background: linear-gradient(112deg, rgba(231,237,239,.9), rgba(250,249,245,.74) 72%);
+  }
+  #root .favorite-page-heading {
+    background: linear-gradient(112deg, rgba(226,235,229,.9), rgba(250,249,245,.72) 78%);
+  }
+
   /* Favorites page: poster collection carries the strongest visual identity. */
   #root .favorite-page {
     min-height: 100vh;
@@ -855,6 +891,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     font-weight: 850;
     letter-spacing: .12em;
   }
+  #root .recommend-content::before,
   #root .recommend-content .recommend-label::after {
     content: none !important;
     display: none !important;
