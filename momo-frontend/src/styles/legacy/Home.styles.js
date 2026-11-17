@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const HomePage = styled.div`
   width: 100%;
   background-color: var(--momo-bg);
-  color: #2d2a26;
+  color: var(--momo-text);
   padding-bottom: 80px;
 `;
 
@@ -18,7 +18,7 @@ export const FeatureSection = styled.section`
   background: var(--momo-surface);
   overflow: hidden;
   border-radius: 16px;
-  border: 1px solid #e6e1d6;
+  border: 1px solid var(--momo-border);
   box-shadow: 0 12px 32px -8px rgba(50, 44, 32, 0.05);
 
   @media (max-width: 768px) {
@@ -79,7 +79,7 @@ export const FeatureVisual = styled.div`
   min-width: 0;
   min-height: 440px;
   overflow: hidden;
-  background: #efece4;
+  background: var(--momo-note);
 
   /* 추천작 컴포넌트 전체 */
   .recommend-banner {
@@ -134,9 +134,9 @@ export const FeatureVisual = styled.div`
     margin-bottom: 8px;
     padding: 6px 12px;
     border-radius: 6px;
-    background: #f3e9c8;
-    color: #4a3800;
-    border: 1px solid #e5d7b5;
+    background: var(--momo-note-strong);
+    color: var(--momo-accent-ink);
+    border: 1px solid var(--momo-note-border);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.02em;
@@ -161,9 +161,9 @@ export const FeatureVisual = styled.div`
   /* 오늘의 추천작 버튼 - 쨍한 노랑을 빼고 차분한 크림 옐로우로 고정 */
   .recommend-button {
     padding: 11px 20px;
-    border: 1px solid #e5d7b5;
-    background: #f3e9c8;
-    color: #4a3800;
+    border: 1px solid var(--momo-note-border);
+    background: var(--momo-note-strong);
+    color: var(--momo-accent-ink);
     font-size: 13px;
     font-weight: 800;
     border-radius: 8px;
@@ -187,7 +187,7 @@ export const FeatureVisual = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
-    background: #faf8f2;
+    background: var(--momo-bg);
     color: var(--momo-muted);
     font-size: 14px;
     font-weight: 600;
@@ -249,7 +249,7 @@ export const SectionHeading = styled.div`
 
 /* 섹션 우측 설명 */
 export const MoreText = styled.span`
-  color: #8c8578;
+  color: var(--momo-muted);
   font-size: 13px;
   white-space: nowrap;
 `;
@@ -295,9 +295,9 @@ export const PosterWrap = styled.div`
   width: 100%;
   aspect-ratio: 2 / 2.85;
   overflow: hidden;
-  background: #efece4;
+  background: var(--momo-note);
   border-radius: 10px;
-  border: 1px solid #e2dcce;
+  border: 1px solid var(--momo-border);
   box-shadow: 0 4px 12px rgba(50, 44, 32, 0.04);
 
   img {
@@ -352,10 +352,10 @@ export const GenreList = styled.div`
 
   button {
     padding: 11px 20px;
-    border: 1px solid #e2dcce;
+    border: 1px solid var(--momo-border);
     border-radius: 999px;
     background: var(--momo-surface);
-    color: #4a453c;
+    color: var(--momo-text-soft);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -366,7 +366,7 @@ export const GenreList = styled.div`
   button:hover {
     border-color: var(--momo-link);
     background: var(--momo-accent);
-    color: #4a3800;
+    color: var(--momo-accent-ink);
   }
 `;
 
@@ -377,8 +377,8 @@ export const BrandLine = styled.div`
   justify-content: space-between;
   gap: 24px;
   padding: 36px 0;
-  border-top: 1px solid #e2dcce;
-  border-bottom: 1px solid #e2dcce;
+  border-top: 1px solid var(--momo-border);
+  border-bottom: 1px solid var(--momo-border);
 
   h2 {
     margin: 0;
@@ -407,7 +407,7 @@ export const EmptyPoster = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
-  color: #8c8578;
+  color: var(--momo-muted);
   font-size: 12px;
   font-weight: 600;
 `;
