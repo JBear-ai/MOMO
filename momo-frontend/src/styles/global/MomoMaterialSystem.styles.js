@@ -600,6 +600,46 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     backdrop-filter: blur(24px) saturate(150%);
   }
   #root .home-feature-info { background: linear-gradient(140deg, rgba(255,255,255,.56), rgba(255,250,236,.24)); }
+  /* Smaller but visible surfaces that were missed by the first pass. */
+  #root .movie-detail-page .person-filmography,
+  #root .review-detail-page .review-detail-movie {
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 18px;
+    background: linear-gradient(140deg, rgba(255,255,255,.76), rgba(255,250,236,.42) 60%, rgba(232,226,213,.2));
+    box-shadow: 0 4px 10px rgba(41,40,32,.04), 0 14px 28px rgba(41,40,32,.06), inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    backdrop-filter: blur(22px) saturate(150%);
+  }
+  #root .movie-detail-page .person-filmography { border-left: 1px solid rgba(255,255,255,.9); }
+  #root .movie-detail-page .filmography-list .filmography-item {
+    border: 1px solid rgba(255,255,255,.88);
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.4));
+    box-shadow: 0 3px 8px rgba(41,40,32,.035), inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(16px) saturate(145%);
+    backdrop-filter: blur(16px) saturate(145%);
+  }
+  #root .movie-detail-page .people-list .person-chip > div:first-child {
+    border: 1px solid rgba(255,255,255,.88);
+    border-radius: 10px;
+    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.48));
+    box-shadow: inset 0 1px rgba(255,255,255,.98);
+  }
+  #root .review-detail-page .review-detail-movie-poster,
+  #root .review-detail-page .review-detail-poster-placeholder {
+    border-color: rgba(255,255,255,.9);
+    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.48));
+  }
+  #root .profile-edit-page .profile-edit-sidebar-note {
+    border-color: rgba(255,255,255,.9);
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,250,236,.34));
+    box-shadow: 0 4px 10px rgba(41,40,32,.035), inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    backdrop-filter: blur(18px) saturate(145%);
+  }
+  #root .home-brand-line::before { display: none; content: none; }
+
   #root .favorite-page .favorite-page-card {
     border-color: rgba(255,255,255,.9);
     background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.46) 62%, rgba(232,226,213,.2));
