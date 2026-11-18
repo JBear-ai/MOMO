@@ -1384,6 +1384,37 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     border-top-color: rgba(233,223,197,.82);
   }
 
+  /* Component-level glass hierarchy: airy outer lens, dense frosted inner panes. */
+  #root .momo-app-header, #root .profile-dashboard .profile-card, #root .profile-dashboard .profile-delete-section,
+  #root .home-feature-section, #root .home-feature-info, #root .home-favorites-empty, #root .home-brand-line, #root .home-section,
+  #root .movie-detail-page .movie-detail-header, #root .movie-detail-page > .detail-content-section, #root .movie-detail-page .movie-rating-panel {
+    position: relative; isolation: isolate; border: 1px solid rgba(255,255,255,.96);
+    background: linear-gradient(118deg,rgba(255,255,255,.84),rgba(255,255,255,.42) 32%,rgba(255,250,236,.6) 72%,rgba(255,241,178,.3));
+    box-shadow: 0 3px 8px rgba(70,58,29,.04),0 16px 36px rgba(70,58,29,.09),inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(214,180,63,.2);
+    -webkit-backdrop-filter: blur(32px) saturate(180%); backdrop-filter: blur(32px) saturate(180%);
+  }
+  #root .profile-dashboard .profile-card, #root .profile-dashboard .profile-delete-section, #root .home-feature-info, #root .home-favorites-empty,
+  #root .movie-detail-page > .detail-content-section, #root .movie-detail-page .movie-rating-panel {
+    border-color: rgba(255,255,255,.99);
+    background: radial-gradient(ellipse at 12% 0%,rgba(255,255,255,.98),transparent 48%),linear-gradient(142deg,rgba(255,255,255,.84),rgba(255,250,236,.68) 58%,rgba(255,241,178,.34));
+    box-shadow: 0 6px 14px rgba(70,58,29,.05),0 20px 40px rgba(70,58,29,.1),inset 0 1px 0 rgba(255,255,255,1),inset 0 0 0 1px rgba(255,255,255,.24);
+    -webkit-backdrop-filter: blur(36px) saturate(190%); backdrop-filter: blur(36px) saturate(190%);
+  }
+  #root .profile-dashboard .profile-card.profile-overview-card, #root .profile-dashboard .profile-card.profile-activity-section { border-radius: 22px; background: linear-gradient(140deg,rgba(255,255,255,.86),rgba(255,250,236,.68) 62%,rgba(255,241,178,.32)); }
+  #root .profile-dashboard .profile-activity-section .profile-activity-item { border:1px solid rgba(255,255,255,.96); border-radius:16px; background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,250,236,.58) 65%,rgba(255,241,178,.24)); box-shadow:0 4px 13px rgba(70,58,29,.06),inset 0 1px 0 rgba(255,255,255,.99); -webkit-backdrop-filter:blur(26px) saturate(180%); backdrop-filter:blur(26px) saturate(180%); }
+  #root .profile-dashboard .profile-delete-section { min-height:86px; margin-top:4px; padding:19px 23px; border-radius:18px; border-top:1px solid rgba(255,255,255,.98); background:linear-gradient(130deg,rgba(255,255,255,.82),rgba(255,250,236,.62)); }
+  #root .home-feature-section { overflow:hidden; border-radius:28px; background:radial-gradient(ellipse at 8% 0%,rgba(255,255,255,.98),transparent 48%),radial-gradient(ellipse at 100% 100%,rgba(255,212,59,.24),transparent 48%),linear-gradient(135deg,rgba(255,255,255,.8),rgba(255,250,236,.54) 58%,rgba(255,241,178,.36)); box-shadow:0 8px 18px rgba(70,58,29,.05),0 26px 58px rgba(70,58,29,.12),inset 0 1px 0 rgba(255,255,255,1); -webkit-backdrop-filter:blur(36px) saturate(185%); backdrop-filter:blur(36px) saturate(185%); }
+  #root .home-feature-info { border:1px solid rgba(255,255,255,.82); border-radius:22px; background:linear-gradient(120deg,rgba(255,255,255,.86),rgba(255,250,236,.62) 62%,rgba(255,241,178,.3)); box-shadow:inset 0 1px 0 rgba(255,255,255,1),8px 0 28px rgba(255,255,255,.14); }
+  #root .home-favorites-empty { min-height:140px; border-radius:20px; }
+  #root .home-brand-line { overflow:hidden; border-radius:22px; background:radial-gradient(ellipse at 8% 0%,rgba(255,255,255,.96),transparent 52%),linear-gradient(125deg,rgba(255,255,255,.78),rgba(255,250,236,.56) 58%,rgba(255,241,178,.32)); }
+  #root .home-brand-line::before { display:block; top:18px; bottom:18px; width:2px; background:linear-gradient(180deg,transparent,rgba(214,180,63,.9),transparent); box-shadow:0 0 14px rgba(214,180,63,.24); }
+  #root .home-section { padding:clamp(18px,2.2vw,26px); border-radius:22px; border-color:rgba(255,255,255,.84); background:linear-gradient(145deg,rgba(255,255,255,.58),rgba(255,250,236,.38) 64%,rgba(255,241,178,.18)); box-shadow:0 8px 22px rgba(70,58,29,.05),inset 0 1px 0 rgba(255,255,255,.94); -webkit-backdrop-filter:blur(26px) saturate(165%); backdrop-filter:blur(26px) saturate(165%); }
+  #root .momo-app-header { background:linear-gradient(110deg,rgba(255,255,255,.92),rgba(255,250,236,.74) 58%,rgba(255,241,178,.36)); border-bottom:1px solid rgba(255,255,255,.98); box-shadow:0 8px 30px rgba(70,58,29,.085),inset 0 1px 0 rgba(255,255,255,1); -webkit-backdrop-filter:blur(40px) saturate(195%); backdrop-filter:blur(40px) saturate(195%); }
+  #root .movie-detail-page .movie-detail-header { border-radius:26px; background:radial-gradient(ellipse at 8% 0%,rgba(255,255,255,.98),transparent 44%),radial-gradient(ellipse at 100% 100%,rgba(255,212,59,.24),transparent 46%),linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,250,236,.54) 62%,rgba(255,241,178,.34)); box-shadow:0 8px 18px rgba(70,58,29,.055),0 26px 58px rgba(70,58,29,.13),inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(214,180,63,.22); -webkit-backdrop-filter:blur(40px) saturate(190%); backdrop-filter:blur(40px) saturate(190%); }
+  #root .movie-detail-page > .detail-content-section, #root .movie-detail-page .movie-rating-panel { border-radius:22px; background:radial-gradient(ellipse at 10% 0%,rgba(255,255,255,.99),transparent 48%),linear-gradient(142deg,rgba(255,255,255,.86),rgba(255,250,236,.7) 58%,rgba(255,241,178,.34)); }
+  #root .movie-detail-page .movie-score-display, #root .movie-detail-page .rating-distribution, #root .movie-detail-page .detail-reaction-counts .rating-vote-button, #root .movie-detail-page .people-section .person-chip { border:1px solid rgba(255,255,255,.99); border-radius:16px; background:linear-gradient(140deg,rgba(255,255,255,.9),rgba(255,250,236,.7) 64%,rgba(255,241,178,.32)); box-shadow:0 5px 15px rgba(70,58,29,.06),inset 0 1px 0 rgba(255,255,255,1); -webkit-backdrop-filter:blur(30px) saturate(190%); backdrop-filter:blur(30px) saturate(190%); }
+  #root .movie-detail-page .people-section .person-chip:hover { border-color:rgba(214,180,63,.78); background:linear-gradient(140deg,rgba(255,255,255,.99),rgba(255,250,236,.8)); box-shadow:0 8px 18px rgba(70,58,29,.095),inset 0 1px 0 rgba(255,255,255,1); }
+  @media (max-width:700px) { #root .home-section{padding:17px 14px;border-radius:18px;} #root .home-feature-info{border-radius:17px;} #root .profile-dashboard .profile-delete-section{padding:17px;} #root .movie-detail-page .movie-detail-header{border-radius:20px;} #root .movie-detail-page > .detail-content-section,#root .movie-detail-page .movie-rating-panel{border-radius:18px;} }
 `;
 
 export default MomoMaterialSystemStyles;
