@@ -1379,6 +1379,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .rating-distribution,
   #root .movie-score-display,
   #root .detail-reaction-counts,
+  #root .detail-reaction-counts .rating-vote-button,
   #root .people-section,
   #root .people-section .person-chip {
     border: 1px solid rgba(255,255,255,.98) !important;
@@ -1404,6 +1405,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .rating-distribution,
   #root .movie-score-display,
   #root .detail-reaction-counts,
+  #root .detail-reaction-counts .rating-vote-button,
   #root .people-section,
   #root .people-section .person-chip {
     background-color: rgba(255,254,250,.95) !important;
