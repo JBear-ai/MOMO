@@ -19,20 +19,10 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     --momo-tone-search: #667983;
   }
 
-  /* Quiet canvas: remove notebook grid and ambient bubble gradients. */
-  html, body {
-    background: var(--momo-bg) !important;
-    background-image: none !important;
-  }
-  body {
+body {
     color: var(--momo-glass-ink);
   }
-  #root > div::before {
-    content: none !important;
-    display: none !important;
-  }
-
-  /* The app header is a restrained sheet of glass, not another decoration panel. */
+/* The app header is a restrained sheet of glass, not another decoration panel. */
   #root .momo-app-header {
     border-bottom: 1px solid rgba(233,223,197,.72);
     background: rgba(255,250,236,.88);
@@ -40,11 +30,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     backdrop-filter: blur(24px) saturate(112%);
     -webkit-backdrop-filter: blur(24px) saturate(112%);
   }
-  #root .momo-app-header::after {
-    content: none !important;
-    display: none !important;
-  }
-  #root .momo-app-header::before {
+#root .momo-app-header::before {
     background: linear-gradient(90deg, transparent, rgba(255,255,255,.92), transparent);
     opacity: .7;
   }
@@ -107,16 +93,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     backdrop-filter: blur(20px) saturate(108%);
     -webkit-backdrop-filter: blur(20px) saturate(108%);
   }
-  #root .profile-card::before,
-  #root .profile-card::after,
-  #root .review-detail-card::before,
-  #root .review-detail-card::after,
-  #root .signup-card::before,
-  #root .signup-card::after {
-    content: none !important;
-    display: none !important;
-  }
-  #root .profile-card,
+#root .profile-card,
   #root .all-reviews-card,
   #root .my-reviews-card,
   #root .liked-reviews-card,
@@ -175,16 +152,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     animation: none;
     pointer-events: none;
   }
-  #root .all-reviews-heading::after,
-  #root .my-reviews-heading::after,
-  #root .liked-reviews-heading::after,
-  #root .search-page-heading::after,
-  #root .favorite-page-heading::after {
-    content: none !important;
-    display: none !important;
-    animation: none !important;
-  }
-  #root .all-reviews-heading > div,
+#root .all-reviews-heading > div,
   #root .my-reviews-heading > div,
   #root .liked-reviews-heading > div,
   #root .search-page-heading > div,
@@ -437,8 +405,8 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .profile-page .profile-card:has(.profile-activity-grid)::before,
   #root .profile-page .profile-card:has(.profile-activity-grid)::after {
-    content: none !important;
-    display: none !important;
+    content: none;
+    display: none;
   }
   #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading {
     margin-bottom: 22px;
@@ -494,12 +462,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     --activity-ink: #5F796B;
     background: rgba(235,241,235,.76);
   }
-  #root .profile-page .profile-activity-item::before,
-  #root .profile-page .profile-activity-item::after {
-    content: none !important;
-    display: none !important;
-  }
-  #root .profile-page .profile-activity-item:hover {
+#root .profile-page .profile-activity-item:hover {
     border-color: rgba(255,255,255,.98);
     border-left-color: var(--activity-ink);
     box-shadow: 0 11px 22px rgba(39,43,39,.08), inset 0 1px rgba(255,255,255,.96);
@@ -577,7 +540,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     border-top: 1px solid rgba(79,91,81,.14);
   }
   #root .profile-page .profile-activity-footer p {
-    display: block !important;
+    display: block;
     margin: 0;
     color: #5B635D;
     font-size: 11px;
@@ -611,16 +574,12 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     overflow: hidden;
     border: 1px solid rgba(255,255,255,.82);
     border-radius: 24px;
-    background: linear-gradient(132deg, rgba(251,250,246,.78), rgba(237,238,231,.58));
+    background: linear-gradient(132deg, rgba(255,255,255,.74), rgba(255,250,236,.48));
     box-shadow: 0 18px 42px rgba(39,43,39,.095), inset 0 1px rgba(255,255,255,.92);
     backdrop-filter: blur(28px) saturate(114%);
     -webkit-backdrop-filter: blur(28px) saturate(114%);
   }
-  #root .movie-detail-page .movie-detail-header::before {
-    content: none !important;
-    display: none !important;
-  }
-  #root .movie-detail-page .movie-detail-header::after {
+#root .movie-detail-page .movie-detail-header::after {
     position: absolute;
     z-index: 0;
     inset: 0;
@@ -680,11 +639,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     letter-spacing: .045em;
     backdrop-filter: blur(12px);
   }
-  #root .movie-detail-page .movie-detail-info .detail-rank::before {
-    content: none !important;
-    display: none !important;
-  }
-  #root .movie-detail-page .movie-detail-info h1 {
+#root .movie-detail-page .movie-detail-info h1 {
     flex: 0 0 100%;
     width: 100%;
     margin: 0 0 6px;
@@ -751,8 +706,8 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     -webkit-backdrop-filter: blur(22px) saturate(110%);
   }
   #root .movie-detail-page .movie-rating-panel::before {
-    content: none !important;
-    display: none !important;
+    content: none;
+    display: none;
   }
   #root .movie-detail-page .rating-panel-eyebrow,
   #root .movie-detail-page .rating-panel-stamp {
@@ -891,12 +846,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     font-weight: 850;
     letter-spacing: .12em;
   }
-  #root .recommend-content::before,
-  #root .recommend-content .recommend-label::after {
-    content: none !important;
-    display: none !important;
-  }
-  #root .recommend-content .recommend-info,
+#root .recommend-content .recommend-info,
   #root .recommend-content .recommend-description {
     color: rgba(255,255,255,.94);
     text-shadow: 0 1px 2px rgba(0,0,0,.38);
@@ -1337,11 +1287,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     backdrop-filter: blur(18px) saturate(108%);
     -webkit-backdrop-filter: blur(18px) saturate(108%);
   }
-  #root .profile-edit-page .profile-edit-card::before {
-    content: none !important;
-    display: none !important;
-  }
-  #root .profile-edit-page .profile-edit-form {
+#root .profile-edit-page .profile-edit-form {
     display: grid;
     gap: 10px;
   }
@@ -1482,26 +1428,26 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .profile-edit-page .profile-edit-divider {
     height: 2px;
-    margin: 26px 0 13px !important;
-    border: 0 !important;
+    margin: 26px 0 13px;
+    border: 0;
     background: linear-gradient(90deg, #FFD43B 0%, #E9DFC5 56%, rgba(233,223,197,0) 100%);
   }
   #root .profile-edit-page .profile-edit-section-title {
     position: relative;
-    margin: 0 0 4px !important;
+    margin: 0 0 4px;
     padding: 13px 16px;
     border-left: 4px solid #FFD43B;
     border-radius: 0 8px 8px 0;
     background: #F5F2EB;
     color: #292820;
-    font-size: 16px !important;
+    font-size: 16px;
     font-weight: 900;
     letter-spacing: -.025em;
   }
   #root .profile-edit-page .profile-edit-section-description {
-    margin: 0 0 10px !important;
-    color: #6A6251 !important;
-    font-size: 12px !important;
+    margin: 0 0 10px;
+    color: #6A6251;
+    font-size: 12px;
     line-height: 1.6;
   }
   #root .profile-edit-page .profile-form-buttons {
@@ -1509,7 +1455,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     justify-content: flex-end;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 20px !important;
+    margin-top: 20px;
     padding-top: 18px;
     border-top: 1px solid #E9DFC5;
   }
@@ -1596,17 +1542,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    #root *,
-    #root *::before,
-    #root *::after {
-      animation-duration: .01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: .01ms !important;
-    }
-  }
-
-  /* =========================================================
+/* =========================================================
      MOMO Brand Consistency — final cascade
      Warm cream / memo ivory / highlighter yellow / warm ink.
      Neutralizes legacy sage-gray page overrides.
@@ -1718,7 +1654,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
 
   /* Favorites gallery: one consistent ivory surface, without gray/green variants. */
   #root .favorite-page {
-    background: linear-gradient(180deg, rgba(255,212,59,.13), rgba(255,212,59,.035) 320px, transparent 620px), var(--momo-bg) !important;
+    background: linear-gradient(180deg, rgba(255,212,59,.13), rgba(255,212,59,.035) 320px, transparent 620px), var(--momo-bg);
   }
   #root .favorite-page-heading {
     border-color: rgba(233,223,197,.92);
@@ -1736,7 +1672,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .favorite-page .favorite-page-card:nth-child(3n + 2),
   #root .favorite-page .favorite-page-card:nth-child(3n) {
     border-color: #E9DFC5;
-    background: rgba(255,250,236,.9) !important;
+    background: linear-gradient(145deg, rgba(255,255,255,.64), rgba(255,250,236,.48));
     box-shadow: 0 8px 20px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.98);
   }
   #root .favorite-page .favorite-page-card:hover {
@@ -1801,8 +1737,8 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .profile-page .profile-activity-item::before,
   #root .profile-page .profile-activity-item::after {
-    content: "" !important;
-    display: block !important;
+    content: "";
+    display: block;
   }
   #root .profile-page .profile-activity-item:hover {
     border-color: rgba(214,180,63,.7);
@@ -1908,7 +1844,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .movie-detail-page > .detail-content-section > h2 { color: #292820; }
   #root .movie-detail-page > .detail-content-section > p { color: #514833; }
   #root .movie-detail-page .movie-rating-panel {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     gap: 18px;
     min-height: 240px;
@@ -1920,8 +1856,8 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     -webkit-backdrop-filter: blur(22px) saturate(125%);
   }
   #root .movie-detail-page .movie-rating-panel::before {
-    content: "" !important;
-    display: block !important;
+    content: "";
+    display: block;
     top: 8px;
     right: 34px;
     background: rgba(255,212,59,.5);
@@ -2273,10 +2209,10 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     opacity: .62;
   }
   #root .profile-page .profile-delete-button:not(:disabled) {
-    border-color: #E5B8AD !important;
-    background: #FFF1EC !important;
-    color: #8C3F38 !important;
-    opacity: 1 !important;
+    border-color: #E5B8AD;
+    background: #FFF1EC;
+    color: #8C3F38;
+    opacity: 1;
     cursor: pointer;
   }
 
