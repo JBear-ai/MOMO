@@ -373,6 +373,23 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     outline-offset: 3px;
   }
 
+  /* Destructive action colors stay stable even while pointer hover is active. */
+  #root .profile-page .profile-container .profile-delete-page-card button.profile-button.profile-delete-button:disabled {
+    border-color: #E5B8AD;
+    background-color: #F1EADF;
+    background-image: none;
+    color: #776F62;
+    opacity: 1;
+  }
+  #root .profile-page .profile-container .profile-delete-page-card button.profile-button.profile-delete-button:not(:disabled),
+  #root .profile-page .profile-container .profile-delete-page-card button.profile-button.profile-delete-button:not(:disabled):hover {
+    border-color: #E5B8AD;
+    background-color: #FFF1EC;
+    background-image: none;
+    color: #8C3F38;
+    opacity: 1;
+  }
+
   /* Fields use a light inset surface and a visible focus ring. */
   #root .signup-field input,
   #root .signup-field textarea,
