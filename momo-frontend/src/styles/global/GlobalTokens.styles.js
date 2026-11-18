@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-// MOMO palette: cool mineral surfaces with a warm highlighter accent
+// MOMO palette: warm paper, cream glass and highlighter yellow
 const GlobalTokensStyles = createGlobalStyle`
   :root {
     color-scheme: light;
