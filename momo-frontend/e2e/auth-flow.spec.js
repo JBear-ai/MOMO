@@ -214,7 +214,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     };
   });
   expect(overviewSurface.radius).toBe("20px");
-  expect(overviewSurface.background).toBe("rgba(0, 0, 0, 0)");
+  expect(overviewSurface.background).toBe("rgba(255, 255, 255, 0.12)");
   expect(overviewSurface.backgroundImage).toContain("linear-gradient");
   expect(overviewSurface.blur).toContain("blur(24px)");
   expect(overviewSurface.innerBackground).toBe("rgba(0, 0, 0, 0)");
