@@ -1,140 +1,53 @@
 import { createGlobalStyle } from "styled-components";
 
 /*
- * MOMO Cinema Archive
- * Quiet cinema-inspired surfaces: restrained color, real translucent glass,
- * editorial hierarchy and poster-led composition. No decorative bubbles or tape.
+ * MOMO route experience system.
+ * This module owns page composition for archive, movie, review and account routes.
+ * Shared control materials are defined separately in MomoMaterialSystem.styles.js.
  */
 const MomoLiquidGlassPageStyles = createGlobalStyle`
   :root {
-    --momo-glass-ink: #292820;
-    --momo-glass-muted: #6A6251;
-    --momo-glass-edge: rgba(255,255,255,.84);
-    --momo-glass-surface: rgba(255,250,236,.76);
-    --momo-glass-shadow: 0 12px 30px rgba(39,43,39,.075), inset 0 1px rgba(255,255,255,.9);
-    --momo-glass-ease: cubic-bezier(.2,.72,.2,1);
-    --momo-tone-film: #637A72;
-    --momo-tone-write: #8A7652;
-    --momo-tone-like: #8A6967;
-    --momo-tone-search: #667983;
+    --momo-route-ink: #292820;
+    --momo-route-body: #514C40;
+    --momo-route-muted: #827B6D;
+    --momo-route-paper: rgba(255,250,236,.78);
+    --momo-route-glass: linear-gradient(138deg, rgba(255,255,255,.78), rgba(255,250,236,.48) 60%, rgba(255,244,210,.34));
+    --momo-route-edge: rgba(255,255,255,.9);
+    --momo-route-depth: 0 3px 8px rgba(41,40,32,.035), 0 16px 36px rgba(41,40,32,.075), inset 0 1px 0 rgba(255,255,255,.98);
+    --momo-route-blur: 26px;
   }
 
-body {
-    color: var(--momo-glass-ink);
-  }
-/* The app header is a restrained sheet of glass, not another decoration panel. */
-  #root .momo-app-header {
-    border-bottom: 1px solid rgba(233,223,197,.72);
-    background: rgba(255,250,236,.88);
-    box-shadow: 0 7px 22px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.92);
-    backdrop-filter: blur(24px) saturate(112%);
-    -webkit-backdrop-filter: blur(24px) saturate(112%);
-  }
-#root .momo-app-header::before {
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.92), transparent);
-    opacity: .7;
-  }
-  #root .momo-app-header nav a {
-    min-height: 38px;
-    padding: 0 13px;
-    border: 1px solid rgba(233,223,197,.78);
-    border-radius: 11px;
-    background: rgba(255,250,236,.74);
-    box-shadow: inset 0 1px rgba(255,255,255,.82);
-    color: #514A36;
-    font-size: 12px;
-    font-weight: 750;
-    transition: background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-  }
-  #root .momo-app-header nav a:hover {
-    border-color: rgba(214,180,63,.48);
-    background: rgba(255,212,59,.2);
-    color: #51400F;
-    box-shadow: 0 5px 12px rgba(39,43,39,.06), inset 0 1px rgba(255,255,255,.95);
-  }
-  #root .momo-app-header nav a.active {
-    border-color: rgba(214,180,63,.58);
-    background: rgba(255,212,59,.3);
-    color: #51400F;
-    box-shadow: inset 0 1px rgba(255,255,255,.84);
-  }
-  #root .momo-app-header button {
-    min-height: 38px;
-    padding: 0 15px;
-    border: 1px solid rgba(214,180,63,.5);
-    border-radius: 11px;
-    background: rgba(255,212,59,.26);
-    box-shadow: inset 0 1px rgba(255,255,255,.92);
-    color: #51400F;
-    font-size: 12px;
-    font-weight: 800;
-  }
-  #root .momo-app-header button:hover:not(:disabled) {
-    border-color: rgba(179,141,25,.72);
-    background: rgba(255,212,59,.44);
-    box-shadow: 0 5px 12px rgba(39,43,39,.07), inset 0 1px rgba(255,255,255,.9);
-  }
-
-  /* Common translucent surfaces. Content stays opaque enough to remain readable. */
-  #root .profile-card,
-  #root .all-reviews-card,
-  #root .my-reviews-card,
-  #root .liked-reviews-card,
-  #root .review-detail-card,
-  #root .review-comment-card,
-  #root .detail-content-section,
-  #root .signup-card,
-  #root .favorite-page-empty {
-    border: 1px solid var(--momo-glass-edge);
-    border-radius: 19px;
-    background: rgba(249,248,243,.68);
-    box-shadow: var(--momo-glass-shadow);
-    backdrop-filter: blur(20px) saturate(108%);
-    -webkit-backdrop-filter: blur(20px) saturate(108%);
-  }
-#root .profile-card,
-  #root .all-reviews-card,
-  #root .my-reviews-card,
-  #root .liked-reviews-card,
-  #root .review-detail-card,
-  #root .review-comment-card,
-  #root .detail-content-section {
-    transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms var(--momo-glass-ease);
-  }
-
-  /* Route headers: the accent is a slim editorial rule, never a glowing orb. */
+  /* ---------------------------------------------------------
+     Shared archive headers: editorial hierarchy with a visible
+     glass plane, warm light refraction and a single accent rule.
+  --------------------------------------------------------- */
   #root .all-reviews-heading,
   #root .my-reviews-heading,
   #root .liked-reviews-heading,
-  #root .search-page-heading,
   #root .favorite-page-heading {
-    --page-accent: #718075;
+    --route-accent: #B38D19;
     position: relative;
     isolation: isolate;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    min-height: 154px;
+    min-height: 164px;
     margin: 0 0 24px;
-    padding: clamp(26px, 3.6vw, 38px);
+    padding: clamp(26px, 3.5vw, 40px);
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,.78);
-    border-radius: 21px;
-    background: linear-gradient(132deg, rgba(250,249,245,.82), rgba(240,239,232,.62));
-    box-shadow: 0 12px 30px rgba(39,43,39,.065), inset 0 1px rgba(255,255,255,.92);
-    backdrop-filter: blur(26px) saturate(112%);
-    -webkit-backdrop-filter: blur(26px) saturate(112%);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 22px;
+    background:
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.92), transparent 52%),
+      linear-gradient(132deg, rgba(255,254,250,.84), rgba(255,250,236,.54) 65%, rgba(255,243,194,.32));
+    box-shadow: var(--momo-route-depth);
+    -webkit-backdrop-filter: blur(28px) saturate(150%);
+    backdrop-filter: blur(28px) saturate(150%);
   }
-  #root .all-reviews-heading { --page-accent: #88795F; }
-  #root .my-reviews-heading { --page-accent: #6C806F; }
-  #root .liked-reviews-heading { --page-accent: #896B69; }
-  #root .search-page-heading { --page-accent: #667983; }
-  #root .favorite-page-heading { --page-accent: #627B72; }
   #root .all-reviews-heading::before,
   #root .my-reviews-heading::before,
   #root .liked-reviews-heading::before,
-  #root .search-page-heading::before,
   #root .favorite-page-heading::before {
     position: absolute;
     z-index: 0;
@@ -142,20 +55,32 @@ body {
     bottom: 28px;
     left: 0;
     width: 3px;
-    height: auto;
     content: "";
     border-radius: 0 3px 3px 0;
-    background: var(--page-accent);
-    box-shadow: none;
-    transform: none;
-    animation: none;
+    background: var(--route-accent);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.24);
     pointer-events: none;
   }
-#root .all-reviews-heading > div,
-  #root .my-reviews-heading > div,
-  #root .liked-reviews-heading > div,
-  #root .search-page-heading > div,
-  #root .favorite-page-heading > div {
+  #root .all-reviews-heading::after,
+  #root .my-reviews-heading::after,
+  #root .liked-reviews-heading::after,
+  #root .favorite-page-heading::after {
+    position: absolute;
+    z-index: 0;
+    top: -55%;
+    right: -8%;
+    width: 52%;
+    height: 190%;
+    content: "";
+    border-left: 1px solid rgba(255,255,255,.34);
+    background: linear-gradient(112deg, transparent 12%, rgba(255,255,255,.26) 48%, transparent 82%);
+    transform: rotate(12deg);
+    pointer-events: none;
+  }
+  #root .all-reviews-heading > *,
+  #root .my-reviews-heading > *,
+  #root .liked-reviews-heading > *,
+  #root .favorite-page-heading > * {
     position: relative;
     z-index: 1;
     min-width: 0;
@@ -163,150 +88,121 @@ body {
   #root .all-reviews-heading h1,
   #root .my-reviews-heading h1,
   #root .liked-reviews-heading h1,
-  #root .search-page-heading h1,
   #root .favorite-page-heading h1 {
     margin: 0 0 8px;
-    color: #292D2B;
-    font-size: clamp(27px, 3.2vw, 36px);
+    color: #292820;
+    font-size: clamp(29px, 3.4vw, 40px);
     font-weight: 850;
-    line-height: 1.18;
-    letter-spacing: -.048em;
-    text-shadow: none;
+    line-height: 1.12;
+    letter-spacing: -.055em;
   }
   #root .all-reviews-heading p,
   #root .my-reviews-heading p:not(.my-reviews-eyebrow),
   #root .liked-reviews-heading p,
-  #root .search-page-heading p,
   #root .favorite-page-heading p {
     margin: 0;
-    color: #565D57;
+    color: #625B4F;
     font-size: 13px;
-    font-weight: 550;
-    line-height: 1.7;
+    line-height: 1.75;
   }
   #root .my-reviews-heading .my-reviews-eyebrow,
   #root .liked-reviews-heading .liked-reviews-eyebrow,
   #root .favorite-page-heading .favorite-page-eyebrow {
     display: inline-flex;
     align-items: center;
+    gap: 8px;
     margin: 0 0 11px;
-    color: var(--page-accent);
+    color: var(--route-accent);
     font-size: 10px;
     font-weight: 850;
-    letter-spacing: .13em;
+    letter-spacing: .15em;
   }
+  #root .my-reviews-heading .my-reviews-eyebrow::before,
+  #root .liked-reviews-heading .liked-reviews-eyebrow::before,
   #root .favorite-page-heading .favorite-page-eyebrow::before {
-    width: 5px;
-    height: 13px;
-    margin-right: 8px;
+    width: 6px;
+    height: 6px;
     content: "";
-    border-radius: 1px;
-    background: var(--page-accent);
-    box-shadow: none;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 3px rgba(255,212,59,.2);
   }
+  #root .my-reviews-heading { --route-accent: #80600E; }
+  #root .liked-reviews-heading { --route-accent: #9A6258; }
+  #root .favorite-page-heading { --route-accent: #6F7962; }
+
   #root .page-back-link,
   #root .favorite-back-button,
   #root .review-detail-back {
     position: relative;
     z-index: 2;
     display: inline-flex;
-    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    min-height: 40px;
-    padding: 0 15px;
-    border: 1px solid rgba(255,255,255,.84);
-    border-radius: 11px;
-    background: rgba(249,248,243,.62);
-    box-shadow: 0 4px 12px rgba(39,43,39,.055), inset 0 1px rgba(255,255,255,.94);
-    color: #424A44;
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 0 16px;
+    border: 1px solid rgba(255,255,255,.92);
+    border-radius: 999px;
+    background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(255,250,236,.62));
+    box-shadow: 0 4px 11px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
+    color: #514C40;
     font-size: 12px;
-    font-weight: 750;
+    font-weight: 800;
     text-decoration: none;
     white-space: nowrap;
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    transition: box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    backdrop-filter: blur(18px) saturate(145%);
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
   }
   #root .page-back-link:hover,
   #root .favorite-back-button:hover,
   #root .review-detail-back:hover {
-    background: rgba(255,255,255,.84);
-    box-shadow: 0 7px 16px rgba(39,43,39,.09), inset 0 1px rgba(255,255,255,.98);
+    border-color: rgba(214,180,63,.64);
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 8px 17px rgba(41,40,32,.085), inset 0 1px rgba(255,255,255,1);
   }
 
-  /* Each route has a restrained color atmosphere beyond its title panel. */
+  /* ---------------------------------------------------------
+     Favorites: the saved collection is an image-first gallery,
+     not a stack of flat dashboard cards.
+  --------------------------------------------------------- */
   #root .favorite-page {
-    background: linear-gradient(180deg, rgba(99,122,114,.105), rgba(99,122,114,.035) 300px, transparent 620px);
-  }
-  #root .profile-page {
-    background: linear-gradient(180deg, rgba(108,128,111,.075), transparent 460px);
-  }
-  #root .all-reviews-page {
-    background: linear-gradient(180deg, rgba(136,121,95,.07), transparent 440px);
-  }
-  #root .my-reviews-page {
-    background: linear-gradient(180deg, rgba(108,128,111,.075), transparent 440px);
-  }
-  #root .liked-reviews-page,
-  #root .liked-reviews-container {
-    background: linear-gradient(180deg, rgba(137,107,105,.075), transparent 440px);
-  }
-  #root .search-page {
-    background: linear-gradient(180deg, rgba(102,121,131,.075), transparent 440px);
-  }
-  #root .all-reviews-heading {
-    background: linear-gradient(112deg, rgba(238,234,224,.88), rgba(250,249,245,.74) 72%);
-  }
-  #root .my-reviews-heading {
-    background: linear-gradient(112deg, rgba(232,238,231,.88), rgba(250,249,245,.74) 72%);
-  }
-  #root .liked-reviews-heading {
-    background: linear-gradient(112deg, rgba(241,232,229,.9), rgba(250,249,245,.74) 72%);
-  }
-  #root .search-page-heading {
-    background: linear-gradient(112deg, rgba(231,237,239,.9), rgba(250,249,245,.74) 72%);
-  }
-  #root .favorite-page-heading {
-    background: linear-gradient(112deg, rgba(226,235,229,.9), rgba(250,249,245,.72) 78%);
-  }
-
-  /* Favorites page: poster collection carries the strongest visual identity. */
-  #root .favorite-page {
-    min-height: 100vh;
-    padding: 22px 0 72px;
-    background: linear-gradient(180deg, rgba(99,122,114,.105), rgba(99,122,114,.035) 300px, transparent 620px);
+    min-height: 100%;
+    padding: 0 0 54px;
+    background: linear-gradient(180deg, rgba(255,212,59,.105), rgba(255,212,59,.025) 360px, transparent 660px);
   }
   #root .favorite-page-container {
-    width: min(1240px, calc(100% - 48px));
-    max-width: 1240px;
+    width: min(1280px, 100%);
+    max-width: 1280px;
     margin: 0 auto;
   }
   #root .favorite-page-heading {
-    min-height: 156px;
-    margin-bottom: 22px;
-  }
-  #root .favorite-page-heading h1 {
-    font-size: clamp(29px, 3.4vw, 38px);
+    min-height: 164px;
+    margin-bottom: 23px;
+    border-radius: 22px;
   }
   #root .favorite-page .favorite-list-toolbar {
-    min-height: 42px;
-    margin: 0 0 18px;
-    padding: 0 2px 12px;
-    border-bottom: 1px solid rgba(107,119,110,.18);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 45px;
+    margin: 0 0 19px;
+    padding: 0 2px 11px;
+    border-bottom: 1px solid rgba(179,141,25,.2);
   }
   #root .favorite-page .favorite-list-toolbar > span {
     display: inline-flex;
     align-items: center;
-    min-height: 30px;
-    padding: 0 11px;
-    border: 1px solid rgba(110,129,116,.22);
-    border-radius: 8px;
-    background: rgba(105,128,115,.1);
-    box-shadow: none;
-    color: #41594B;
+    min-height: 31px;
+    padding: 0 12px;
+    border: 1px solid rgba(214,180,63,.48);
+    border-radius: 999px;
+    background: rgba(255,241,178,.5);
+    color: #66510F;
     font-size: 11px;
-    font-weight: 750;
+    font-weight: 800;
+    letter-spacing: -.01em;
   }
   #root .favorite-page .favorite-page-grid {
     display: grid;
@@ -315,286 +211,222 @@ body {
   }
   #root .favorite-page .favorite-page-card {
     position: relative;
+    display: flex;
     min-width: 0;
+    flex-direction: column;
     padding: 8px;
-    border: 1px solid rgba(255,255,255,.78);
-    border-radius: 15px;
-    background: rgba(248,247,242,.58);
-    box-shadow: 0 7px 18px rgba(39,43,39,.055), inset 0 1px rgba(255,255,255,.86);
-    backdrop-filter: blur(18px) saturate(108%);
-    -webkit-backdrop-filter: blur(18px) saturate(108%);
-    transition: box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 17px;
+    background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.54));
+    box-shadow: 0 3px 8px rgba(41,40,32,.035), 0 12px 26px rgba(41,40,32,.065), inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(24px) saturate(145%);
+    backdrop-filter: blur(24px) saturate(145%);
+    transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
   }
-  #root .favorite-page .favorite-page-card:nth-child(3n + 2) {
-    background: rgba(244,241,235,.62);
-  }
-  #root .favorite-page .favorite-page-card:nth-child(3n) {
-    background: rgba(239,243,237,.62);
+  #root .favorite-page .favorite-page-card::before {
+    position: absolute;
+    z-index: 2;
+    inset: 1px 1px auto;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,1), transparent);
+    pointer-events: none;
   }
   #root .favorite-page .favorite-page-card:hover {
-    border-color: rgba(255,255,255,.96);
-    box-shadow: 0 13px 24px rgba(39,43,39,.09), inset 0 1px rgba(255,255,255,.96);
+    border-color: rgba(214,180,63,.58);
+    background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,250,236,.66));
+    box-shadow: 0 8px 16px rgba(41,40,32,.055), 0 18px 34px rgba(41,40,32,.09), inset 0 1px rgba(255,255,255,1);
   }
   #root .favorite-page .favorite-page-poster {
+    position: relative;
+    aspect-ratio: 2 / 2.86;
     padding: 4px;
-    border: 1px solid rgba(255,255,255,.72);
-    border-radius: 10px;
-    background: rgba(255,255,255,.46);
-    box-shadow: 0 4px 10px rgba(35,39,35,.1);
-    backdrop-filter: blur(12px);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.82);
+    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(255,255,255,.65), rgba(229,222,207,.6));
+    box-shadow: 0 5px 14px rgba(41,40,32,.095), inset 0 1px rgba(255,255,255,.94);
   }
-  #root .favorite-page .favorite-page-poster > .favorite-page-open-button,
-  #root .favorite-page .favorite-page-poster img {
-    border-radius: 7px;
+  #root .favorite-page .favorite-page-open-button {
+    position: absolute;
+    inset: 4px;
+    display: block;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+  }
+  #root .favorite-page .favorite-page-open-button img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    transition: filter 220ms ease;
+  }
+  #root .favorite-page .favorite-page-card:hover .favorite-page-open-button img { filter: saturate(1.045) contrast(1.015); }
+  #root .favorite-page .favorite-page-no-poster {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    background: linear-gradient(145deg, #EEE9DE, #F9F5EB);
+    color: #827B6D;
+    font-size: 11px;
   }
   #root .favorite-page .favorite-page-movie-info {
-    padding: 11px 3px 3px;
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+    padding: 13px 6px 7px;
   }
   #root .favorite-page .favorite-page-movie-info h3 {
-    color: #303633;
+    margin: 0;
+    overflow: hidden;
+    color: #292820;
     font-size: 13px;
-    font-weight: 800;
-    letter-spacing: -.02em;
+    font-weight: 850;
+    letter-spacing: -.025em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   #root .favorite-page .favorite-page-movie-info p {
-    color: #626A63;
+    margin: 0;
+    color: #827B6D;
     font-size: 11px;
     font-weight: 600;
   }
   #root .favorite-page .favorite-page-empty {
-    padding: 52px 22px;
-    background: rgba(248,247,242,.72);
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 10px;
+    min-height: 300px;
+    padding: 42px 24px;
+    border: 1px solid rgba(255,255,255,.92);
+    border-radius: 22px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.92), transparent 58%),
+      linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.62));
+    box-shadow: var(--momo-route-depth);
     text-align: center;
+    -webkit-backdrop-filter: blur(26px) saturate(145%);
+    backdrop-filter: blur(26px) saturate(145%);
   }
   #root .favorite-page .favorite-empty-symbol {
-    color: #647B70;
-    filter: none;
-  }
-  #root .favorite-page .favorite-page-empty h2 {
-    color: #303633;
-    font-weight: 800;
-  }
-  #root .favorite-page .favorite-page-empty p {
-    color: #626A63;
-  }
-  #root .favorite-page .favorite-browse-button {
-    min-height: 42px;
-    padding: 0 18px;
-    border: 1px solid rgba(95,119,104,.32);
-    border-radius: 11px;
-    background: rgba(101,126,111,.14);
-    box-shadow: none;
-    color: #41594B;
-    font-weight: 800;
-  }
-
-  /* Profile activity is a set of glass archive entries, not paper stickers. */
-  #root .profile-dashboard .profile-card {
-    display: block;
-    width: 100%;
-    padding: clamp(22px, 3vw, 32px);
-    border: 1px solid rgba(255,255,255,.8);
-    border-radius: 20px;
-    background: rgba(248,247,242,.68);
-    box-shadow: var(--momo-glass-shadow);
-    backdrop-filter: blur(22px) saturate(110%);
-    -webkit-backdrop-filter: blur(22px) saturate(110%);
-  }
-#root .profile-dashboard .profile-card > .profile-card-heading {
-    margin-bottom: 22px;
-  }
-  #root .profile-dashboard .profile-card > .profile-card-heading h2 {
-    color: #303633;
-    font-size: 21px;
-    font-weight: 850;
-    letter-spacing: -.04em;
-  }
-  #root .profile-dashboard .profile-card > .profile-card-heading p {
-    color: #626A63;
-  }
-  #root .profile-page .profile-activity-grid {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-  }
-  #root .profile-page .profile-activity-item {
-    --activity-ink: #756346;
-    display: flex;
-    position: relative;
-    isolation: isolate;
-    min-width: 0;
-    min-height: 184px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 19px 19px 15px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.8);
-    border-left: 3px solid var(--activity-ink);
-    border-radius: 15px;
-    background: rgba(245,243,235,.66);
-    box-shadow: 0 6px 16px rgba(39,43,39,.045), inset 0 1px rgba(255,255,255,.88);
-    color: #303633;
-    text-align: left;
-    text-decoration: none;
-    backdrop-filter: blur(22px) saturate(108%);
-    -webkit-backdrop-filter: blur(22px) saturate(108%);
-    transition: box-shadow 210ms ease, border-color 210ms ease, background 210ms ease;
-  }
-  #root .profile-page .profile-activity-item[data-tone="writing"] {
-    --activity-ink: #887653;
-    background: rgba(243,239,229,.74);
-  }
-  #root .profile-page .profile-activity-item[data-tone="liked"] {
-    --activity-ink: #896B69;
-    background: rgba(243,236,233,.74);
-  }
-  #root .profile-page .profile-activity-item[data-tone="saved"] {
-    --activity-ink: #5F796B;
-    background: rgba(235,241,235,.76);
-  }
-#root .profile-page .profile-activity-item:hover {
-    border-color: rgba(255,255,255,.98);
-    border-left-color: var(--activity-ink);
-    box-shadow: 0 11px 22px rgba(39,43,39,.08), inset 0 1px rgba(255,255,255,.96);
-  }
-  #root .profile-page .profile-activity-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    min-height: 38px;
-    margin-bottom: 13px;
-  }
-  #root .profile-page .profile-activity-kicker {
-    color: var(--activity-ink);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .035em;
-  }
-  #root .profile-page .profile-activity-icon {
     display: grid;
     place-items: center;
-    flex: 0 0 36px;
-    width: 36px;
-    height: 36px;
-    border: 1px solid rgba(255,255,255,.78);
-    border-radius: 10px;
-    background: rgba(255,255,255,.44);
-    box-shadow: inset 0 1px rgba(255,255,255,.9);
-    color: var(--activity-ink);
+    width: 54px;
+    height: 54px;
+    border: 1px solid rgba(214,180,63,.4);
+    border-radius: 17px;
+    background: rgba(255,241,178,.48);
+    box-shadow: inset 0 1px rgba(255,255,255,.96);
+    color: #80600E;
+    font-size: 23px;
   }
-  #root .profile-page .profile-activity-icon svg {
-    display: block;
-    width: 19px;
-    height: 19px;
-  }
-  #root .profile-page .profile-activity-item h3 {
-    margin: 0 0 9px;
-    color: #303633;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: -.025em;
-  }
-  #root .profile-page .profile-activity-count-row {
-    display: inline-flex;
-    align-items: baseline;
-    align-self: flex-start;
-    gap: 6px;
-    min-height: 0;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-  #root .profile-page .profile-activity-count {
-    color: #303633;
-    font-size: clamp(34px, 3.2vw, 41px);
+  #root .favorite-page .favorite-page-empty h2 {
+    margin: 3px 0 0;
+    color: #292820;
+    font-size: 19px;
     font-weight: 850;
-    line-height: 1;
-    letter-spacing: -.06em;
-    font-variant-numeric: tabular-nums;
+    letter-spacing: -.035em;
   }
-  #root .profile-page .profile-activity-unit {
-    color: #616962;
-    font-size: 11px;
-    font-weight: 700;
-  }
-  #root .profile-page .profile-activity-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: auto;
-    padding-top: 13px;
-    border-top: 1px solid rgba(79,91,81,.14);
-  }
-  #root .profile-page .profile-activity-footer p {
-    display: block;
+  #root .favorite-page .favorite-page-empty p {
     margin: 0;
-    color: #5B635D;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.5;
+    color: #746D60;
+    font-size: 12px;
+    line-height: 1.7;
   }
-  #root .profile-page .profile-activity-arrow {
-    color: var(--activity-ink);
-    font-size: 17px;
-    font-weight: 700;
-    transition: transform 180ms ease;
+  #root .favorite-page .favorite-browse-button {
+    min-height: 43px;
+    margin-top: 9px;
+    padding: 0 19px;
+    border: 1px solid #D6B43F;
+    border-radius: 999px;
+    background: linear-gradient(145deg, #FFE078, #FFD43B);
+    color: #292820;
+    font-size: 12px;
+    font-weight: 850;
+    box-shadow: 0 5px 13px rgba(179,141,25,.16), inset 0 1px rgba(255,255,255,.72);
   }
-  #root .profile-page .profile-activity-item:hover .profile-activity-arrow {
-    transform: none;
-  }
+  #root .favorite-page .favorite-browse-button:hover { background: #F3C51E; }
 
-  /* Movie detail: glass is visible in the material, not in decorative circles. */
+  /* ---------------------------------------------------------
+     Movie detail and person detail share a cinematic stage.
+     The poster, rather than another card, is the visual anchor.
+  --------------------------------------------------------- */
   #root .movie-detail-page {
-    max-width: 1240px;
-    padding-bottom: 72px;
+    width: 100%;
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 0 76px;
+  }
+  #root .movie-detail-page > .detail-back-button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    margin: 0 0 16px;
+    padding: 0 15px;
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 999px;
+    background: rgba(255,250,236,.72);
+    color: #514C40;
+    font-size: 11px;
+    font-weight: 800;
+    box-shadow: 0 3px 8px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,.96);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
   }
   #root .movie-detail-page .movie-detail-header {
     position: relative;
     isolation: isolate;
     display: grid;
-    grid-template-columns: minmax(220px, .55fr) minmax(0, 1fr);
+    grid-template-columns: minmax(235px, 310px) minmax(0, 1fr);
     align-items: center;
-    gap: clamp(26px, 3.5vw, 46px);
-    min-height: 410px;
-    padding: clamp(24px, 3.6vw, 42px);
+    gap: clamp(28px, 4vw, 58px);
+    min-height: 430px;
+    padding: clamp(26px, 4vw, 48px);
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,.82);
-    border-radius: 24px;
-    background: linear-gradient(132deg, rgba(255,255,255,.74), rgba(255,250,236,.48));
-    box-shadow: 0 18px 42px rgba(39,43,39,.095), inset 0 1px rgba(255,255,255,.92);
-    backdrop-filter: blur(28px) saturate(114%);
-    -webkit-backdrop-filter: blur(28px) saturate(114%);
+    border: 1px solid rgba(255,255,255,.88);
+    border-radius: 22px;
+    background:
+      radial-gradient(ellipse at 8% 4%, rgba(255,255,255,.92), transparent 42%),
+      radial-gradient(ellipse at 96% 100%, rgba(255,212,59,.15), transparent 45%),
+      linear-gradient(132deg, rgba(255,255,255,.74), rgba(255,250,236,.4));
+    box-shadow: 0 4px 11px rgba(41,40,32,.04), 0 24px 58px rgba(41,40,32,.11),
+      inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.2);
+    -webkit-backdrop-filter: blur(32px) saturate(152%);
+    backdrop-filter: blur(32px) saturate(152%);
   }
-#root .movie-detail-page .movie-detail-header::after {
+  #root .movie-detail-page .movie-detail-header::after {
     position: absolute;
     z-index: 0;
     inset: 0;
     content: "";
     border-radius: inherit;
-    background: linear-gradient(118deg, rgba(255,255,255,.22), transparent 38%);
+    background: linear-gradient(116deg, rgba(255,255,255,.28), transparent 34%, transparent 68%, rgba(255,255,255,.13));
     pointer-events: none;
   }
   #root .movie-detail-page .movie-detail-poster {
     position: relative;
     z-index: 1;
-    width: 100%;
-    max-width: 320px;
+    width: min(100%, 292px);
+    aspect-ratio: 2 / 2.95;
     padding: 7px;
-    border: 1px solid rgba(255,255,255,.86);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.9);
     border-radius: 16px;
-    background: rgba(250,249,245,.48);
-    box-shadow: 0 16px 30px rgba(30,34,30,.18), inset 0 1px rgba(255,255,255,.94);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    transform: none;
-  }
-  #root .movie-detail-page .movie-detail-poster:hover {
-    box-shadow: 0 20px 34px rgba(30,34,30,.2), inset 0 1px rgba(255,255,255,.96);
+    background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.4));
+    box-shadow: 0 12px 24px rgba(30,34,30,.15), 0 22px 42px rgba(30,34,30,.12),
+      inset 0 1px 0 rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    backdrop-filter: blur(18px) saturate(145%);
   }
   #root .movie-detail-page .movie-detail-poster img {
     display: block;
@@ -608,1634 +440,967 @@ body {
     z-index: 1;
     display: flex;
     min-width: 0;
-    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    gap: 9px;
+    gap: 10px;
   }
   #root .movie-detail-page .movie-detail-info .detail-rank {
     display: inline-flex;
     align-items: center;
-    min-height: 29px;
-    margin: 0 0 3px;
-    padding: 0 10px;
-    border: 1px solid rgba(98,122,109,.26);
-    border-radius: 7px;
-    background: rgba(101,126,111,.1);
-    box-shadow: none;
-    color: #4C6657;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .045em;
-    backdrop-filter: blur(12px);
+    min-height: 28px;
+    margin: 0 0 5px;
+    padding: 0 11px;
+    border: 1px solid rgba(214,180,63,.48);
+    border-radius: 999px;
+    background: rgba(255,241,178,.42);
+    color: #80600E;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .12em;
   }
-#root .movie-detail-page .movie-detail-info h1 {
+  #root .movie-detail-page .movie-detail-info h1 {
     flex: 0 0 100%;
     width: 100%;
-    margin: 0 0 6px;
-    color: #292D2B;
-    font-size: clamp(29px, 3.8vw, 42px);
-    font-weight: 850;
-    line-height: 1.14;
-    letter-spacing: -.05em;
+    margin: 0 0 13px;
+    color: #292820;
+    font-size: clamp(34px, 4.4vw, 54px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -.06em;
     overflow-wrap: anywhere;
-    text-shadow: none;
   }
   #root .movie-detail-page .movie-detail-info > p {
     display: inline-flex;
     align-items: center;
     width: fit-content;
     max-width: 100%;
-    min-height: 32px;
+    min-height: 34px;
     margin: 0;
-    padding: 6px 10px;
-    border: 1px solid rgba(255,255,255,.7);
-    border-radius: 9px;
-    background: rgba(250,249,245,.48);
-    box-shadow: inset 0 1px rgba(255,255,255,.84);
-    color: #525B54;
-    font-size: 12px;
+    padding: 7px 11px;
+    border: 1px solid rgba(255,255,255,.82);
+    border-radius: 10px;
+    background: rgba(255,254,250,.46);
+    box-shadow: inset 0 1px rgba(255,255,255,.92);
+    color: #514C40;
+    font-size: 11px;
     font-weight: 650;
     line-height: 1.5;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(16px) saturate(145%);
+    backdrop-filter: blur(16px) saturate(145%);
   }
   #root .movie-detail-page .movie-detail-header-no-poster {
     grid-template-columns: minmax(0, 1fr);
-    min-height: 320px;
+    min-height: 340px;
   }
-  #root .movie-detail-page .movie-detail-header-no-poster .movie-detail-info {
-    max-width: 900px;
+  #root .movie-detail-page .movie-detail-header-no-poster .movie-detail-info { max-width: 900px; }
+  #root .movie-detail-page > .detail-content-section,
+  #root .movie-detail-page .movie-rating-panel {
+    position: relative;
+    border: 1px solid rgba(255,255,255,.88);
+    border-radius: 19px;
+    background:
+      linear-gradient(140deg, rgba(255,255,255,.74), rgba(255,250,236,.5));
+    box-shadow: 0 3px 9px rgba(41,40,32,.035), 0 14px 32px rgba(41,40,32,.065),
+      inset 0 1px 0 rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(26px) saturate(145%);
+    backdrop-filter: blur(26px) saturate(145%);
   }
   #root .movie-detail-page > .detail-content-section {
-    margin-top: 22px;
-    border: 1px solid rgba(255,255,255,.78);
-    border-radius: 19px;
-    background: rgba(248,247,242,.67);
-    box-shadow: var(--momo-glass-shadow);
-    backdrop-filter: blur(20px) saturate(108%);
-    -webkit-backdrop-filter: blur(20px) saturate(108%);
+    margin-top: 18px;
+    padding: clamp(22px, 3vw, 31px);
   }
-  #root .movie-detail-page > .detail-content-section > h2 {
-    color: #303633;
+  #root .movie-detail-page > .detail-content-section > h2,
+  #root .movie-detail-page .detail-section-heading h2 {
+    margin: 0;
+    color: #292820;
+    font-size: 19px;
     font-weight: 850;
-    letter-spacing: -.035em;
+    letter-spacing: -.04em;
   }
   #root .movie-detail-page > .detail-content-section > p {
-    color: #535B55;
-    line-height: 1.8;
+    margin: 13px 0 0;
+    color: #5F584D;
+    font-size: 13px;
+    line-height: 1.9;
+  }
+  #root .movie-detail-page .detail-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin: 0 0 19px;
+    padding: 0 0 13px;
+    border-bottom: 1px solid rgba(214,180,63,.25);
+  }
+  #root .movie-detail-page .detail-section-count {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0 9px;
+    border: 1px solid rgba(233,223,197,.88);
+    border-radius: 999px;
+    background: rgba(255,254,250,.64);
+    color: #827B6D;
+    font-size: 10px;
+    font-weight: 800;
+  }
+  #root .movie-detail-page .people-list-compact {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 11px;
+  }
+  #root .movie-detail-page .people-list-compact .person-chip {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    min-height: 78px;
+    padding: 9px;
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 13px;
+    background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.54));
+    box-shadow: 0 3px 8px rgba(41,40,32,.035), inset 0 1px rgba(255,255,255,.96);
+    color: #292820;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  }
+  #root .movie-detail-page .people-list-compact .person-chip:hover {
+    border-color: rgba(214,180,63,.6);
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 7px 15px rgba(41,40,32,.07), inset 0 1px rgba(255,255,255,1);
+  }
+  #root .movie-detail-page .people-list-compact .person-chip > img,
+  #root .movie-detail-page .people-list-compact .person-chip > div:first-child {
+    display: block;
+    width: 54px;
+    height: 58px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.88);
+    border-radius: 9px;
+    background: #EEE9DE;
+    object-fit: cover;
+  }
+  #root .movie-detail-page .people-list-compact .person-chip > div:last-child {
+    display: grid;
+    min-width: 0;
+    gap: 4px;
+  }
+  #root .movie-detail-page .people-list-compact .person-chip strong {
+    overflow: hidden;
+    color: #292820;
+    font-size: 11px;
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #root .movie-detail-page .people-list-compact .person-chip span {
+    overflow: hidden;
+    color: #827B6D;
+    font-size: 9px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #root .movie-detail-page .people-list-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 17px;
+  }
+  #root .movie-detail-page .people-more-button,
+  #root .movie-detail-page .person-bio-toggle {
+    min-height: 37px;
+    padding: 0 15px;
+    border: 1px solid rgba(214,180,63,.48);
+    border-radius: 999px;
+    background: rgba(255,241,178,.34);
+    color: #66510F;
+    font-size: 11px;
+    font-weight: 800;
   }
 
-  /* Audience feedback uses calm positive / critical hues, not saturated status colors. */
+  /* Audience rating: a single horizontal instrument with distinct readout and action. */
   #root .movie-detail-page .movie-rating-panel {
-    border: 1px solid rgba(255,255,255,.82);
-    border-radius: 18px;
-    background: rgba(248,247,242,.72);
-    box-shadow: var(--momo-glass-shadow);
-    backdrop-filter: blur(22px) saturate(110%);
-    -webkit-backdrop-filter: blur(22px) saturate(110%);
+    margin-top: 18px;
+    padding: clamp(22px, 3vw, 32px);
   }
-#root .movie-detail-page .rating-panel-eyebrow,
+  #root .movie-detail-page .rating-panel-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+  #root .movie-detail-page .rating-panel-eyebrow {
+    display: block;
+    margin: 0 0 7px;
+    color: #9B7C2D;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .15em;
+  }
+  #root .movie-detail-page .rating-label {
+    margin: 0;
+    color: #292820;
+    font-size: 21px;
+    font-weight: 850;
+    letter-spacing: -.04em;
+  }
+  #root .movie-detail-page .rating-panel-description {
+    margin: 7px 0 0;
+    color: #746D60;
+    font-size: 11px;
+    line-height: 1.6;
+  }
   #root .movie-detail-page .rating-panel-stamp {
-    color: #66746A;
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border: 1px solid rgba(233,223,197,.88);
+    border-radius: 999px;
+    background: rgba(255,254,250,.6);
+    color: #827B6D;
+    font-size: 8px;
+    font-weight: 850;
+    letter-spacing: .11em;
+    white-space: nowrap;
   }
-  #root .movie-detail-page .rating-label,
-  #root .movie-detail-page .movie-score-value strong {
-    color: #303633;
-  }
-  #root .movie-detail-page .rating-panel-description,
-  #root .movie-detail-page .rating-score-caption,
-  #root .movie-detail-page .rating-vote-summary,
-  #root .movie-detail-page .rating-distribution-heading,
-  #root .movie-detail-page .rating-distribution-legend {
-    color: #58615A;
+  #root .movie-detail-page .rating-panel-main {
+    display: grid;
+    grid-template-columns: minmax(160px,.65fr) minmax(0,1.35fr);
+    gap: 14px;
   }
   #root .movie-detail-page .movie-score-display,
   #root .movie-detail-page .rating-distribution {
-    border: 1px solid rgba(255,255,255,.8);
-    border-radius: 12px;
-    background: rgba(255,255,255,.42);
-    box-shadow: inset 0 1px rgba(255,255,255,.9);
+    min-width: 0;
+    padding: 19px;
+    border: 1px solid rgba(255,255,255,.88);
+    border-radius: 15px;
+    background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.48));
+    box-shadow: inset 0 1px rgba(255,255,255,.96);
+  }
+  #root .movie-detail-page .movie-score-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #root .movie-detail-page .movie-score-value {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+  }
+  #root .movie-detail-page .movie-score-value strong {
+    color: #292820;
+    font-size: clamp(40px, 5vw, 54px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -.07em;
+    font-variant-numeric: tabular-nums;
+  }
+  #root .movie-detail-page .movie-score-value span {
+    color: #827B6D;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  #root .movie-detail-page .rating-vote-summary {
+    margin: 10px 0 0;
+    color: #514C40;
+    font-size: 11px;
+    font-weight: 750;
+  }
+  #root .movie-detail-page .rating-score-caption {
+    margin: 5px 0 0;
+    color: #918A7D;
+    font-size: 9px;
+    line-height: 1.45;
+  }
+  #root .movie-detail-page .rating-distribution-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: #625B4F;
+    font-size: 11px;
+    font-weight: 750;
+  }
+  #root .movie-detail-page .rating-distribution-heading strong {
+    color: #66510F;
+    font-size: 13px;
+    font-weight: 850;
+    font-variant-numeric: tabular-nums;
   }
   #root .movie-detail-page .rating-distribution-track {
-    border-color: rgba(90,105,94,.16);
-    background: rgba(111,126,115,.13);
-    box-shadow: none;
+    height: 9px;
+    margin: 16px 0 13px;
+    overflow: hidden;
+    border: 1px solid rgba(179,141,25,.14);
+    border-radius: 999px;
+    background: rgba(214,201,159,.24);
+    box-shadow: inset 0 1px 2px rgba(41,40,32,.06);
   }
   #root .movie-detail-page .rating-distribution-track span {
-    background: #718578;
-    box-shadow: none;
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #D6B43F, #F1D879);
+    box-shadow: 0 0 10px rgba(214,180,63,.22);
+  }
+  #root .movie-detail-page .rating-distribution-legend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: #746D60;
+    font-size: 10px;
+    font-weight: 650;
+  }
+  #root .movie-detail-page .rating-distribution-legend > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #root .movie-detail-page .rating-legend-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #D6B43F;
+  }
+  #root .movie-detail-page .rating-legend-dot.is-dislike { background: #B77B70; }
+  #root .movie-detail-page .detail-reaction-counts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+    margin-top: 13px;
   }
   #root .movie-detail-page .rating-vote-button {
-    border: 1px solid rgba(255,255,255,.82);
-    border-radius: 10px;
-    background: rgba(255,255,255,.52);
-    box-shadow: 0 4px 10px rgba(39,43,39,.045), inset 0 1px rgba(255,255,255,.9);
-    color: #48534B;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 48px;
+    padding: 0 15px;
+    border: 1px solid rgba(233,223,197,.9);
+    border-radius: 12px;
+    background: rgba(255,254,250,.62);
+    color: #514C40;
+    font-size: 12px;
+    font-weight: 800;
+    box-shadow: inset 0 1px rgba(255,255,255,.96);
   }
-  #root .movie-detail-page .rating-vote-button.is-like,
+  #root .movie-detail-page .rating-vote-button.is-like {
+    border-color: rgba(214,180,63,.42);
+    background: rgba(255,241,178,.28);
+    color: #66510F;
+  }
+  #root .movie-detail-page .rating-vote-button.is-dislike {
+    border-color: rgba(183,123,112,.28);
+    background: rgba(255,241,236,.38);
+    color: #88594F;
+  }
   #root .movie-detail-page .rating-vote-button.selected-like {
-    border-color: rgba(96,125,103,.3);
-    background: rgba(117,145,122,.14);
-    color: #405D47;
+    border-color: #D6B43F;
+    background: rgba(255,212,59,.48);
+    color: #51400F;
+    box-shadow: 0 0 0 2px rgba(255,212,59,.14), inset 0 1px rgba(255,255,255,.8);
   }
-  #root .movie-detail-page .rating-vote-button.is-dislike,
   #root .movie-detail-page .rating-vote-button.selected-dislike {
-    border-color: rgba(148,108,103,.28);
-    background: rgba(160,121,114,.12);
-    color: #76524F;
+    border-color: rgba(166,91,79,.54);
+    background: rgba(255,229,220,.68);
+    color: #793A34;
   }
   #root .movie-detail-page .rating-vote-button strong {
     color: inherit;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
   }
-  #root .movie-detail-page .rating-vote-button:hover:not(:disabled) {
-    box-shadow: 0 7px 14px rgba(39,43,39,.07), inset 0 1px rgba(255,255,255,.94);
+  #root .movie-detail-page .detail-total-count {
+    margin: 10px 2px 0;
+    color: #827B6D;
+    text-align: right;
+    font-size: 10px;
   }
+  #root .movie-detail-page .detail-total-count strong { color: #514C40; }
+  #root .movie-detail-page .rating-status,
+  #root .movie-detail-page .rating-error {
+    margin: 9px 0 0;
+    color: #80600E;
+    font-size: 11px;
+  }
+  #root .movie-detail-page .rating-error { color: #A34D43; }
   #root .movie-detail-page .rating-unavailable {
-    border-color: rgba(98,122,109,.24);
-    border-radius: 10px;
-    background: rgba(101,126,111,.08);
-    color: #55635A;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+    padding: 15px;
+    border: 1px solid rgba(233,223,197,.9);
+    border-radius: 12px;
+    background: rgba(255,250,236,.62);
+    color: #746D60;
+    font-size: 11px;
   }
-
-  /* Film-ticket control: the perforated ticket is the actual action symbol. */
-  #root .favorite-star {
-    position: absolute;
-    top: 11px;
-    right: 11px;
-    z-index: 5;
+  #root .movie-detail-page .rating-unavailable > span {
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border: 1px solid rgba(255,255,255,.58);
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: rgba(255,241,178,.48);
+    color: #80600E;
+    font-size: 15px;
+  }
+  #root .movie-detail-page .rating-unavailable p { margin: 0; }
+
+  /* The save control reads as a film ticket, not a decorative star. */
+  #root .favorite-star {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255,255,255,.78);
     border-radius: 12px;
-    background: rgba(29,36,32,.52);
-    box-shadow: 0 7px 17px rgba(18,24,20,.2), inset 0 1px rgba(255,255,255,.28);
-    color: rgba(255,255,255,.96);
-    backdrop-filter: blur(18px) saturate(115%);
-    -webkit-backdrop-filter: blur(18px) saturate(115%);
-    transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    background: rgba(34,34,29,.54);
+    box-shadow: 0 5px 13px rgba(0,0,0,.2), inset 0 1px rgba(255,255,255,.3);
+    color: #fff;
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    backdrop-filter: blur(18px) saturate(150%);
+    transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 100ms ease;
   }
-  #root .favorite-star .favorite-film-ticket-icon {
-    display: block;
-    width: 24px;
-    height: 24px;
-  }
-  #root .favorite-star .favorite-film-ticket-icon path,
-  #root .favorite-star .favorite-film-ticket-icon rect,
-  #root .favorite-star .favorite-film-ticket-icon line {
-    vector-effect: non-scaling-stroke;
-  }
+  #root .favorite-star .favorite-film-ticket-icon { display: block; width: 23px; height: 23px; }
   #root .favorite-star:hover:not(:disabled) {
-    border-color: rgba(255,255,255,.88);
-    background: rgba(29,36,32,.72);
-    box-shadow: 0 10px 20px rgba(18,24,20,.24), inset 0 1px rgba(255,255,255,.42);
-    transform: none;
+    border-color: rgba(255,255,255,1);
+    background: rgba(34,34,29,.76);
+    box-shadow: 0 8px 18px rgba(0,0,0,.23), inset 0 1px rgba(255,255,255,.48);
   }
   #root .favorite-star.is-active {
-    border-color: rgba(255,255,255,.76);
-    background: rgba(94,119,103,.94);
-    color: #FFFFFF;
-    box-shadow: 0 7px 18px rgba(36,58,44,.24), inset 0 1px rgba(255,255,255,.26);
+    border-color: rgba(255,255,255,.9);
+    background: linear-gradient(145deg, #FFE078, #D6B43F);
+    color: #292820;
+    box-shadow: 0 5px 15px rgba(41,40,32,.2), inset 0 1px rgba(255,255,255,.7);
   }
   #root .favorite-star:focus-visible {
-    outline: 3px solid rgba(92,119,102,.5);
+    outline: 3px solid rgba(179,141,25,.72);
     outline-offset: 3px;
   }
 
-  /* Recommendation and ranking labels use one compact archive language. */
-  #root .recommend-content .recommend-label {
-    display: inline-flex;
-    align-items: center;
-    min-height: 25px;
-    margin: 0 0 10px;
-    padding: 3px 9px;
-    border: 1px solid rgba(255,255,255,.5);
-    border-radius: 5px;
-    background: rgba(34,40,36,.44);
-    box-shadow: none;
-    color: rgba(255,255,255,.96);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .03em;
-    transform: none;
-    backdrop-filter: blur(12px);
+  /* ---------------------------------------------------------
+     Review archives and review detail: reading-first panels,
+     consistent data hierarchy and tactile action controls.
+  --------------------------------------------------------- */
+  #root .all-reviews-page,
+  #root .my-reviews-page,
+  #root .liked-reviews-page,
+  #root .liked-reviews-container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  #root .recommend-content .recommend-label::before {
-    content: "FILM";
-    margin-right: 7px;
-    color: rgba(255,255,255,.78);
-    font-size: 8px;
-    font-weight: 850;
-    letter-spacing: .12em;
-  }
-#root .recommend-content .recommend-info,
-  #root .recommend-content .recommend-description {
-    color: rgba(255,255,255,.94);
-    text-shadow: 0 1px 2px rgba(0,0,0,.38);
-  }
-  #root .recommend-content .recommend-button {
-    min-height: 40px;
-    padding: 0 15px;
-    border: 1px solid rgba(255,255,255,.72);
-    border-radius: 10px;
-    background: rgba(239,238,229,.92);
-    box-shadow: 0 5px 13px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.9);
-    color: #354139;
-    font-size: 12px;
-    font-weight: 800;
-  }
-  #root .recommend-content .recommend-button:hover {
-    background: #FFFFFF;
-  }
-  #root .home-page .movie-info h3 { color: #303633; }
-  #root .home-page .movie-info p { color: #626A63; }
-  #root .home-page .poster-rank,
-  #root .home-page .rank {
-    border: 1px solid rgba(255,255,255,.76);
-    border-radius: 7px;
-    background: rgba(38,48,42,.72);
-    box-shadow: none;
-    color: #FFFFFF;
-  }
-
-  /* Shared buttons: consistent shape, low-contrast surface, dark readable text. */
-  #root .profile-button,
-  #root .page-back-link,
-  #root .favorite-back-button,
-  #root .detail-back-button,
-  #root .review-detail-back,
-  #root .people-more-button,
-  #root .person-bio-toggle,
-  #root .home-favorites-more {
-    min-height: 40px;
-    border: 1px solid rgba(255,255,255,.82);
-    border-radius: 10px;
-    background: rgba(249,248,243,.68);
-    box-shadow: 0 4px 11px rgba(39,43,39,.045), inset 0 1px rgba(255,255,255,.9);
-    color: #465149;
-    font-size: 12px;
-    font-weight: 750;
-    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
-  }
-  #root .profile-button:hover,
-  #root .page-back-link:hover,
-  #root .favorite-back-button:hover,
-  #root .detail-back-button:hover,
-  #root .review-detail-back:hover,
-  #root .people-more-button:hover,
-  #root .person-bio-toggle:hover,
-  #root .home-favorites-more:hover {
-    border-color: rgba(99,124,108,.35);
-    background: rgba(255,255,255,.86);
-    box-shadow: 0 7px 15px rgba(39,43,39,.075), inset 0 1px rgba(255,255,255,.96);
-  }
-
-  /* Search, archive lists and forms inherit the same calm material. */
-  #root .all-reviews-search-label {
-    color: #526258;
-  }
-  #root .all-reviews-search-select,
-  #root .all-reviews-search-input,
-  #root .momo-search-form,
-  #root .search-page input,
-  #root .search-page select,
-  #root main > input[type="search"],
-  #root .review-title-field input,
-  #root .review-content-field textarea,
-  #root .review-edit-title,
-  #root .review-edit-area textarea,
-  #root .review-comment-form textarea,
-  #root .signup-field input,
-  #root .profile-form input,
-  #root .profile-form textarea,
-  #root .profile-delete-page-card input {
-    border: 1px solid rgba(103,120,108,.25);
-    border-radius: 10px;
-    background: rgba(250,249,245,.76);
-    box-shadow: inset 0 1px rgba(255,255,255,.9);
-    color: #303833;
-  }
-  #root input::placeholder,
-  #root textarea::placeholder {
-    color: #737B73;
-  }
-  #root input:focus,
-  #root textarea:focus,
-  #root select:focus {
-    border-color: rgba(93,122,104,.56);
-    outline: none;
-    background: rgba(255,255,255,.9);
-    box-shadow: 0 0 0 3px rgba(93,122,104,.13), 0 5px 14px rgba(39,43,39,.045);
-  }
-  #root .momo-search-form:focus-within {
-    border-color: rgba(93,122,104,.48);
-    box-shadow: 0 0 0 3px rgba(93,122,104,.12), 0 10px 22px rgba(39,43,39,.065);
-  }
-  #root .momo-search-dropdown {
-    border: 1px solid rgba(255,255,255,.86);
-    border-radius: 15px;
-    background: rgba(249,248,243,.92);
-    box-shadow: 0 16px 36px rgba(39,43,39,.12), inset 0 1px rgba(255,255,255,.94);
-    backdrop-filter: blur(22px) saturate(108%);
-    -webkit-backdrop-filter: blur(22px) saturate(108%);
-  }
-  #root .momo-search-result:hover {
-    background: rgba(101,126,111,.09);
-  }
-  #root .all-reviews-search-panel,
-  #root .all-reviews-search-form,
-  #root .all-reviews-search-toolbar {
-    border-color: rgba(255,255,255,.78);
-    border-radius: 14px;
-    background: rgba(247,246,240,.68);
-    box-shadow: inset 0 1px rgba(255,255,255,.88);
-    backdrop-filter: blur(18px) saturate(108%);
-    -webkit-backdrop-filter: blur(18px) saturate(108%);
-  }
-  #root .all-reviews-table-wrap {
-    border: 1px solid rgba(255,255,255,.82);
-    border-radius: 13px;
-    background: rgba(248,247,242,.62);
-    box-shadow: 0 8px 18px rgba(39,43,39,.045);
-  }
-  #root .all-reviews-table thead th {
-    border-bottom: 1px solid rgba(96,117,103,.2);
-    background: rgba(104,128,112,.12);
-    color: #4D6254;
-  }
-  #root .all-reviews-table tbody tr,
-  #root .all-reviews-table tbody tr:nth-child(even) {
-    background: rgba(250,249,245,.64);
-  }
-  #root .all-reviews-table tbody tr:hover {
-    background: rgba(105,128,114,.09);
-  }
-  #root .my-review-item,
-  #root .liked-review-item,
-  #root .all-reviews-mobile-item {
-    border: 1px solid rgba(255,255,255,.82);
-    border-radius: 13px;
-    background: rgba(248,247,242,.68);
-    box-shadow: 0 6px 15px rgba(39,43,39,.045), inset 0 1px rgba(255,255,255,.9);
-  }
-  #root .my-review-item:hover,
-  #root .liked-review-item:hover,
-  #root .all-reviews-mobile-item:hover {
-    background: rgba(255,255,255,.82);
-    box-shadow: 0 10px 20px rgba(39,43,39,.075);
-    transform: none;
-  }
-  #root .liked-review-unlike {
-    border: 1px solid rgba(137,107,105,.25);
-    border-radius: 9px;
-    background: rgba(137,107,105,.1);
-    color: #765855;
-  }
-  #root .liked-review-unlike:hover:not(:disabled) {
-    background: rgba(137,107,105,.16);
-    box-shadow: 0 5px 12px rgba(39,43,39,.05);
-  }
-  #root .profile-user {
-    border: 1px solid rgba(255,255,255,.8);
-    border-radius: 14px;
-    background: rgba(250,249,245,.62);
-    box-shadow: inset 0 1px rgba(255,255,255,.9);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-  }
-  #root .person-chip {
-    border-color: rgba(255,255,255,.82);
-    background: rgba(249,248,243,.66);
-    box-shadow: 0 3px 9px rgba(39,43,39,.045), inset 0 1px rgba(255,255,255,.9);
-    color: #4C5750;
-  }
-  #root .person-chip:hover {
-    background: rgba(255,255,255,.86);
-    box-shadow: 0 6px 13px rgba(39,43,39,.07);
-  }
-  #root .signup-card {
-    border: 1px solid rgba(255,255,255,.82);
-    border-radius: 20px;
-    background: rgba(248,247,242,.78);
-    box-shadow: 0 16px 38px rgba(39,43,39,.085), inset 0 1px rgba(255,255,255,.94);
-    backdrop-filter: blur(22px) saturate(108%);
-    -webkit-backdrop-filter: blur(22px) saturate(108%);
-  }
-  #root .signup-card-heading h1 {
-    color: #303833;
-  }
-  #root .signup-submit,
-  #root .all-reviews-search-submit {
-    min-height: 44px;
-    border: 1px solid rgba(94,119,103,.32);
-    border-radius: 10px;
-    background: rgba(101,126,111,.15);
-    box-shadow: 0 5px 12px rgba(39,43,39,.055), inset 0 1px rgba(255,255,255,.88);
-    color: #40574A;
-    font-weight: 800;
-  }
-  #root .signup-submit:hover:not(:disabled),
-  #root .all-reviews-search-submit:hover:not(:disabled) {
-    background: rgba(101,126,111,.22);
-    box-shadow: 0 8px 16px rgba(39,43,39,.075), inset 0 1px rgba(255,255,255,.94);
-  }
-  #root .signup-note-label {
-    border-color: rgba(101,126,111,.22);
-    background: rgba(101,126,111,.1);
-    color: #4D6254;
-  }
-  #root .review-write-toggle:hover {
-    background: rgba(101,126,111,.1);
-  }
-  #root .review-title-field input:focus,
-  #root .review-content-field textarea:focus,
-  #root .review-edit-title:focus,
-  #root .review-edit-area textarea:focus,
-  #root .review-comment-form textarea:focus,
-  #root .signup-field input:focus,
-  #root .profile-form input:focus,
-  #root .profile-form textarea:focus {
-    border-color: rgba(93,122,104,.56);
-    box-shadow: 0 0 0 3px rgba(93,122,104,.13);
-  }
-
-  /* Small text is never faded into the glass. */
-  #root .profile-heading p,
-  #root .profile-card-heading p,
-  #root .movie-detail-info > p:not(.eyebrow),
-  #root .detail-section-count,
-  #root .all-reviews-description,
-  #root .my-reviews-heading p,
-  #root .liked-reviews-heading p,
-  #root .favorite-page-heading p,
-  #root .favorite-page-empty p,
-  #root .search-page-heading p,
-  #root .favorite-page-movie-info p {
-    color: #59615A;
-  }
-
-  /* Mobile rhythm. Keep every activity description visible. */
-  @media (max-width: 1050px) {
-    #root .favorite-page .favorite-page-grid {
-      grid-template-columns: repeat(4, minmax(0,1fr));
-    }
-  }
-  @media (max-width: 860px) {
-    #root .profile-page .profile-activity-grid {
-      grid-template-columns: repeat(2, minmax(0,1fr));
-    }
-  }
-  @media (max-width: 760px) {
-    #root .all-reviews-heading,
-    #root .my-reviews-heading,
-    #root .liked-reviews-heading,
-    #root .search-page-heading,
-    #root .favorite-page-heading {
-      align-items: flex-start;
-      flex-direction: column;
-      min-height: 0;
-      gap: 17px;
-      padding: 24px 21px;
-      border-radius: 17px;
-    }
-    #root .all-reviews-heading::before,
-    #root .my-reviews-heading::before,
-    #root .liked-reviews-heading::before,
-    #root .search-page-heading::before,
-    #root .favorite-page-heading::before {
-      top: 22px;
-      bottom: 22px;
-    }
-    #root .favorite-page-container { width: calc(100% - 36px); }
-    #root .favorite-page .favorite-page-grid {
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 17px 12px;
-    }
-    #root .movie-detail-page .movie-detail-header {
-      grid-template-columns: minmax(0,1fr);
-      min-height: 0;
-      gap: 23px;
-      padding: 24px 20px;
-      border-radius: 19px;
-    }
-    #root .movie-detail-page .movie-detail-poster {
-      width: min(58%, 240px);
-      margin: 0 auto;
-    }
-    #root .movie-detail-page .movie-detail-info { gap: 8px; }
-    #root .movie-detail-page .rating-panel-main { grid-template-columns: 1fr; }
-    #root .profile-dashboard .profile-card { padding: 22px 17px; }
-  }
-  @media (max-width: 600px) {
-    #root .favorite-page-container { width: calc(100% - 28px); }
-    #root .favorite-page .favorite-page-grid {
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 16px 10px;
-    }
-    #root .favorite-page .favorite-page-card { padding: 6px; border-radius: 12px; }
-    #root .favorite-page .favorite-page-poster { padding: 3px; }
-    #root .favorite-page .favorite-page-movie-info { padding: 9px 2px 3px; }
-    #root .favorite-page .favorite-page-movie-info h3 { font-size: 12px; }
-    #root .favorite-page .favorite-page-movie-info p { font-size: 10px; }
-    #root .profile-page .profile-activity-grid {
-      grid-template-columns: 1fr;
-      gap: 11px;
-    }
-    #root .profile-page .profile-activity-item {
-      min-height: 168px;
-      padding: 17px 16px 14px;
-    }
-    #root .movie-detail-page .movie-detail-header { padding: 21px 16px; }
-    #root .movie-detail-page .movie-detail-info h1 { font-size: 29px; }
-    #root .movie-detail-page .movie-detail-info > p { font-size: 11px; }
-    #root .movie-detail-page .rating-panel-heading { flex-direction: column; align-items: flex-start; }
-    #root .movie-detail-page .detail-reaction-counts { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 380px) {
-    #root .movie-detail-page .detail-reaction-counts { grid-template-columns: 1fr; }
-  }
-
-    /* Profile edit: shaped memo paper with MOMO's original cream and highlighter yellow. */
-  #root .profile-edit-page {
-    max-width: 1080px;
-    padding: clamp(24px, 3.6vw, 42px) 0 76px;
-    border-radius: 18px;
-    background:
-      linear-gradient(135deg, rgba(255,212,59,.16), transparent 44%),
-      #F5F2EB;
-  }
-  #root .profile-edit-page .profile-container {
-    gap: 21px;
-  }
-
-  /* The heading is a memo sheet with a folded corner, not a generic rounded card. */
-  #root .profile-edit-page .profile-edit-heading {
-    position: relative;
-    isolation: isolate;
-    display: flex;
-    min-height: 164px;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 6px;
-    margin: 0 12px 2px 0;
-    padding: 31px 44px 29px 58px;
-    overflow: visible;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-  #root .profile-edit-page .profile-edit-heading::before {
-    position: absolute;
-    z-index: 0;
-    inset: 9px 0 0;
-    content: "";
-    background-color: #FFFAEC;
-    background-image:
-      linear-gradient(90deg, transparent 0 31px, rgba(196, 99, 82, .2) 31px 32px, transparent 32px),
-      repeating-linear-gradient(0deg, transparent 0 30px, rgba(127, 151, 177, .105) 30px 31px, transparent 31px 32px);
-    clip-path: polygon(0 0, calc(100% - 43px) 0, 100% 43px, 100% 100%, 0 100%);
-    filter: drop-shadow(0 10px 14px rgba(75, 61, 31, .13));
-    pointer-events: none;
-  }
-  #root .profile-edit-page .profile-edit-heading::after {
-    position: absolute;
-    z-index: 0;
-    top: 9px;
-    right: 0;
-    width: 43px;
-    height: 43px;
-    content: "";
-    border-left: 1px solid rgba(147, 111, 27, .28);
-    border-bottom: 1px solid rgba(147, 111, 27, .28);
-    background: linear-gradient(135deg, #FFE98F 0%, #FFD43B 70%, #E8B91D 100%);
-    clip-path: polygon(0 0, 100% 100%, 100% 0);
-    pointer-events: none;
-  }
-  #root .profile-edit-page .profile-edit-eyebrow {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    min-height: 23px;
-    margin: 0 0 4px;
-    padding: 0 9px;
-    border: 1px solid #E2BE39;
-    border-radius: 2px;
-    background: #FFD43B;
-    color: #292820;
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: .13em;
-  }
-  #root .profile-edit-page .profile-edit-heading h1 {
-    position: relative;
-    z-index: 1;
-    display: inline-block;
-    width: fit-content;
-    margin: 0;
-    padding: 0 .08em .09em 0;
-    background: linear-gradient(transparent 61%, rgba(255,212,59,.9) 61% 92%, transparent 92%);
-    color: #292820;
-    font-size: clamp(29px, 3.2vw, 37px);
-    font-weight: 900;
-    line-height: 1.18;
-    letter-spacing: -.05em;
-  }
-  #root .profile-edit-page .profile-edit-heading p {
-    position: relative;
-    z-index: 1;
-    margin: 3px 0 0;
-    color: #625A45;
-    font-size: 13px;
-    font-weight: 650;
-    line-height: 1.55;
-  }
-
-  #root .profile-edit-page .profile-edit-card {
-    position: relative;
-    padding: clamp(22px, 3.2vw, 36px);
-    overflow: hidden;
-    border: 1px solid #E9DFC5;
-    border-left: 5px solid #FFD43B;
-    border-radius: 4px 18px 4px 18px;
-    background: rgba(255,250,236,.96);
-    box-shadow: 0 14px 30px rgba(75, 61, 31, .075), inset 0 1px rgba(255,255,255,.98);
-    backdrop-filter: blur(18px) saturate(108%);
-    -webkit-backdrop-filter: blur(18px) saturate(108%);
-  }
-#root .profile-edit-page .profile-edit-form {
-    display: grid;
-    gap: 10px;
-  }
-  #root .profile-edit-page .profile-edit-image-kicker {
-    margin: 0 0 2px;
-    color: #76601F;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: .16em;
-  }
-  #root .profile-edit-page .profile-image-edit {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 11px;
-    width: 100%;
-    margin: 0 0 14px;
-    padding: 22px 18px 20px;
-    border: 1px solid #E3CE83;
-    border-radius: 5px 15px 5px 15px;
-    background:
-      linear-gradient(90deg, #FFD43B 0 8px, transparent 8px),
-      linear-gradient(115deg, #FFF0AD 0%, #FFFAEC 68%, #F5F2EB 100%);
-    box-shadow: inset 0 1px rgba(255,255,255,.96), 0 5px 14px rgba(75, 61, 31, .055);
-  }
-  #root .profile-edit-page .profile-image-preview {
-    width: 116px;
-    height: 116px;
-    margin: 0;
-    border: 5px solid #FFD43B;
-    border-radius: 50%;
-    background: #FFFAEC;
-    box-shadow: 0 7px 17px rgba(75, 61, 31, .16), 0 0 0 4px rgba(255,212,59,.2);
-  }
-  #root .profile-edit-page .profile-image-preview img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    object-fit: cover;
-  }
-  #root .profile-edit-page .profile-image-input-wrapper {
-    margin: 2px 0 0;
-  }
-  #root .profile-edit-page #profile-image-input {
-    width: min(100%, 410px);
-    min-height: 44px;
-    padding: 5px;
-    border: 1px solid #E9DFC5;
-    border-radius: 8px;
-    background: rgba(255,250,236,.92);
-    color: #514A36;
-    font-size: 12px;
-  }
-  #root .profile-edit-page #profile-image-input::file-selector-button {
-    min-height: 32px;
-    margin-right: 10px;
-    padding: 0 12px;
-    border: 1px solid #D6B43F;
-    border-radius: 4px;
-    background: #FFD43B;
-    color: #292820;
-    font-size: 11px;
-    font-weight: 800;
-    cursor: pointer;
-  }
-  #root .profile-edit-page .profile-image-buttons {
-    flex-wrap: wrap;
-    gap: 9px;
-    margin-top: 1px;
-  }
-  #root .profile-edit-page .profile-image-buttons .profile-button {
-    min-height: 38px;
-    padding: 0 15px;
-    border-radius: 7px;
-    font-size: 11px;
-    font-weight: 800;
-  }
-  #root .profile-edit-page .profile-edit-image-save {
-    border: 1px solid #D6B43F;
-    background: #FFD43B;
-    color: #292820;
-    box-shadow: 0 4px 10px rgba(126, 98, 15, .14);
-  }
-  #root .profile-edit-page .profile-edit-image-save:hover:not(:disabled) {
-    border-color: #B38D19;
-    background: #F3C72E;
-    color: #292820;
-  }
-  #root .profile-edit-page .profile-edit-image-remove {
-    border: 1px solid #E1CFC0;
-    background: #F6EDE4;
-    color: #795B4D;
-  }
-  #root .profile-edit-page .profile-edit-image-remove:hover:not(:disabled) {
-    border-color: #D1B4A0;
-    background: #EFE0D3;
-    color: #62483D;
-  }
-
-  #root .profile-edit-page .profile-edit-form > label {
-    margin-top: 7px;
-    color: #514A36;
-    font-size: 12px;
-    font-weight: 850;
-    letter-spacing: -.01em;
-  }
-  #root .profile-edit-page .profile-edit-form > input {
-    min-height: 47px;
-    padding: 11px 14px;
-    border: 1px solid #E9DFC5;
-    border-radius: 7px;
-    background: #FFFEFA;
-    box-shadow: inset 0 1px 2px rgba(75, 61, 31, .035);
-    color: #292820;
-    font-size: 14px;
-    transition: border-color 170ms ease, box-shadow 170ms ease, background 170ms ease;
-  }
-  #root .profile-edit-page .profile-edit-form > input:read-only {
-    border-color: #E9DFC5;
-    background: #F5F2EB;
-    color: #6D6654;
-  }
-  #root .profile-edit-page .profile-edit-form > input:focus {
-    border-color: #C6A12B;
-    outline: none;
-    background: #FFFFFF;
-    box-shadow: 0 0 0 3px rgba(255,212,59,.24);
-  }
-  #root .profile-edit-page .profile-edit-form > .signup-message {
-    min-height: 15px;
-    margin: -4px 0 1px;
-    padding-left: 2px;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.45;
-  }
-  #root .profile-edit-page .profile-edit-divider {
-    height: 2px;
-    margin: 26px 0 13px;
-    border: 0;
-    background: linear-gradient(90deg, #FFD43B 0%, #E9DFC5 56%, rgba(233,223,197,0) 100%);
-  }
-  #root .profile-edit-page .profile-edit-section-title {
-    position: relative;
-    margin: 0 0 4px;
-    padding: 13px 16px;
-    border-left: 4px solid #FFD43B;
-    border-radius: 0 8px 8px 0;
-    background: #F5F2EB;
-    color: #292820;
-    font-size: 16px;
-    font-weight: 900;
-    letter-spacing: -.025em;
-  }
-  #root .profile-edit-page .profile-edit-section-description {
-    margin: 0 0 10px;
-    color: #6A6251;
-    font-size: 12px;
-    line-height: 1.6;
-  }
-  #root .profile-edit-page .profile-form-buttons {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-    padding-top: 18px;
-    border-top: 1px solid #E9DFC5;
-  }
-  #root .profile-edit-page .profile-edit-submit,
-  #root .profile-edit-page .profile-edit-cancel {
-    min-width: 112px;
-    min-height: 46px;
-    padding: 0 22px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 850;
-    transition: transform 170ms ease, box-shadow 170ms ease, background 170ms ease;
-  }
-  #root .profile-edit-page .profile-edit-submit {
-    border: 1px solid #D6B43F;
-    background: #FFD43B;
-    color: #292820;
-    box-shadow: 0 6px 15px rgba(126, 98, 15, .16);
-  }
-  #root .profile-edit-page .profile-edit-submit:hover:not(:disabled) {
-    border-color: #B38D19;
-    background: #F3C72E;
-    color: #292820;
-    box-shadow: 0 9px 18px rgba(126, 98, 15, .2);
-  }
-  #root .profile-edit-page .profile-edit-submit:disabled {
-    border-color: #D6B43F;
-    background: #FFD43B;
-    color: #292820;
-    box-shadow: none;
-    opacity: .56;
-  }
-  #root .profile-edit-page .profile-edit-cancel {
-    border: 1px solid #E9DFC5;
-    background: #F5F2EB;
-    color: #514A36;
-    box-shadow: none;
-  }
-  #root .profile-edit-page .profile-edit-cancel:hover:not(:disabled) {
-    border-color: #D8C99F;
-    background: #EEE8DA;
-    color: #292820;
-  }
-
-  @media (max-width: 600px) {
-    #root .profile-edit-page {
-      padding: 18px 0 48px;
-    }
-    #root .profile-edit-page .profile-edit-heading {
-      min-height: 145px;
-      margin-right: 5px;
-      padding: 28px 26px 24px 49px;
-    }
-    #root .profile-edit-page .profile-edit-heading::before {
-      inset: 8px 0 0;
-      background:
-        linear-gradient(90deg, transparent 0 25px, rgba(196, 99, 82, .2) 25px 26px, transparent 26px),
-        repeating-linear-gradient(0deg, transparent 0 27px, rgba(127, 151, 177, .105) 27px 28px, transparent 28px 29px),
-        #FFFAEC;
-      clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);
-    }
-    #root .profile-edit-page .profile-edit-heading::after {
-      top: 8px;
-      width: 32px;
-      height: 32px;
-    }
-    #root .profile-edit-page .profile-edit-card {
-      padding: 20px 16px 18px;
-      border-radius: 4px 14px 4px 14px;
-    }
-    #root .profile-edit-page .profile-image-edit {
-      padding: 20px 12px 17px;
-    }
-    #root .profile-edit-page .profile-form-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-    #root .profile-edit-page .profile-edit-submit,
-    #root .profile-edit-page .profile-edit-cancel {
-      width: 100%;
-      min-width: 0;
-    }
-  }
-
-/* =========================================================
-     MOMO Brand Consistency — final cascade
-     Warm cream / memo ivory / highlighter yellow / warm ink.
-     Neutralizes legacy sage-gray page overrides.
-  ========================================================= */
-
-  :root {
-    --momo-glass-ink: #292820;
-    --momo-glass-muted: #6A6251;
-    --momo-glass-edge: rgba(233,223,197,.9);
-    --momo-glass-surface: rgba(255,250,236,.86);
-    --momo-glass-shadow: 0 14px 34px rgba(75,61,31,.085), inset 0 1px rgba(255,255,255,.96);
-    --momo-tone-film: #B38D19;
-    --momo-tone-write: #B38D19;
-    --momo-tone-like: #A85E54;
-    --momo-tone-search: #8A6A20;
-  }
-
-  /* Shared reading surfaces */
-  #root .profile-card,
   #root .all-reviews-card,
   #root .my-reviews-card,
   #root .liked-reviews-card,
   #root .review-detail-card,
-  #root .review-comment-card,
-  #root .detail-content-section,
-  #root .signup-card,
-  #root .favorite-page-empty,
-  #root .all-reviews-search-panel,
-  #root .all-reviews-search-form,
-  #root .all-reviews-search-toolbar {
-    border-color: rgba(233,223,197,.9);
-    background: rgba(255,250,236,.88);
-    box-shadow: 0 12px 30px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.96);
-  }
-
-  /* Header navigation remains quiet; active navigation receives the accent. */
-  #root .momo-app-header nav a {
-    border-color: rgba(233,223,197,.82);
-    background: rgba(255,250,236,.74);
-    color: #514833;
-  }
-  #root .momo-app-header nav a:hover {
-    border-color: rgba(214,180,63,.58);
-    background: rgba(255,212,59,.16);
-    color: #66510F;
-  }
-  #root .momo-app-header nav a.active {
-    border-color: rgba(214,180,63,.68);
-    background: rgba(255,212,59,.26);
-    color: #66510F;
-  }
-  #root .momo-app-header .momo-logout-button {
-    min-height: 36px;
-    padding: 0 13px;
-    border: 1px solid rgba(233,223,197,.9);
-    border-radius: 10px;
-    background: rgba(255,250,236,.78);
-    box-shadow: none;
-    color: #6A6251;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: -.01em;
-  }
-  #root .momo-app-header .momo-logout-button:hover:not(:disabled) {
-    border-color: rgba(214,180,63,.62);
-    background: rgba(255,212,59,.16);
-    color: #66510F;
-    box-shadow: 0 4px 10px rgba(75,61,31,.06);
-    transform: none;
-  }
-
-  /* Page title panels share one warm paper treatment. */
-  #root .all-reviews-heading,
-  #root .my-reviews-heading,
-  #root .liked-reviews-heading,
-  #root .search-page-heading,
-  #root .favorite-page-heading {
-    --page-accent: #D6B43F;
-    border-color: rgba(233,223,197,.92);
-    background: linear-gradient(135deg, rgba(255,254,250,.96), rgba(255,250,236,.9));
-    box-shadow: 0 14px 32px rgba(75,61,31,.07), inset 0 1px rgba(255,255,255,.98);
-  }
-  #root .all-reviews-heading h1,
-  #root .my-reviews-heading h1,
-  #root .liked-reviews-heading h1,
-  #root .search-page-heading h1,
-  #root .favorite-page-heading h1 {
-    color: #292820;
-  }
-  #root .all-reviews-heading p,
-  #root .my-reviews-heading p,
-  #root .liked-reviews-heading p,
-  #root .search-page-heading p,
-  #root .favorite-page-heading p {
-    color: #6A6251;
-  }
-  #root .my-reviews-heading .my-reviews-eyebrow,
-  #root .liked-reviews-heading .liked-reviews-eyebrow,
-  #root .favorite-page-heading .favorite-page-eyebrow {
-    color: #80600E;
-  }
-  #root .page-back-link,
-  #root .favorite-back-button,
-  #root .review-detail-back {
-    border-color: rgba(233,223,197,.9);
-    background: rgba(255,250,236,.88);
-    color: #514833;
-  }
-
-  /* Favorites gallery: one consistent ivory surface, without gray/green variants. */
-  #root .favorite-page {
-    background: linear-gradient(180deg, rgba(255,212,59,.13), rgba(255,212,59,.035) 320px, transparent 620px), var(--momo-bg);
-  }
-  #root .favorite-page-heading {
-    border-color: rgba(233,223,197,.92);
-    background: linear-gradient(135deg, rgba(255,254,250,.97), rgba(255,250,236,.9));
-  }
-  #root .favorite-page .favorite-list-toolbar {
-    border-bottom-color: rgba(214,180,63,.32);
-  }
-  #root .favorite-page .favorite-list-toolbar > span {
-    border-color: rgba(214,180,63,.52);
-    background: rgba(255,241,178,.58);
-    color: #66510F;
-  }
-  #root .favorite-page .favorite-page-card,
-  #root .favorite-page .favorite-page-card:nth-child(3n + 2),
-  #root .favorite-page .favorite-page-card:nth-child(3n) {
-    border-color: #E9DFC5;
-    background: linear-gradient(145deg, rgba(255,255,255,.64), rgba(255,250,236,.48));
-    box-shadow: 0 8px 20px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.98);
-  }
-  #root .favorite-page .favorite-page-card:hover {
-    border-color: rgba(214,180,63,.62);
-    box-shadow: 0 14px 26px rgba(75,61,31,.1), inset 0 1px rgba(255,255,255,.98);
-  }
-  #root .favorite-page .favorite-page-poster {
-    border-color: rgba(233,223,197,.74);
-    background: rgba(255,254,250,.72);
-  }
-  #root .favorite-page .favorite-page-movie-info h3,
-  #root .favorite-page .favorite-page-empty h2 {
-    color: #292820;
-  }
-  #root .favorite-page .favorite-page-movie-info p,
-  #root .favorite-page .favorite-page-empty p {
-    color: #6A6251;
-  }
-  #root .favorite-page .favorite-empty-symbol {
-    color: #B38D19;
-  }
-  #root .favorite-page .favorite-page-empty {
-    border-color: rgba(214,180,63,.5);
-    background: rgba(255,250,236,.92);
-  }
-  #root .favorite-page .favorite-browse-button {
-    border-color: #D6B43F;
-    background: #FFD43B;
-    color: #292820;
-    box-shadow: 0 5px 12px rgba(179,141,25,.14);
-  }
-  #root .favorite-page .favorite-browse-button:hover {
-    background: #F3C72E;
-    color: #292820;
-  }
-
-  /* Profile activity cards: one memo-paper family, not three unrelated colors. */
-  #root .profile-dashboard .profile-card {
-    border-color: rgba(255,255,255,.84);
-    background: linear-gradient(145deg, rgba(255,255,255,.70), rgba(255,250,236,.50));
-    box-shadow: var(--momo-glass-shadow);
-    backdrop-filter: blur(26px) saturate(145%);
-    -webkit-backdrop-filter: blur(26px) saturate(145%);
-  }
-  #root .profile-dashboard .profile-card > .profile-card-heading h2 {
-    color: #292820;
-  }
-  #root .profile-dashboard .profile-card > .profile-card-heading p {
-    color: #6A6251;
-  }
-  #root .profile-page .profile-activity-item,
-  #root .profile-page .profile-activity-item[data-tone="writing"],
-  #root .profile-page .profile-activity-item[data-tone="liked"],
-  #root .profile-page .profile-activity-item[data-tone="saved"] {
-    --activity-ink: #B38D19;
-    border-color: rgba(255,255,255,.84);
-    border-left: 3px solid rgba(255,212,59,.92);
-    border-radius: 17px;
-    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,250,236,.48));
-    color: #292820;
-    box-shadow: var(--momo-depth-shadow);
-    backdrop-filter: blur(24px) saturate(142%);
-    -webkit-backdrop-filter: blur(24px) saturate(142%);
-  }
-  #root .profile-page .profile-activity-item::before {
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    content: "";
-    border-radius: inherit;
-    background: linear-gradient(125deg, rgba(255,255,255,.54), transparent 46%, rgba(255,212,59,.05));
-    pointer-events: none;
-  }
-  #root .profile-page .profile-activity-item::after {
-    position: absolute;
-    z-index: 0;
-    top: 1px;
-    left: 18px;
-    right: 18px;
-    height: 1px;
-    content: "";
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.96), transparent);
-    pointer-events: none;
-  }
-  #root .profile-page .profile-activity-item > * {
-    position: relative;
-    z-index: 1;
-  }
-  #root .profile-page .profile-activity-item:hover {
-    border-color: rgba(214,180,63,.7);
-    border-left-color: #D6B43F;
-    box-shadow: 0 14px 26px rgba(75,61,31,.105), inset 0 1px rgba(255,255,255,1);
-  }
-  #root .profile-page .profile-activity-icon {
-    border-color: rgba(255,255,255,.88);
-    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.52));
-    color: #80600E;
-    box-shadow: 0 5px 12px rgba(41,40,32,.06), inset 0 1px rgba(255,255,255,.96);
-  }
-  #root .profile-page .profile-activity-item[data-tone="liked"] .profile-activity-icon {
-    color: #80600E;
-  }
-  #root .profile-page .profile-activity-item h3,
-  #root .profile-page .profile-activity-count {
-    color: #292820;
-  }
-  #root .profile-page .profile-activity-unit,
-  #root .profile-page .profile-activity-footer p {
-    color: #6A6251;
-  }
-  #root .profile-page .profile-activity-footer {
-    border-top-color: rgba(214,180,63,.3);
-  }
-  #root .profile-page .profile-activity-arrow {
-    border-color: rgba(233,223,197,.9);
-    background: rgba(255,254,250,.88);
-    color: #80600E;
-  }
-  #root .profile-page .profile-activity-item:hover .profile-activity-arrow {
-    background: #FFF1B2;
-  }
-
-  /* Member deletion: clear destructive action, never a competing primary CTA. */
-  #root .profile-page .profile-delete-section {
-    border-color: rgba(229,184,173,.56);
-    background: linear-gradient(145deg, rgba(255,255,255,.62), rgba(255,247,243,.54));
-    box-shadow: var(--momo-depth-shadow);
-    backdrop-filter: blur(22px) saturate(138%);
-    -webkit-backdrop-filter: blur(22px) saturate(138%);
-  }
-  #root .profile-delete-page-card {
-    border-color: rgba(229,184,173,.72);
-    background: linear-gradient(145deg, rgba(255,254,250,.96), rgba(255,250,236,.9));
-  }
-  #root .profile-delete-page-card h2 {
-    margin: 0 0 8px;
-    color: #292820;
-    font-size: 20px;
-    font-weight: 850;
-  }
-  #root .profile-delete-page-card > p {
-    color: #6A6251;
-    line-height: 1.7;
-  }
-  #root .profile-delete-page-card #delete-password {
-    min-height: 46px;
-    border: 1px solid #E9DFC5;
-    border-radius: 10px;
-    background: #FFFEFA;
-    color: #292820;
-  }
-  #root .profile-delete-check { color: #514833; }
-  #root .profile-delete-check input { accent-color: #D6B43F; }
-  #root .profile-delete-button {
-    border: 1px solid #E5B8AD;
-    border-radius: 10px;
-    background: #FFF1EC;
-    color: #8C3F38;
-    box-shadow: none;
-  }
-  #root .profile-delete-button:hover:not(:disabled) {
-    border-color: #D69D91;
-    background: #FFE5DC;
-    color: #793A34;
-  }
-  #root .profile-delete-button:disabled {
-    opacity: .62;
-    border-color: #E9DFC5;
-    background: #F1EADF;
-    color: #776F62;
-  }
-
-  /* Movie detail and audience rating: visible, layered glass in cream and yellow. */
-  #root .movie-detail-page .movie-detail-header {
-    border-color: rgba(233,223,197,.92);
-    background: linear-gradient(135deg, rgba(255,254,250,.96), rgba(255,250,236,.86));
-    box-shadow: 0 18px 42px rgba(75,61,31,.085), inset 0 1px rgba(255,255,255,.98);
-  }
-  #root .movie-detail-page .movie-detail-info .detail-rank {
-    border-color: rgba(214,180,63,.58);
-    background: rgba(255,241,178,.58);
-    color: #66510F;
-  }
-  #root .movie-detail-page .movie-detail-info h1 { color: #292820; }
-  #root .movie-detail-page .movie-detail-info > p {
-    border-color: rgba(233,223,197,.78);
-    background: rgba(255,250,236,.78);
-    color: #514833;
-  }
-  #root .movie-detail-page > .detail-content-section {
-    border-color: rgba(233,223,197,.9);
-    background: rgba(255,250,236,.88);
-  }
-  #root .movie-detail-page > .detail-content-section > h2 { color: #292820; }
-  #root .movie-detail-page > .detail-content-section > p { color: #514833; }
-  #root .movie-detail-page .movie-rating-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    min-height: 240px;
-    border: 1px solid rgba(214,180,63,.52);
+  #root .review-comment-card {
+    border: 1px solid rgba(255,255,255,.9);
     border-radius: 19px;
-    background: rgba(255,250,236,.9);
-    box-shadow: 0 14px 32px rgba(75,61,31,.085), inset 0 1px rgba(255,255,255,.98);
-    backdrop-filter: blur(22px) saturate(125%);
-    -webkit-backdrop-filter: blur(22px) saturate(125%);
+    background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.56));
+    box-shadow: var(--momo-route-depth);
+    -webkit-backdrop-filter: blur(24px) saturate(145%);
+    backdrop-filter: blur(24px) saturate(145%);
   }
-  #root .movie-detail-page .movie-rating-panel::before {
-    content: "";
-    display: block;
-    top: 8px;
-    right: 34px;
-    background: rgba(255,212,59,.5);
-    border-color: rgba(214,180,63,.35);
+  #root .all-reviews-card,
+  #root .my-reviews-card,
+  #root .liked-reviews-card { padding: clamp(18px, 2.5vw, 28px); }
+  #root .all-reviews-card-heading,
+  #root .my-reviews-card-heading,
+  #root .liked-reviews-toolbar,
+  #root .review-comment-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid rgba(214,180,63,.24);
   }
-  #root .movie-detail-page .rating-panel-heading {
-    border-bottom-color: rgba(214,180,63,.34);
-  }
-  #root .movie-detail-page .rating-panel-eyebrow,
-  #root .movie-detail-page .rating-panel-stamp { color: #80600E; }
-  #root .movie-detail-page .rating-panel-stamp {
-    border-color: rgba(214,180,63,.58);
-    background: rgba(255,241,178,.64);
-  }
-  #root .movie-detail-page .rating-label,
-  #root .movie-detail-page .movie-score-value strong { color: #292820; }
-  #root .movie-detail-page .rating-panel-description,
-  #root .movie-detail-page .rating-score-caption,
-  #root .movie-detail-page .rating-vote-summary,
-  #root .movie-detail-page .rating-distribution-heading,
-  #root .movie-detail-page .rating-distribution-legend { color: #6A6251; }
-  #root .movie-detail-page .movie-score-display,
-  #root .movie-detail-page .rating-distribution {
-    border-color: rgba(233,223,197,.82);
-    background: rgba(255,254,250,.78);
-  }
-  #root .movie-detail-page .rating-distribution-track {
-    border-color: rgba(214,180,63,.46);
-    background: rgba(233,223,197,.5);
-  }
-  #root .movie-detail-page .rating-distribution-track span {
-    background: linear-gradient(90deg, #D6A91B, #FFD43B);
-    box-shadow: 0 0 10px rgba(214,169,27,.18);
-  }
-  #root .movie-detail-page .rating-vote-button {
-    border-color: rgba(233,223,197,.9);
-    background: rgba(255,254,250,.86);
-    color: #514833;
-  }
-  #root .movie-detail-page .rating-vote-button.is-like,
-  #root .movie-detail-page .rating-vote-button.selected-like {
-    border-color: rgba(214,180,63,.7);
-    background: rgba(255,212,59,.22);
-    color: #66510F;
-  }
-  #root .movie-detail-page .rating-vote-button.is-dislike,
-  #root .movie-detail-page .rating-vote-button.selected-dislike {
-    border-color: rgba(229,184,173,.85);
-    background: rgba(255,241,236,.92);
-    color: #8B4F47;
-  }
-  #root .movie-detail-page .rating-vote-button.selected-like {
-    background: linear-gradient(145deg, #FFF1B2, #FFE58A);
-  }
-  #root .movie-detail-page .rating-vote-button.selected-dislike {
-    background: linear-gradient(145deg, #FFF1EC, #FFE5DC);
-  }
-  #root .movie-detail-page .rating-unavailable {
-    border-color: rgba(214,180,63,.55);
-    background: rgba(255,241,178,.42);
-    color: #66510F;
-  }
-  #root .movie-detail-page .rating-unavailable > span {
-    border-color: rgba(214,180,63,.4);
-    background: rgba(255,254,250,.9);
-    color: #80600E;
-  }
-
-  /* Warm inputs, search controls, tables and page metadata. */
-  #root .all-reviews-search-label { color: #66510F; }
-  #root .all-reviews-search-select,
-  #root .all-reviews-search-input,
-  #root .momo-search-form,
-  #root .search-page input,
-  #root .search-page select,
-  #root main > input[type="search"],
-  #root .review-title-field input,
-  #root .review-content-field textarea,
-  #root .review-edit-title,
-  #root .review-edit-area textarea,
-  #root .review-comment-form textarea,
-  #root .signup-field input,
-  #root .profile-form input,
-  #root .profile-form textarea,
-  #root .profile-delete-page-card input {
-    border-color: rgba(216,201,159,.9);
-    background: rgba(255,254,250,.9);
-    color: #292820;
-  }
-  #root input::placeholder,
-  #root textarea::placeholder { color: #776F62; }
-  #root input:focus,
-  #root textarea:focus,
-  #root select:focus,
-  #root .momo-search-form:focus-within {
-    border-color: rgba(198,161,43,.82);
-    box-shadow: 0 0 0 3px rgba(255,212,59,.2), 0 6px 16px rgba(75,61,31,.055);
-  }
-  #root .momo-search-dropdown {
-    border-color: rgba(233,223,197,.92);
-    background: rgba(255,250,236,.96);
-  }
-  #root .momo-search-result:hover { background: rgba(255,241,178,.38); }
-  #root .all-reviews-table thead th {
-    border-bottom-color: rgba(214,180,63,.4);
-    background: rgba(255,241,178,.52);
-    color: #66510F;
-  }
-  #root .all-reviews-table tbody tr:hover,
-  #root .my-review-item:hover,
-  #root .liked-review-item:hover,
-  #root .all-reviews-mobile-item:hover,
-  #root .review-comment-item:hover { background: rgba(255,241,178,.28); }
-  #root .home-page .movie-info h3 { color: #292820; }
-  #root .home-page .movie-info p,
-  #root .profile-heading p,
-  #root .profile-card-heading p,
-  #root .favorite-page-movie-info p,
-  #root .favorite-page-empty p,
-  #root .search-page-heading p,
-  #root .all-reviews-description { color: #6A6251; }
-  #root .detail-rank,
-  #root .all-reviews-page-info,
-  #root .favorite-list-toolbar > span {
-    border-color: rgba(214,180,63,.5);
-    background: rgba(255,241,178,.52);
-    color: #66510F;
-  }
-
-  /* Footer: the readable back cover of the same warm memo book. */
-  #root footer {
-    border-top: 1px solid rgba(233,223,197,.96);
-    background: linear-gradient(145deg, rgba(255,250,236,.98), rgba(245,242,235,.98));
-    color: #514833;
-    box-shadow: 0 -8px 24px rgba(75,61,31,.045), inset 0 1px rgba(255,255,255,.96);
-  }
-  #root footer p,
-  #root footer span,
-  #root footer a { color: #514833; }
-  #root footer h4 { color: #80600E; }
-  #root footer a:hover { color: #66510F; }
-  #root footer > div:first-child { border-bottom-color: rgba(214,180,63,.32); }
-  #root footer [class*="FooterBottom"] { color: #6A6251; }
-
-  @media (max-width: 600px) {
-    #root .profile-page .profile-activity-grid { grid-template-columns: 1fr; }
-    #root .profile-page .profile-activity-item { min-height: 190px; }
-    #root .movie-detail-page .rating-panel-main { grid-template-columns: 1fr; }
-    #root .movie-detail-page .rating-vote-button { min-height: 54px; }
-    #root footer { padding-top: 32px; }
-  }
-
-
-  /* Remaining shared components: bookmarks, forms, archives and reaction actions. */
-  #root .favorite-star {
-    border-color: rgba(233,223,197,.96);
-    background: rgba(255,250,236,.94);
-    color: #80600E;
-    box-shadow: 0 7px 17px rgba(75,61,31,.16), inset 0 1px rgba(255,255,255,.98);
-  }
-  #root .favorite-star:hover:not(:disabled) {
-    border-color: #D6B43F;
-    background: #FFF1B2;
-    color: #66510F;
-  }
-  #root .favorite-star.is-active {
-    border-color: rgba(214,180,63,.9);
-    background: #FFD43B;
-    color: #292820;
-    box-shadow: 0 7px 18px rgba(179,141,25,.2), inset 0 1px rgba(255,255,255,.8);
-  }
-  #root .favorite-star:focus-visible {
-    outline-color: rgba(198,161,43,.56);
-  }
-  #root .recommend-content .recommend-label {
-    border-color: rgba(255,255,255,.58);
-    background: rgba(41,40,32,.62);
-    color: #FFF1B2;
-  }
-  #root .recommend-content .recommend-button {
-    border-color: #D6B43F;
-    background: #FFD43B;
-    color: #292820;
-    box-shadow: 0 6px 14px rgba(75,61,31,.15), inset 0 1px rgba(255,255,255,.82);
-  }
-  #root .recommend-content .recommend-button:hover {
-    background: #F3C72E;
-    color: #292820;
-  }
-  #root .home-page .poster-rank,
-  #root .home-page .rank {
-    border-color: rgba(255,250,236,.8);
-    background: rgba(41,40,32,.84);
-    color: #FFF1B2;
-  }
-
-  #root .profile-button,
-  #root .page-back-link,
-  #root .favorite-back-button,
-  #root .detail-back-button,
-  #root .review-detail-back,
-  #root .people-more-button,
-  #root .person-bio-toggle,
-  #root .home-favorites-more {
-    border-color: rgba(233,223,197,.94);
-    background: rgba(255,250,236,.9);
-    color: #514833;
-  }
-  #root .profile-button:hover:not(:disabled),
-  #root .page-back-link:hover,
-  #root .favorite-back-button:hover,
-  #root .detail-back-button:hover,
-  #root .review-detail-back:hover,
-  #root .people-more-button:hover,
-  #root .person-bio-toggle:hover,
-  #root .home-favorites-more:hover {
-    border-color: rgba(214,180,63,.7);
-    background: rgba(255,241,178,.56);
-    color: #66510F;
-  }
-  #root .all-reviews-search-label { color: #66510F; }
-  #root .all-reviews-table-wrap,
-  #root .my-review-item,
-  #root .liked-review-item,
-  #root .all-reviews-mobile-item {
-    border-color: rgba(233,223,197,.92);
-    background: rgba(255,250,236,.88);
-    color: #292820;
-  }
-  #root .all-reviews-table tbody tr,
-  #root .all-reviews-table tbody tr:nth-child(even) {
-    background: rgba(255,250,236,.76);
-  }
-  #root .all-reviews-table thead th {
-    border-bottom-color: rgba(214,180,63,.4);
-    background: rgba(255,241,178,.56);
-    color: #66510F;
-  }
-  #root .all-reviews-table tbody tr:hover,
-  #root .my-review-item:hover,
-  #root .liked-review-item:hover,
-  #root .all-reviews-mobile-item:hover {
-    background: rgba(255,241,178,.32);
-  }
-  #root .liked-review-unlike {
-    border-color: rgba(229,184,173,.82);
-    background: rgba(255,241,236,.9);
-    color: #8B4F47;
-  }
-  #root .liked-review-unlike:hover:not(:disabled) {
-    background: #FFE5DC;
-  }
-  #root .profile-user {
-    border-color: rgba(233,223,197,.9);
-    background: rgba(255,250,236,.88);
-  }
-  #root .person-chip {
-    border-color: rgba(233,223,197,.9);
-    background: rgba(255,250,236,.86);
-    color: #514833;
-  }
-  #root .person-chip:hover {
-    background: rgba(255,241,178,.5);
-  }
-  #root .signup-card {
-    border-color: rgba(233,223,197,.94);
-    background: rgba(255,250,236,.92);
-  }
-  #root .signup-card-heading h1 { color: #292820; }
-  #root .signup-submit,
-  #root .all-reviews-search-submit {
-    border-color: #D6B43F;
-    background: #FFD43B;
-    color: #292820;
-    box-shadow: 0 5px 13px rgba(179,141,25,.14), inset 0 1px rgba(255,255,255,.84);
-  }
-  #root .signup-submit:hover:not(:disabled),
-  #root .all-reviews-search-submit:hover:not(:disabled) {
-    background: #F3C72E;
-    color: #292820;
-  }
-  #root .signup-note-label {
-    border-color: rgba(214,180,63,.48);
-    background: rgba(255,241,178,.55);
-    color: #66510F;
-  }
-  #root .review-write-toggle:hover {
-    background: rgba(255,241,178,.42);
-  }
-  #root .review-like-button,
-  #root .comment-like-button {
-    border-color: var(--momo-like-border);
-    background: var(--momo-like-bg);
-    color: var(--momo-like-text);
-  }
-  #root .review-dislike-button,
-  #root .comment-dislike-button {
-    border-color: var(--momo-dislike-border);
-    background: var(--momo-dislike-bg);
-    color: var(--momo-dislike-text);
-  }
-  #root .review-like-button:hover:not(:disabled),
-  #root .comment-like-button:hover:not(:disabled) {
-    background: var(--momo-like-bg-hover);
-  }
-  #root .review-dislike-button:hover:not(:disabled),
-  #root .comment-dislike-button:hover:not(:disabled) {
-    background: var(--momo-dislike-bg-hover);
-  }
-  #root .profile-heading h1,
-  #root .profile-card-heading h2,
   #root .all-reviews-card-heading h2,
   #root .my-reviews-card-heading h2,
-  #root .liked-reviews-card-heading h2 {
+  #root .liked-reviews-toolbar h2,
+  #root .review-comment-heading h2 {
+    margin: 0;
     color: #292820;
+    font-size: 17px;
+    font-weight: 850;
+    letter-spacing: -.035em;
   }
-  #root .profile-heading p,
-  #root .profile-card-heading p,
   #root .all-reviews-card-heading p,
   #root .my-reviews-card-heading p,
-  #root .liked-reviews-card-heading p {
-    color: #6A6251;
+  #root .liked-reviews-toolbar p {
+    margin: 5px 0 0;
+    color: #827B6D;
+    font-size: 11px;
   }
+  #root .all-reviews-page-info,
+  #root .my-reviews-card-heading > span,
+  #root .liked-reviews-toolbar > span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 9px;
+    border: 1px solid rgba(233,223,197,.92);
+    border-radius: 999px;
+    background: rgba(255,254,250,.68);
+    color: #746D60;
+    font-size: 10px;
+    font-weight: 750;
+  }
+  #root .all-reviews-search {
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 0 0 19px;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 14px;
+    background: rgba(255,250,236,.54);
+    box-shadow: inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+  }
+  #root .all-reviews-search-label {
+    display: grid;
+    gap: 6px;
+    color: #625B4F;
+    font-size: 10px;
+    font-weight: 800;
+  }
+  #root .all-reviews-search-select,
+  #root .all-reviews-search-input {
+    min-height: 40px;
+    padding: 0 11px;
+    border: 1px solid rgba(216,201,159,.9);
+    border-radius: 9px;
+    background: rgba(255,254,250,.92);
+    color: #292820;
+    font-size: 11px;
+  }
+  #root .all-reviews-search-submit,
+  #root .all-reviews-search-reset {
+    min-height: 40px;
+    padding: 0 15px;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 800;
+  }
+  #root .all-reviews-search-submit {
+    border: 1px solid #D6B43F;
+    background: #FFD43B;
+    color: #292820;
+    box-shadow: 0 4px 10px rgba(179,141,25,.12);
+  }
+  #root .all-reviews-search-submit:hover:not(:disabled) { background: #F3C51E; }
+  #root .all-reviews-search-reset {
+    border: 1px solid rgba(233,223,197,.9);
+    background: rgba(255,254,250,.76);
+    color: #746D60;
+  }
+  #root .all-reviews-table-wrap {
+    overflow-x: auto;
+    border: 1px solid rgba(233,223,197,.86);
+    border-radius: 13px;
+    background: rgba(255,254,250,.54);
+  }
+  #root .all-reviews-table { border-collapse: separate; border-spacing: 0; }
+  #root .all-reviews-table thead th {
+    padding: 13px 12px;
+    border-bottom: 1px solid rgba(214,180,63,.26);
+    background: rgba(255,241,178,.3);
+    color: #66551A;
+    font-size: 10px;
+    font-weight: 850;
+  }
+  #root .all-reviews-table tbody tr,
+  #root .all-reviews-table tbody tr:nth-child(even) { background: rgba(255,254,250,.56); }
+  #root .all-reviews-table tbody tr:hover { background: rgba(255,241,178,.24); }
+  #root .all-reviews-table td {
+    padding: 14px 12px;
+    border-bottom-color: rgba(233,223,197,.66);
+    color: #514C40;
+    font-size: 11px;
+  }
+  #root .review-title-link { color: #51400F; font-weight: 800; text-decoration: none; }
+  #root .review-title-link:hover { color: #80600E; text-decoration: underline; text-underline-offset: 3px; }
+  #root .all-reviews-mobile-list { display: grid; gap: 10px; }
+  #root .all-reviews-mobile-item {
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 13px;
+    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.6));
+    box-shadow: 0 4px 12px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  }
+  #root .all-reviews-mobile-item:hover {
+    border-color: rgba(214,180,63,.58);
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 8px 17px rgba(41,40,32,.075), inset 0 1px rgba(255,255,255,1);
+  }
+  #root .my-review-item,
+  #root .liked-review-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    padding: 16px 13px;
+    border-bottom: 1px solid rgba(233,223,197,.75);
+    border-radius: 12px;
+    background: rgba(255,254,250,.28);
+    transition: background 180ms ease, border-color 180ms ease;
+  }
+  #root .my-review-item:hover,
+  #root .liked-review-item:hover { background: rgba(255,241,178,.18); }
+  #root .my-review-poster,
+  #root .liked-review-poster,
+  #root .all-review-poster {
+    flex: 0 0 58px;
+    width: 58px;
+    height: 82px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.92);
+    border-radius: 8px;
+    background: #EEE9DE;
+    box-shadow: 0 4px 10px rgba(41,40,32,.1);
+  }
+  #root .my-review-poster img,
+  #root .liked-review-poster img,
+  #root .all-review-poster img { width: 100%; height: 100%; object-fit: cover; }
+  #root .my-review-info h3,
+  #root .liked-review-title { color: #292820; font-size: 14px; font-weight: 850; }
+  #root .my-review-movie,
+  #root .liked-review-movie { color: #80600E; font-size: 10px; font-weight: 800; }
+  #root .my-review-info p,
+  #root .liked-review-content { color: #625B4F; font-size: 11px; line-height: 1.65; }
+  #root .my-review-date,
+  #root .liked-review-meta { color: #918A7D; font-size: 10px; }
+  #root .my-review-arrow { color: #B38D19; }
+  #root .liked-review-unlike {
+    min-height: 34px;
+    padding: 0 11px;
+    border: 1px solid rgba(229,184,173,.78);
+    border-radius: 9px;
+    background: rgba(255,247,243,.78);
+    color: #8C5149;
+    font-size: 10px;
+    font-weight: 800;
+  }
+  #root .liked-review-unlike:hover:not(:disabled) { border-color: #D69D91; background: #FFF1EC; }
+
+  /* Review detail: a reading canvas, not another dense admin panel. */
+  #root .review-detail-page {
+    width: min(1100px, 100%);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 0 72px;
+  }
+  #root .review-detail-page > .review-detail-back { margin: 0 0 16px; }
+  #root .review-detail-page .review-detail-card {
+    padding: clamp(23px, 3.5vw, 42px);
+    border-radius: 22px;
+    background:
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.9), transparent 50%),
+      linear-gradient(145deg, rgba(255,255,255,.8), rgba(255,250,236,.66));
+  }
+  #root .review-detail-page .review-detail-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(214,180,63,.28);
+  }
+  #root .review-detail-page .review-detail-eyebrow {
+    margin: 0 0 11px;
+    color: #9B7C2D;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .14em;
+  }
+  #root .review-detail-page .review-detail-title {
+    margin: 0 0 13px;
+    color: #292820;
+    font-size: clamp(25px, 3.2vw, 36px);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -.05em;
+  }
+  #root .review-detail-page .review-detail-meta {
+    color: #746D60;
+    font-size: 11px;
+  }
+  #root .review-detail-page .review-detail-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  #root .review-detail-page .review-action-button {
+    min-height: 36px;
+    padding: 0 12px;
+    border: 1px solid rgba(233,223,197,.92);
+    border-radius: 9px;
+    background: rgba(255,254,250,.78);
+    color: #514C40;
+    font-size: 10px;
+    font-weight: 800;
+  }
+  #root .review-detail-page .review-action-button.delete {
+    border-color: rgba(229,184,173,.74);
+    background: rgba(255,247,243,.76);
+    color: #8C5149;
+  }
+  #root .review-detail-page .review-detail-movie {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 15px;
+    background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.56));
+    box-shadow: inset 0 1px rgba(255,255,255,.98);
+  }
+  #root .review-detail-page .review-detail-movie-poster {
+    flex: 0 0 76px;
+    width: 76px;
+    height: 110px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.94);
+    border-radius: 8px;
+    box-shadow: 0 5px 12px rgba(41,40,32,.1);
+  }
+  #root .review-detail-page .review-detail-movie-poster img { width: 100%; height: 100%; object-fit: cover; }
+  #root .review-detail-page .review-detail-movie-info h2 {
+    margin: 0 0 5px;
+    color: #292820;
+    font-size: 17px;
+    font-weight: 850;
+  }
+  #root .review-detail-page .review-detail-movie-info > p { margin: 0 0 9px; color: #827B6D; font-size: 10px; }
+  #root .review-detail-page .review-detail-content {
+    min-height: 140px;
+    padding: clamp(20px, 3vw, 30px);
+    border: 1px solid rgba(233,223,197,.84);
+    border-radius: 15px;
+    background:
+      linear-gradient(90deg, transparent 0 25px, rgba(198,118,98,.1) 25px 26px, transparent 26px),
+      repeating-linear-gradient(180deg, rgba(255,254,250,.85) 0 31px, rgba(214,201,159,.18) 32px, rgba(255,254,250,.85) 33px);
+    color: #3F3A31;
+    font-size: 14px;
+    line-height: 2;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  #root .review-detail-page .review-detail-reactions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  #root .review-detail-page .review-like-button,
+  #root .review-detail-page .review-dislike-button,
+  #root .review-detail-page .comment-like-button,
+  #root .review-detail-page .comment-dislike-button {
+    min-width: 118px;
+    min-height: 40px;
+    padding: 0 15px;
+    border-radius: 10px;
+    font-size: 11px;
+  }
+  #root .review-detail-page .review-comment-card { margin-top: 20px; padding: clamp(20px, 3vw, 28px); }
+  #root .review-detail-page .review-comment-item {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(233,223,197,.72);
+  }
+  #root .review-detail-page .review-comment-content { color: #514C40; font-size: 12px; line-height: 1.75; }
+
+  /* Signup and login share a centered, illuminated glass notebook. */
+  #root .signup-page {
+    min-height: calc(100vh - 220px);
+    display: grid;
+    place-items: center;
+    padding: 18px 0 44px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,212,59,.11), transparent 54%);
+  }
+  #root .signup-page .signup-wrapper { width: min(100%, 500px); max-width: 500px; }
+  #root .signup-page .signup-brand { display: flex; justify-content: center; margin: 0 0 19px; }
+  #root .signup-page .signup-brand img { width: auto; max-width: 160px; height: 36px; object-fit: contain; }
+  #root .signup-page .signup-card {
+    position: relative;
+    padding: clamp(24px, 4vw, 38px);
+    border: 1px solid rgba(255,255,255,.94);
+    border-radius: 22px;
+    background:
+      radial-gradient(ellipse at 6% 0%, rgba(255,255,255,.94), transparent 52%),
+      linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.68));
+    box-shadow: 0 4px 12px rgba(41,40,32,.04), 0 22px 52px rgba(41,40,32,.09), inset 0 1px rgba(255,255,255,1);
+    -webkit-backdrop-filter: blur(28px) saturate(148%);
+    backdrop-filter: blur(28px) saturate(148%);
+  }
+  #root .signup-page .signup-card-heading { margin: 0 0 22px; }
+  #root .signup-page .signup-card-heading h1 {
+    margin: 0;
+    color: #292820;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -.05em;
+  }
+  #root .signup-page .signup-eyebrow {
+    display: block;
+    margin: 0 0 8px;
+    color: #9B7C2D;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .15em;
+  }
+  #root .signup-page .signup-field { display: grid; gap: 7px; margin: 0 0 15px; }
+  #root .signup-page .signup-field label { color: #514C40; font-size: 11px; font-weight: 800; }
+  #root .signup-page .signup-field input {
+    min-height: 46px;
+    padding: 0 13px;
+    border: 1px solid rgba(216,201,159,.88);
+    border-radius: 10px;
+    background: rgba(255,254,250,.88);
+    color: #292820;
+    font-size: 12px;
+  }
+  #root .signup-page .signup-note-label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 25px;
+    margin: 0 0 13px;
+    padding: 0 9px;
+    border: 1px solid rgba(214,180,63,.38);
+    border-radius: 999px;
+    background: rgba(255,241,178,.38);
+    color: #80600E;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .06em;
+  }
+  #root .signup-page .signup-submit {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 5px;
+    border: 1px solid #D6B43F;
+    border-radius: 11px;
+    background: linear-gradient(145deg, #FFE078, #FFD43B);
+    color: #292820;
+    font-size: 12px;
+    font-weight: 850;
+    box-shadow: 0 5px 14px rgba(179,141,25,.16), inset 0 1px rgba(255,255,255,.78);
+  }
+  #root .signup-page .signup-submit:hover:not(:disabled) {
+    border-color: #B38D19;
+    background: #F3C51E;
+    box-shadow: 0 8px 18px rgba(179,141,25,.2), inset 0 1px rgba(255,255,255,.9);
+  }
+  #root .signup-page .signup-footer {
+    margin: 18px 0 0;
+    color: #827B6D;
+    font-size: 11px;
+    text-align: center;
+  }
+  #root .signup-page .signup-footer a { color: #80600E; font-weight: 800; text-decoration: none; }
+  #root .signup-page .signup-bottom-caption { margin: 14px 0 0; color: #918A7D; font-size: 10px; text-align: center; }
+
+  /* State and accessibility treatment. */
+  #root .all-reviews-state,
+  #root .my-reviews-state,
+  #root .liked-reviews-state,
+  #root .review-detail-state {
+    color: #827B6D;
+  }
+  #root .all-reviews-error,
+  #root .my-reviews-state.error,
+  #root .liked-reviews-state.error,
+  #root .review-detail-error { color: #A34D43; }
   #root a:focus-visible,
   #root button:focus-visible,
   #root input:focus-visible,
   #root textarea:focus-visible,
   #root select:focus-visible {
-    outline-color: rgba(198,161,43,.62);
+    outline: 3px solid rgba(179,141,25,.68);
+    outline-offset: 3px;
   }
 
-
-  /* Preserve danger semantics after the shared profile-button rule. */
-  #root .profile-page .profile-delete-button {
-    border-color: #E5B8AD;
-    background: #FFF1EC;
-    color: #8C3F38;
-    box-shadow: none;
+  @media (max-width: 980px) {
+    #root .favorite-page .favorite-page-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    #root .movie-detail-page .movie-detail-header { grid-template-columns: minmax(205px,260px) minmax(0,1fr); }
+    #root .movie-detail-page .people-list-compact { grid-template-columns: repeat(2,minmax(0,1fr)); }
   }
-  #root .profile-page .profile-delete-button:hover:not(:disabled) {
-    border-color: #D69D91;
-    background: #FFE5DC;
-    color: #793A34;
+  @media (max-width: 700px) {
+    #root .all-reviews-heading,
+    #root .my-reviews-heading,
+    #root .liked-reviews-heading,
+    #root .favorite-page-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 0;
+      padding: 25px 22px;
+    }
+    #root .favorite-page .favorite-page-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px 10px; }
+    #root .favorite-page .favorite-page-card { padding: 6px; border-radius: 13px; }
+    #root .favorite-page .favorite-page-poster { padding: 3px; border-radius: 9px; }
+    #root .favorite-page .favorite-page-open-button { inset: 3px; width: calc(100% - 6px); height: calc(100% - 6px); }
+    #root .favorite-page .favorite-page-movie-info { padding: 10px 3px 5px; }
+    #root .favorite-page .favorite-page-movie-info h3 { font-size: 11px; }
+    #root .favorite-page .favorite-page-movie-info p { font-size: 9px; }
+    #root .movie-detail-page .movie-detail-header {
+      grid-template-columns: minmax(0,1fr);
+      gap: 20px;
+      min-height: 0;
+      padding: 20px;
+      border-radius: 18px;
+    }
+    #root .movie-detail-page .movie-detail-poster { width: min(62%,220px); margin: 0 auto; }
+    #root .movie-detail-page .movie-detail-info { gap: 8px; }
+    #root .movie-detail-page .movie-detail-info h1 { font-size: clamp(29px,8vw,38px); margin-bottom: 7px; }
+    #root .movie-detail-page .movie-detail-info > p { min-height: 30px; font-size: 10px; padding: 5px 8px; }
+    #root .movie-detail-page .movie-rating-panel { padding: 19px; }
+    #root .movie-detail-page .rating-panel-heading { gap: 9px; }
+    #root .movie-detail-page .rating-panel-stamp { display: none; }
+    #root .movie-detail-page .rating-panel-main { grid-template-columns: 1fr; }
+    #root .movie-detail-page .movie-score-display { min-height: 125px; }
+    #root .movie-detail-page > .detail-content-section { padding: 19px; }
+    #root .movie-detail-page .people-list-compact { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+    #root .movie-detail-page .people-list-compact .person-chip { grid-template-columns: 42px minmax(0,1fr); gap: 8px; padding: 7px; }
+    #root .movie-detail-page .people-list-compact .person-chip > img,
+    #root .movie-detail-page .people-list-compact .person-chip > div:first-child { width: 42px; height: 48px; }
+    #root .review-detail-page .review-detail-card { padding: 20px 16px; border-radius: 17px; }
+    #root .review-detail-page .review-detail-top { flex-direction: column; gap: 14px; }
+    #root .review-detail-page .review-detail-actions { width: 100%; }
+    #root .review-detail-page .review-detail-actions > * { flex: 1; }
+    #root .review-detail-page .review-detail-movie { align-items: flex-start; gap: 12px; padding: 11px; }
+    #root .review-detail-page .review-detail-movie-poster { flex-basis: 62px; width: 62px; height: 92px; }
+    #root .review-detail-page .review-detail-title { font-size: 25px; }
+    #root .signup-page { min-height: auto; padding-top: 4px; }
+    #root .signup-page .signup-card { padding: 24px 19px; border-radius: 18px; }
   }
-  #root .profile-page .profile-delete-button:disabled {
-    border-color: #E9DFC5;
-    background: #F1EADF;
-    color: #776F62;
-    opacity: .62;
+  @media (max-width: 430px) {
+    #root .favorite-page .favorite-page-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px 11px; }
+    #root .movie-detail-page .detail-reaction-counts { grid-template-columns: 1fr; }
+    #root .movie-detail-page .people-list-compact { grid-template-columns: 1fr; }
+    #root .all-reviews-card,
+    #root .my-reviews-card,
+    #root .liked-reviews-card { padding: 16px 12px; }
+    #root .review-detail-page .review-detail-content { padding: 17px; font-size: 12px; }
   }
-  #root .profile-page .profile-delete-button:not(:disabled) {
-    border-color: #E5B8AD;
-    background: #FFF1EC;
-    color: #8C3F38;
-    opacity: 1;
-    cursor: pointer;
-  }
-
-
-  /* The desktop rating metrics must use the complete card width, not a narrow content column. */
-  #root .movie-detail-page .rating-panel-main {
-    display: grid;
-    width: 100%;
-    max-width: none;
-    align-self: stretch;
-    grid-template-columns: minmax(200px, .82fr) minmax(0, 1.18fr);
-  }
-  @media (max-width: 600px) {
-    #root .movie-detail-page .rating-panel-main {
-      width: 100%;
-      grid-template-columns: minmax(0, 1fr);
+  @media (prefers-reduced-motion: reduce) {
+    #root .favorite-page *,
+    #root .movie-detail-page *,
+    #root .review-detail-page *,
+    #root .all-reviews-page *,
+    #root .my-reviews-page *,
+    #root .liked-reviews-page *,
+    #root .signup-page * {
+      animation-duration: .01ms;
+      animation-iteration-count: 1;
+      transition-duration: .01ms;
+      scroll-behavior: auto;
     }
   }
-
 `;
 
 export default MomoLiquidGlassPageStyles;
