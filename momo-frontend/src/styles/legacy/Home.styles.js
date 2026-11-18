@@ -52,7 +52,7 @@ export const HomePage = styled.div.attrs({ className: "home-page" })`
   }
 `;
 
-export const FeatureSection = styled.section`
+export const FeatureSection = styled.section.attrs({ className: "home-feature-section" })`
   position: relative; isolation: isolate; display: grid;
   grid-template-columns: minmax(310px, .82fr) minmax(0, 1.18fr);
   min-height: clamp(390px, 38vw, 500px); overflow: hidden;
@@ -71,7 +71,7 @@ export const FeatureSection = styled.section`
   @media (max-width: 820px) { grid-template-columns: 1fr; min-height: auto; }
 `;
 
-export const FeatureInfo = styled.div`
+export const FeatureInfo = styled.div.attrs({ className: "home-feature-info" })`
   position: relative; z-index: 2; display: flex; flex-direction: column;
   justify-content: center; align-items: flex-start; padding: clamp(30px, 4.4vw, 62px);
   background: linear-gradient(145deg, rgba(255,255,255,.5), rgba(255,250,236,.22));
@@ -109,7 +109,7 @@ export const FeatureDescription = styled.p`
   br { display: block; content: ""; margin-top: 3px; }
 `;
 
-export const FeatureVisual = styled.div`
+export const FeatureVisual = styled.div.attrs({ className: "home-feature-visual" })`
   position: relative; z-index: 1; min-width: 0; min-height: 390px;
   overflow: hidden; background: #24251F;
   .recommend-banner {
