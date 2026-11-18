@@ -189,14 +189,6 @@ function Home() {
     navigate("/movie/" + movieCode);
   };
 
-  // Enter 또는 Space 키로 영화 카드 선택
-  const handleMovieKeyDown = (event, movieCode) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      goToMovie(movieCode);
-    }
-  };
-
   const genres = [
     "드라마",
     "액션",
@@ -298,44 +290,37 @@ function Home() {
             (movies.slice(0, 10).map((movie, index) => (
                           React.createElement(
                     MovieCard,
-                    {"key":movie.movieCode || index,"role":"button","tabIndex":0,"onClick":() => goToMovie(movie.movieCode),"onKeyDown":(event) =>
-                                      handleMovieKeyDown(event, movie.movieCode)},
+                    {"key": movie.movieCode || index},
                     React.createElement(
-                              PosterWrap,
-                              null,
-                              React.createElement(SafeImage, {
-                                src: resolvePosterUrl(movie.posterUrl),
-                                alt: movie.title,
-                                fallback: React.createElement(
-                                  EmptyPoster,
-                                  null,
-                                  "포스터 준비 중"
-                                ),
-                              }),
-                              React.createElement(
-                                          Rank,
-                                          null,
-                                          (movie.rank)
-                                        ),
-                              React.createElement(
-                                          FavoriteStar,
-                                          {"movie":movie}
-                                        )
-                            ),
+                      "button",
+                      {
+                        "type": "button",
+                        "className": "home-movie-card-open",
+                        "aria-label": movie.title + " 영화 상세 보기",
+                        "onClick": () => goToMovie(movie.movieCode)
+                      },
+                      React.createElement(
+                        PosterWrap,
+                        null,
+                        React.createElement(SafeImage, {
+                          src: resolvePosterUrl(movie.posterUrl),
+                          alt: movie.title,
+                          fallback: React.createElement(EmptyPoster, null, "포스터 준비 중")
+                        }),
+                        React.createElement(Rank, null, movie.rank)
+                      ),
+                      React.createElement(
+                        MovieInfo,
+                        null,
+                        React.createElement("h3", null, movie.title),
+                        React.createElement("p", null, movie.releaseDate || "개봉일 정보 없음")
+                      )
+                    ),
                     React.createElement(
-                              MovieInfo,
-                              null,
-                              React.createElement(
-                                          "h3",
-                                          null,
-                                          (movie.title)
-                                        ),
-                              React.createElement(
-                                          "p",
-                                          null,
-                                          (movie.releaseDate || "개봉일 정보 없음")
-                                        )
-                            )
+                      "div",
+                      {"className": "home-movie-card-favorite"},
+                      React.createElement(FavoriteStar, {"movie": movie})
+                    )
                   )
                         )))
           )
@@ -423,42 +408,37 @@ function Home() {
             (favoriteMovies.slice(0, 5).map((movie) => (
                           React.createElement(
                     MovieCard,
-                    {"key":movie.movieCode,"role":"button","tabIndex":0,"onClick":() => goToMovie(movie.movieCode),"onKeyDown":(event) =>
-                                      handleMovieKeyDown(event, movie.movieCode)},
+                    {"key": movie.movieCode},
                     React.createElement(
-                              PosterWrap,
-                              null,
-                              (movie.posterUrl ? (
-                                                  React.createElement(
-                                          "img",
-                                          {"src":resolvePosterUrl(movie.posterUrl),"alt":movie.title}
-                                        )
-                                                ) : (
-                                                  React.createElement(
-                                          EmptyPoster,
-                                          null,
-                                          "포스터 준비 중"
-                                        )
-                                                )),
-                              React.createElement(
-                                          FavoriteStar,
-                                          {"movie":movie,"active":true}
-                                        )
-                            ),
+                      "button",
+                      {
+                        "type": "button",
+                        "className": "home-movie-card-open",
+                        "aria-label": movie.title + " 영화 상세 보기",
+                        "onClick": () => goToMovie(movie.movieCode)
+                      },
+                      React.createElement(
+                        PosterWrap,
+                        null,
+                        movie.posterUrl
+                          ? React.createElement("img", {
+                              "src": resolvePosterUrl(movie.posterUrl),
+                              "alt": movie.title
+                            })
+                          : React.createElement(EmptyPoster, null, "포스터 준비 중")
+                      ),
+                      React.createElement(
+                        MovieInfo,
+                        null,
+                        React.createElement("h3", null, movie.title),
+                        React.createElement("p", null, movie.releaseDate || "개봉일 정보 없음")
+                      )
+                    ),
                     React.createElement(
-                              MovieInfo,
-                              null,
-                              React.createElement(
-                                          "h3",
-                                          null,
-                                          (movie.title)
-                                        ),
-                              React.createElement(
-                                          "p",
-                                          null,
-                                          (movie.releaseDate || "개봉일 정보 없음")
-                                        )
-                            )
+                      "div",
+                      {"className": "home-movie-card-favorite"},
+                      React.createElement(FavoriteStar, {"movie": movie, "active": true})
+                    )
                   )
                         )))
           )
