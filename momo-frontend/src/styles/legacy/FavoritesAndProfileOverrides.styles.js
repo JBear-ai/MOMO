@@ -215,7 +215,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   transition: transform .2s ease, box-shadow .2s ease;
 
   &:hover {
-    transform: translateY(-4px);
+    transform: none;
     box-shadow: var(--momo-shadow-sm);
   }
 }
@@ -396,7 +396,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-browse-button:hover {
   background: var(--momo-text-soft);
   border-color: var(--momo-text-soft);
-  transform: translateY(-2px);
+  transform: none;
   box-shadow: 0 4px 12px rgba(50, 40, 30, 0.12);
 }
 
@@ -549,7 +549,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   background: transparent;
   box-shadow: none;
 }
-.favorite-page-card:hover { transform: translateY(-3px); box-shadow: none; }
+.favorite-page-card:hover { transform: none; box-shadow: none; }
 .favorite-page-poster { border-radius: 10px; box-shadow: var(--momo-shadow-xs); }
 .favorite-page-movie-info { padding: 10px 2px 0; }
 .favorite-page-movie-info h3 { font-size: 14px; }

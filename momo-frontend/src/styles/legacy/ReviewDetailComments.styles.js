@@ -441,7 +441,7 @@ const ReviewDetailCommentsStyles = createGlobalStyle`
 .review-dislike-button:hover,
 .comment-like-button:hover,
 .comment-dislike-button:hover {
-  transform: translateY(-1px);
+  transform: none;
   box-shadow: 0 4px 12px rgba(45, 38, 26, 0.08);
 }
 

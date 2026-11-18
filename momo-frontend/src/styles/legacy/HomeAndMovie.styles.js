@@ -231,7 +231,7 @@ const HomeAndMovieStyles = createGlobalStyle`
 }
 
 .movie-card:hover {
-  transform: translateY(-6px);
+  transform: none;
   box-shadow: 0 18px 40px -10px rgba(45, 39, 28, 0.14);
   border-color: var(--momo-accent-ink);
 }

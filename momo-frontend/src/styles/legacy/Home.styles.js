@@ -49,8 +49,8 @@ export const HomePage = styled.div.attrs({ className: "home-page" })`
     box-shadow: 0 5px 12px rgba(53,43,24,.07), 0 1px 2px rgba(53,43,24,.04), inset 0 1px rgba(255,255,255,1);
     backdrop-filter: blur(18px) saturate(145%);
     -webkit-backdrop-filter: blur(18px) saturate(145%);
-    transition: transform 220ms cubic-bezier(.2,.72,.2,1), box-shadow 220ms ease;
-    &:hover { transform: translateY(-3px) scale(1.015); box-shadow: 0 12px 24px rgba(53,43,24,.12), inset 0 1px rgba(255,255,255,1); }
+    transition: border-color 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+    &:hover { border-color: rgba(255,255,255,1); box-shadow: 0 8px 20px rgba(53,43,24,.105), inset 0 1px rgba(255,255,255,1); filter: saturate(1.04); }
   }
 `;
 
@@ -74,7 +74,7 @@ export const FeatureSection = styled.section`
   &:hover {
     border-color: rgba(214,180,63,.48);
     box-shadow: 0 6px 12px rgba(39,43,39,.04), 0 30px 64px rgba(68,53,22,.16), inset 0 1px rgba(255,255,255,1);
-    transform: perspective(1200px) translateY(-5px) rotateX(.6deg);
+    transform: none;
   }
   @media (max-width: 760px) {
     grid-template-columns: 1fr;
@@ -181,18 +181,6 @@ export const FeatureVisual = styled.div`
     backdrop-filter: blur(22px) saturate(155%);
     -webkit-backdrop-filter: blur(18px) saturate(145%);
     animation: momo-glass-arrive .7s cubic-bezier(.2,.7,.2,1) both;
-    &::before {
-      position: absolute;
-      top: -8px;
-      right: 28px;
-      width: 58px;
-      height: 16px;
-      content: "";
-      border: 1px solid rgba(255,255,255,.3);
-      background: rgba(255,255,255,.18);
-      transform: rotate(3deg);
-      pointer-events: none;
-    }
     @keyframes momo-glass-arrive {
       from { opacity: 0; transform: translate3d(0, 14px, 0) scale(.985); }
       to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
@@ -238,7 +226,6 @@ export const FeatureVisual = styled.div`
   }
   .recommend-button:hover {
     background: var(--momo-accent-hover);
-    transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0,0,0,.2);
   }
   .recommend-state {
@@ -265,7 +252,7 @@ export const FeatureVisual = styled.div`
     transform: translateX(-110%);
     transition: transform .9s cubic-bezier(.2,.7,.2,1);
   }
-  &:hover .recommend-poster { transform: scale(1.055); }
+  &:hover .recommend-poster { transform: scale(1.025); }
   &:hover .recommend-content { box-shadow: 0 18px 44px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.5); }
   &:hover::after { transform: translateX(110%); }
   @media (max-width: 760px) {
@@ -339,9 +326,9 @@ export const MovieCard = styled.div`
   cursor: pointer;
   transform: translateZ(0);
   transform-style: preserve-3d;
-  transition: transform 280ms cubic-bezier(.2,.7,.2,1), filter 280ms ease;
-  &:hover { transform: perspective(1000px) translateY(-7px) rotateX(1deg); filter: drop-shadow(0 12px 12px rgba(54,45,28,.08)); }
-  &:hover img { transform: scale(1.065); }
+  transition: filter 280ms ease;
+  &:hover { transform: none; filter: drop-shadow(0 8px 10px rgba(54,45,28,.10)) saturate(1.035); }
+  &:hover img { transform: scale(1.025); }
   &:focus-visible { outline: 2px solid var(--momo-link); outline-offset: 5px; }
 `;
 
@@ -354,7 +341,7 @@ export const PosterWrap = styled.div`
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,.96);
   box-shadow: 0 2px 4px rgba(54,45,28,.06), 0 12px 24px rgba(54,45,28,.13), inset 0 1px rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.18);
-  transition: border-color 280ms ease, box-shadow 280ms ease, transform 280ms ease;
+  transition: border-color 280ms ease, box-shadow 280ms ease;
   transform: perspective(900px) rotateX(0deg) translateZ(0);
   transform-style: preserve-3d;
   &::after {
@@ -377,7 +364,7 @@ export const PosterWrap = styled.div`
   &:hover {
     border-color: rgba(105,128,115,.55);
     box-shadow: 0 5px 10px rgba(54,45,28,.07), 0 22px 34px rgba(54,45,28,.2), inset 0 1px rgba(255,255,255,1);
-    transform: perspective(1000px) rotateX(2deg) translateY(-4px) translateZ(3px);
+    transform: none;
   }
   &:hover::after { opacity: .28; }
 `;
@@ -435,28 +422,27 @@ export const GenreList = styled.div`
     border: 1px solid rgba(255,255,255,.96);
     border-radius: 16px;
     background:
-      linear-gradient(90deg, transparent 0 15px, rgba(201,117,104,.13) 15px 16px, transparent 16px),
-      repeating-linear-gradient(0deg, transparent 0 26px, rgba(117,145,177,.08) 27px, transparent 28px),
+      linear-gradient(90deg, transparent 0 15px, rgba(166,148,108,.075) 15px 16px, transparent 16px),
+      repeating-linear-gradient(0deg, transparent 0 26px, rgba(166,148,108,.055) 27px, transparent 28px),
       radial-gradient(ellipse at 15% 0%, rgba(255,255,255,.98), transparent 58%),
       linear-gradient(145deg, rgba(255,255,255,.66), rgba(255,250,236,.42));
     box-shadow: 0 2px 4px rgba(54,45,28,.04), 0 9px 20px rgba(54,45,28,.09), inset 0 1px rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.2);
     backdrop-filter: blur(22px) saturate(150%);
     -webkit-backdrop-filter: blur(22px) saturate(150%);
     position: relative;
-    transform: perspective(800px) translateZ(0);
     color: var(--momo-text-soft);
     font-size: 14px;
     font-weight: 700;
     text-align: left;
     cursor: pointer;
-    transition: border-color var(--momo-transition-fast), background var(--momo-transition-fast), transform var(--momo-transition-fast);
+    transition: border-color var(--momo-transition-fast), background var(--momo-transition-fast), box-shadow var(--momo-transition-fast);
     &::after { content: "↗"; color: var(--momo-muted); font-size: 13px; }
     &:hover {
       border-color: rgba(214,180,63,.72);
       background:
         linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,248,223,.78)),
         #FFF8DF;
-      transform: perspective(800px) translateY(-4px) translateZ(2px);
+      transform: none;
       box-shadow: 0 3px 7px rgba(54,45,28,.045), 0 15px 26px rgba(54,45,28,.13), inset 0 1px rgba(255,255,255,1);
     }
   }
@@ -476,14 +462,14 @@ export const BrandLine = styled.div`
   border-radius: 22px;
   color: var(--momo-text);
   background:
-    linear-gradient(90deg, transparent 0 28px, rgba(201,117,104,.16) 28px 29px, transparent 29px),
-    repeating-linear-gradient(0deg, transparent 0 29px, rgba(117,145,177,.09) 30px, transparent 31px),
+    linear-gradient(90deg, transparent 0 28px, rgba(166,148,108,.085) 28px 29px, transparent 29px),
+    repeating-linear-gradient(0deg, transparent 0 29px, rgba(166,148,108,.06) 30px, transparent 31px),
     radial-gradient(ellipse at 10% 0%, rgba(255,255,255,.95), transparent 48%),
     linear-gradient(145deg, rgba(255,255,255,.66), rgba(255,246,218,.58));
   box-shadow: 0 2px 5px rgba(64,51,30,.035), 0 18px 38px rgba(64,51,30,.12), inset 0 1px rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.24);
   backdrop-filter: blur(28px) saturate(150%);
   -webkit-backdrop-filter: blur(28px) saturate(150%);
-  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+  transition: box-shadow 260ms ease, border-color 260ms ease, background 260ms ease;
   &::after {
     position: absolute;
     inset: 0;
@@ -492,7 +478,7 @@ export const BrandLine = styled.div`
     pointer-events: none;
   }
   > * { position: relative; z-index: 1; }
-  &:hover { transform: perspective(1000px) translateY(-3px) rotateX(.35deg); box-shadow: 0 4px 8px rgba(64,51,30,.04), 0 26px 50px rgba(64,51,30,.16), inset 0 1px rgba(255,255,255,1); }
+  &:hover { transform: none; box-shadow: 0 4px 8px rgba(64,51,30,.04), 0 21px 42px rgba(64,51,30,.14), inset 0 1px rgba(255,255,255,1); }
   h2 {
     margin: 0;
     font-size: clamp(19px, 2.4vw, 25px);

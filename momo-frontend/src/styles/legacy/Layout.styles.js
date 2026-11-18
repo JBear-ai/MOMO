@@ -60,8 +60,8 @@ const Logo = styled(Link)`
   align-items: center;
   flex-shrink: 0;
   text-decoration: none;
-  transition: transform 200ms cubic-bezier(.2,.72,.2,1);
-  &:hover { transform: translateY(-1px); }
+  transition: filter 200ms ease;
+  &:hover { filter: drop-shadow(0 2px 3px rgba(66,52,29,.12)); }
 `;
 
 const LogoImage = styled.img`
@@ -107,7 +107,6 @@ const Navigation = styled.nav`
       border-color: rgba(214,180,63,.48);
       background: rgba(255,250,236,.94);
       box-shadow: 0 5px 12px rgba(39,43,39,.06), inset 0 1px rgba(255,255,255,.95);
-      transform: translateY(-2px);
     }
   }
   a.active {
@@ -153,7 +152,7 @@ const ActionButton = styled.button`
   font-weight: 700;
   cursor: pointer;
   box-shadow: inset 0 1px rgba(255,255,255,.86);
-  transition: transform 180ms cubic-bezier(.2,.72,.2,1), box-shadow 180ms ease, filter 180ms ease;
+  transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, filter 180ms ease;
   &::before {
     position: absolute;
     top: 1px;
@@ -165,12 +164,11 @@ const ActionButton = styled.button`
     pointer-events: none;
   }
   &:hover:not(:disabled) {
-    transform: translateY(-2px);
     border-color: rgba(214,180,63,.58);
     background: rgba(255,212,59,.16);
     box-shadow: 0 5px 12px rgba(39,43,39,.07), inset 0 1px rgba(255,255,255,.9);
   }
-  &:active:not(:disabled) { transform: translateY(0) scale(.98); }
+  &:active:not(:disabled) { transform: scale(.985); box-shadow: inset 0 2px 4px rgba(41,40,32,.08); }
   &:disabled { cursor: not-allowed; opacity: .58; }
   &.momo-logout-button {
     min-height: 32px; padding: 0 11px; border-color: rgba(216,201,159,.58);
@@ -178,7 +176,7 @@ const ActionButton = styled.button`
   }
   &.momo-logout-button:hover:not(:disabled) {
     border-color: rgba(216,201,159,.9); background: rgba(255,250,236,.76); color: #514C40;
-    box-shadow: 0 4px 10px rgba(41,40,32,.045); transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(41,40,32,.045);
   }
 `;
 
@@ -210,7 +208,7 @@ const Footer = styled.footer`
   box-shadow: 0 -10px 28px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.96);
   backdrop-filter: blur(26px) saturate(145%);
   -webkit-backdrop-filter: blur(26px) saturate(145%);
-  &::before { position: absolute; z-index: -1; inset: 0; content: ""; background-image: linear-gradient(rgba(116,145,178,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(116,145,178,.045) 1px, transparent 1px); background-size: 34px 34px; pointer-events: none; }
+  &::before { position: absolute; z-index: -1; inset: 0; content: ""; background-image: linear-gradient(rgba(166,148,108,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(166,148,108,.055) 1px, transparent 1px); background-size: 34px 34px; pointer-events: none; }
 `;
 
 const FooterContainer = styled.div`

@@ -44,13 +44,12 @@ body {
     color: #514A36;
     font-size: 12px;
     font-weight: 750;
-    transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+    transition: background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
   }
   #root .momo-app-header nav a:hover {
     border-color: rgba(214,180,63,.48);
     background: rgba(255,212,59,.2);
     color: #51400F;
-    transform: translateY(-1px);
     box-shadow: 0 5px 12px rgba(39,43,39,.06), inset 0 1px rgba(255,255,255,.95);
   }
   #root .momo-app-header nav a.active {
@@ -227,14 +226,13 @@ body {
     white-space: nowrap;
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    transition: box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
   }
   #root .page-back-link:hover,
   #root .favorite-back-button:hover,
   #root .review-detail-back:hover {
     background: rgba(255,255,255,.84);
     box-shadow: 0 7px 16px rgba(39,43,39,.09), inset 0 1px rgba(255,255,255,.98);
-    transform: translateY(-1px);
   }
 
   /* Each route has a restrained color atmosphere beyond its title panel. */
@@ -325,7 +323,7 @@ body {
     box-shadow: 0 7px 18px rgba(39,43,39,.055), inset 0 1px rgba(255,255,255,.86);
     backdrop-filter: blur(18px) saturate(108%);
     -webkit-backdrop-filter: blur(18px) saturate(108%);
-    transition: transform 220ms var(--momo-glass-ease), box-shadow 220ms ease, border-color 220ms ease;
+    transition: box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;
   }
   #root .favorite-page .favorite-page-card:nth-child(3n + 2) {
     background: rgba(244,241,235,.62);
@@ -336,7 +334,6 @@ body {
   #root .favorite-page .favorite-page-card:hover {
     border-color: rgba(255,255,255,.96);
     box-shadow: 0 13px 24px rgba(39,43,39,.09), inset 0 1px rgba(255,255,255,.96);
-    transform: translateY(-3px);
   }
   #root .favorite-page .favorite-page-poster {
     padding: 4px;
@@ -392,7 +389,7 @@ body {
   }
 
   /* Profile activity is a set of glass archive entries, not paper stickers. */
-  #root .profile-page .profile-card:has(.profile-activity-grid) {
+  #root .profile-dashboard .profile-card {
     display: block;
     width: 100%;
     padding: clamp(22px, 3vw, 32px);
@@ -403,16 +400,16 @@ body {
     backdrop-filter: blur(22px) saturate(110%);
     -webkit-backdrop-filter: blur(22px) saturate(110%);
   }
-#root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading {
+#root .profile-dashboard .profile-card > .profile-card-heading {
     margin-bottom: 22px;
   }
-  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading h2 {
+  #root .profile-dashboard .profile-card > .profile-card-heading h2 {
     color: #303633;
     font-size: 21px;
     font-weight: 850;
     letter-spacing: -.04em;
   }
-  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading p {
+  #root .profile-dashboard .profile-card > .profile-card-heading p {
     color: #626A63;
   }
   #root .profile-page .profile-activity-grid {
@@ -443,7 +440,7 @@ body {
     text-decoration: none;
     backdrop-filter: blur(22px) saturate(108%);
     -webkit-backdrop-filter: blur(22px) saturate(108%);
-    transition: transform 210ms var(--momo-glass-ease), box-shadow 210ms ease, border-color 210ms ease;
+    transition: box-shadow 210ms ease, border-color 210ms ease, background 210ms ease;
   }
   #root .profile-page .profile-activity-item[data-tone="writing"] {
     --activity-ink: #887653;
@@ -461,7 +458,6 @@ body {
     border-color: rgba(255,255,255,.98);
     border-left-color: var(--activity-ink);
     box-shadow: 0 11px 22px rgba(39,43,39,.08), inset 0 1px rgba(255,255,255,.96);
-    transform: translateY(-3px);
   }
   #root .profile-page .profile-activity-top {
     display: flex;
@@ -549,7 +545,7 @@ body {
     transition: transform 180ms ease;
   }
   #root .profile-page .profile-activity-item:hover .profile-activity-arrow {
-    transform: translate(2px,-2px);
+    transform: none;
   }
 
   /* Movie detail: glass is visible in the material, not in decorative circles. */
@@ -598,7 +594,6 @@ body {
     transform: none;
   }
   #root .movie-detail-page .movie-detail-poster:hover {
-    transform: translateY(-3px);
     box-shadow: 0 20px 34px rgba(30,34,30,.2), inset 0 1px rgba(255,255,255,.96);
   }
   #root .movie-detail-page .movie-detail-poster img {
@@ -754,7 +749,6 @@ body {
     color: inherit;
   }
   #root .movie-detail-page .rating-vote-button:hover:not(:disabled) {
-    transform: translateY(-1px);
     box-shadow: 0 7px 14px rgba(39,43,39,.07), inset 0 1px rgba(255,255,255,.94);
   }
   #root .movie-detail-page .rating-unavailable {
@@ -798,7 +792,7 @@ body {
     border-color: rgba(255,255,255,.88);
     background: rgba(29,36,32,.72);
     box-shadow: 0 10px 20px rgba(18,24,20,.24), inset 0 1px rgba(255,255,255,.42);
-    transform: translateY(-2px);
+    transform: none;
   }
   #root .favorite-star.is-active {
     border-color: rgba(255,255,255,.76);
@@ -855,7 +849,6 @@ body {
   }
   #root .recommend-content .recommend-button:hover {
     background: #FFFFFF;
-    transform: translateY(-1px);
   }
   #root .home-page .movie-info h3 { color: #303633; }
   #root .home-page .movie-info p { color: #626A63; }
@@ -898,7 +891,6 @@ body {
     border-color: rgba(99,124,108,.35);
     background: rgba(255,255,255,.86);
     box-shadow: 0 7px 15px rgba(39,43,39,.075), inset 0 1px rgba(255,255,255,.96);
-    transform: translateY(-1px);
   }
 
   /* Search, archive lists and forms inherit the same calm material. */
@@ -941,7 +933,6 @@ body {
   #root .momo-search-form:focus-within {
     border-color: rgba(93,122,104,.48);
     box-shadow: 0 0 0 3px rgba(93,122,104,.12), 0 10px 22px rgba(39,43,39,.065);
-    transform: translateY(-1px);
   }
   #root .momo-search-dropdown {
     border: 1px solid rgba(255,255,255,.86);
@@ -995,7 +986,7 @@ body {
   #root .all-reviews-mobile-item:hover {
     background: rgba(255,255,255,.82);
     box-shadow: 0 10px 20px rgba(39,43,39,.075);
-    transform: translateY(-2px);
+    transform: none;
   }
   #root .liked-review-unlike {
     border: 1px solid rgba(137,107,105,.25);
@@ -1050,7 +1041,6 @@ body {
   #root .all-reviews-search-submit:hover:not(:disabled) {
     background: rgba(101,126,111,.22);
     box-shadow: 0 8px 16px rgba(39,43,39,.075), inset 0 1px rgba(255,255,255,.94);
-    transform: translateY(-1px);
   }
   #root .signup-note-label {
     border-color: rgba(101,126,111,.22);
@@ -1137,7 +1127,7 @@ body {
     }
     #root .movie-detail-page .movie-detail-info { gap: 8px; }
     #root .movie-detail-page .rating-panel-main { grid-template-columns: 1fr; }
-    #root .profile-page .profile-card:has(.profile-activity-grid) { padding: 22px 17px; }
+    #root .profile-dashboard .profile-card { padding: 22px 17px; }
   }
   @media (max-width: 600px) {
     #root .favorite-page-container { width: calc(100% - 28px); }
@@ -1471,7 +1461,6 @@ body {
     background: #F3C72E;
     color: #292820;
     box-shadow: 0 9px 18px rgba(126, 98, 15, .2);
-    transform: translateY(-1px);
   }
   #root .profile-edit-page .profile-edit-submit:disabled {
     border-color: #D6B43F;
@@ -1490,7 +1479,6 @@ body {
     border-color: #D8C99F;
     background: #EEE8DA;
     color: #292820;
-    transform: translateY(-1px);
   }
 
   @media (max-width: 600px) {
@@ -1701,17 +1689,17 @@ body {
   }
 
   /* Profile activity cards: one memo-paper family, not three unrelated colors. */
-  #root .profile-page .profile-card:has(.profile-activity-grid) {
+  #root .profile-dashboard .profile-card {
     border-color: rgba(255,255,255,.84);
     background: linear-gradient(145deg, rgba(255,255,255,.70), rgba(255,250,236,.50));
     box-shadow: var(--momo-glass-shadow);
     backdrop-filter: blur(26px) saturate(145%);
     -webkit-backdrop-filter: blur(26px) saturate(145%);
   }
-  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading h2 {
+  #root .profile-dashboard .profile-card > .profile-card-heading h2 {
     color: #292820;
   }
-  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading p {
+  #root .profile-dashboard .profile-card > .profile-card-heading p {
     color: #6A6251;
   }
   #root .profile-page .profile-activity-item,
