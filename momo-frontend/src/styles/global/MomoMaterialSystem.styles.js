@@ -56,6 +56,11 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     z-index: 1;
   }
 
+  #root .profile-dashboard .profile-dashboard-heading {
+    min-height: 132px;
+    padding: clamp(24px, 3.4vw, 36px);
+  }
+
   /* Identity, edit form, saved movies and review panels share one optical material. */
   #root .profile-dashboard .profile-card,
   #root .profile-edit-page .profile-edit-card,
@@ -292,6 +297,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     #root .profile-dashboard .profile-dashboard-heading,
     #root .profile-edit-page .profile-edit-heading {
       min-height: 116px;
+      padding: 22px 18px;
     }
     #root .profile-dashboard .profile-card,
     #root .profile-edit-page .profile-edit-card,
