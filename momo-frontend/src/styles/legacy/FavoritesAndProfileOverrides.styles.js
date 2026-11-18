@@ -80,7 +80,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .home-favorites-empty {
   padding: 32px 20px;
-  border: 1px dashed var(--momo-border);
+  border: 1px solid rgba(255,255,255,.9);
   border-radius: 16px;
   background: var(--momo-surface);
   color: var(--momo-muted);
