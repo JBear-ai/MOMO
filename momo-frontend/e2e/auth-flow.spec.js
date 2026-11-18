@@ -471,7 +471,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   });
   expect(favoriteHeroGlass.blur).toContain("blur(26px)");
   expect(favoriteHeroGlass.background).not.toContain("radial-gradient");
-  expect(favoriteHeroGlass.radius).toBe("21px");
+  expect(favoriteHeroGlass.radius).toBe("22px");
   const favoritePageBackground = await page.locator(".favorite-page").evaluate((element) => {
     const style = getComputedStyle(element);
     return { image: style.backgroundImage, color: style.backgroundColor };
