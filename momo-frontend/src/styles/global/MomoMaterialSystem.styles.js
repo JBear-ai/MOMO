@@ -1362,6 +1362,138 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .movie-detail-page .movie-score-display, #root .movie-detail-page .rating-distribution, #root .movie-detail-page .detail-reaction-counts .rating-vote-button, #root .movie-detail-page .people-section .person-chip { border:1px solid rgba(255,255,255,.99); border-radius:16px; background:linear-gradient(140deg,rgba(255,255,255,.9),rgba(255,250,236,.7) 64%,rgba(255,241,178,.32)); box-shadow:0 5px 15px rgba(70,58,29,.06),inset 0 1px 0 rgba(255,255,255,1); -webkit-backdrop-filter:blur(30px) saturate(190%); backdrop-filter:blur(30px) saturate(190%); }
   #root .movie-detail-page .people-section .person-chip:hover { border-color:rgba(214,180,63,.78); background:linear-gradient(140deg,rgba(255,255,255,.99),rgba(255,250,236,.8)); box-shadow:0 8px 18px rgba(70,58,29,.095),inset 0 1px 0 rgba(255,255,255,1); }
   @media (max-width:700px) { #root .home-section{padding:17px 14px;border-radius:18px;} #root .home-feature-info{border-radius:17px;} #root .profile-dashboard .profile-delete-section{padding:17px;} #root .movie-detail-page .movie-detail-header{border-radius:20px;} #root .movie-detail-page > .detail-content-section,#root .movie-detail-page .movie-rating-panel{border-radius:18px;} }
+
+  /* Opaque milk-glass pass. These rules intentionally win over legacy page
+     surfaces so every named component receives the same visible material. */
+  #root .profile-card,
+  #root .profile-delete-section,
+  #root .home-feature-section,
+  #root .home-feature-info,
+  #root .home-favorites-empty,
+  #root .home-brand-line,
+  #root .home-section,
+  #root .momo-app-header,
+  #root .movie-detail-header,
+  #root .detail-content-section,
+  #root .movie-rating-panel,
+  #root .rating-distribution,
+  #root .movie-score-display,
+  #root .detail-reaction-counts,
+  #root .people-section,
+  #root .people-section .person-chip {
+    border: 1px solid rgba(255,255,255,.98) !important;
+    background-color: rgba(255,253,247,.91) !important;
+    background-image:
+      linear-gradient(132deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.76) 24%, rgba(255,250,236,.88) 68%, rgba(255,241,178,.54) 100%) !important;
+    box-shadow:
+      0 2px 5px rgba(74,59,28,.035),
+      0 12px 28px rgba(74,59,28,.095),
+      0 28px 58px rgba(74,59,28,.055),
+      inset 0 1.5px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(214,180,63,.24) !important;
+    -webkit-backdrop-filter: blur(34px) saturate(175%) !important;
+    backdrop-filter: blur(34px) saturate(175%) !important;
+  }
+
+  #root .profile-card,
+  #root .profile-delete-section,
+  #root .home-feature-info,
+  #root .home-favorites-empty,
+  #root .detail-content-section,
+  #root .movie-rating-panel,
+  #root .rating-distribution,
+  #root .movie-score-display,
+  #root .detail-reaction-counts,
+  #root .people-section,
+  #root .people-section .person-chip {
+    background-color: rgba(255,254,250,.95) !important;
+    background-image:
+      radial-gradient(ellipse at 10% 0%, rgba(255,255,255,1), transparent 56%),
+      linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,250,236,.9) 62%, rgba(255,241,178,.48)) !important;
+    box-shadow:
+      0 5px 12px rgba(74,59,28,.045),
+      0 18px 38px rgba(74,59,28,.085),
+      inset 0 1.5px 0 rgba(255,255,255,1),
+      inset 0 0 0 1px rgba(255,255,255,.44) !important;
+    -webkit-backdrop-filter: blur(38px) saturate(185%) !important;
+    backdrop-filter: blur(38px) saturate(185%) !important;
+  }
+
+  #root .profile-card::before {
+    background: linear-gradient(125deg, rgba(255,255,255,.72), transparent 54%, rgba(255,212,59,.12)) !important;
+  }
+
+  #root .home-feature-section,
+  #root .movie-detail-header {
+    border-radius: 28px !important;
+    background-image:
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.98), transparent 46%),
+      radial-gradient(ellipse at 96% 100%, rgba(255,212,59,.2), transparent 48%),
+      linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,250,236,.84) 60%, rgba(255,241,178,.5)) !important;
+    box-shadow:
+      0 8px 18px rgba(74,59,28,.055),
+      0 26px 58px rgba(74,59,28,.12),
+      inset 0 1.5px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(214,180,63,.24) !important;
+    -webkit-backdrop-filter: blur(42px) saturate(190%) !important;
+    backdrop-filter: blur(42px) saturate(190%) !important;
+  }
+
+  #root .home-section {
+    padding: clamp(18px,2.2vw,26px) !important;
+    border-radius: 24px !important;
+    background-color: rgba(255,252,242,.76) !important;
+    background-image: linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,250,236,.7) 65%,rgba(255,241,178,.36)) !important;
+  }
+
+  #root .home-feature-info {
+    border-radius: 22px !important;
+    background-color: rgba(255,254,250,.94) !important;
+    background-image: linear-gradient(135deg,rgba(255,255,255,.98),rgba(255,250,236,.9) 72%,rgba(255,241,178,.52)) !important;
+  }
+
+  #root .home-favorites-empty,
+  #root .profile-delete-section {
+    border-radius: 20px !important;
+  }
+
+  #root .movie-detail-header {
+    padding: clamp(22px,3vw,36px) !important;
+  }
+
+  #root .detail-content-section,
+  #root .movie-rating-panel {
+    border-radius: 22px !important;
+  }
+
+  #root .rating-distribution,
+  #root .movie-score-display,
+  #root .detail-reaction-counts .rating-vote-button,
+  #root .people-section .person-chip {
+    border-radius: 17px !important;
+  }
+
+  #root .momo-app-header {
+    background-color: rgba(255,253,247,.88) !important;
+    background-image: linear-gradient(110deg,rgba(255,255,255,.98),rgba(255,250,236,.9) 65%,rgba(255,241,178,.48)) !important;
+    box-shadow: 0 8px 30px rgba(74,59,28,.09),inset 0 1.5px 0 rgba(255,255,255,1) !important;
+    -webkit-backdrop-filter: blur(42px) saturate(195%) !important;
+    backdrop-filter: blur(42px) saturate(195%) !important;
+  }
+
+  #root .people-section .person-chip:hover {
+    background-color: rgba(255,255,255,.99) !important;
+    border-color: rgba(214,180,63,.85) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 9px 22px rgba(74,59,28,.1),inset 0 1px 0 rgba(255,255,255,1) !important;
+  }
+
+  @media (max-width:700px) {
+    #root .home-section { padding: 17px 14px !important; border-radius: 19px !important; }
+    #root .home-feature-section, #root .movie-detail-header { border-radius: 21px !important; }
+    #root .detail-content-section, #root .movie-rating-panel { border-radius: 18px !important; }
+  }
+
 `;
 
 export default MomoMaterialSystemStyles;
