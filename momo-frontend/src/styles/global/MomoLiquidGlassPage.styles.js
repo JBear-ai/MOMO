@@ -1702,8 +1702,11 @@ body {
 
   /* Profile activity cards: one memo-paper family, not three unrelated colors. */
   #root .profile-page .profile-card:has(.profile-activity-grid) {
-    border-color: rgba(233,223,197,.92);
-    background: rgba(255,250,236,.9);
+    border-color: rgba(255,255,255,.84);
+    background: linear-gradient(145deg, rgba(255,255,255,.70), rgba(255,250,236,.50));
+    box-shadow: var(--momo-glass-shadow);
+    backdrop-filter: blur(26px) saturate(145%);
+    -webkit-backdrop-filter: blur(26px) saturate(145%);
   }
   #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading h2 {
     color: #292820;
@@ -1716,20 +1719,38 @@ body {
   #root .profile-page .profile-activity-item[data-tone="liked"],
   #root .profile-page .profile-activity-item[data-tone="saved"] {
     --activity-ink: #B38D19;
-    border-color: rgba(233,223,197,.92);
-    border-left: 3px solid #D6B43F;
-    border-radius: 15px;
-    background:
-      linear-gradient(90deg, transparent 0 25px, rgba(197,112,101,.11) 25px 26px, transparent 26px),
-      repeating-linear-gradient(0deg, transparent 0 29px, rgba(198,161,43,.11) 30px, transparent 31px),
-      linear-gradient(145deg, #FFFEFA, #FFFAEC);
+    border-color: rgba(255,255,255,.84);
+    border-left: 3px solid rgba(255,212,59,.92);
+    border-radius: 17px;
+    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,250,236,.48));
     color: #292820;
-    box-shadow: 0 8px 20px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.98);
+    box-shadow: var(--momo-depth-shadow);
+    backdrop-filter: blur(24px) saturate(142%);
+    -webkit-backdrop-filter: blur(24px) saturate(142%);
   }
-  #root .profile-page .profile-activity-item::before,
-  #root .profile-page .profile-activity-item::after {
+  #root .profile-page .profile-activity-item::before {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
     content: "";
-    display: block;
+    border-radius: inherit;
+    background: linear-gradient(125deg, rgba(255,255,255,.54), transparent 46%, rgba(255,212,59,.05));
+    pointer-events: none;
+  }
+  #root .profile-page .profile-activity-item::after {
+    position: absolute;
+    z-index: 0;
+    top: 1px;
+    left: 18px;
+    right: 18px;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.96), transparent);
+    pointer-events: none;
+  }
+  #root .profile-page .profile-activity-item > * {
+    position: relative;
+    z-index: 1;
   }
   #root .profile-page .profile-activity-item:hover {
     border-color: rgba(214,180,63,.7);
@@ -1737,12 +1758,13 @@ body {
     box-shadow: 0 14px 26px rgba(75,61,31,.105), inset 0 1px rgba(255,255,255,1);
   }
   #root .profile-page .profile-activity-icon {
-    border-color: rgba(233,223,197,.88);
-    background: rgba(255,254,250,.88);
+    border-color: rgba(255,255,255,.88);
+    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.52));
     color: #80600E;
+    box-shadow: 0 5px 12px rgba(41,40,32,.06), inset 0 1px rgba(255,255,255,.96);
   }
   #root .profile-page .profile-activity-item[data-tone="liked"] .profile-activity-icon {
-    color: #A85E54;
+    color: #80600E;
   }
   #root .profile-page .profile-activity-item h3,
   #root .profile-page .profile-activity-count {
@@ -1766,8 +1788,11 @@ body {
 
   /* Member deletion: clear destructive action, never a competing primary CTA. */
   #root .profile-page .profile-delete-section {
-    border-color: rgba(229,184,173,.78);
-    background: rgba(255,250,236,.92);
+    border-color: rgba(229,184,173,.56);
+    background: linear-gradient(145deg, rgba(255,255,255,.62), rgba(255,247,243,.54));
+    box-shadow: var(--momo-depth-shadow);
+    backdrop-filter: blur(22px) saturate(138%);
+    -webkit-backdrop-filter: blur(22px) saturate(138%);
   }
   #root .profile-delete-page-card {
     border-color: rgba(229,184,173,.72);
