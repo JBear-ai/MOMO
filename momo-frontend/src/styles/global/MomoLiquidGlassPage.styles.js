@@ -403,12 +403,7 @@ body {
     backdrop-filter: blur(22px) saturate(110%);
     -webkit-backdrop-filter: blur(22px) saturate(110%);
   }
-  #root .profile-page .profile-card:has(.profile-activity-grid)::before,
-  #root .profile-page .profile-card:has(.profile-activity-grid)::after {
-    content: none;
-    display: none;
-  }
-  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading {
+#root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading {
     margin-bottom: 22px;
   }
   #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading h2 {
@@ -705,11 +700,7 @@ body {
     backdrop-filter: blur(22px) saturate(110%);
     -webkit-backdrop-filter: blur(22px) saturate(110%);
   }
-  #root .movie-detail-page .movie-rating-panel::before {
-    content: none;
-    display: none;
-  }
-  #root .movie-detail-page .rating-panel-eyebrow,
+#root .movie-detail-page .rating-panel-eyebrow,
   #root .movie-detail-page .rating-panel-stamp {
     color: #66746A;
   }
