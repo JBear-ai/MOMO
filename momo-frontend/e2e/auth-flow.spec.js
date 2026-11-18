@@ -49,8 +49,6 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     { path: "/profile/liked-reviews", heading: ".liked-reviews-heading", surface: ".liked-reviews-card" },
     { path: "/profile/favorites", heading: ".favorite-page-heading", surface: ".favorite-page-card, .favorite-page-empty" },
     { path: "/reviews", heading: ".all-reviews-heading", surface: ".all-reviews-card" },
-    { path: "/movie/20261234", heading: ".movie-detail-header", surface: ".movie-rating-panel" },
-    { path: "/person/name/테스트배우", heading: ".movie-detail-header", surface: ".detail-content-section" },
     { path: "/search?keyword=기생충", heading: ".search-page-heading", surface: ".search-page input" },
   ];
 
@@ -604,6 +602,14 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
     page.getByRole("heading", { level: 1, name: "인물 연결 E2E" }),
   ).toBeVisible();
 
+  const personHeroStyle = await page.locator(".movie-detail-header").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundImage, border: style.borderTopColor };
+  });
+  expect(personHeroStyle.background).toContain("linear-gradient");
+  expect(personHeroStyle.border).toBe("rgb(233, 223, 197)");
+  await page.screenshot({ path: "test-results/route-person-detail-mobile.png", fullPage: true });
+
   // 긴 인물 소개는 세 줄 미리보기에서 펼치고 다시 접을 수 있어야 한다.
   const biography = page.locator(".person-biography");
   await expect(biography).not.toHaveClass(/is-expanded/);
@@ -634,6 +640,14 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   ).toBeVisible();
   await expect(page.getByRole("heading", { level: 2, name: "관객 평점" })).toBeVisible();
   await expect(page.locator(".rating-distribution-track")).toBeVisible();
+
+  const movieHeroStyle = await page.locator(".movie-detail-header").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundImage, border: style.borderTopColor };
+  });
+  expect(movieHeroStyle.background).toContain("linear-gradient");
+  expect(movieHeroStyle.border).toBe("rgb(233, 223, 197)");
+  await page.screenshot({ path: "test-results/route-movie-detail-mobile.png", fullPage: true });
   await expect(page.locator(".detail-reaction-counts .rating-vote-button")).toHaveCount(2);
 
   // 영화 상세 헤더는 원형 광원 없이 절제된 반투명 글래스로 표현한다.
