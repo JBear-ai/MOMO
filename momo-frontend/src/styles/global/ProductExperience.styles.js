@@ -354,22 +354,9 @@ const ProductExperienceStyles = createGlobalStyle`
   .favorite-page-empty { border: 1px dashed rgba(177,157,111,.5); border-radius: 18px; background: rgba(255,254,250,.65); }
 
   /* Chat popup: the floating lounge follows the same glass language. */
-  [aria-label="전체 회원 채팅"] {
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.94) !important;
-    border-radius: 20px !important;
-    background: rgba(255,254,250,.9) !important;
-    box-shadow: 0 26px 68px rgba(32,27,18,.24), inset 0 1px rgba(255,255,255,.96) !important;
-    backdrop-filter: blur(24px) saturate(150%);
-  }
-  [aria-label="공용 채팅 열기"] {
-    border: 1px solid rgba(255,255,255,.8) !important;
-    box-shadow: 0 12px 28px rgba(53,43,24,.2), inset 0 1px rgba(255,255,255,.38) !important;
-    transition: transform 220ms var(--momo-ease-out), box-shadow 220ms ease !important;
-  }
-  [aria-label="공용 채팅 열기"]:hover {
+[aria-label="공용 채팅 열기"]:hover {
     transform: translateY(-4px) scale(1.035);
-    box-shadow: 0 18px 36px rgba(53,43,24,.25), inset 0 1px rgba(255,255,255,.48) !important;
+    box-shadow: 0 18px 36px rgba(53,43,24,.25), inset 0 1px rgba(255,255,255,.48);
   }
 
   /* Chat popup, modal, toast and dialogs */
@@ -406,13 +393,7 @@ const ProductExperienceStyles = createGlobalStyle`
     .review-action-button { flex: 1; }
   }
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: .01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: .01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
+}
 `;
 
 export default ProductExperienceStyles;
