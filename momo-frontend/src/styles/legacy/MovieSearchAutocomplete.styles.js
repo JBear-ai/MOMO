@@ -17,9 +17,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     box-sizing: border-box;
     min-height: 44px;
     padding: 6px 16px;
-    background:
-      linear-gradient(90deg, transparent 0 16px, rgba(201,117,104,.12) 16px 17px, transparent 17px),
-      linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.72));
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.52));
     border: 1px solid rgba(255,255,255,.96);
     border-radius: 16px;
     box-shadow: 0 7px 18px rgba(54,45,28,.07), inset 0 1px rgba(255,255,255,.98), inset 0 -1px rgba(190,172,135,.12);
@@ -76,10 +74,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     max-height: 390px;
     overflow-y: auto;
     box-sizing: border-box;
-    background:
-      linear-gradient(90deg, transparent 0 24px, rgba(201,117,104,.13) 24px 25px, transparent 25px),
-      repeating-linear-gradient(0deg, transparent 0 30px, rgba(117,145,177,.07) 31px, transparent 32px),
-      rgba(255,254,249,.88);
+    background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,250,236,.78));
     border: 1px solid rgba(255,255,255,.98);
     border-radius: 17px;
     box-shadow: 0 24px 56px rgba(54,45,28,.17), 0 3px 8px rgba(54,45,28,.045), inset 0 1px rgba(255,255,255,.98);
