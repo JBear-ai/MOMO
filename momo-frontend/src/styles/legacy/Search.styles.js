@@ -3,7 +3,7 @@ import styled from "styled-components";
 /* A film-search desk: focused controls above a quiet, tactile poster library. */
 const SearchPage = styled.div.attrs({ className: "search-page" })`
   --search-ink: #292820;
-  --search-muted: #827B6D;
+  --search-muted: #6A6251;
   width: 100%;
   max-width: 1320px;
   margin: 0 auto;
@@ -83,7 +83,7 @@ const SearchInput = styled.input`
     box-shadow: 0 0 0 4px rgba(255,212,59,.16), 0 12px 28px rgba(41,40,32,.075),
       inset 0 1px rgba(255,255,255,1);
   }
-  &::placeholder { color: #918A7D; }
+  &::placeholder { color: #6A6251; }
 `;
 
 const MovieGrid = styled.div`
@@ -155,7 +155,7 @@ const MovieInfo = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  p { margin: 5px 0 0; color: #827B6D; font-size: 11px; line-height: 1.5; }
+  p { margin: 5px 0 0; color: #6A6251; font-size: 11px; line-height: 1.5; }
 `;
 
 const SearchMessage = styled.div`
@@ -170,7 +170,7 @@ const SearchMessage = styled.div`
   box-shadow: 0 8px 24px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
   -webkit-backdrop-filter: blur(22px) saturate(140%);
   backdrop-filter: blur(22px) saturate(140%);
-  color: #827B6D;
+  color: #6A6251;
   text-align: center;
   font-size: 14px;
   line-height: 1.8;
@@ -178,7 +178,7 @@ const SearchMessage = styled.div`
 
 const LoadingMessage = styled.div`
   padding: 35px 0;
-  color: #827B6D;
+  color: #6A6251;
   text-align: center;
   font-size: 13px;
 `;
