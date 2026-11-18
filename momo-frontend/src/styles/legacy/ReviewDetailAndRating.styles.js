@@ -300,7 +300,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 }
 
 .detail-reaction-count:hover {
-  transform: translateY(-2px);
+  transform: none;
   box-shadow: var(--momo-shadow);
 }
 
