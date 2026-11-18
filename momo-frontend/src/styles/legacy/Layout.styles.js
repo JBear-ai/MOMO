@@ -180,8 +180,8 @@ const ActionButton = styled.button`
   &.momo-logout-button {
     min-height: 33px;
     padding: 0 12px;
-    border-color: rgba(216,201,159,.68);
-    background: rgba(255,254,250,.45);
+    border-color: rgba(216,201,159,.58);
+    background: rgba(255,254,250,.34);
     color: #827B6D;
     font-size: 10px;
     font-weight: 700;
@@ -264,7 +264,7 @@ const FooterLogo = styled.img`
 const FooterDesc = styled.p`
   max-width: 420px;
   margin: 0;
-  color: #625B4F;
+  color: #514C40;
   font-size: 12px;
   line-height: 1.75;
 `;
@@ -284,7 +284,7 @@ const FooterColumn = styled.div`
   h4 { margin: 0 0 4px; color: #292820; font-size: 11px; font-weight: 850; letter-spacing: .08em; }
   a {
     width: fit-content;
-    color: #746D60;
+    color: #514C40;
     font-size: 11px;
     text-decoration: none;
     transition: color 150ms ease;
@@ -301,7 +301,7 @@ const FooterBottom = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  color: #827B6D;
+  color: #514C40;
   font-size: 10px;
   p { margin: 0; }
   @media (max-width: 600px) { flex-direction: column; gap: 7px; text-align: center; }
