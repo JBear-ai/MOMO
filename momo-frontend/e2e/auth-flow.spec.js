@@ -43,6 +43,59 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(page.getByRole("button", { name: "로그아웃" })).toBeVisible();
   await initialFavoritesSync;
 
+  // Requested routes must use one shared warm-paper visual system on desktop and mobile.
+  const brandRoutes = [
+    { path: "/profile/reviews", heading: ".my-reviews-heading", surface: ".my-reviews-card" },
+    { path: "/profile/liked-reviews", heading: ".liked-reviews-heading", surface: ".liked-reviews-card" },
+    { path: "/profile/favorites", heading: ".favorite-page-heading", surface: ".favorite-page-card, .favorite-page-empty" },
+    { path: "/reviews", heading: ".all-reviews-heading", surface: ".all-reviews-card" },
+    { path: "/search?keyword=기생충", heading: ".search-page-heading", surface: ".search-page input" },
+  ];
+
+  for (const route of brandRoutes) {
+    await page.goto(route.path);
+    await expect(page.locator(".momo-app-header")).toBeVisible();
+    await expect(page.locator(route.heading).first()).toBeVisible({ timeout: 20000 });
+
+    const visual = await page.locator(route.heading).first().evaluate((element) => {
+      const style = getComputedStyle(element);
+      const title = element.querySelector("h1") || element;
+      return {
+        background: style.backgroundImage,
+        border: style.borderTopColor,
+        title: getComputedStyle(title).color,
+      };
+    });
+    expect(visual.background).toContain("linear-gradient");
+    expect(visual.border).toBe("rgb(233, 223, 197)");
+    expect(visual.title).toBe("rgb(41, 40, 32)");
+
+    const routeSurface = page.locator(route.surface).first();
+    if (await routeSurface.count()) {
+      const surfaceStyle = await routeSurface.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return { background: style.backgroundColor, border: style.borderTopColor };
+      });
+      expect(surfaceStyle.background).not.toBe("rgb(236, 234, 227)");
+      expect(surfaceStyle.background).not.toContain("rgb(239, 243, 237)");
+      expect(surfaceStyle.border).not.toBe("rgb(168, 177, 154)");
+    }
+
+    await page.screenshot({
+      path: `test-results/route-${route.path.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "")}-desktop.png`,
+      fullPage: true,
+    });
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator(route.heading).first()).toBeVisible();
+    await page.screenshot({
+      path: `test-results/route-${route.path.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "")}-mobile.png`,
+      fullPage: true,
+    });
+    await page.setViewportSize({ width: 1280, height: 800 });
+  }
+
+
   // 마이페이지의 세 활동 카드가 실제 카드 구조와 개수 배지를 유지하는지 확인한다.
   await page.goto("/profile");
   const profileActivityCards = page.locator(".profile-activity-item");
@@ -549,6 +602,17 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
     page.getByRole("heading", { level: 1, name: "인물 연결 E2E" }),
   ).toBeVisible();
 
+  const personHeroStyle = await page.locator(".movie-detail-header").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundImage, border: style.borderTopColor };
+  });
+  expect(personHeroStyle.background).toContain("linear-gradient");
+  expect(personHeroStyle.border).toBe("rgba(233, 223, 197, 0.9)");
+  await page.screenshot({ path: "test-results/route-person-detail-mobile.png", fullPage: true });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.screenshot({ path: "test-results/route-person-detail-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+
   // 긴 인물 소개는 세 줄 미리보기에서 펼치고 다시 접을 수 있어야 한다.
   const biography = page.locator(".person-biography");
   await expect(biography).not.toHaveClass(/is-expanded/);
@@ -579,6 +643,17 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   ).toBeVisible();
   await expect(page.getByRole("heading", { level: 2, name: "관객 평점" })).toBeVisible();
   await expect(page.locator(".rating-distribution-track")).toBeVisible();
+
+  const movieHeroStyle = await page.locator(".movie-detail-header").evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundImage, border: style.borderTopColor };
+  });
+  expect(movieHeroStyle.background).toContain("linear-gradient");
+  expect(movieHeroStyle.border).toBe("rgba(233, 223, 197, 0.9)");
+  await page.screenshot({ path: "test-results/route-movie-detail-mobile.png", fullPage: true });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.screenshot({ path: "test-results/route-movie-detail-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
   await expect(page.locator(".detail-reaction-counts .rating-vote-button")).toHaveCount(2);
 
   // 영화 상세 헤더는 원형 광원 없이 절제된 반투명 글래스로 표현한다.
