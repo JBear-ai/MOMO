@@ -20,8 +20,8 @@ const GlobalTokensStyles = createGlobalStyle`
 
     /* Typography */
     --momo-text: #292820;
-    --momo-text-soft: #494333;
-    --momo-muted: #6A6251;
+    --momo-text-soft: #514C40;
+    --momo-muted: #827B6D;
     --momo-placeholder: #776F62;
     --momo-link: #715713;
 
@@ -45,16 +45,16 @@ const GlobalTokensStyles = createGlobalStyle`
     /* Material */
     --momo-shadow-xs: 0 1px 2px rgba(39, 43, 39, .035);
     --momo-shadow-sm: 0 5px 16px rgba(39, 43, 39, .055);
-    --momo-shadow: 0 12px 30px rgba(39, 43, 39, .075);
-    --momo-shadow-lg: 0 20px 46px rgba(39, 43, 39, .105);
-    --momo-glass: rgba(255, 250, 236, .62);
-    --momo-glass-border: rgba(255, 255, 255, .82);
-    --momo-header-glass: rgba(255, 250, 236, .68);
-    --momo-glass-clear: rgba(255, 254, 250, .52);
-    --momo-glass-soft: rgba(255, 250, 236, .66);
-    --momo-glass-highlight: rgba(255, 255, 255, .88);
-    --momo-glass-shadow: 0 20px 44px rgba(41, 40, 32, .10), 0 4px 12px rgba(41, 40, 32, .045), inset 0 1px rgba(255,255,255,.94), inset 0 -1px rgba(216,201,159,.18);
-    --momo-depth-shadow: 0 16px 30px rgba(41,40,32,.09), 0 4px 9px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.94);
+    --momo-shadow: 0 12px 28px rgba(41, 40, 32, .065);
+    --momo-shadow-lg: 0 24px 48px rgba(41, 40, 32, .105);
+    --momo-glass: rgba(255, 253, 247, .48);
+    --momo-glass-border: rgba(255, 255, 255, .86);
+    --momo-header-glass: rgba(255, 253, 247, .58);
+    --momo-glass-clear: rgba(255, 255, 255, .32);
+    --momo-glass-soft: rgba(255, 250, 236, .54);
+    --momo-glass-highlight: rgba(255, 255, 255, .94);
+    --momo-glass-shadow: 0 14px 34px rgba(41,40,32,.075), 0 3px 8px rgba(41,40,32,.035), inset 0 1px rgba(255,255,255,.96), inset 0 -1px rgba(216,201,159,.16);
+    --momo-depth-shadow: 0 16px 34px rgba(41,40,32,.085), 0 4px 10px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,.96);
 
     /* Layout */
     --momo-radius-sm: 8px;
@@ -78,7 +78,13 @@ const GlobalTokensStyles = createGlobalStyle`
     --momo-space-12: 48px;
     --momo-transition-fast: 150ms cubic-bezier(.2, .7, .2, 1);
     --momo-transition-ui: 220ms cubic-bezier(.2, .7, .2, 1);
-    --momo-ring: 0 0 0 3px rgba(255, 212, 59, .22);
+    --momo-ring: 0 0 0 3px rgba(214, 180, 63, .2);
+    --momo-glass-blur: 26px;
+    --momo-glass-saturation: 150%;
+    --momo-glass-tint: rgba(255, 250, 236, .36);
+    --momo-glass-edge: rgba(255, 255, 255, .88);
+    --momo-glass-inner-light: inset 0 1px 0 rgba(255,255,255,.96);
+    --momo-glass-depth: 0 2px 5px rgba(41,40,32,.035), 0 12px 28px rgba(41,40,32,.075), inset 0 1px 0 rgba(255,255,255,.96);
   }
 
   html, body, #root { min-height: 100%; }
@@ -86,8 +92,8 @@ const GlobalTokensStyles = createGlobalStyle`
   body {
     margin: 0;
     background-color: var(--momo-bg);
-    background-image: linear-gradient(rgba(116,145,178,.065) 1px, transparent 1px), linear-gradient(90deg, rgba(116,145,178,.065) 1px, transparent 1px), radial-gradient(ellipse at 12% 0%, rgba(255,255,255,.82), transparent 38%), radial-gradient(ellipse at 92% 28%, rgba(255,212,59,.11), transparent 42%);
-    background-size: 34px 34px, 34px 34px, auto, auto;
+    background-image: radial-gradient(ellipse at 10% 0%, rgba(255,255,255,.86), transparent 36rem), radial-gradient(ellipse at 92% 18%, rgba(255,212,59,.10), transparent 40rem), linear-gradient(135deg, rgba(233,223,197,.12), transparent 48%);
+    background-size: auto, auto, auto;
     background-attachment: fixed;
     color: var(--momo-text);
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
