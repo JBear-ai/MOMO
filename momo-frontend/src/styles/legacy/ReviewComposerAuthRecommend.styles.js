@@ -555,18 +555,22 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .recommend-state {
+    display: grid;
+    place-items: center;
     width: 100%;
-    height: 400px;
-    margin-bottom: 45px;
-    border-radius: var(--momo-radius);
-    background-color: var(--momo-surface);
-    border: 1px dashed var(--momo-border);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--momo-muted);
-    font-size: 15px;
-    font-weight: 600;
+    min-height: 220px;
+    height: auto;
+    margin-bottom: 28px;
+    padding: 28px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.9);
+    background: linear-gradient(140deg, rgba(255,255,255,.72), rgba(255,250,236,.38));
+    color: var(--momo-text-soft);
+    font-size: 13px;
+    line-height: 1.75;
+    box-shadow: 0 8px 24px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    backdrop-filter: blur(22px) saturate(150%);
 }
 
 /* 반응형 모바일 조정 */
