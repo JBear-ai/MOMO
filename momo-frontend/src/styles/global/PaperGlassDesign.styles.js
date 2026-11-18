@@ -45,9 +45,7 @@ const PaperGlassDesignStyles = createGlobalStyle`
     50% { transform: translateY(-3px) rotate(-.12deg); }
   }
 
-  /* Desk: subtle graph-paper texture, not a flat beige canvas. */
-  html { background: var(--momo-desk); }
-  body {
+body {
     color: var(--momo-text);
     background-color: var(--momo-desk);
     background-image:
@@ -1008,15 +1006,7 @@ const PaperGlassDesignStyles = createGlobalStyle`
   .favorite-star:hover { transform: translateY(-2px) scale(1.07); box-shadow: 0 10px 20px rgba(32,25,16,.21); }
   .favorite-star.is-active { background: rgba(255,216,103,.92); border-color: rgba(255,255,255,.98); }
 
-  /* Chat and toast reuse the same glass material without losing contrast. */
-  [aria-label="전체 회원 채팅"] {
-    border: 1px solid rgba(255,255,255,.94) !important;
-    border-radius: 19px !important;
-    background: rgba(255,254,249,.91) !important;
-    box-shadow: 0 24px 56px rgba(46,36,21,.2), inset 0 1px rgba(255,255,255,.98) !important;
-    backdrop-filter: blur(24px) saturate(145%);
-  }
-  .momo-toast {
+.momo-toast {
     border: 1px solid rgba(255,255,255,.94);
     border-radius: 15px;
     background: rgba(255,254,249,.9);
@@ -1162,14 +1152,6 @@ const PaperGlassDesignStyles = createGlobalStyle`
     }
     .movie-detail-page > .detail-content-section > .filmography-list > .person-chip > div:last-child > span {
       font-size: 10px;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: .01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: .01ms !important;
-      scroll-behavior: auto !important;
     }
   }
 `;
