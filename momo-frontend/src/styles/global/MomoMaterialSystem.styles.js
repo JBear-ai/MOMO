@@ -22,14 +22,12 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    border: 1px solid var(--momo-material-edge);
-    border-radius: 23px;
-    background:
-      radial-gradient(ellipse at 90% -8%, rgba(255,212,59,.2), transparent 40%),
-      linear-gradient(132deg, rgba(255,255,255,.72), rgba(255,250,236,.4) 58%, rgba(255,243,194,.3));
+    border: 1px solid var(--momo-route-line);
+    border-radius: 21px;
+    background: linear-gradient(132deg, rgba(255,255,255,.74), rgba(255,250,236,.42) 58%, rgba(255,243,194,.3));
     box-shadow: var(--momo-material-shadow);
-    backdrop-filter: blur(30px) saturate(158%);
-    -webkit-backdrop-filter: blur(30px) saturate(158%);
+    backdrop-filter: blur(26px) saturate(158%);
+    -webkit-backdrop-filter: blur(26px) saturate(158%);
   }
   #root .profile-dashboard .profile-dashboard-heading::after,
   #root .profile-edit-page .profile-edit-heading::after,
@@ -179,13 +177,15 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .profile-dashboard .profile-activity-item {
     position: relative;
     isolation: isolate;
-    border: 1px solid rgba(255,255,255,.92);
+    border: 1px solid rgba(233,223,197,.9);
+    border-left-color: #D6B43F;
+    border-radius: 15px;
     background:
       radial-gradient(ellipse at 92% 0%, rgba(255,255,255,.78), transparent 48%),
       linear-gradient(145deg, rgba(255,255,255,.62), rgba(255,250,236,.4));
     box-shadow: 0 2px 4px rgba(48,39,22,.035), 0 10px 22px rgba(48,39,22,.08), inset 0 1px rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.18);
-    backdrop-filter: blur(22px) saturate(152%);
-    -webkit-backdrop-filter: blur(22px) saturate(152%);
+    backdrop-filter: blur(24px) saturate(152%);
+    -webkit-backdrop-filter: blur(24px) saturate(152%);
     transition: transform var(--momo-material-ease), box-shadow var(--momo-material-ease), border-color var(--momo-material-ease);
   }
   #root .profile-dashboard .profile-activity-item::before {
@@ -199,6 +199,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .profile-dashboard .profile-activity-item > * { position: relative; z-index: 1; }
   #root .profile-dashboard .profile-activity-item:hover {
     border-color: rgba(214,180,63,.68);
+    border-left-color: #D6B43F;
     box-shadow: 0 5px 9px rgba(48,39,22,.045), 0 18px 32px rgba(48,39,22,.13), inset 0 1px rgba(255,255,255,1);
     transform: perspective(900px) translateY(-4px) rotateX(.6deg) translateZ(2px);
   }
@@ -213,13 +214,14 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,.88);
+    border-radius: 22px;
     background:
       radial-gradient(ellipse at 88% 0%, rgba(255,212,59,.22), transparent 38%),
       linear-gradient(130deg, rgba(255,255,255,.68), rgba(255,250,236,.38));
     box-shadow: 0 4px 10px rgba(48,39,22,.045), 0 24px 52px rgba(48,39,22,.13), inset 0 1px rgba(255,255,255,1);
-    backdrop-filter: blur(30px) saturate(160%);
-    -webkit-backdrop-filter: blur(30px) saturate(160%);
+    backdrop-filter: blur(32px) saturate(160%);
+    -webkit-backdrop-filter: blur(32px) saturate(160%);
   }
   #root .movie-detail-page .movie-detail-header::after {
     position: absolute;
@@ -236,6 +238,29 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     border: 1px solid rgba(255,255,255,.96);
     border-radius: 13px;
     box-shadow: 0 3px 7px rgba(42,35,20,.08), 0 14px 25px rgba(42,35,20,.16), inset 0 1px rgba(255,255,255,.92);
+  }
+
+  #root .profile-dashboard .profile-card {
+    border-radius: 20px;
+    backdrop-filter: blur(26px) saturate(158%);
+    -webkit-backdrop-filter: blur(26px) saturate(158%);
+  }
+  #root .profile-edit-page .profile-edit-photo-card,
+  #root .profile-edit-page .profile-edit-details {
+    border: 1px solid rgba(233,223,197,.9);
+    border-radius: 18px;
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+  }
+  #root .favorite-page .favorite-page-card {
+    border-color: var(--momo-route-line);
+    border-radius: 15px;
+    backdrop-filter: blur(24px) saturate(152%);
+    -webkit-backdrop-filter: blur(24px) saturate(152%);
+  }
+  #root .movie-detail-page .movie-rating-panel {
+    backdrop-filter: blur(26px) saturate(156%);
+    -webkit-backdrop-filter: blur(26px) saturate(156%);
   }
 
   /* Inputs retain legibility while reflecting the glass surface around them. */
