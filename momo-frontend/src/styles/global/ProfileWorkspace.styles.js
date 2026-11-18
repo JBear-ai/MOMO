@@ -52,7 +52,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-edit-page .profile-heading-eyebrow {
     display: block;
     margin: 0 0 9px;
-    color: #9B7C2D;
+    color: #80600E;
     font-size: 9px;
     font-weight: 850;
     letter-spacing: .16em;
@@ -141,7 +141,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-dashboard .profile-section-label {
     display: block;
     margin: 0 0 7px;
-    color: #9B7C2D;
+    color: #80600E;
     font-size: 9px;
     font-weight: 850;
     letter-spacing: .15em;
@@ -198,7 +198,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-dashboard .profile-user-kicker {
     display: block;
     margin: 0 0 5px;
-    color: #918A7D;
+    color: #6A6251;
     font-size: 9px;
     font-weight: 850;
     letter-spacing: .1em;
@@ -227,7 +227,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     border-left: 1px solid rgba(233,223,197,.86);
   }
   #root .profile-dashboard .profile-user-details > div:first-child { padding-left: 0; border-left: 0; }
-  #root .profile-dashboard .profile-user-details dt { color: #918A7D; font-size: 9px; font-weight: 750; }
+  #root .profile-dashboard .profile-user-details dt { color: #6A6251; font-size: 9px; font-weight: 750; }
   #root .profile-dashboard .profile-user-details dd {
     min-width: 0;
     margin: 0;
@@ -324,7 +324,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   }
   #root .profile-dashboard .profile-activity-icon svg { display: block; width: 19px; height: 19px; }
   #root .profile-dashboard .profile-activity-number {
-    color: #B7AD97;
+    color: #6A6251;
     font-size: 9px;
     font-weight: 850;
     letter-spacing: .12em;
@@ -357,7 +357,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     letter-spacing: -.065em;
     font-variant-numeric: tabular-nums;
   }
-  #root .profile-dashboard .profile-activity-unit { color: #827B6D; font-size: 10px; font-weight: 750; }
+  #root .profile-dashboard .profile-activity-unit { color: #6A6251; font-size: 10px; font-weight: 750; }
   #root .profile-dashboard .profile-activity-footer {
     display: flex;
     align-items: center;
@@ -370,7 +370,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-dashboard .profile-activity-footer p {
     min-width: 0;
     margin: 0;
-    color: #827B6D;
+    color: #6A6251;
     font-size: 9px;
     font-weight: 650;
     line-height: 1.5;
@@ -407,7 +407,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     background: transparent;
     box-shadow: none;
   }
-  #root .profile-dashboard .profile-delete-copy .profile-section-label { color: #A36C62; }
+  #root .profile-dashboard .profile-delete-copy .profile-section-label { color: #8C5149; }
   #root .profile-dashboard .profile-delete-copy h2 {
     margin: 0;
     color: #514C40;
@@ -416,7 +416,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   }
   #root .profile-dashboard .profile-delete-copy p {
     margin: 5px 0 0;
-    color: #918A7D;
+    color: #6A6251;
     font-size: 10px;
     line-height: 1.55;
   }
@@ -543,7 +543,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-edit-page .profile-edit-section-eyebrow {
     display: block;
     margin: 0 0 6px;
-    color: #9B7C2D;
+    color: #80600E;
     font-size: 9px;
     font-weight: 850;
     letter-spacing: .14em;
@@ -609,7 +609,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-edit-page .profile-edit-file-help {
     align-self: flex-start;
     margin: 7px 0 0;
-    color: #918A7D;
+    color: #6A6251;
     font-size: 9px;
   }
   #root .profile-edit-page .profile-image-buttons {
@@ -712,7 +712,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-edit-page .profile-edit-feedback {
     min-height: 13px;
     margin: -1px 1px 0;
-    color: #827B6D;
+    color: #6A6251;
     font-size: 9px;
     font-weight: 650;
     line-height: 1.45;
