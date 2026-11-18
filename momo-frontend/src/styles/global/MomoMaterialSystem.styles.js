@@ -928,6 +928,41 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     letter-spacing: .18em;
   }
 
+
+  /* Card navigation is a transparent hit area; the saved-film action is its sibling. */
+  #root .momo-app-main button.home-movie-card-open,
+  #root .momo-app-main button.home-movie-card-open:hover:not(:disabled),
+  #root .momo-app-main button.home-movie-card-open:active:not(:disabled) {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 15px;
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    filter: none;
+    transform: none;
+  }
+  #root .momo-app-main .home-movie-card-open:focus-visible {
+    outline: 3px solid rgba(179,141,25,.7);
+    outline-offset: 4px;
+  }
+  #root .home-movie-card-favorite {
+    position: absolute;
+    z-index: 6;
+    top: 10px;
+    right: 10px;
+  }
+  #root .home-movie-card-favorite .favorite-star {
+    position: relative;
+    top: auto;
+    right: auto;
+  }
+
 `;
 
 export default MomoMaterialSystemStyles;
