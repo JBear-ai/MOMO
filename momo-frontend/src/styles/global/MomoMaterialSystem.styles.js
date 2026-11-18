@@ -43,15 +43,15 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     --momo-motion-press: 100ms cubic-bezier(.2,.7,.2,1);
   }
 
-  /* Warm notebook paper is the canvas; glass surfaces float above it. */
+  /* Quiet stone-toned notebook paper: low-contrast ruling, no loud yellow wash. */
   body {
-    background-color: #F5F2EB;
+    background-color: #E9E8E2;
     background-image:
-      linear-gradient(to right, transparent 0, transparent 62px, rgba(205,104,91,.28) 62px, rgba(205,104,91,.28) 64px, transparent 64px),
-      repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(130,166,194,.16) 31px, rgba(130,166,194,.16) 32px),
-      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.82), transparent 46rem),
-      radial-gradient(ellipse at 92% 16%, rgba(255,212,59,.16), transparent 42rem),
-      linear-gradient(140deg, #F8F5EC 0%, #F5F2EB 56%, #F1EBDD 100%);
+      linear-gradient(to right, transparent 0, transparent 62px, rgba(157,105,100,.13) 62px, rgba(157,105,100,.13) 63px, transparent 63px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(104,126,137,.075) 31px, rgba(104,126,137,.075) 32px),
+      radial-gradient(ellipse at 12% 0%, rgba(255,255,255,.42), transparent 46rem),
+      radial-gradient(ellipse at 88% 18%, rgba(194,177,218,.045), transparent 42rem),
+      linear-gradient(140deg, #EFEEE8 0%, #E9E8E2 56%, #E3E3DD 100%);
     background-attachment: fixed;
   }
 
@@ -68,9 +68,9 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main > .profile-page,
   #root .momo-app-main > .review-detail-page {
     background:
-      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.76), transparent 38rem),
-      radial-gradient(ellipse at 94% 58%, rgba(255,212,59,.14), transparent 40rem),
-      linear-gradient(145deg, rgba(255,250,236,.58), rgba(255,255,255,.22) 58%, rgba(255,241,178,.28));
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.24), transparent 38rem),
+      radial-gradient(ellipse at 94% 58%, rgba(194,177,218,.045), transparent 40rem),
+      linear-gradient(145deg, rgba(232,237,232,.12), rgba(255,255,255,.035) 58%, rgba(221,229,224,.08));
     border-radius: 26px;
   }
   /* Shared header: translucent material with a visible refractive rim. */

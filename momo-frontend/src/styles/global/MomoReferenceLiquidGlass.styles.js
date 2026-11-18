@@ -1,67 +1,67 @@
 import { createGlobalStyle } from "styled-components";
 
 /*
- * MOMO reference-led glass material layer.
- * Notebook paper remains the only canvas. UI surfaces use thick, milky glass;
- * floating controls use a brighter, more refractive liquid-glass treatment.
+ * MOMO translucent liquid-glass material.
+ * The notebook remains visible through every surface. White is reserved for
+ * reflected light and fine edges; it is not used as an opaque panel fill.
  */
 const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   :root {
-    --momo-glass-paper: rgba(255, 253, 247, .94);
-    --momo-glass-paper-strong: rgba(255, 255, 252, .975);
-    --momo-glass-paper-warm: rgba(255, 248, 225, .94);
-    --momo-glass-stroke: rgba(255, 255, 255, .98);
-    --momo-glass-stroke-warm: rgba(224, 195, 112, .42);
-    --momo-glass-shadow:
-      0 2px 5px rgba(73, 57, 22, .035),
-      0 12px 28px rgba(73, 57, 22, .075),
-      0 26px 54px rgba(73, 57, 22, .045),
-      inset 0 1px 0 rgba(255,255,255,1),
-      inset 0 -1px 0 rgba(214,180,63,.16);
-    --momo-glass-shadow-hover:
-      0 5px 10px rgba(73,57,22,.05),
-      0 18px 38px rgba(73,57,22,.11),
-      0 30px 60px rgba(73,57,22,.06),
-      inset 0 1px 0 rgba(255,255,255,1),
-      inset 0 -1px 0 rgba(214,180,63,.24);
-    --momo-glass-filter: blur(28px) saturate(175%);
-    --momo-glass-control-filter: blur(22px) saturate(190%);
-    --momo-glass-radius: 22px;
-    --momo-glass-motion: 240ms cubic-bezier(.2,.72,.2,1);
+    --momo-glass-surface:
+      linear-gradient(132deg, rgba(245,249,247,.34), rgba(222,231,229,.2) 48%, rgba(238,226,216,.17));
+    --momo-glass-surface-raised:
+      linear-gradient(132deg, rgba(250,252,250,.42), rgba(225,235,232,.25) 54%, rgba(239,228,217,.2));
+    --momo-glass-edge: rgba(255,255,255,.68);
+    --momo-glass-edge-low: rgba(255,255,255,.34);
+    --momo-glass-prism-cyan: rgba(159,213,211,.12);
+    --momo-glass-prism-lilac: rgba(194,177,218,.1);
+    --momo-glass-prism-amber: rgba(232,205,155,.1);
+    --momo-glass-blur: blur(30px) saturate(155%);
+    --momo-glass-control-blur: blur(22px) saturate(165%);
+    --momo-glass-depth:
+      0 2px 5px rgba(38,43,40,.035),
+      0 13px 32px rgba(38,43,40,.075),
+      inset 0 1px 0 rgba(255,255,255,.78),
+      inset 0 -1px 0 rgba(104,120,116,.12);
+    --momo-glass-depth-hover:
+      0 6px 12px rgba(38,43,40,.05),
+      0 20px 42px rgba(38,43,40,.11),
+      inset 0 1px 0 rgba(255,255,255,.9),
+      inset 0 -1px 0 rgba(104,120,116,.16);
+    --momo-glass-transition: 260ms cubic-bezier(.2,.72,.2,1);
   }
 
-  /* Floating navigation: a separate, brighter functional glass layer. */
+  /* Navigation is a floating, clear glass sheet rather than a white bar. */
   #root .momo-app-header {
     position: sticky;
     isolation: isolate;
     background:
-      linear-gradient(112deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.88) 38%, rgba(255,248,225,.86) 100%) !important;
-    border: 1px solid rgba(255,255,255,.98) !important;
-    border-bottom-color: rgba(218,190,111,.34) !important;
-    box-shadow: 0 10px 34px rgba(72,57,24,.095), inset 0 1px 0 #fff, inset 0 -1px 0 rgba(214,180,63,.16) !important;
-    -webkit-backdrop-filter: blur(34px) saturate(190%) !important;
-    backdrop-filter: blur(34px) saturate(190%) !important;
+      linear-gradient(112deg, rgba(248,251,249,.42), rgba(220,230,228,.24) 54%, rgba(237,225,213,.2)) !important;
+    border: 1px solid rgba(255,255,255,.66) !important;
+    border-bottom-color: rgba(255,255,255,.42) !important;
+    box-shadow: 0 9px 30px rgba(40,46,43,.075), inset 0 1px 0 rgba(255,255,255,.82), inset 0 -1px 0 rgba(121,137,132,.12) !important;
+    -webkit-backdrop-filter: blur(34px) saturate(165%) !important;
+    backdrop-filter: blur(34px) saturate(165%) !important;
   }
   #root .momo-app-header nav a {
-    position: relative;
-    border: 1px solid rgba(255,255,255,.96) !important;
-    background: linear-gradient(150deg, rgba(255,255,255,.96), rgba(255,250,235,.88)) !important;
-    box-shadow: 0 2px 7px rgba(72,57,24,.055), inset 0 1px 0 #fff, inset 0 -1px 0 rgba(214,180,63,.12) !important;
-    -webkit-backdrop-filter: var(--momo-glass-control-filter) !important;
-    backdrop-filter: var(--momo-glass-control-filter) !important;
-    transition: transform var(--momo-glass-motion), box-shadow var(--momo-glass-motion), background var(--momo-glass-motion) !important;
+    border: 1px solid rgba(255,255,255,.44) !important;
+    background: linear-gradient(145deg, rgba(250,252,251,.3), rgba(215,227,224,.16)) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.62), 0 2px 8px rgba(38,43,40,.035) !important;
+    -webkit-backdrop-filter: var(--momo-glass-control-blur) !important;
+    backdrop-filter: var(--momo-glass-control-blur) !important;
+    transition: transform var(--momo-glass-transition), background var(--momo-glass-transition), box-shadow var(--momo-glass-transition) !important;
   }
   #root .momo-app-header nav a.active {
-    background: linear-gradient(145deg, #fff 0%, rgba(255,248,222,.98) 58%, rgba(255,229,139,.92) 100%) !important;
-    border-color: rgba(255,255,255,1) !important;
-    box-shadow: 0 3px 10px rgba(104,78,16,.1), inset 0 1px 0 #fff, inset 0 -1px 0 rgba(214,180,63,.3) !important;
+    background: linear-gradient(145deg, rgba(255,255,255,.48), rgba(225,232,225,.3) 58%, rgba(228,214,190,.2)) !important;
+    border-color: rgba(255,255,255,.72) !important;
+    box-shadow: 0 3px 12px rgba(38,43,40,.07), inset 0 1px 0 rgba(255,255,255,.88), inset 0 -1px 0 rgba(153,164,153,.12) !important;
   }
   #root .momo-app-header nav a:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 15px rgba(72,57,24,.11), inset 0 1px 0 #fff !important;
+    box-shadow: 0 6px 16px rgba(38,43,40,.09), inset 0 1px 0 rgba(255,255,255,.9) !important;
   }
 
-  /* Dense content glass: opaque enough for long-form text and data. */
+  /* Main content panes: transparent smoke glass with a soft, restrained prism. */
   #root .home-feature-section,
   #root .home-feature-info,
   #root .home-brand-line,
@@ -112,39 +112,39 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   #root .signup-page .signup-card,
   #root .login-page .login-card {
     position: relative;
-    background-color: var(--momo-glass-paper) !important;
+    background-color: rgba(222,231,227,.16) !important;
     background-image:
-      linear-gradient(128deg, rgba(255,255,255,.99) 0%, rgba(255,255,255,.93) 24%, rgba(255,251,237,.92) 68%, rgba(255,246,215,.9) 100%),
-      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.9), transparent 62%) !important;
-    border-color: var(--momo-glass-stroke) !important;
-    box-shadow: var(--momo-glass-shadow) !important;
-    -webkit-backdrop-filter: var(--momo-glass-filter) !important;
-    backdrop-filter: var(--momo-glass-filter) !important;
+      linear-gradient(126deg, rgba(255,255,255,.24) 0%, transparent 30%, rgba(159,213,211,.075) 56%, rgba(194,177,218,.065) 75%, rgba(232,205,155,.07) 100%),
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.3), transparent 52%),
+      linear-gradient(145deg, rgba(231,239,235,.29), rgba(220,229,225,.17) 58%, rgba(235,222,207,.15)) !important;
+    background-blend-mode: screen, normal, normal !important;
+    border-color: var(--momo-glass-edge) !important;
+    box-shadow: var(--momo-glass-depth) !important;
+    -webkit-backdrop-filter: var(--momo-glass-blur) !important;
+    backdrop-filter: var(--momo-glass-blur) !important;
   }
 
-  /* Feature content and nested information planes have their own glass depth. */
+  /* Inner planes sit one step deeper and remain more transparent than cards. */
   #root .home-feature-info,
   #root .profile-overview-card,
   #root .profile-activity-section,
   #root .profile-delete-section,
-  #root .detail-content-section,
-  #root .movie-rating-panel,
-  #root .rating-distribution,
-  #root .movie-score-display,
-  #root .detail-reaction-counts,
-  #root .people-section,
+  #root .movie-detail-page .detail-content-section,
+  #root .movie-detail-page .movie-rating-panel,
+  #root .movie-detail-page .rating-distribution,
+  #root .movie-detail-page .movie-score-display,
+  #root .movie-detail-page .detail-reaction-counts,
+  #root .movie-detail-page .people-section,
   #root .review-detail-content,
   #root .review-detail-movie {
-    background:
-      linear-gradient(145deg, rgba(255,255,255,.985), rgba(255,253,245,.955) 52%, rgba(255,247,220,.94)) !important;
-    box-shadow:
-      0 3px 8px rgba(73,57,22,.045),
-      0 10px 24px rgba(73,57,22,.065),
-      inset 0 1px 0 #fff,
-      inset 0 -1px 0 rgba(214,180,63,.14) !important;
+    background-color: rgba(218,229,224,.13) !important;
+    background-image:
+      linear-gradient(140deg, rgba(255,255,255,.2), rgba(255,255,255,.035) 42%, rgba(183,204,199,.1) 100%),
+      radial-gradient(ellipse at 100% 0%, rgba(194,177,218,.075), transparent 52%) !important;
+    box-shadow: 0 3px 8px rgba(38,43,40,.04), 0 10px 24px rgba(38,43,40,.055), inset 0 1px 0 rgba(255,255,255,.62), inset 0 -1px 0 rgba(104,120,116,.1) !important;
   }
 
-  /* Glass edge optics: fine double rim and a restrained warm refraction line. */
+  /* Fine optical rim. A subtle cool/warm split hints at glass refraction. */
   #root .home-feature-section,
   #root .home-brand-line,
   #root .home-favorites-empty,
@@ -162,12 +162,12 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   #root .movie-detail-page .movie-detail-header,
   #root .movie-detail-page .movie-rating-panel,
   #root .movie-detail-page .detail-content-section {
-    border: 1px solid rgba(255,255,255,.99) !important;
-    outline: 1px solid rgba(214,180,63,.13);
+    border: 1px solid rgba(255,255,255,.62) !important;
+    outline: 1px solid rgba(172,190,185,.13);
     outline-offset: -3px;
   }
 
-  /* Smaller information tiles and metadata chips remain glass, not flat paper. */
+  /* Compact tiles: less blur and less tint, so they do not look like white pills. */
   #root .home-movie-card,
   #root .home-movie-info,
   #root .profile-stat-card,
@@ -185,14 +185,14 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   #root .momo-search-result,
   #root .momo-search-dropdown,
   #root .momo-toast {
-    background: linear-gradient(145deg, rgba(255,255,255,.97), rgba(255,250,233,.93)) !important;
-    border-color: rgba(255,255,255,.99) !important;
-    box-shadow: 0 3px 10px rgba(73,57,22,.055), inset 0 1px 0 #fff, inset 0 -1px 0 rgba(214,180,63,.1) !important;
-    -webkit-backdrop-filter: var(--momo-glass-control-filter) !important;
-    backdrop-filter: var(--momo-glass-control-filter) !important;
+    background: linear-gradient(140deg, rgba(248,251,249,.3), rgba(213,226,222,.16) 58%, rgba(232,219,204,.13)) !important;
+    border-color: rgba(255,255,255,.48) !important;
+    box-shadow: 0 3px 10px rgba(38,43,40,.045), inset 0 1px 0 rgba(255,255,255,.66), inset 0 -1px 0 rgba(104,120,116,.08) !important;
+    -webkit-backdrop-filter: var(--momo-glass-control-blur) !important;
+    backdrop-filter: var(--momo-glass-control-blur) !important;
   }
 
-  /* Buttons: convex glass with a bright crown, dark lower bevel and tactile response. */
+  /* Convex glass controls: translucent body, brighter upper rim, soft lower bevel. */
   #root .momo-app-main button,
   #root .momo-app-header button,
   #root .momo-app-footer button,
@@ -201,17 +201,12 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   #root .login-page button {
     position: relative;
     isolation: isolate;
-    border: 1px solid rgba(255,255,255,1) !important;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.96) 34%, rgba(255,250,232,.95) 100%) !important;
-    box-shadow:
-      0 2px 5px rgba(73,57,22,.055),
-      0 7px 16px rgba(73,57,22,.075),
-      inset 0 1px 0 #fff,
-      inset 0 -1px 0 rgba(214,180,63,.2) !important;
-    -webkit-backdrop-filter: var(--momo-glass-control-filter) !important;
-    backdrop-filter: var(--momo-glass-control-filter) !important;
-    transition: transform var(--momo-glass-motion), box-shadow var(--momo-glass-motion), filter var(--momo-glass-motion), background var(--momo-glass-motion) !important;
+    border: 1px solid rgba(255,255,255,.66) !important;
+    background: linear-gradient(180deg, rgba(255,255,255,.4), rgba(220,231,226,.22) 48%, rgba(205,218,212,.17)) !important;
+    box-shadow: 0 3px 9px rgba(38,43,40,.055), inset 0 1px 0 rgba(255,255,255,.82), inset 0 -1px 0 rgba(105,123,116,.14) !important;
+    -webkit-backdrop-filter: var(--momo-glass-control-blur) !important;
+    backdrop-filter: var(--momo-glass-control-blur) !important;
+    transition: transform var(--momo-glass-transition), box-shadow var(--momo-glass-transition), filter var(--momo-glass-transition), background var(--momo-glass-transition) !important;
   }
   #root .momo-app-main button::before,
   #root .momo-app-header button::before,
@@ -227,7 +222,7 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
     height: 1px;
     content: "";
     border-radius: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.96), transparent);
     pointer-events: none;
   }
   #root .momo-app-main button:hover:not(:disabled),
@@ -237,8 +232,8 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   #root .signup-page button:hover:not(:disabled),
   #root .login-page button:hover:not(:disabled) {
     transform: translateY(-1px);
-    filter: saturate(1.06) brightness(1.015);
-    box-shadow: var(--momo-glass-shadow-hover) !important;
+    filter: saturate(1.08) brightness(1.035);
+    box-shadow: var(--momo-glass-depth-hover) !important;
   }
   #root .momo-app-main button:active:not(:disabled),
   #root .momo-app-header button:active:not(:disabled),
@@ -246,10 +241,10 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   #root .signup-page button:active:not(:disabled),
   #root .login-page button:active:not(:disabled) {
     transform: translateY(0) scale(.985);
-    box-shadow: inset 0 2px 6px rgba(73,57,22,.12), inset 0 1px 0 #fff !important;
+    box-shadow: inset 0 2px 6px rgba(38,43,40,.11), inset 0 1px 0 rgba(255,255,255,.76) !important;
   }
 
-  /* Gold is a refracted tint inside the glass, not a flat yellow fill. */
+  /* Brand actions use a pale champagne transmission, never a flat yellow slab. */
   #root .momo-app-main button[class*="primary"],
   #root .momo-app-main button[class*="submit"],
   #root .momo-app-main .all-reviews-search-submit,
@@ -258,32 +253,23 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   #root .momo-app-main .recommend-button,
   #root .signup-page .signup-submit,
   #root .login-page .login-submit {
-    color: #51400F !important;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.99), rgba(255,249,224,.97) 38%, rgba(255,226,133,.94) 100%) !important;
-    box-shadow:
-      0 3px 8px rgba(124,91,14,.09),
-      0 9px 18px rgba(124,91,14,.09),
-      inset 0 1px 0 #fff,
-      inset 0 -1px 0 rgba(190,143,20,.25) !important;
+    color: #51451F !important;
+    background: linear-gradient(145deg, rgba(255,255,255,.48), rgba(245,225,175,.34) 48%, rgba(209,190,145,.22)) !important;
+    box-shadow: 0 4px 12px rgba(95,78,39,.075), inset 0 1px 0 rgba(255,255,255,.86), inset 0 -1px 0 rgba(150,125,69,.15) !important;
   }
 
-  /* Inputs and selects: milky optical glass with a recessed inner well. */
+  /* Form fields are recessed translucent glass, not white input boxes. */
   #root .momo-app-main input:not([type="checkbox"]):not([type="radio"]),
   #root .momo-app-main textarea,
   #root .momo-app-main select,
   #root .momo-app-header input,
   #root .signup-page input,
   #root .login-page input {
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.99), rgba(255,253,246,.96)) !important;
-    border: 1px solid rgba(255,255,255,1) !important;
-    box-shadow:
-      inset 0 2px 5px rgba(73,57,22,.045),
-      inset 0 1px 0 #fff,
-      0 2px 7px rgba(73,57,22,.045) !important;
-    -webkit-backdrop-filter: blur(18px) saturate(185%) !important;
-    backdrop-filter: blur(18px) saturate(185%) !important;
+    background: linear-gradient(180deg, rgba(250,252,250,.34), rgba(210,224,218,.2)) !important;
+    border: 1px solid rgba(255,255,255,.58) !important;
+    box-shadow: inset 0 2px 6px rgba(38,43,40,.055), inset 0 1px 0 rgba(255,255,255,.62), 0 2px 7px rgba(38,43,40,.035) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(155%) !important;
+    backdrop-filter: blur(18px) saturate(155%) !important;
   }
   #root .momo-app-main input:focus,
   #root .momo-app-main textarea:focus,
@@ -291,11 +277,11 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   #root .momo-app-header input:focus,
   #root .signup-page input:focus,
   #root .login-page input:focus {
-    border-color: rgba(190,143,20,.55) !important;
-    box-shadow: 0 0 0 3px rgba(255,212,59,.16), inset 0 1px 0 #fff, 0 5px 14px rgba(73,57,22,.07) !important;
+    border-color: rgba(255,255,255,.82) !important;
+    box-shadow: 0 0 0 3px rgba(171,195,190,.18), inset 0 1px 0 rgba(255,255,255,.78), 0 5px 14px rgba(38,43,40,.065) !important;
   }
 
-  /* Search overlays, chat windows and toast layers float above the content. */
+  /* Floating overlays catch more light and sit above the content plane. */
   #root .momo-app-header .momo-search-dropdown,
   #root .momo-chat-popup,
   #root .momo-chat-window,
@@ -303,14 +289,14 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
   #root .momo-toast,
   #root [role="dialog"],
   #root [role="listbox"] {
-    background: linear-gradient(145deg, rgba(255,255,255,.985), rgba(255,250,231,.965)) !important;
-    border: 1px solid rgba(255,255,255,1) !important;
-    box-shadow: 0 18px 48px rgba(73,57,22,.16), inset 0 1px 0 #fff, inset 0 -1px 0 rgba(214,180,63,.16) !important;
-    -webkit-backdrop-filter: blur(34px) saturate(190%) !important;
-    backdrop-filter: blur(34px) saturate(190%) !important;
+    background: linear-gradient(140deg, rgba(247,251,249,.56), rgba(213,226,222,.36) 58%, rgba(233,219,205,.28)) !important;
+    border: 1px solid rgba(255,255,255,.74) !important;
+    box-shadow: 0 18px 48px rgba(38,43,40,.15), inset 0 1px 0 rgba(255,255,255,.88), inset 0 -1px 0 rgba(104,120,116,.13) !important;
+    -webkit-backdrop-filter: blur(34px) saturate(170%) !important;
+    backdrop-filter: blur(34px) saturate(170%) !important;
   }
 
-  /* Poster art and the ruled-paper canvas must stay untouched. */
+  /* Keep poster photography and the paper canvas free of glass filters. */
   #root .momo-app-main img,
   #root .momo-app-main video,
   #root .momo-app-main canvas,
@@ -343,7 +329,7 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
     #root .movie-detail-page .movie-rating-panel,
     #root .movie-detail-page .detail-content-section {
       border-radius: 18px;
-      box-shadow: 0 8px 24px rgba(73,57,22,.075), inset 0 1px 0 #fff !important;
+      box-shadow: 0 8px 24px rgba(38,43,40,.075), inset 0 1px 0 rgba(255,255,255,.72) !important;
     }
   }
 
