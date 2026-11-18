@@ -297,7 +297,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     };
   });
   expect(logoutStyle.background).toContain("linear-gradient");
-  expect(logoutStyle.blur).toContain("blur(18px)");
+  expect(logoutStyle.blur).toContain("blur(22px)");
   expect(logoutStyle.border).toBe("rgba(216, 201, 159, 0.58)");
 
   const footerStyle = await page.locator("footer").evaluate((element) => {
@@ -444,7 +444,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     };
   });
   expect(saveButton.background).toContain("linear-gradient");
-  expect(saveButton.blur).toContain("blur(20px)");
+  expect(saveButton.blur).toContain("blur(22px)");
   expect(saveButton.color).toBe("rgb(78, 66, 31)");
   expect(saveButton.radius).toBe("10px");
 
