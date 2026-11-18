@@ -658,6 +658,101 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
   #root .momo-app-footer::before { display: none; content: none; background: none; background-image: none; }
 
+
+  /* Header links and search action are buttons in the visual language too. */
+  #root .momo-app-header nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid rgba(255,255,255,.84);
+    border-radius: 999px;
+    background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.38));
+    color: #514C40;
+    box-shadow: 0 3px 8px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    backdrop-filter: blur(18px) saturate(150%);
+    transition: background 200ms ease, border-color 200ms ease, box-shadow 200ms ease, color 200ms ease;
+  }
+  #root .momo-app-header nav a.active,
+  #root .momo-app-header nav a[aria-current="page"] {
+    border-color: rgba(214,180,63,.48);
+    background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,246,217,.62));
+    color: #66510F;
+    box-shadow: 0 4px 10px rgba(41,40,32,.05), inset 0 1px rgba(255,255,255,1);
+  }
+  #root .momo-app-header nav a:hover,
+  #root .momo-app-header nav a:focus-visible {
+    border-color: rgba(255,255,255,1);
+    background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,250,236,.72));
+    color: #292820;
+    box-shadow: 0 6px 13px rgba(41,40,32,.065), inset 0 1px rgba(255,255,255,1);
+  }
+  #root .momo-app-header .momo-search-button {
+    border: 1px solid rgba(255,255,255,.92);
+    border-radius: 11px;
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.48));
+    color: #514C40;
+    box-shadow: 0 3px 8px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    backdrop-filter: blur(18px) saturate(150%);
+  }
+
+  /* Link-shaped actions use the same glass edge as their button counterparts. */
+  #root .momo-app-main .page-back-link,
+  #root .momo-app-main .favorite-back-button,
+  #root .momo-app-main .review-detail-back,
+  #root .momo-app-main .profile-dashboard-edit,
+  #root .momo-app-main .my-reviews-heading > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 15px;
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 999px;
+    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.42));
+    color: #514C40;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    backdrop-filter: blur(18px) saturate(150%);
+  }
+  #root .momo-app-main .page-back-link:hover,
+  #root .momo-app-main .favorite-back-button:hover,
+  #root .momo-app-main .review-detail-back:hover,
+  #root .momo-app-main .profile-dashboard-edit:hover,
+  #root .momo-app-main .my-reviews-heading > a:hover {
+    border-color: rgba(255,255,255,1);
+    background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,250,236,.7));
+    color: #292820;
+    box-shadow: 0 6px 14px rgba(41,40,32,.075), inset 0 1px rgba(255,255,255,1);
+  }
+
+  /* The no-recommendation state must not reveal the visual's dark poster backing. */
+  #root .home-page .home-feature-visual,
+  #root .home-page .home-feature-visual .recommend-banner {
+    background: #F4F0E7;
+  }
+  #root .home-page .home-feature-visual .recommend-state {
+    border: 1px solid rgba(255,255,255,.94);
+    border-radius: 0;
+    background: linear-gradient(145deg, #FFFEFA, #F2EEE5);
+    color: #514C40;
+    box-shadow: inset 0 1px rgba(255,255,255,1);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* Keep the poster fallback clean and the film note copy free of ruled lines. */
+  #root .review-detail-page .review-detail-content {
+    background: linear-gradient(140deg, rgba(255,255,255,.78), rgba(255,250,236,.48) 58%, rgba(232,226,213,.22));
+    background-image: linear-gradient(140deg, rgba(255,255,255,.78), rgba(255,250,236,.48) 58%, rgba(232,226,213,.22));
+    border-color: rgba(255,255,255,.9);
+    color: #3F3A31;
+  }
+
 `;
 
 export default MomoMaterialSystemStyles;
