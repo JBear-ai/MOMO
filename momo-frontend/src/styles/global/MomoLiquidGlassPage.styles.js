@@ -620,6 +620,9 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
 
   /* Audience rating: a single horizontal instrument with distinct readout and action. */
   #root .movie-detail-page .movie-rating-panel {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
     margin-top: 18px;
     padding: clamp(22px, 3vw, 32px);
   }
@@ -667,6 +670,9 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .movie-detail-page .rating-panel-main {
     display: grid;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     grid-template-columns: minmax(160px,.65fr) minmax(0,1.35fr);
     gap: 14px;
   }
