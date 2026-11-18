@@ -26,10 +26,10 @@ const Header = styled.header`
   gap: clamp(14px, 2vw, 26px);
   box-sizing: border-box;
   border-bottom: 1px solid rgba(255,255,255,.9);
-  background: rgba(255,250,236,.88);
-  box-shadow: 0 7px 22px rgba(39,43,39,.055), inset 0 1px rgba(255,255,255,.86);
-  backdrop-filter: blur(24px) saturate(112%);
-  -webkit-backdrop-filter: blur(24px) saturate(112%);
+  background: rgba(255,250,236,.68);
+  box-shadow: 0 10px 28px rgba(41,40,32,.065), inset 0 1px rgba(255,255,255,.92);
+  backdrop-filter: blur(28px) saturate(148%);
+  -webkit-backdrop-filter: blur(28px) saturate(148%);
   transition: box-shadow 220ms ease, background 220ms ease;
   &::before {
     position: absolute;
@@ -145,14 +145,14 @@ const ActionButton = styled.button`
   min-height: 38px;
   padding: 0 16px;
   overflow: hidden;
-  border: 1px solid rgba(233,223,197,.92);
-  border-radius: 11px;
-  background: rgba(255,250,236,.82);
-  color: #6A6251;
-  font-size: 12px;
-  font-weight: 900;
+  border: 1px solid rgba(233,223,197,.78);
+  border-radius: 10px;
+  background: rgba(255,254,250,.48);
+  color: #625B4D;
+  font-size: 11px;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: inset 0 1px rgba(255,255,255,.85);
+  box-shadow: inset 0 1px rgba(255,255,255,.86);
   transition: transform 180ms cubic-bezier(.2,.72,.2,1), box-shadow 180ms ease, filter 180ms ease;
   &::before {
     position: absolute;
@@ -172,6 +172,14 @@ const ActionButton = styled.button`
   }
   &:active:not(:disabled) { transform: translateY(0) scale(.98); }
   &:disabled { cursor: not-allowed; opacity: .58; }
+  &.momo-logout-button {
+    min-height: 32px; padding: 0 11px; border-color: rgba(216,201,159,.58);
+    background: rgba(255,254,250,.34); color: #827B6D; font-size: 10px; font-weight: 650; box-shadow: none;
+  }
+  &.momo-logout-button:hover:not(:disabled) {
+    border-color: rgba(216,201,159,.9); background: rgba(255,250,236,.76); color: #514C40;
+    box-shadow: 0 4px 10px rgba(41,40,32,.045); transform: translateY(-1px);
+  }
 `;
 
 const Main = styled.main`
@@ -195,12 +203,14 @@ const Footer = styled.footer`
   padding: 42px var(--momo-page-gutter) 24px;
   overflow: hidden;
   box-sizing: border-box;
-  border-top: 1px solid rgba(255,255,255,.9);
-  background: rgba(255,250,236,.94);
-  color: #514833;
-  box-shadow: 0 -6px 20px rgba(39,43,39,.035), inset 0 1px rgba(255,255,255,.86);
-  backdrop-filter: blur(18px) saturate(108%);
-  -webkit-backdrop-filter: blur(18px) saturate(108%);
+  isolation: isolate;
+  border-top: 1px solid rgba(255,255,255,.86);
+  background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,250,236,.76));
+  color: #292820;
+  box-shadow: 0 -10px 28px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.96);
+  backdrop-filter: blur(26px) saturate(145%);
+  -webkit-backdrop-filter: blur(26px) saturate(145%);
+  &::before { position: absolute; z-index: -1; inset: 0; content: ""; background-image: linear-gradient(rgba(116,145,178,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(116,145,178,.045) 1px, transparent 1px); background-size: 34px 34px; pointer-events: none; }
 `;
 
 const FooterContainer = styled.div`
@@ -235,7 +245,7 @@ const FooterLogo = styled.img`
 
 const FooterDesc = styled.p`
   margin: 0;
-  color: var(--momo-muted);
+  color: #514C40;
   font-size: 13px;
   line-height: 1.65;
   max-width: 380px;
@@ -264,7 +274,7 @@ const FooterColumn = styled.div`
     text-transform: uppercase;
   }
   span, a {
-    color: var(--momo-muted);
+    color: #514C40;
     font-size: 12px;
     text-decoration: none;
     transition: color 150ms ease, transform 150ms ease;
@@ -280,7 +290,7 @@ const FooterBottom = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
-  color: #6A6251;
+  color: #514C40;
   box-sizing: border-box;
   p { margin: 0; }
   @media (max-width: 600px) { flex-direction: column; gap: 7px; text-align: center; }
