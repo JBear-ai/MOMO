@@ -240,6 +240,93 @@ const MomoPrismGlassRefinementStyles = createGlobalStyle`
       transition-duration: .01ms !important;
     }
   }
+
+  /* Home sections are actual styled components; make each glass plane legible. */
+  #root main.momo-app-main > .home-page > .home-section {
+    position: relative !important;
+    isolation: isolate !important;
+    padding: clamp(20px, 2.5vw, 30px) !important;
+    border: 1px solid rgba(255,255,255,.64) !important;
+    border-radius: 24px !important;
+    background: linear-gradient(128deg, rgba(255,255,255,.30), rgba(211,224,218,.20) 48%, rgba(218,207,224,.16) 76%, rgba(235,222,202,.14)) !important;
+    box-shadow: 0 4px 10px rgba(43,48,46,.04), 0 16px 34px rgba(43,48,46,.07), inset 0 1px 0 rgba(255,255,255,.82), inset 0 -1px 0 rgba(105,122,115,.12) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(165%) !important;
+    backdrop-filter: blur(28px) saturate(165%) !important;
+  }
+
+  #root main.momo-app-main > .home-page > .home-section::after {
+    background: linear-gradient(112deg, transparent 4%, rgba(255,255,255,.22) 23%, transparent 42%, rgba(191,211,220,.12) 59%, rgba(220,195,220,.12) 75%, transparent 91%) !important;
+    opacity: 1 !important;
+  }
+
+  #root main.momo-app-main > .home-page > .home-section .home-section-heading {
+    border-bottom-color: rgba(255,255,255,.36) !important;
+  }
+
+  #root main.momo-app-main > .home-page > .home-section .home-section-heading h2 {
+    color: #343936 !important;
+  }
+
+  #root main.momo-app-main > .home-page > .home-section .home-section-heading p {
+    color: #69716D !important;
+  }
+
+  #root main.momo-app-main > .home-page > .home-brand-line {
+    min-height: 116px !important;
+    border: 1px solid rgba(255,255,255,.72) !important;
+    border-radius: 24px !important;
+    background: linear-gradient(112deg, rgba(255,255,255,.34), rgba(211,226,220,.22) 42%, rgba(207,198,224,.18) 68%, rgba(237,220,200,.16)) !important;
+    box-shadow: 0 5px 14px rgba(43,48,46,.05), 0 18px 38px rgba(43,48,46,.08), inset 0 1px 0 rgba(255,255,255,.88), inset 0 -1px 0 rgba(105,122,115,.14) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(170%) !important;
+    backdrop-filter: blur(32px) saturate(170%) !important;
+  }
+
+  #root main.momo-app-main > .home-page > .home-brand-line::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  #root main.momo-app-main > .home-page > .home-brand-line::after {
+    background: linear-gradient(108deg, transparent 3%, rgba(255,255,255,.24) 25%, transparent 44%, rgba(191,211,220,.14) 61%, rgba(220,195,220,.13) 77%, transparent 94%) !important;
+    opacity: 1 !important;
+  }
+
+  #root main.momo-app-main > .home-page > .home-brand-line h2 {
+    color: #343A36 !important;
+  }
+
+  #root main.momo-app-main > .home-page > .home-brand-line p {
+    color: #69716D !important;
+  }
+
+  #root main.momo-app-main > .profile-dashboard .profile-card.profile-overview-card,
+  #root main.momo-app-main > .profile-dashboard .profile-card.profile-activity-section {
+    background: linear-gradient(132deg, rgba(255,255,255,.31), rgba(210,225,218,.20) 54%, rgba(218,205,224,.15)) !important;
+    border-color: rgba(255,255,255,.68) !important;
+    box-shadow: 0 5px 14px rgba(43,48,46,.045), 0 16px 36px rgba(43,48,46,.07), inset 0 1px 0 rgba(255,255,255,.84) !important;
+  }
+
+  #root main.momo-app-main > .profile-dashboard .profile-activity-item {
+    background: linear-gradient(135deg, rgba(255,255,255,.28), rgba(207,223,216,.18) 58%, rgba(216,201,222,.13)) !important;
+    border-color: rgba(255,255,255,.62) !important;
+    box-shadow: 0 5px 16px rgba(43,48,46,.05), inset 0 1px 0 rgba(255,255,255,.78) !important;
+  }
+
+  #root main.momo-app-main > .profile-dashboard .profile-delete-section {
+    border-top: 1px solid rgba(255,255,255,.48) !important;
+    background: linear-gradient(110deg, rgba(255,255,255,.17), rgba(211,224,218,.11)) !important;
+    border-radius: 16px !important;
+    padding: 18px 20px !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.56) !important;
+  }
+
+  @media (max-width: 700px) {
+    #root main.momo-app-main > .home-page > .home-section {
+      padding: 18px !important;
+      border-radius: 19px !important;
+    }
+  }
 `;
+
 
 export default MomoPrismGlassRefinementStyles;
