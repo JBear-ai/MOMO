@@ -45,7 +45,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     width: 3px;
     content: "";
     border-radius: 0 3px 3px 0;
-    background: #829A85;
+    background: #D6B43F;
   }
   #root .profile-dashboard .profile-heading-main { position: relative; z-index: 1; min-width: 0; }
   #root .profile-dashboard .profile-heading-eyebrow,
@@ -258,7 +258,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     border: 1px solid rgba(255,255,255,.9);
     border-left: 3px solid #D6B43F;
     border-radius: 15px;
-    background: linear-gradient(145deg, rgba(255,255,255,.66), rgba(241,247,242,.34) 58%, rgba(221,233,225,.24));
+    background: linear-gradient(145deg, rgba(255,255,255,.66), rgba(255,250,236,.34) 58%, rgba(255,250,236,.24));
     box-shadow: 0 4px 11px rgba(41,40,32,.04), 0 11px 22px rgba(41,40,32,.06),
       inset 0 1px 0 rgba(255,255,255,.98);
     color: #292820;
@@ -270,14 +270,14 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   }
   #root .profile-dashboard .profile-reviews-link { --activity-color: #88734D; border-left-color: #B79C67; }
   #root .profile-dashboard .profile-liked-reviews-link { --activity-color: #9A6B62; border-left-color: #C18A7E; }
-  #root .profile-dashboard .profile-favorites-link { --activity-color: #637D68; border-left-color: #829B87; }
+  #root .profile-dashboard .profile-favorites-link { --activity-color: #80600E; border-left-color: #D6B43F; }
   #root .profile-dashboard .profile-activity-item::before {
     position: absolute;
     z-index: 0;
     inset: 0;
     content: "";
     border-radius: inherit;
-    background: linear-gradient(122deg, rgba(255,255,255,.52), transparent 46%, rgba(166,190,172,.07));
+    background: linear-gradient(122deg, rgba(255,255,255,.52), transparent 46%, rgba(214,180,63,.07));
     pointer-events: none;
   }
   #root .profile-dashboard .profile-activity-item::after {
@@ -293,9 +293,9 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   }
   #root .profile-dashboard .profile-activity-item > * { position: relative; z-index: 1; }
   #root .profile-dashboard .profile-activity-item:hover {
-    border-color: rgba(176,196,180,.68);
+    border-color: rgba(214,180,63,.68);
     border-left-color: var(--activity-color);
-    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(233,243,236,.48));
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.48));
     box-shadow: 0 7px 14px rgba(41,40,32,.045), 0 17px 31px rgba(41,40,32,.09),
       inset 0 1px 0 rgba(255,255,255,1);
   }
@@ -476,7 +476,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     width: 3px;
     content: "";
     border-radius: 0 3px 3px 0;
-    background: #829A85;
+    background: #D6B43F;
     pointer-events: none;
   }
   #root .profile-edit-page .profile-edit-heading::after {

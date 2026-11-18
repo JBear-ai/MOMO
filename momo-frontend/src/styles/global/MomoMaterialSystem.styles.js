@@ -11,27 +11,27 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     --momo-glass-blur: 26px;
     --momo-glass-saturation: 165%;
     --momo-glass-edge: rgba(255,255,255,.9);
-    --momo-glass-edge-soft: rgba(222,230,223,.72);
-    --momo-glass-surface: linear-gradient(138deg, rgba(255,255,255,.68), rgba(244,248,245,.34) 54%, rgba(222,232,225,.24));
+    --momo-glass-edge-soft: rgba(233,223,197,.72);
+    --momo-glass-surface: linear-gradient(138deg, rgba(255,255,255,.68), rgba(255,250,236,.34) 54%, rgba(255,241,178,.24));
     --momo-glass-depth:
-      0 2px 5px rgba(34,42,37,.035),
-      0 14px 34px rgba(34,42,37,.075),
+      0 2px 5px rgba(41,40,32,.035),
+      0 14px 34px rgba(41,40,32,.075),
       inset 0 1px 0 rgba(255,255,255,.98),
       inset 0 -1px 0 rgba(216,201,159,.2);
     --momo-glass-depth-hover:
-      0 5px 10px rgba(34,42,37,.045),
-      0 18px 38px rgba(34,42,37,.1),
+      0 5px 10px rgba(41,40,32,.045),
+      0 18px 38px rgba(41,40,32,.1),
       inset 0 1px 0 rgba(255,255,255,1),
       inset 0 -1px 0 rgba(216,201,159,.26);
     --momo-glass-depth-active:
-      0 1px 3px rgba(34,42,37,.045),
-      inset 0 2px 5px rgba(34,42,37,.075),
+      0 1px 3px rgba(41,40,32,.045),
+      inset 0 2px 5px rgba(41,40,32,.075),
       inset 0 1px 0 rgba(255,255,255,.88);
     --momo-glass-button:
-      linear-gradient(145deg, rgba(255,255,255,.58), rgba(229,241,233,.34) 54%, rgba(255,241,178,.24)),
+      linear-gradient(145deg, rgba(255,255,255,.58), rgba(255,250,236,.34) 54%, rgba(255,241,178,.24)),
       rgba(255,255,255,.16);
     --momo-glass-button-hover:
-      linear-gradient(145deg, rgba(255,255,255,.9), rgba(241,248,243,.58) 54%, rgba(255,250,236,.38)),
+      linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,250,236,.58) 54%, rgba(255,250,236,.38)),
       rgba(255,255,255,.2);
     --momo-glass-button-primary:
       linear-gradient(140deg, rgba(255,255,255,.66), rgba(255,231,151,.48) 48%, rgba(255,212,59,.26)),
@@ -43,94 +43,41 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     --momo-motion-press: 100ms cubic-bezier(.2,.7,.2,1);
   }
 
-  /* A neutral canvas. Yellow is reserved for actions and selected states. */
+  /* Warm notebook paper is the canvas; glass surfaces float above it. */
   body {
-    background-color: #EEF2EE;
+    background-color: #F5F2EB;
     background-image:
-      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.9), transparent 46rem),
-      radial-gradient(ellipse at 92% 16%, rgba(255,212,59,.25), transparent 42rem),
-      radial-gradient(ellipse at 8% 88%, rgba(255,241,178,.22), transparent 36rem),
-      linear-gradient(140deg, #EEF3EF 0%, #E9F0EB 54%, #EFF3EE 100%);
+      linear-gradient(to right, transparent 0, transparent 62px, rgba(205,104,91,.28) 62px, rgba(205,104,91,.28) 64px, transparent 64px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(130,166,194,.16) 31px, rgba(130,166,194,.16) 32px),
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.82), transparent 46rem),
+      radial-gradient(ellipse at 92% 16%, rgba(255,212,59,.16), transparent 42rem),
+      linear-gradient(140deg, #F8F5EC 0%, #F5F2EB 56%, #F1EBDD 100%);
     background-attachment: fixed;
   }
 
-  /* Route-specific colour fields. These sit behind the glass, not on top of it. */
-  #root .momo-app-main > .home-page {
-    background:
-      radial-gradient(ellipse at 84% 2%, rgba(255,212,59,.34), transparent 37rem),
-      radial-gradient(ellipse at 2% 52%, rgba(255,250,236,.62), transparent 32rem),
-      linear-gradient(145deg, rgba(255,250,236,.72), rgba(238,244,235,.54) 58%, rgba(255,241,178,.64));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .search-page {
-    background:
-      radial-gradient(ellipse at 5% 0%, rgba(116,166,178,.3), transparent 36rem),
-      radial-gradient(ellipse at 96% 58%, rgba(199,222,225,.56), transparent 38rem),
-      linear-gradient(145deg, rgba(222,239,241,.76), rgba(235,244,242,.54) 58%, rgba(218,235,237,.62));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .favorite-page {
-    background:
-      radial-gradient(ellipse at 4% 0%, rgba(255,212,59,.32), transparent 36rem),
-      radial-gradient(ellipse at 96% 62%, rgba(255,241,178,.56), transparent 40rem),
-      linear-gradient(145deg, rgba(255,250,236,.78), rgba(239,245,232,.56) 58%, rgba(255,241,178,.64));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .movie-detail-page {
-    background:
-      radial-gradient(ellipse at 8% 0%, rgba(113,157,163,.3), transparent 36rem),
-      radial-gradient(ellipse at 96% 68%, rgba(194,218,213,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(221,237,235,.78), rgba(236,243,237,.54) 58%, rgba(218,232,229,.62));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .all-reviews-page {
-    background:
-      radial-gradient(ellipse at 4% 0%, rgba(163,150,180,.28), transparent 36rem),
-      radial-gradient(ellipse at 96% 60%, rgba(218,207,229,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(234,229,241,.76), rgba(243,240,246,.54) 58%, rgba(228,224,239,.62));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .my-reviews-page {
-    background:
-      radial-gradient(ellipse at 4% 0%, rgba(216,201,159,.3), transparent 36rem),
-      radial-gradient(ellipse at 96% 60%, rgba(218,226,204,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(230,237,220,.78), rgba(243,245,235,.54) 58%, rgba(255,250,236,.62));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .liked-reviews-page {
-    background:
-      radial-gradient(ellipse at 4% 0%, rgba(187,139,145,.28), transparent 36rem),
-      radial-gradient(ellipse at 96% 60%, rgba(230,204,209,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(244,229,232,.76), rgba(248,239,240,.54) 58%, rgba(237,220,225,.62));
-    border-radius: 26px;
-  }
+  /* Every route uses the same warm brand field beneath its glass surfaces. */
+  #root .momo-app-main > .home-page,
+  #root .momo-app-main > .search-page,
+  #root .momo-app-main > .favorite-page,
+  #root .momo-app-main > .movie-detail-page,
+  #root .momo-app-main > .all-reviews-page,
+  #root .momo-app-main > .my-reviews-page,
+  #root .momo-app-main > .liked-reviews-page,
   #root .momo-app-main > .profile-dashboard,
   #root .momo-app-main > .profile-edit-page,
-  #root .momo-app-main > .profile-page {
-    background:
-      radial-gradient(ellipse at 6% 0%, rgba(255,241,178,.3), transparent 36rem),
-      radial-gradient(ellipse at 96% 64%, rgba(255,250,236,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(225,238,230,.78), rgba(239,245,240,.56) 58%, rgba(255,250,236,.62));
-    border-radius: 26px;
-  }
+  #root .momo-app-main > .profile-page,
   #root .momo-app-main > .review-detail-page {
     background:
-      radial-gradient(ellipse at 4% 0%, rgba(130,159,177,.28), transparent 36rem),
-      radial-gradient(ellipse at 96% 65%, rgba(203,220,230,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(225,237,243,.76), rgba(240,245,247,.54) 58%, rgba(216,231,238,.62));
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.76), transparent 38rem),
+      radial-gradient(ellipse at 94% 58%, rgba(255,212,59,.14), transparent 40rem),
+      linear-gradient(145deg, rgba(255,250,236,.58), rgba(255,255,255,.22) 58%, rgba(255,241,178,.28));
     border-radius: 26px;
   }
-  #root .signup-page {
-    background:
-      radial-gradient(ellipse at 50% 0%, rgba(216,201,159,.28), transparent 42rem),
-      radial-gradient(ellipse at 86% 68%, rgba(224,213,190,.18), transparent 32rem);
-  }
-
   /* Shared header: translucent material with a visible refractive rim. */
   #root .momo-app-header {
     background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(245,248,245,.56));
     border-bottom: 1px solid rgba(255,255,255,.88);
-    box-shadow: 0 8px 28px rgba(34,42,37,.065), inset 0 1px 0 rgba(255,255,255,.98);
+    box-shadow: 0 8px 28px rgba(41,40,32,.065), inset 0 1px 0 rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(32px) saturate(175%);
     backdrop-filter: blur(32px) saturate(175%);
   }
@@ -138,7 +85,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     border: 1px solid rgba(255,255,255,.9);
     background: var(--momo-glass-button);
     color: #3D4941;
-    box-shadow: 0 2px 5px rgba(34,42,37,.045), 0 7px 16px rgba(34,42,37,.065), inset 0 1px 0 rgba(255,255,255,.98);
+    box-shadow: 0 2px 5px rgba(41,40,32,.045), 0 7px 16px rgba(41,40,32,.065), inset 0 1px 0 rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     backdrop-filter: blur(24px) saturate(180%);
     transition: color var(--momo-motion-material), background var(--momo-motion-material), border-color var(--momo-motion-material), box-shadow var(--momo-motion-material), transform var(--momo-motion-press);
@@ -153,23 +100,23 @@ const MomoMaterialSystemStyles = createGlobalStyle`
 
   #root .momo-chat-launcher {
     border: 1px solid rgba(255,255,255,.94);
-    background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(232,243,235,.56) 54%, rgba(255,241,178,.36));
+    background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(255,250,236,.56) 54%, rgba(255,241,178,.36));
     color: #514C40;
-    box-shadow: 0 8px 22px rgba(34,42,37,.12), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.16);
+    box-shadow: 0 8px 22px rgba(41,40,32,.12), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.16);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     backdrop-filter: blur(24px) saturate(180%);
   }
   #root .momo-chat-launcher:hover {
     border-color: rgba(255,255,255,1);
     background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,241,178,.72) 54%, rgba(255,212,59,.48));
-    box-shadow: 0 11px 26px rgba(34,42,37,.15), inset 0 1px 0 rgba(255,255,255,1);
+    box-shadow: 0 11px 26px rgba(41,40,32,.15), inset 0 1px 0 rgba(255,255,255,1);
     color: #292820;
     transform: none;
   }
 
   #root .momo-app-header nav a {
     border: 1px solid rgba(255,255,255,.54);
-    background: linear-gradient(145deg, rgba(255,255,255,.46), rgba(235,242,237,.18));
+    background: linear-gradient(145deg, rgba(255,255,255,.46), rgba(255,250,236,.18));
     color: #514C40;
     box-shadow: inset 0 1px rgba(255,255,255,.78);
     -webkit-backdrop-filter: blur(18px) saturate(165%);
@@ -179,20 +126,20 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-header nav a:hover,
   #root .momo-app-header nav a:focus-visible {
     border-color: rgba(255,255,255,.98);
-    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(230,240,233,.48));
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.48));
     color: #292820;
-    box-shadow: 0 5px 13px rgba(34,42,37,.065), inset 0 1px rgba(255,255,255,1);
+    box-shadow: 0 5px 13px rgba(41,40,32,.065), inset 0 1px rgba(255,255,255,1);
   }
   #root .momo-app-header nav a.active {
     border-color: rgba(233,223,197,.78);
     background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.56));
     color: #292820;
-    box-shadow: 0 3px 10px rgba(34,42,37,.04), inset 0 1px rgba(255,255,255,1);
+    box-shadow: 0 3px 10px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,1);
   }
   #root .momo-app-header .momo-search-form {
     border: 1px solid rgba(255,255,255,.9);
-    background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(237,244,239,.36));
-    box-shadow: 0 4px 14px rgba(34,42,37,.055), inset 0 1px rgba(255,255,255,.98);
+    background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(255,250,236,.36));
+    box-shadow: 0 4px 14px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(24px) saturate(165%);
     backdrop-filter: blur(24px) saturate(165%);
   }
@@ -206,8 +153,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-header .momo-search-dropdown {
     border: 1px solid rgba(255,255,255,.94);
     border-radius: 18px;
-    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(238,246,240,.56) 58%, rgba(220,233,225,.38));
-    box-shadow: 0 20px 46px rgba(34,42,37,.14), inset 0 1px rgba(255,255,255,1);
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.56) 58%, rgba(255,241,178,.38));
+    box-shadow: 0 20px 46px rgba(41,40,32,.14), inset 0 1px rgba(255,255,255,1);
     -webkit-backdrop-filter: blur(30px) saturate(175%);
     backdrop-filter: blur(30px) saturate(175%);
   }
@@ -232,8 +179,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
   #root .momo-app-header .momo-search-form:focus-within {
     border-color: rgba(233,223,197,.92);
-    background: linear-gradient(140deg, rgba(255,255,255,.84), rgba(235,245,238,.5));
-    box-shadow: 0 0 0 3px rgba(216,201,159,.18), 0 9px 22px rgba(34,42,37,.075), inset 0 1px rgba(255,255,255,1);
+    background: linear-gradient(140deg, rgba(255,255,255,.84), rgba(255,250,236,.5));
+    box-shadow: 0 0 0 3px rgba(216,201,159,.18), 0 9px 22px rgba(41,40,32,.075), inset 0 1px rgba(255,255,255,1);
   }
 
   /* Main glass planes. Each keeps its own shape and hierarchy. */
@@ -278,13 +225,13 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     backdrop-filter: blur(28px) saturate(175%);
     background:
       radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.78), transparent 50%),
-      linear-gradient(135deg, rgba(255,255,255,.62), rgba(231,241,234,.32) 56%, rgba(255,255,255,.22));
+      linear-gradient(135deg, rgba(255,255,255,.62), rgba(255,250,236,.32) 56%, rgba(255,255,255,.22));
   }
   #root .home-feature-info {
-    background: linear-gradient(145deg, rgba(255,255,255,.46), rgba(234,242,235,.2));
+    background: linear-gradient(145deg, rgba(255,255,255,.46), rgba(255,250,236,.2));
   }
   #root .home-feature-visual .recommend-content {
-    background: linear-gradient(140deg, rgba(255,255,255,.3), rgba(229,239,232,.14) 55%, rgba(255,255,255,.08)), rgba(23,31,27,.3);
+    background: linear-gradient(140deg, rgba(255,255,255,.3), rgba(255,250,236,.14) 55%, rgba(255,255,255,.08)), rgba(41,40,32,.3);
     border-color: rgba(255,255,255,.58);
     box-shadow: 0 18px 48px rgba(0,0,0,.26), inset 0 1px rgba(255,255,255,.68), inset 0 -1px rgba(255,255,255,.12);
     -webkit-backdrop-filter: blur(28px) saturate(175%);
@@ -308,7 +255,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .movie-detail-page .movie-detail-header {
     background:
       radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.78), transparent 48%),
-      linear-gradient(135deg, rgba(241,248,243,.68), rgba(255,250,236,.28) 58%, rgba(255,255,255,.2));
+      linear-gradient(135deg, rgba(255,250,236,.68), rgba(255,250,236,.28) 58%, rgba(255,255,255,.2));
     border-color: rgba(255,255,255,.9);
     -webkit-backdrop-filter: blur(32px) saturate(175%);
     backdrop-filter: blur(32px) saturate(175%);
@@ -317,7 +264,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .movie-detail-page .detail-content-section,
   #root .movie-detail-page .review-write-section,
   #root .movie-detail-page .detail-review-card {
-    background: linear-gradient(140deg, rgba(255,255,255,.66), rgba(244,248,245,.32) 58%, rgba(221,233,225,.24));
+    background: linear-gradient(140deg, rgba(255,255,255,.66), rgba(244,248,245,.32) 58%, rgba(255,250,236,.24));
   }
   #root .review-detail-page .review-detail-card,
   #root .review-detail-page .review-comment-card {
@@ -333,7 +280,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .favorite-page-empty,
   #root .profile-delete-page-card,
   #root .signup-page .signup-card {
-    background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(245,248,245,.32) 58%, rgba(224,233,226,.22));
+    background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(245,248,245,.32) 58%, rgba(255,250,236,.22));
   }
 
   /* Compact cards also need transparency, a highlight rim and real depth. */
@@ -349,8 +296,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .review-detail-movie,
   #root .review-comment-item {
     border-color: rgba(255,255,255,.84);
-    background: linear-gradient(145deg, rgba(255,255,255,.58), rgba(239,246,241,.28) 58%, rgba(255,250,236,.22));
-    box-shadow: 0 4px 12px rgba(34,42,37,.045), 0 12px 26px rgba(34,42,37,.06), inset 0 1px 0 rgba(255,255,255,.96);
+    background: linear-gradient(145deg, rgba(255,255,255,.58), rgba(255,250,236,.28) 58%, rgba(255,250,236,.22));
+    box-shadow: 0 4px 12px rgba(41,40,32,.045), 0 12px 26px rgba(41,40,32,.06), inset 0 1px 0 rgba(255,255,255,.96);
     -webkit-backdrop-filter: blur(22px) saturate(160%);
     backdrop-filter: blur(22px) saturate(160%);
   }
@@ -364,7 +311,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .all-reviews-mobile-item:hover,
   #root .person-chip:hover {
     border-color: rgba(255,255,255,.98);
-    background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(237,246,239,.4) 58%, rgba(255,250,236,.3));
+    background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.4) 58%, rgba(255,250,236,.3));
     box-shadow: var(--momo-glass-depth-hover);
     filter: saturate(1.045);
     transform: none;
@@ -381,7 +328,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .favorite-page-poster,
   #root .movie-detail-poster {
     border: 1px solid rgba(255,255,255,.9);
-    box-shadow: 0 8px 20px rgba(34,42,37,.12), inset 0 1px rgba(255,255,255,.9);
+    box-shadow: 0 8px 20px rgba(41,40,32,.12), inset 0 1px rgba(255,255,255,.9);
   }
   #root .favorite-page-poster:hover img,
   #root .momo-home-poster-frame:hover img {
@@ -407,8 +354,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     background: var(--momo-glass-button);
     color: #3D4941;
     box-shadow:
-      0 2px 5px rgba(34,42,37,.045),
-      0 7px 16px rgba(34,42,37,.065),
+      0 2px 5px rgba(41,40,32,.045),
+      0 7px 16px rgba(41,40,32,.065),
       inset 0 1px 0 rgba(255,255,255,.98),
       inset 0 -1px 0 rgba(216,201,159,.22);
     -webkit-backdrop-filter: blur(20px) saturate(175%);
@@ -432,7 +379,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
   #root .momo-app-main button:active:not(:disabled),
   #root .signup-page button:active:not(:disabled) {
-    background: linear-gradient(145deg, rgba(234,242,236,.74), rgba(214,228,218,.48));
+    background: linear-gradient(145deg, rgba(255,250,236,.74), rgba(255,241,178,.48));
     box-shadow: var(--momo-glass-depth-active);
     filter: none;
     transform: scale(.985);
@@ -493,7 +440,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     border-radius: 999px;
     background: var(--momo-glass-button);
     color: #514C40;
-    box-shadow: 0 3px 8px rgba(34,42,37,.045), 0 7px 15px rgba(34,42,37,.055), inset 0 1px rgba(255,255,255,.98);
+    box-shadow: 0 3px 8px rgba(41,40,32,.045), 0 7px 15px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(20px) saturate(170%);
     backdrop-filter: blur(20px) saturate(170%);
   }
@@ -544,7 +491,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main .favorite-star {
     border: 1px solid rgba(255,255,255,.72);
     border-radius: 12px;
-    background: linear-gradient(145deg, rgba(32,40,34,.58), rgba(31,37,32,.34));
+    background: linear-gradient(145deg, rgba(41,40,32,.58), rgba(41,40,32,.34));
     color: rgba(255,255,255,.94);
     box-shadow: 0 6px 16px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.38);
     -webkit-backdrop-filter: blur(20px) saturate(175%);
@@ -552,7 +499,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
   #root .momo-app-main .favorite-star:hover:not(:disabled) {
     border-color: rgba(255,255,255,.98);
-    background: linear-gradient(145deg, rgba(39,49,41,.72), rgba(31,37,32,.46));
+    background: linear-gradient(145deg, rgba(41,40,32,.72), rgba(41,40,32,.46));
     color: #fff;
     box-shadow: 0 8px 19px rgba(0,0,0,.2), inset 0 1px rgba(255,255,255,.52);
   }
@@ -600,10 +547,10 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main textarea,
   #root .momo-app-main select,
   #root .momo-app-header .momo-search-input {
-    border-color: rgba(212,222,214,.9);
-    background: linear-gradient(145deg, rgba(255,255,255,.7), rgba(239,246,241,.36));
+    border-color: rgba(255,250,236,.9);
+    background: linear-gradient(145deg, rgba(255,255,255,.7), rgba(255,250,236,.36));
     color: #303A33;
-    box-shadow: inset 0 1px 2px rgba(34,42,37,.035), 0 1px 0 rgba(255,255,255,.86);
+    box-shadow: inset 0 1px 2px rgba(41,40,32,.035), 0 1px 0 rgba(255,255,255,.86);
     -webkit-backdrop-filter: blur(16px) saturate(150%);
     backdrop-filter: blur(16px) saturate(150%);
   }
@@ -612,8 +559,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main select:focus,
   #root .momo-app-header .momo-search-input:focus {
     border-color: rgba(216,201,159,.82);
-    background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(236,245,239,.55));
-    box-shadow: 0 0 0 3px rgba(255,241,178,.16), inset 0 1px 2px rgba(34,42,37,.025);
+    background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(255,250,236,.55));
+    box-shadow: 0 0 0 3px rgba(255,241,178,.16), inset 0 1px 2px rgba(41,40,32,.025);
     outline: none;
   }
   #root .momo-app-main input::placeholder,
@@ -626,16 +573,16 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .review-detail-page .review-detail-content {
     border: 1px solid rgba(255,255,255,.86);
     border-radius: 15px;
-    background: linear-gradient(140deg, rgba(255,255,255,.6), rgba(242,247,243,.32) 58%, rgba(222,233,225,.22));
+    background: linear-gradient(140deg, rgba(255,255,255,.6), rgba(242,247,243,.32) 58%, rgba(255,250,236,.22));
     color: #353D36;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), 0 8px 20px rgba(34,42,37,.045);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), 0 8px 20px rgba(41,40,32,.045);
     -webkit-backdrop-filter: blur(22px) saturate(155%);
     backdrop-filter: blur(22px) saturate(155%);
   }
   #root .review-detail-page .review-detail-movie {
     border: 1px solid rgba(255,255,255,.88);
-    background: linear-gradient(145deg, rgba(255,255,255,.64), rgba(238,245,240,.32));
-    box-shadow: 0 6px 16px rgba(34,42,37,.05), inset 0 1px rgba(255,255,255,.96);
+    background: linear-gradient(145deg, rgba(255,255,255,.64), rgba(255,250,236,.32));
+    box-shadow: 0 6px 16px rgba(41,40,32,.05), inset 0 1px rgba(255,255,255,.96);
     -webkit-backdrop-filter: blur(22px) saturate(155%);
     backdrop-filter: blur(22px) saturate(155%);
   }
@@ -682,9 +629,9 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     padding: 28px;
     border: 1px solid rgba(255,255,255,.9);
     border-radius: 20px;
-    background: linear-gradient(140deg, rgba(255,255,255,.62), rgba(234,243,237,.38) 58%, rgba(255,250,236,.24));
+    background: linear-gradient(140deg, rgba(255,255,255,.62), rgba(255,250,236,.38) 58%, rgba(255,250,236,.24));
     color: #514C40;
-    box-shadow: 0 8px 24px rgba(34,42,37,.055), inset 0 1px rgba(255,255,255,.98);
+    box-shadow: 0 8px 24px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(24px) saturate(165%);
     backdrop-filter: blur(24px) saturate(165%);
   }
@@ -699,8 +646,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main .all-reviews-table-wrap {
     border: 1px solid rgba(255,255,255,.88);
     border-radius: 14px;
-    background: linear-gradient(145deg, rgba(255,255,255,.54), rgba(235,243,237,.32));
-    box-shadow: inset 0 1px rgba(255,255,255,.98), 0 7px 18px rgba(34,42,37,.04);
+    background: linear-gradient(145deg, rgba(255,255,255,.54), rgba(255,250,236,.32));
+    box-shadow: inset 0 1px rgba(255,255,255,.98), 0 7px 18px rgba(41,40,32,.04);
     -webkit-backdrop-filter: blur(22px) saturate(155%);
     backdrop-filter: blur(22px) saturate(155%);
   }
@@ -724,7 +671,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main .liked-review-item,
   #root .momo-app-main .all-reviews-mobile-item {
     border-bottom-color: rgba(255,255,255,.72);
-    background: linear-gradient(145deg, rgba(255,255,255,.48), rgba(233,242,236,.26));
+    background: linear-gradient(145deg, rgba(255,255,255,.48), rgba(255,250,236,.26));
   }
   #root .momo-app-main .my-review-item:hover,
   #root .momo-app-main .liked-review-item:hover,
@@ -743,8 +690,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   /* Footer is a quiet translucent panel, not a graph-paper memo. */
   #root .momo-app-footer {
     border-top-color: rgba(255,255,255,.86);
-    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(239,244,239,.42) 58%, rgba(225,232,225,.34));
-    box-shadow: 0 -8px 26px rgba(34,42,37,.045), inset 0 1px rgba(255,255,255,.98);
+    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(239,244,239,.42) 58%, rgba(255,250,236,.34));
+    box-shadow: 0 -8px 26px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(28px) saturate(155%);
     backdrop-filter: blur(28px) saturate(155%);
   }
@@ -1189,7 +1136,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-header button {
     background:
       linear-gradient(112deg, rgba(255,255,255,.62), rgba(255,255,255,.2) 38%, rgba(255,250,236,.25) 100%),
-      linear-gradient(145deg, rgba(255,255,255,.56), rgba(255,250,236,.26) 58%, rgba(222,232,223,.16));
+      linear-gradient(145deg, rgba(255,255,255,.56), rgba(255,250,236,.26) 58%, rgba(255,250,236,.16));
     border-color: rgba(255,255,255,.96);
     box-shadow:
       0 2px 5px rgba(41,40,32,.045),
@@ -1204,7 +1151,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-header button:hover:not(:disabled) {
     background:
       linear-gradient(112deg, rgba(255,255,255,.82), rgba(255,255,255,.38) 38%, rgba(255,250,236,.38) 100%),
-      linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.38) 58%, rgba(222,232,223,.24));
+      linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.38) 58%, rgba(255,250,236,.24));
     box-shadow:
       0 5px 10px rgba(41,40,32,.055),
       0 15px 28px rgba(41,40,32,.11),
@@ -1382,6 +1329,326 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-footer {
     background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.72));
     border-top-color: rgba(233,223,197,.82);
+  }
+
+  /* Component-level glass hierarchy: airy outer lens, dense frosted inner panes. */
+  #root .momo-app-header, #root .profile-dashboard .profile-card, #root .profile-dashboard .profile-delete-section,
+  #root .home-feature-section, #root .home-feature-info, #root .home-favorites-empty, #root .home-brand-line, #root .home-section,
+  #root .movie-detail-page .movie-detail-header, #root .movie-detail-page > .detail-content-section, #root .movie-detail-page .movie-rating-panel {
+    position: relative; isolation: isolate; border: 1px solid rgba(255,255,255,.96);
+    background: linear-gradient(118deg,rgba(255,255,255,.84),rgba(255,255,255,.42) 32%,rgba(255,250,236,.6) 72%,rgba(255,241,178,.3));
+    box-shadow: 0 3px 8px rgba(70,58,29,.04),0 16px 36px rgba(70,58,29,.09),inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(214,180,63,.2);
+    -webkit-backdrop-filter: blur(32px) saturate(180%); backdrop-filter: blur(32px) saturate(180%);
+  }
+  #root .profile-dashboard .profile-card, #root .profile-dashboard .profile-delete-section, #root .home-feature-info, #root .home-favorites-empty,
+  #root .movie-detail-page > .detail-content-section, #root .movie-detail-page .movie-rating-panel {
+    border-color: rgba(255,255,255,.99);
+    background: radial-gradient(ellipse at 12% 0%,rgba(255,255,255,.98),transparent 48%),linear-gradient(142deg,rgba(255,255,255,.84),rgba(255,250,236,.68) 58%,rgba(255,241,178,.34));
+    box-shadow: 0 6px 14px rgba(70,58,29,.05),0 20px 40px rgba(70,58,29,.1),inset 0 1px 0 rgba(255,255,255,1),inset 0 0 0 1px rgba(255,255,255,.24);
+    -webkit-backdrop-filter: blur(36px) saturate(190%); backdrop-filter: blur(36px) saturate(190%);
+  }
+  #root .profile-dashboard .profile-card.profile-overview-card, #root .profile-dashboard .profile-card.profile-activity-section { border-radius: 22px; background: linear-gradient(140deg,rgba(255,255,255,.86),rgba(255,250,236,.68) 62%,rgba(255,241,178,.32)); }
+  #root .profile-dashboard .profile-activity-section .profile-activity-item { border:1px solid rgba(255,255,255,.96); border-radius:16px; background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,250,236,.58) 65%,rgba(255,241,178,.24)); box-shadow:0 4px 13px rgba(70,58,29,.06),inset 0 1px 0 rgba(255,255,255,.99); -webkit-backdrop-filter:blur(26px) saturate(180%); backdrop-filter:blur(26px) saturate(180%); }
+  #root .profile-dashboard .profile-delete-section { min-height:86px; margin-top:4px; padding:19px 23px; border-radius:18px; border-top:1px solid rgba(255,255,255,.98); background:linear-gradient(130deg,rgba(255,255,255,.82),rgba(255,250,236,.62)); }
+  #root .home-feature-section { overflow:hidden; border-radius:28px; background:radial-gradient(ellipse at 8% 0%,rgba(255,255,255,.98),transparent 48%),radial-gradient(ellipse at 100% 100%,rgba(255,212,59,.24),transparent 48%),linear-gradient(135deg,rgba(255,255,255,.8),rgba(255,250,236,.54) 58%,rgba(255,241,178,.36)); box-shadow:0 8px 18px rgba(70,58,29,.05),0 26px 58px rgba(70,58,29,.12),inset 0 1px 0 rgba(255,255,255,1); -webkit-backdrop-filter:blur(36px) saturate(185%); backdrop-filter:blur(36px) saturate(185%); }
+  #root .home-feature-info { border:1px solid rgba(255,255,255,.82); border-radius:22px; background:linear-gradient(120deg,rgba(255,255,255,.86),rgba(255,250,236,.62) 62%,rgba(255,241,178,.3)); box-shadow:inset 0 1px 0 rgba(255,255,255,1),8px 0 28px rgba(255,255,255,.14); }
+  #root .home-favorites-empty { min-height:140px; border-radius:20px; }
+  #root .home-brand-line { overflow:hidden; border-radius:22px; background:radial-gradient(ellipse at 8% 0%,rgba(255,255,255,.96),transparent 52%),linear-gradient(125deg,rgba(255,255,255,.78),rgba(255,250,236,.56) 58%,rgba(255,241,178,.32)); }
+  #root .home-brand-line::before { display:block; content:""; top:18px; bottom:18px; width:2px; background:linear-gradient(180deg,transparent,rgba(214,180,63,.9),transparent); box-shadow:0 0 14px rgba(214,180,63,.24); }
+  #root .home-section { padding:clamp(18px,2.2vw,26px); border-radius:22px; border-color:rgba(255,255,255,.84); background:linear-gradient(145deg,rgba(255,255,255,.58),rgba(255,250,236,.38) 64%,rgba(255,241,178,.18)); box-shadow:0 8px 22px rgba(70,58,29,.05),inset 0 1px 0 rgba(255,255,255,.94); -webkit-backdrop-filter:blur(26px) saturate(165%); backdrop-filter:blur(26px) saturate(165%); }
+  #root .momo-app-header { background:linear-gradient(110deg,rgba(255,255,255,.92),rgba(255,250,236,.74) 58%,rgba(255,241,178,.36)); border-bottom:1px solid rgba(255,255,255,.98); box-shadow:0 8px 30px rgba(70,58,29,.085),inset 0 1px 0 rgba(255,255,255,1); -webkit-backdrop-filter:blur(40px) saturate(195%); backdrop-filter:blur(40px) saturate(195%); }
+  #root .movie-detail-page .movie-detail-header { border-radius:26px; background:radial-gradient(ellipse at 8% 0%,rgba(255,255,255,.98),transparent 44%),radial-gradient(ellipse at 100% 100%,rgba(255,212,59,.24),transparent 46%),linear-gradient(135deg,rgba(255,255,255,.82),rgba(255,250,236,.54) 62%,rgba(255,241,178,.34)); box-shadow:0 8px 18px rgba(70,58,29,.055),0 26px 58px rgba(70,58,29,.13),inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(214,180,63,.22); -webkit-backdrop-filter:blur(40px) saturate(190%); backdrop-filter:blur(40px) saturate(190%); }
+  #root .movie-detail-page > .detail-content-section, #root .movie-detail-page .movie-rating-panel { border-radius:22px; background:radial-gradient(ellipse at 10% 0%,rgba(255,255,255,.99),transparent 48%),linear-gradient(142deg,rgba(255,255,255,.86),rgba(255,250,236,.7) 58%,rgba(255,241,178,.34)); }
+  #root .movie-detail-page .movie-score-display, #root .movie-detail-page .rating-distribution, #root .movie-detail-page .detail-reaction-counts .rating-vote-button, #root .movie-detail-page .people-section .person-chip { border:1px solid rgba(255,255,255,.99); border-radius:16px; background:linear-gradient(140deg,rgba(255,255,255,.9),rgba(255,250,236,.7) 64%,rgba(255,241,178,.32)); box-shadow:0 5px 15px rgba(70,58,29,.06),inset 0 1px 0 rgba(255,255,255,1); -webkit-backdrop-filter:blur(30px) saturate(190%); backdrop-filter:blur(30px) saturate(190%); }
+  #root .movie-detail-page .people-section .person-chip:hover { border-color:rgba(214,180,63,.78); background:linear-gradient(140deg,rgba(255,255,255,.99),rgba(255,250,236,.8)); box-shadow:0 8px 18px rgba(70,58,29,.095),inset 0 1px 0 rgba(255,255,255,1); }
+  @media (max-width:700px) { #root .home-section{padding:17px 14px;border-radius:18px;} #root .home-feature-info{border-radius:17px;} #root .profile-dashboard .profile-delete-section{padding:17px;} #root .movie-detail-page .movie-detail-header{border-radius:20px;} #root .movie-detail-page > .detail-content-section,#root .movie-detail-page .movie-rating-panel{border-radius:18px;} }
+
+  /* Opaque milk-glass pass. These rules intentionally win over legacy page
+     surfaces so every named component receives the same visible material. */
+  #root .profile-card,
+  #root .profile-activity-item,
+  #root .profile-user-details > div,
+  #root .profile-delete-section,
+  #root .home-feature-section,
+  #root .home-feature-info,
+  #root .home-favorites-empty,
+  #root .home-brand-line,
+  #root .home-section,
+  #root .momo-app-header,
+  #root .movie-detail-header,
+  #root .detail-content-section,
+  #root .movie-rating-panel,
+  #root .rating-distribution,
+  #root .movie-score-display,
+  #root .detail-reaction-counts,
+  #root .detail-reaction-counts .rating-vote-button,
+  #root .people-section,
+  #root .people-section .person-chip {
+    border: 1px solid rgba(255,255,255,.98) !important;
+    background-color: rgba(255,253,247,.91) !important;
+    background-image:
+      linear-gradient(132deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.76) 24%, rgba(255,250,236,.88) 68%, rgba(255,241,178,.54) 100%) !important;
+    box-shadow:
+      0 2px 5px rgba(74,59,28,.035),
+      0 12px 28px rgba(74,59,28,.095),
+      0 28px 58px rgba(74,59,28,.055),
+      inset 0 1.5px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(214,180,63,.24) !important;
+    -webkit-backdrop-filter: blur(34px) saturate(175%) !important;
+    backdrop-filter: blur(34px) saturate(175%) !important;
+  }
+
+  #root .profile-card,
+  #root .profile-activity-item,
+  #root .profile-user-details > div,
+  #root .profile-delete-section,
+  #root .home-feature-info,
+  #root .home-favorites-empty,
+  #root .detail-content-section,
+  #root .movie-rating-panel,
+  #root .rating-distribution,
+  #root .movie-score-display,
+  #root .detail-reaction-counts,
+  #root .detail-reaction-counts .rating-vote-button,
+  #root .people-section,
+  #root .people-section .person-chip {
+    background-color: rgba(255,254,250,.95) !important;
+    background-image:
+      radial-gradient(ellipse at 10% 0%, rgba(255,255,255,1), transparent 56%),
+      linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,250,236,.9) 62%, rgba(255,241,178,.48)) !important;
+    box-shadow:
+      0 5px 12px rgba(74,59,28,.045),
+      0 18px 38px rgba(74,59,28,.085),
+      inset 0 1.5px 0 rgba(255,255,255,1),
+      inset 0 0 0 1px rgba(255,255,255,.44) !important;
+    -webkit-backdrop-filter: blur(38px) saturate(185%) !important;
+    backdrop-filter: blur(38px) saturate(185%) !important;
+  }
+
+  #root .profile-card::before {
+    background: linear-gradient(125deg, rgba(255,255,255,.72), transparent 54%, rgba(255,212,59,.12)) !important;
+  }
+
+  #root .home-feature-section,
+  #root .movie-detail-header {
+    border-radius: 28px !important;
+    background-image:
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.98), transparent 46%),
+      radial-gradient(ellipse at 96% 100%, rgba(255,212,59,.2), transparent 48%),
+      linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,250,236,.84) 60%, rgba(255,241,178,.5)) !important;
+    box-shadow:
+      0 8px 18px rgba(74,59,28,.055),
+      0 26px 58px rgba(74,59,28,.12),
+      inset 0 1.5px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(214,180,63,.24) !important;
+    -webkit-backdrop-filter: blur(42px) saturate(190%) !important;
+    backdrop-filter: blur(42px) saturate(190%) !important;
+  }
+
+  #root .home-section {
+    padding: clamp(18px,2.2vw,26px) !important;
+    border-radius: 24px !important;
+    background-color: rgba(255,252,242,.9) !important;
+    background-image: linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,250,236,.88) 65%,rgba(255,241,178,.48)) !important;
+  }
+
+  #root .home-feature-info {
+    border-radius: 22px !important;
+    background-color: rgba(255,254,250,.94) !important;
+    background-image: linear-gradient(135deg,rgba(255,255,255,.98),rgba(255,250,236,.9) 72%,rgba(255,241,178,.52)) !important;
+  }
+
+  #root .home-favorites-empty,
+  #root .profile-delete-section {
+    border-radius: 20px !important;
+  }
+
+  #root .movie-detail-header {
+    padding: clamp(22px,3vw,36px) !important;
+  }
+
+  #root .detail-content-section,
+  #root .movie-rating-panel {
+    border-radius: 22px !important;
+  }
+
+  #root .rating-distribution,
+  #root .movie-score-display,
+  #root .detail-reaction-counts .rating-vote-button,
+  #root .people-section .person-chip {
+    border-radius: 17px !important;
+  }
+
+  #root .momo-app-header {
+    background-color: rgba(255,253,247,.88) !important;
+    background-image: linear-gradient(110deg,rgba(255,255,255,.98),rgba(255,250,236,.9) 65%,rgba(255,241,178,.48)) !important;
+    box-shadow: 0 8px 30px rgba(74,59,28,.09),inset 0 1.5px 0 rgba(255,255,255,1) !important;
+    -webkit-backdrop-filter: blur(42px) saturate(195%) !important;
+    backdrop-filter: blur(42px) saturate(195%) !important;
+  }
+
+  #root .people-section .person-chip:hover {
+    background-color: rgba(255,255,255,.99) !important;
+    border-color: rgba(214,180,63,.85) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 9px 22px rgba(74,59,28,.1),inset 0 1px 0 rgba(255,255,255,1) !important;
+  }
+
+  @media (max-width:700px) {
+    #root .home-section { padding: 17px 14px !important; border-radius: 19px !important; }
+    #root .home-feature-section, #root .movie-detail-header { border-radius: 21px !important; }
+    #root .detail-content-section, #root .movie-rating-panel { border-radius: 18px !important; }
+  }
+
+
+  /* ============================================================
+     OPAQUE FROSTED GLASS OVERRIDE
+     The notebook background is the only exposed canvas.
+     All UI surfaces above it use dense, milky glass.
+  ============================================================ */
+  :root {
+    --momo-frosted-face: linear-gradient(145deg, rgba(255,255,255,.96) 0%, rgba(255,253,247,.93) 52%, rgba(255,247,220,.9) 100%);
+    --momo-frosted-face-soft: linear-gradient(145deg, rgba(255,255,255,.93), rgba(255,251,238,.9));
+    --momo-frosted-edge: rgba(255,255,255,.99);
+    --momo-frosted-shadow: 0 3px 8px rgba(65,54,29,.055), 0 16px 38px rgba(65,54,29,.105), inset 0 1px 0 #fff, inset 0 -1px 0 rgba(214,180,63,.18);
+    --momo-frosted-blur: blur(30px) saturate(185%);
+  }
+
+  /* App shell and navigation */
+  #root .momo-app-header,
+  #root .momo-app-header .momo-search-form,
+  #root .momo-app-header .momo-search-dropdown,
+  #root .momo-app-header nav a,
+  #root .momo-app-header button,
+  #root .momo-chat-launcher {
+    background: var(--momo-frosted-face) !important;
+    border: 1px solid var(--momo-frosted-edge) !important;
+    box-shadow: var(--momo-frosted-shadow) !important;
+    -webkit-backdrop-filter: var(--momo-frosted-blur) !important;
+    backdrop-filter: var(--momo-frosted-blur) !important;
+  }
+
+  /* Every named UI surface: cards, panels, sections, drawers,
+     empty states, chips, rows, popovers, dialogs and toolbars. */
+  #root .momo-app-main [class*="card"],
+  #root .momo-app-main [class*="panel"],
+  #root .momo-app-main [class*="section"],
+  #root .momo-app-main [class*="empty"],
+  #root .momo-app-main [class*="dropdown"],
+  #root .momo-app-main [class*="popover"],
+  #root .momo-app-main [class*="modal"],
+  #root .momo-app-main [class*="dialog"],
+  #root .momo-app-main [class*="popup"],
+  #root .momo-app-main [class*="toolbar"],
+  #root .momo-app-main [class*="chip"],
+  #root .momo-app-main [class*="badge"],
+  #root .momo-app-main [class*="activity-item"],
+  #root .momo-app-main [class*="review-item"],
+  #root .momo-app-main [class*="movie-item"],
+  #root .momo-app-main [class*="table-wrap"],
+  #root .momo-app-main [class*="search-form"],
+  #root .momo-app-main [class*="search-filter"],
+  #root .momo-app-main [class*="feature-info"],
+  #root .momo-app-main [class*="brand-line"],
+  #root .momo-app-main .profile-card,
+  #root .momo-app-main .profile-overview-card,
+  #root .momo-app-main .profile-activity-section,
+  #root .momo-app-main .profile-delete-section,
+  #root .momo-app-main .home-favorites-empty,
+  #root .momo-app-main .home-feature-section,
+  #root .momo-app-main .movie-detail-header,
+  #root .momo-app-main .detail-content-section,
+  #root .momo-app-main .movie-rating-panel,
+  #root .momo-app-main .rating-distribution,
+  #root .momo-app-main .movie-score-display,
+  #root .momo-app-main .detail-reaction-counts,
+  #root .momo-app-main .people-section,
+  #root .signup-page .signup-card {
+    background: var(--momo-frosted-face) !important;
+    border-color: var(--momo-frosted-edge) !important;
+    box-shadow: var(--momo-frosted-shadow) !important;
+    -webkit-backdrop-filter: var(--momo-frosted-blur) !important;
+    backdrop-filter: var(--momo-frosted-blur) !important;
+  }
+
+  /* Inner information blocks remain distinct, but are still dense glass. */
+  #root .momo-app-main [class*="info"],
+  #root .momo-app-main [class*="content"],
+  #root .momo-app-main [class*="details"],
+  #root .momo-app-main [class*="summary"],
+  #root .momo-app-main [class*="distribution"],
+  #root .momo-app-main [class*="score-display"],
+  #root .momo-app-main [class*="reaction-count"],
+  #root .momo-app-main [class*="person-chip"],
+  #root .momo-app-main [class*="movie-meta"] {
+    background-color: rgba(255,253,247,.94) !important;
+    background-image: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,250,232,.91)) !important;
+    border-color: rgba(255,255,255,.98) !important;
+    box-shadow: inset 0 1px 0 #fff, 0 5px 16px rgba(65,54,29,.065) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(180%) !important;
+    backdrop-filter: blur(26px) saturate(180%) !important;
+  }
+
+  /* Controls are solid-looking frosted glass, not see-through pills. */
+  #root .momo-app-main button,
+  #root .momo-app-main [role="button"],
+  #root .momo-app-header button,
+  #root .signup-page button {
+    background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(255,250,231,.94)) !important;
+    border: 1px solid rgba(255,255,255,1) !important;
+    box-shadow: 0 3px 8px rgba(65,54,29,.07), 0 8px 18px rgba(65,54,29,.075), inset 0 1px 0 #fff !important;
+    -webkit-backdrop-filter: blur(24px) saturate(185%) !important;
+    backdrop-filter: blur(24px) saturate(185%) !important;
+  }
+  #root .momo-app-main button:hover:not(:disabled),
+  #root .momo-app-main [role="button"]:hover,
+  #root .momo-app-header button:hover:not(:disabled),
+  #root .signup-page button:hover:not(:disabled) {
+    background: linear-gradient(145deg, #fff, rgba(255,245,207,.98)) !important;
+    border-color: #fff !important;
+    box-shadow: 0 6px 14px rgba(65,54,29,.1), 0 14px 25px rgba(65,54,29,.09), inset 0 1px 0 #fff !important;
+  }
+
+  #root .momo-app-main input:not([type="checkbox"]):not([type="radio"]),
+  #root .momo-app-main textarea,
+  #root .momo-app-main select,
+  #root .momo-app-header input,
+  #root .signup-page input {
+    background: linear-gradient(145deg, rgba(255,255,255,.99), rgba(255,252,241,.96)) !important;
+    border: 1px solid rgba(255,255,255,1) !important;
+    box-shadow: inset 0 2px 5px rgba(65,54,29,.045), 0 2px 8px rgba(65,54,29,.045) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+    backdrop-filter: blur(22px) saturate(180%) !important;
+  }
+
+  /* Selected and primary actions retain MOMO yellow through the glass. */
+  #root .momo-app-main button[class*="active"],
+  #root .momo-app-main button[class*="selected"],
+  #root .momo-app-main button[class*="primary"],
+  #root .momo-app-main .signup-submit,
+  #root .momo-app-main .review-form-actions button,
+  #root .momo-app-main .all-reviews-search-submit,
+  #root .momo-app-main .favorite-browse-button,
+  #root .momo-app-main .recommend-button,
+  #root .momo-app-main .profile-edit-submit {
+    background: linear-gradient(145deg, rgba(255,255,255,.99), rgba(255,235,166,.97) 58%, rgba(255,212,59,.88)) !important;
+    color: #51400F !important;
+    border-color: rgba(255,255,255,1) !important;
+  }
+
+  /* Do not frost the notebook canvas or turn poster/media artwork into panels. */
+  #root .momo-app-main img,
+  #root .momo-app-main video,
+  #root .momo-app-main canvas,
+  #root .momo-app-main svg,
+  #root .momo-app-main picture,
+  #root .momo-app-main .movie-poster,
+  #root .momo-app-main .favorite-page-poster,
+  #root .momo-app-main .momo-home-poster-frame,
+  #root .momo-app-main .search-poster-frame,
+  #root .momo-app-main .movie-detail-poster {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
   }
 
 `;

@@ -17,10 +17,10 @@ const ToastNotificationStyles = createGlobalStyle`
     overflow: hidden;
     color: #303A33;
     font-family: inherit;
-    background: linear-gradient(140deg, rgba(255,255,255,.8), rgba(239,246,241,.52) 58%, rgba(222,233,225,.38));
+    background: linear-gradient(140deg, rgba(255,255,255,.8), rgba(255,250,236,.52) 58%, rgba(255,250,236,.38));
     border: 1px solid rgba(255,255,255,.94);
     border-radius: 17px;
-    box-shadow: 0 16px 42px rgba(34,42,37,.14), inset 0 1px rgba(255,255,255,.98);
+    box-shadow: 0 16px 42px rgba(41,40,32,.14), inset 0 1px rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(30px) saturate(175%);
     backdrop-filter: blur(30px) saturate(175%);
     transform-origin: top right;
@@ -37,8 +37,8 @@ const ToastNotificationStyles = createGlobalStyle`
     align-self: stretch;
     width: var(--momo-stub-width);
     place-items: center;
-    color: #4F6A56;
-    background: linear-gradient(145deg, rgba(255,255,255,.48), rgba(220,235,224,.58));
+    color: #80600E;
+    background: linear-gradient(145deg, rgba(255,255,255,.48), rgba(255,250,236,.58));
     border-right: 1px solid rgba(255,255,255,.8);
     font-size: 20px;
     font-weight: 900;
@@ -50,10 +50,10 @@ const ToastNotificationStyles = createGlobalStyle`
     height: 36px;
     place-items: center;
     line-height: 1;
-    background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(229,241,232,.64));
+    background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(255,250,236,.64));
     border: 1px solid rgba(255,255,255,.96);
     border-radius: 50%;
-    box-shadow: 0 3px 9px rgba(34,42,37,.07), inset 0 1px rgba(255,255,255,1);
+    box-shadow: 0 3px 9px rgba(41,40,32,.07), inset 0 1px rgba(255,255,255,1);
     animation: momo-toast-check .34s .08s cubic-bezier(.2,.72,.2,1) both;
   }
   .momo-toast-copy {
@@ -97,13 +97,13 @@ const ToastNotificationStyles = createGlobalStyle`
     left: var(--momo-stub-width);
     height: 3px;
     overflow: hidden;
-    background: rgba(163,185,168,.24);
+    background: rgba(214,180,63,.24);
   }
   .momo-toast-progress span {
     display: block;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #A7BEAA, #6F8B75);
+    background: linear-gradient(90deg, #D6B43F, #D6B43F);
     transform-origin: left center;
     animation: momo-toast-progress 3.2s linear both;
   }

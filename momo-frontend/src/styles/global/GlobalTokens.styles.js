@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-// MOMO palette: cool mineral surfaces with a warm highlighter accent
+// MOMO palette: warm paper, cream glass and highlighter yellow
 const GlobalTokensStyles = createGlobalStyle`
   :root {
     color-scheme: light;
@@ -94,8 +94,8 @@ const GlobalTokensStyles = createGlobalStyle`
     background-color: var(--momo-bg);
     background-image:
       radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.72), transparent 42rem),
-      radial-gradient(ellipse at 92% 16%, rgba(145,166,154,.075), transparent 44rem),
-      linear-gradient(140deg, rgba(226,230,221,.12), transparent 54%);
+      radial-gradient(ellipse at 92% 16%, rgba(255,212,59,.09), transparent 44rem),
+      linear-gradient(140deg, rgba(233,223,197,.12), transparent 54%);
     background-size: auto, auto, auto;
     background-attachment: fixed;
     color: var(--momo-text);
