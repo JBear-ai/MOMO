@@ -78,8 +78,8 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     border: 1px solid rgba(255,255,255,.98);
     border-radius: 17px;
     box-shadow: 0 24px 56px rgba(54,45,28,.17), 0 3px 8px rgba(54,45,28,.045), inset 0 1px rgba(255,255,255,.98);
-    backdrop-filter: blur(24px) saturate(145%);
-    -webkit-backdrop-filter: blur(24px) saturate(145%);
+    backdrop-filter: blur(28px) saturate(165%);
+    -webkit-backdrop-filter: blur(28px) saturate(165%);
   }
 
   /* 영화 검색 결과 */
@@ -91,11 +91,11 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     min-height: 88px;
     padding: 10px 14px;
     border: none;
-    border-bottom: 1px solid rgba(177,158,119,.22);
-    background: rgba(255,254,249,.58);
+    border-bottom: 1px solid rgba(255,255,255,.72);
+    background: rgba(255,255,255,.12);
     text-align: left;
     cursor: pointer;
-    transition: background 160ms ease, padding-left 160ms ease;
+    transition: background 180ms ease, border-color 180ms ease;
   }
 
   .momo-search-result:last-child {
@@ -105,8 +105,8 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   .momo-search-result:hover,
   .momo-search-result:focus-visible,
   .momo-search-result.is-active {
-    background: rgba(255,247,222,.92);
-    padding-left: 18px;
+    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(225,239,229,.58));
+    border-color: rgba(255,255,255,.96);
     outline: none;
   }
 
