@@ -159,8 +159,13 @@ export const FeatureVisual = styled.div.attrs({ className: "home-feature-visual"
   .recommend-button:hover { filter: brightness(1.035) saturate(1.04); box-shadow: 0 8px 19px rgba(0,0,0,.23), inset 0 1px rgba(255,255,255,.92); }
   .recommend-state {
     position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 24px;
-    background: linear-gradient(145deg, #35352E, #20211D); color: rgba(255,255,255,.76);
-    text-align: center; font-size: 13px;
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: inherit;
+    background: linear-gradient(140deg, rgba(255,255,255,.88), rgba(255,250,236,.68));
+    color: #514C40;
+    text-align: center; font-size: 13px; line-height: 1.75;
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
   }
   &:hover .recommend-poster { filter: saturate(1.02); }
   &:hover .recommend-content { border-color: rgba(255,255,255,.78); }
