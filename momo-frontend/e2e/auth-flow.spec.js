@@ -101,8 +101,8 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   });
   expect(homeHeroMaterial.columns).toBe(2);
   expect(homeHeroMaterial.background).toContain("linear-gradient");
-  expect(homeHeroMaterial.blur).toContain("blur(24px)");
-  expect(homeHeroMaterial.border).toBe("rgba(255, 255, 255, 0.9)");
+  expect(homeHeroMaterial.blur).toContain("blur(36px)");
+  expect(homeHeroMaterial.border).toBe("rgba(255, 255, 255, 0.96)");
 
   const homeMovieCards = page.locator(".home-movie-card");
   await expect(homeMovieCards.first()).toBeVisible();
