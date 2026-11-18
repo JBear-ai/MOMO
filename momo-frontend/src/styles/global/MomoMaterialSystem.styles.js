@@ -512,8 +512,11 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main .comment-like-button,
   #root .momo-app-main .selected-like {
     border-color: rgba(214,180,63,.48);
-    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,241,190,.5) 58%, rgba(255,212,59,.18));
+    background-color: transparent;
+    background-image: linear-gradient(145deg, rgba(255,255,255,.92), rgba(255,241,190,.5) 58%, rgba(255,212,59,.18));
     color: #66510F;
+    -webkit-backdrop-filter: blur(22px) saturate(175%);
+    backdrop-filter: blur(22px) saturate(175%);
   }
   #root .momo-app-main .detail-reaction-count:last-child,
   #root .momo-app-main .rating-vote-button.is-dislike,
@@ -521,8 +524,11 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main .comment-dislike-button,
   #root .momo-app-main .selected-dislike {
     border-color: rgba(218,174,164,.56);
-    background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(250,233,228,.58) 58%, rgba(229,184,173,.2));
+    background-color: transparent;
+    background-image: linear-gradient(145deg, rgba(255,255,255,.94), rgba(250,233,228,.58) 58%, rgba(229,184,173,.2));
     color: #87534B;
+    -webkit-backdrop-filter: blur(22px) saturate(165%);
+    backdrop-filter: blur(22px) saturate(165%);
   }
   #root .momo-app-main .profile-delete-button,
   #root .momo-app-main .review-action-button.delete,
