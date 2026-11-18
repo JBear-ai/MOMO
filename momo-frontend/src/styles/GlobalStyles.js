@@ -1,11 +1,7 @@
 import React from "react";
 import GlobalTokensStyles from "./global/GlobalTokens.styles";
-import ProductExperienceStyles from "./global/ProductExperience.styles";
-import PaperGlassDesignStyles from "./global/PaperGlassDesign.styles";
-import PaperGlassDetailPolishStyles from "./global/PaperGlassDetailPolish.styles";
 import MomoLiquidGlassPageStyles from "./global/MomoLiquidGlassPage.styles";
 import ProfileWorkspaceStyles from "./global/ProfileWorkspace.styles";
-import RouteBrandSystemStyles from "./global/RouteBrandSystem.styles";
 import GlobalResetStyles from "./global/GlobalReset.styles";
 import MomoMaterialSystemStyles from "./global/MomoMaterialSystem.styles";
 import ToastNotificationStyles from "./global/ToastNotification.styles";
@@ -33,6 +29,7 @@ function GlobalStyles() {
   return (
     <>
       <GlobalTokensStyles />
+      <GlobalResetStyles />
       <ToastNotificationStyles />
       <FoundationAndProfileStyles />
       <HomeAndMovieStyles />
@@ -47,13 +44,8 @@ function GlobalStyles() {
       <ResponsiveAndPosterOverridesStyles />
       <PersonDetailStyles />
       <ChatPopupGlobalStyles />
-      <ProductExperienceStyles />
-      <PaperGlassDesignStyles />
-      <PaperGlassDetailPolishStyles />
       <MomoLiquidGlassPageStyles />
       <ProfileWorkspaceStyles />
-      <RouteBrandSystemStyles />
-      <GlobalResetStyles />
       <MomoMaterialSystemStyles />
     </>
   );
