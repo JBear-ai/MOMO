@@ -308,7 +308,7 @@ const ReviewListStyles = createGlobalStyle`
   padding: 30px;
   color: var(--momo-muted);
   background: var(--momo-bg);
-  border: 1px dashed var(--momo-border);
+  border: 1px solid rgba(255,255,255,.9);
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
