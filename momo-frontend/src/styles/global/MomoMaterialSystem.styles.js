@@ -124,6 +124,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     -webkit-backdrop-filter: blur(32px) saturate(152%);
   }
   #root .movie-detail-page .movie-rating-panel {
+    border-color: rgba(255,255,255,.82);
     background: radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.82), transparent 48%), linear-gradient(140deg, rgba(255,255,255,.74), rgba(255,250,236,.5));
   }
   #root .profile-edit-page .profile-edit-photo-card {
