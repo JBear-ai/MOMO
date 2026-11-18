@@ -24,10 +24,12 @@ export const ChatPanel = styled.section`
   box-sizing: border-box;
   min-width: 0;
   min-height: 0;
-  border: 1px solid var(--momo-border-strong);
-  border-radius: 16px;
-  background: var(--momo-surface-raised);
-  box-shadow: 0 12px 36px rgba(35, 28, 18, 0.22);
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.66));
+  box-shadow: 0 14px 36px rgba(41,40,32,.13), inset 0 1px rgba(255,255,255,.98);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  backdrop-filter: blur(28px) saturate(150%);
 
   @media (max-width: 600px) {
     max-width: calc(100vw - 32px);
@@ -41,7 +43,10 @@ export const ChatHeader = styled.header`
   justify-content: space-between;
   padding: 13px 14px;
   color: var(--momo-text);
-  background: var(--momo-note);
+  background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.54));
+  border-bottom: 1px solid rgba(255,255,255,.86);
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  backdrop-filter: blur(20px) saturate(145%);
   cursor: move;
   user-select: none;
 `;
@@ -70,10 +75,13 @@ export const WindowActions = styled.div`
 export const WindowActionButton = styled.button`
   width: 30px;
   height: 30px;
-  border: 0;
+  border: 1px solid rgba(255,255,255,.84);
   border-radius: 10px;
-  color: var(--momo-surface);
-  background: var(--momo-text-soft);
+  color: #514C40;
+  background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.44));
+  box-shadow: 0 2px 6px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
+  backdrop-filter: blur(16px) saturate(145%);
   cursor: pointer;
   font-size: 20px;
   line-height: 1;
@@ -135,10 +143,12 @@ export const MessageMeta = styled.div`
 `;
 
 export const DeleteButton = styled.button`
-  padding: 0;
-  border: 0;
-  color: var(--momo-muted);
-  background: transparent;
+  min-height: 26px;
+  padding: 0 8px;
+  border: 1px solid rgba(255,255,255,.86);
+  border-radius: 999px;
+  color: #6A6251;
+  background: rgba(255,255,255,.42);
   cursor: pointer;
   font-size: 11px;
 `;
@@ -149,7 +159,9 @@ export const MessageBubble = styled.p`
   overflow-wrap: anywhere;
   border-radius: ${({ $isOwn }) => ($isOwn ? "14px 14px 4px 14px" : "14px 14px 14px 4px")};
   color: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-muted)" : $isOwn ? "var(--momo-surface-raised)" : "var(--momo-text)")};
-  background: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-note)" : $isOwn ? "var(--momo-text-soft)" : "var(--momo-note)")};
+  background: ({ $isOwn, $isDeleted }) => ($isDeleted ? "rgba(255,250,236,.68)" : $isOwn ? "linear-gradient(145deg, rgba(255,255,255,.84), rgba(255,239,190,.62))" : "linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.58))");
+  border: 1px solid rgba(255,255,255,.82);
+  box-shadow: 0 2px 6px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,.96);
   line-height: 1.45;
   white-space: pre-wrap;
   font-style: ${({ $isDeleted }) => ($isDeleted ? "italic" : "normal")};
