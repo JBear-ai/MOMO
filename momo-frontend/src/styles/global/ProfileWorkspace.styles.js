@@ -333,7 +333,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-dashboard .profile-activity-body { display: grid; gap: 8px; }
   #root .profile-dashboard .profile-activity-item h3 {
     margin: 0;
-    color: #514C40;
+    color: #292820;
     font-size: 12px;
     font-weight: 850;
     letter-spacing: -.02em;
@@ -771,6 +771,19 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-edit-page .profile-edit-cancel:hover:not(:disabled) {
     border-color: rgba(214,180,63,.56);
     background: rgba(255,248,229,.94);
+  }
+
+  #root .profile-delete-page-card .profile-delete-button:disabled {
+    border-color: #E5B8AD;
+    background: #F1EADF;
+    color: #776F62;
+    opacity: 1;
+  }
+  #root .profile-delete-page-card .profile-delete-button:not(:disabled) {
+    border-color: #E5B8AD;
+    background: #FFF1EC;
+    color: #8C3F38;
+    opacity: 1;
   }
 
   /* Delete-account route: calm explanation with a separate warning surface. */
