@@ -242,10 +242,10 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   gap: 14px;
   margin-top: 18px;
   padding: 20px;
-  background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(241,247,242,.38));
+  background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(255,250,236,.38));
   border: 1px solid rgba(255,255,255,.88);
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(34,42,37,.055), inset 0 1px rgba(255,255,255,.98);
+  box-shadow: 0 8px 20px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
   -webkit-backdrop-filter: blur(22px) saturate(155%);
   backdrop-filter: blur(22px) saturate(155%);
 }
