@@ -252,7 +252,7 @@ export const FeatureVisual = styled.div`
     transform: translateX(-110%);
     transition: transform .9s cubic-bezier(.2,.7,.2,1);
   }
-  &:hover .recommend-poster { transform: scale(1.055); }
+  &:hover .recommend-poster { transform: scale(1.025); }
   &:hover .recommend-content { box-shadow: 0 18px 44px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.5); }
   &:hover::after { transform: translateX(110%); }
   @media (max-width: 760px) {
@@ -328,7 +328,7 @@ export const MovieCard = styled.div`
   transform-style: preserve-3d;
   transition: filter 280ms ease;
   &:hover { transform: none; filter: drop-shadow(0 8px 10px rgba(54,45,28,.10)) saturate(1.035); }
-  &:hover img { transform: scale(1.065); }
+  &:hover img { transform: scale(1.025); }
   &:focus-visible { outline: 2px solid var(--momo-link); outline-offset: 5px; }
 `;
 
