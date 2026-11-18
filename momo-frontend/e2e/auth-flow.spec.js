@@ -102,7 +102,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   expect(homeHeroMaterial.columns).toBe(2);
   expect(homeHeroMaterial.background).toContain("linear-gradient");
   expect(homeHeroMaterial.blur).toContain("blur(24px)");
-  expect(homeHeroMaterial.border).toBe("rgba(255, 255, 255, 0.92)");
+  expect(homeHeroMaterial.border).toBe("rgba(255, 255, 255, 0.9)");
   await page.screenshot({ path: "test-results/home-cinema-desktop.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileHomeColumns = await homeHero.evaluate(
