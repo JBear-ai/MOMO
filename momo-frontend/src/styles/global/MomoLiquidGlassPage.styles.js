@@ -389,7 +389,7 @@ body {
   }
 
   /* Profile activity is a set of glass archive entries, not paper stickers. */
-  #root .profile-page .profile-card:has(.profile-activity-grid) {
+  #root .profile-dashboard .profile-card {
     display: block;
     width: 100%;
     padding: clamp(22px, 3vw, 32px);
@@ -400,16 +400,16 @@ body {
     backdrop-filter: blur(22px) saturate(110%);
     -webkit-backdrop-filter: blur(22px) saturate(110%);
   }
-#root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading {
+#root .profile-dashboard .profile-card > .profile-card-heading {
     margin-bottom: 22px;
   }
-  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading h2 {
+  #root .profile-dashboard .profile-card > .profile-card-heading h2 {
     color: #303633;
     font-size: 21px;
     font-weight: 850;
     letter-spacing: -.04em;
   }
-  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading p {
+  #root .profile-dashboard .profile-card > .profile-card-heading p {
     color: #626A63;
   }
   #root .profile-page .profile-activity-grid {
@@ -545,7 +545,7 @@ body {
     transition: transform 180ms ease;
   }
   #root .profile-page .profile-activity-item:hover .profile-activity-arrow {
-    transform: translate(2px,-2px);
+    transform: none;
   }
 
   /* Movie detail: glass is visible in the material, not in decorative circles. */
@@ -1127,7 +1127,7 @@ body {
     }
     #root .movie-detail-page .movie-detail-info { gap: 8px; }
     #root .movie-detail-page .rating-panel-main { grid-template-columns: 1fr; }
-    #root .profile-page .profile-card:has(.profile-activity-grid) { padding: 22px 17px; }
+    #root .profile-dashboard .profile-card { padding: 22px 17px; }
   }
   @media (max-width: 600px) {
     #root .favorite-page-container { width: calc(100% - 28px); }
@@ -1689,17 +1689,17 @@ body {
   }
 
   /* Profile activity cards: one memo-paper family, not three unrelated colors. */
-  #root .profile-page .profile-card:has(.profile-activity-grid) {
+  #root .profile-dashboard .profile-card {
     border-color: rgba(255,255,255,.84);
     background: linear-gradient(145deg, rgba(255,255,255,.70), rgba(255,250,236,.50));
     box-shadow: var(--momo-glass-shadow);
     backdrop-filter: blur(26px) saturate(145%);
     -webkit-backdrop-filter: blur(26px) saturate(145%);
   }
-  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading h2 {
+  #root .profile-dashboard .profile-card > .profile-card-heading h2 {
     color: #292820;
   }
-  #root .profile-page .profile-card:has(.profile-activity-grid) > .profile-card-heading p {
+  #root .profile-dashboard .profile-card > .profile-card-heading p {
     color: #6A6251;
   }
   #root .profile-page .profile-activity-item,
