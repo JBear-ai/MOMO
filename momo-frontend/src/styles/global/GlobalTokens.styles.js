@@ -21,7 +21,7 @@ const GlobalTokensStyles = createGlobalStyle`
     /* Typography */
     --momo-text: #292820;
     --momo-text-soft: #514C40;
-    --momo-muted: #827B6D;
+    --momo-muted: #6A6251;
     --momo-placeholder: #776F62;
     --momo-link: #715713;
 

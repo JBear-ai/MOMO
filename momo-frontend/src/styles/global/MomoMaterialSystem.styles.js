@@ -11,7 +11,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     --momo-glass-saturation: 150%;
     --momo-glass-tint: rgba(255, 250, 236, .38);
     --momo-glass-clear: rgba(255, 255, 255, .34);
-    --momo-glass-edge: rgba(255, 255, 255, .9);
+    --momo-glass-edge: rgba(233, 223, 197, .9);
     --momo-glass-edge-warm: rgba(214, 180, 63, .28);
     --momo-glass-surface:
       linear-gradient(138deg, rgba(255,255,255,.78), rgba(255,250,236,.48) 58%, rgba(255,245,214,.35));
@@ -117,6 +117,21 @@ const MomoMaterialSystemStyles = createGlobalStyle`
       linear-gradient(132deg, rgba(255,255,255,.76), rgba(255,250,236,.42));
   }
 
+  /* Main cinematic surfaces keep a stronger refractive layer than compact cards. */
+  #root .movie-detail-page .movie-detail-header {
+    border-color: rgba(255,255,255,.88);
+    backdrop-filter: blur(32px) saturate(152%);
+    -webkit-backdrop-filter: blur(32px) saturate(152%);
+  }
+  #root .movie-detail-page .movie-rating-panel {
+    border-color: rgba(255,255,255,.82);
+    background: radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.82), transparent 48%), linear-gradient(140deg, rgba(255,255,255,.74), rgba(255,250,236,.5));
+  }
+  #root .profile-edit-page .profile-edit-photo-card {
+    backdrop-filter: blur(24px) saturate(145%);
+    -webkit-backdrop-filter: blur(24px) saturate(145%);
+  }
+
   /* Smaller surfaces keep their own silhouettes instead of becoming uniform cards. */
   #root .favorite-page .favorite-page-card,
   #root .profile-dashboard .profile-activity-item,
@@ -164,6 +179,25 @@ const MomoMaterialSystemStyles = createGlobalStyle`
       inset 0 1px 0 rgba(255,255,255,1);
     filter: saturate(1.04);
   }
+
+  #root .favorite-page .favorite-page-card { border-color: #E9DFC5; }
+
+  /* The saved-film action is anchored to the poster, without shifting the card itself. */
+  #root .favorite-page .favorite-page-poster .favorite-star,
+  #root .momo-home-poster-frame .favorite-star {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+
+  /* Preserve semantic left-edge cues for the three profile destinations. */
+  #root .profile-dashboard .profile-activity-item[data-tone="writing"] { border-left-color: #D6B43F; }
+  #root .profile-dashboard .profile-activity-item[data-tone="liked"] { border-left-color: #B98778; }
+  #root .profile-dashboard .profile-activity-item[data-tone="saved"] { border-left-color: #829276; }
 
   /* Poster edges are crisp; the image remains the visual focus. */
   #root .favorite-page .favorite-page-poster,
@@ -265,6 +299,11 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     filter: saturate(1.06) brightness(1.015);
   }
 
+  /* The logout action stays visually secondary inside the glass masthead. */
+  #root .momo-app-header button.momo-logout-button {
+    border-color: rgba(216,201,159,.58);
+  }
+
   #root .profile-button:active:not(:disabled),
   #root .all-reviews-pagination button:active:not(:disabled),
   #root .my-reviews-pagination button:active:not(:disabled),
@@ -332,6 +371,23 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root a:focus-visible {
     outline: 3px solid rgba(179,141,25,.72);
     outline-offset: 3px;
+  }
+
+  /* Destructive action colors stay stable even while pointer hover is active. */
+  #root .profile-page .profile-container .profile-delete-page-card button.profile-button.profile-delete-button:disabled {
+    border-color: #E5B8AD;
+    background-color: #F1EADF;
+    background-image: none;
+    color: #776F62;
+    opacity: 1;
+  }
+  #root .profile-page .profile-container .profile-delete-page-card button.profile-button.profile-delete-button:not(:disabled),
+  #root .profile-page .profile-container .profile-delete-page-card button.profile-button.profile-delete-button:not(:disabled):hover {
+    border-color: #E5B8AD;
+    background-color: #FFF1EC;
+    background-image: none;
+    color: #8C3F38;
+    opacity: 1;
   }
 
   /* Fields use a light inset surface and a visible focus ring. */
