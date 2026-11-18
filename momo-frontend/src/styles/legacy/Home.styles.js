@@ -207,11 +207,10 @@ export const MovieGrid = styled.div`
   @media (max-width: 480px) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 11px; }
 `;
 
-export const MovieCard = styled.div`
-  position: relative; min-width: 0; cursor: pointer; border-radius: 15px; outline-offset: 4px;
+export const MovieCard = styled.article.attrs({ className: "home-movie-card" })`
+  position: relative; min-width: 0; border-radius: 15px;
   transition: filter 240ms ease;
   &:hover { filter: drop-shadow(0 9px 12px rgba(41,40,32,.13)); }
-  &:focus-visible { outline: 3px solid rgba(179,141,25,.7); }
 `;
 
 export const PosterWrap = styled.div.attrs({ className: "momo-home-poster-frame" })`
