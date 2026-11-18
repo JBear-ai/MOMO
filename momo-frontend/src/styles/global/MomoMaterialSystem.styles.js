@@ -177,6 +177,13 @@ const MomoMaterialSystemStyles = createGlobalStyle`
 
   /* Reusable controls: optical edge-light and pressure feedback, no lift motion. */
   #root .profile-button,
+  #root .all-reviews-pagination button,
+  #root .my-reviews-pagination button,
+  #root .liked-reviews-pagination button,
+  #root .review-edit-buttons button,
+  #root .review-comment-form button,
+  #root .liked-review-unlike,
+  #root .reaction-button,
   #root .favorite-browse-button,
   #root .favorite-back-button,
   #root .page-back-link,
@@ -217,6 +224,13 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
 
   #root .profile-button:hover:not(:disabled),
+  #root .all-reviews-pagination button:hover:not(:disabled),
+  #root .my-reviews-pagination button:hover:not(:disabled),
+  #root .liked-reviews-pagination button:hover:not(:disabled),
+  #root .review-edit-buttons button:hover:not(:disabled),
+  #root .review-comment-form button:hover:not(:disabled),
+  #root .liked-review-unlike:hover:not(:disabled),
+  #root .reaction-button:hover:not(:disabled),
   #root .favorite-browse-button:hover:not(:disabled),
   #root .favorite-back-button:hover,
   #root .page-back-link:hover,
@@ -252,6 +266,13 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
 
   #root .profile-button:active:not(:disabled),
+  #root .all-reviews-pagination button:active:not(:disabled),
+  #root .my-reviews-pagination button:active:not(:disabled),
+  #root .liked-reviews-pagination button:active:not(:disabled),
+  #root .review-edit-buttons button:active:not(:disabled),
+  #root .review-comment-form button:active:not(:disabled),
+  #root .liked-review-unlike:active:not(:disabled),
+  #root .reaction-button:active:not(:disabled),
   #root .favorite-browse-button:active:not(:disabled),
   #root .favorite-back-button:active,
   #root .page-back-link:active,
@@ -275,6 +296,13 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
 
   #root .profile-button:focus-visible,
+  #root .all-reviews-pagination button:focus-visible,
+  #root .my-reviews-pagination button:focus-visible,
+  #root .liked-reviews-pagination button:focus-visible,
+  #root .review-edit-buttons button:focus-visible,
+  #root .review-comment-form button:focus-visible,
+  #root .liked-review-unlike:focus-visible,
+  #root .reaction-button:focus-visible,
   #root .favorite-browse-button:focus-visible,
   #root .favorite-back-button:focus-visible,
   #root .page-back-link:focus-visible,
