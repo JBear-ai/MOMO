@@ -105,7 +105,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   .momo-search-result:hover,
   .momo-search-result:focus-visible,
   .momo-search-result.is-active {
-    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(225,239,229,.58));
+    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.58));
     border-color: rgba(255,255,255,.96);
     outline: none;
   }

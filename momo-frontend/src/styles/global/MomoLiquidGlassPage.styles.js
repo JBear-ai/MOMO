@@ -1195,7 +1195,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     border-radius: 15px;
     background:
       radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.82), transparent 58%),
-      linear-gradient(145deg, rgba(255,255,255,.46), rgba(245,247,242,.28) 52%, rgba(232,238,231,.38));
+      linear-gradient(145deg, rgba(255,255,255,.46), rgba(245,247,242,.28) 52%, rgba(255,250,236,.38));
     color: #3F3A31;
     font-size: 14px;
     line-height: 2;
