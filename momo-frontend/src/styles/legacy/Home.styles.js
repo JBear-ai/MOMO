@@ -442,9 +442,8 @@ export const GenreList = styled.div`
     box-shadow: 0 2px 4px rgba(54,45,28,.04), 0 9px 20px rgba(54,45,28,.09), inset 0 1px rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.2);
     backdrop-filter: blur(22px) saturate(150%);
     -webkit-backdrop-filter: blur(22px) saturate(150%);
+    position: relative;
     transform: perspective(800px) translateZ(0);
-    transition: transform 240ms cubic-bezier(.2,.72,.2,1), box-shadow 240ms ease, border-color 240ms ease;
-    -webkit-backdrop-filter: blur(10px);
     color: var(--momo-text-soft);
     font-size: 14px;
     font-weight: 700;
@@ -485,6 +484,14 @@ export const BrandLine = styled.div`
   backdrop-filter: blur(28px) saturate(150%);
   -webkit-backdrop-filter: blur(28px) saturate(150%);
   transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(112deg, transparent 18%, rgba(255,255,255,.32) 46%, transparent 70%);
+    pointer-events: none;
+  }
+  > * { position: relative; z-index: 1; }
   &:hover { transform: perspective(1000px) translateY(-3px) rotateX(.35deg); box-shadow: 0 4px 8px rgba(64,51,30,.04), 0 26px 50px rgba(64,51,30,.16), inset 0 1px rgba(255,255,255,1); }
   h2 {
     margin: 0;
