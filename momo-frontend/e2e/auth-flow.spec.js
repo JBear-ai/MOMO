@@ -43,6 +43,50 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(page.getByRole("button", { name: "로그아웃" })).toBeVisible();
   await initialFavoritesSync;
 
+  // Requested routes must use one shared warm-paper visual system on desktop and mobile.
+  const brandRoutes = [
+    { path: "/profile/reviews", heading: ".my-reviews-heading", surface: ".my-reviews-card" },
+    { path: "/profile/liked-reviews", heading: ".liked-reviews-heading", surface: ".liked-reviews-card" },
+    { path: "/profile/favorites", heading: ".favorite-page-heading", surface: ".favorite-page-card, .favorite-page-empty" },
+    { path: "/reviews", heading: ".all-reviews-heading", surface: ".all-reviews-card" },
+    { path: "/movie/20261234", heading: ".movie-detail-header", surface: ".movie-rating-panel" },
+    { path: "/person/name/테스트배우", heading: ".movie-detail-header", surface: ".detail-content-section" },
+    { path: "/search?keyword=기생충", heading: ".search-page-heading", surface: ".search-page input" },
+  ];
+
+  for (const route of brandRoutes) {
+    await page.goto(route.path);
+    await expect(page.locator(".momo-app-header")).toBeVisible();
+    await expect(page.locator(route.heading).first()).toBeVisible({ timeout: 20000 });
+
+    const visual = await page.locator(route.heading).first().evaluate((element) => {
+      const style = getComputedStyle(element);
+      const title = element.querySelector("h1") || element;
+      return {
+        background: style.backgroundImage,
+        border: style.borderTopColor,
+        title: getComputedStyle(title).color,
+      };
+    });
+    expect(visual.background).toContain("linear-gradient");
+    expect(visual.border).toBe("rgb(233, 223, 197)");
+    expect(visual.title).toBe("rgb(41, 40, 32)");
+
+    await page.screenshot({
+      path: `test-results/route-${route.path.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "")}-desktop.png`,
+      fullPage: true,
+    });
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(page.locator(route.heading).first()).toBeVisible();
+    await page.screenshot({
+      path: `test-results/route-${route.path.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "")}-mobile.png`,
+      fullPage: true,
+    });
+    await page.setViewportSize({ width: 1280, height: 800 });
+  }
+
+
   // 마이페이지의 세 활동 카드가 실제 카드 구조와 개수 배지를 유지하는지 확인한다.
   await page.goto("/profile");
   const profileActivityCards = page.locator(".profile-activity-item");
