@@ -8,7 +8,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     margin: 0 auto;
     padding: 34px 0 64px;
     border-radius: 0;
-    background: transparent !important;
+    background: transparent;
   }
   #root .profile-dashboard .profile-dashboard-container { display: grid; gap: 18px; }
   #root .profile-dashboard .profile-dashboard-heading {
@@ -24,7 +24,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   }
   #root .profile-dashboard .profile-heading h1,
   #root .profile-edit-page .profile-heading h1 {
-    margin: 0; padding: 0; border: 0; background: none !important;
+    margin: 0; padding: 0; border: 0; background: none;
     color: #292820; font-size: clamp(29px, 3.2vw, 36px);
     font-weight: 850; line-height: 1.16; letter-spacing: -.055em;
     box-shadow: none;
@@ -49,15 +49,13 @@ const ProfileWorkspaceStyles = createGlobalStyle`
 
   #root .profile-dashboard .profile-card {
     position: relative; min-width: 0; padding: clamp(22px, 2.8vw, 30px);
-    overflow: hidden; border: 1px solid rgba(233,223,197,.88);
-    border-radius: 20px; background: rgba(255,254,250,.88);
-    box-shadow: 0 12px 32px rgba(75,61,31,.055), inset 0 1px rgba(255,255,255,.98);
-    backdrop-filter: blur(22px) saturate(125%);
-    -webkit-backdrop-filter: blur(22px) saturate(125%);
+    overflow: hidden; border: 1px solid rgba(255,255,255,.82);
+    border-radius: 20px; background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,250,236,.50));
+    box-shadow: var(--momo-glass-shadow);
+    backdrop-filter: blur(26px) saturate(145%);
+    -webkit-backdrop-filter: blur(26px) saturate(145%);
   }
-  #root .profile-dashboard .profile-card::before,
-  #root .profile-dashboard .profile-card::after { content: none !important; display: none !important; }
-  #root .profile-dashboard .profile-card-heading {
+#root .profile-dashboard .profile-card-heading {
     display: flex; align-items: flex-start; justify-content: space-between;
     gap: 16px; margin: 0 0 21px;
   }
@@ -140,9 +138,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     -webkit-backdrop-filter: blur(18px) saturate(120%);
     transition: border-color 180ms ease, background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
   }
-  #root .profile-dashboard .profile-activity-item::before,
-  #root .profile-dashboard .profile-activity-item::after { content: none !important; display: none !important; }
-  #root .profile-dashboard .profile-activity-item:hover {
+#root .profile-dashboard .profile-activity-item:hover {
     border-color: rgba(214,180,63,.74);
     background: linear-gradient(155deg, #FFFEFA, #FFF8E4);
     box-shadow: 0 11px 22px rgba(75,61,31,.085), inset 0 1px rgba(255,255,255,1);
@@ -184,7 +180,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     border-top: 1px solid rgba(233,223,197,.86);
   }
   #root .profile-dashboard .profile-activity-footer p {
-    display: block !important; min-width: 0; margin: 0; color: #756C5A;
+    display: block; min-width: 0; margin: 0; color: #756C5A;
     font-size: 10px; font-weight: 600; line-height: 1.45;
   }
   #root .profile-dashboard .profile-activity-arrow {
@@ -226,7 +222,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-edit-page {
     width: min(1080px, calc(100% - 48px)); max-width: 1080px;
     margin: 0 auto; padding: 34px 0 72px; border-radius: 0;
-    background: transparent !important;
+    background: transparent;
   }
   #root .profile-edit-page .profile-container { display: grid; gap: 18px; }
   #root .profile-edit-page .profile-edit-heading {
@@ -234,11 +230,12 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     margin: 0 0 4px; padding: 0 2px 8px; overflow: visible;
     border: 0; border-radius: 0; background: transparent; box-shadow: none;
   }
-  #root .profile-edit-page .profile-edit-heading::before,
-  #root .profile-edit-page .profile-edit-heading::after { content: none !important; display: none !important; }
-  #root .profile-edit-page .profile-edit-card {
-    position: relative; padding: 0; overflow: visible; border: 0; border-radius: 0;
-    background: transparent; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+#root .profile-edit-page .profile-edit-card {
+    position: relative; isolation: isolate; padding: clamp(22px, 3vw, 34px); overflow: hidden;
+    border: 1px solid rgba(255,255,255,.84); border-radius: 22px;
+    background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.56));
+    box-shadow: var(--momo-glass-shadow); backdrop-filter: blur(28px) saturate(148%);
+    -webkit-backdrop-filter: blur(28px) saturate(148%);
   }
   #root .profile-edit-page .profile-edit-form { display: grid; gap: 16px; }
   #root .profile-edit-page .profile-edit-layout {
@@ -249,10 +246,10 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-edit-page .profile-edit-photo-card,
   #root .profile-edit-page .profile-edit-details {
     min-width: 0; border: 1px solid rgba(233,223,197,.9); border-radius: 18px;
-    background: rgba(255,254,250,.9);
-    box-shadow: 0 12px 30px rgba(75,61,31,.055), inset 0 1px rgba(255,255,255,.98);
-    backdrop-filter: blur(22px) saturate(125%);
-    -webkit-backdrop-filter: blur(22px) saturate(125%);
+    background: linear-gradient(145deg, rgba(255,255,255,.66), rgba(255,250,236,.48));
+    box-shadow: var(--momo-depth-shadow);
+    backdrop-filter: blur(24px) saturate(142%);
+    -webkit-backdrop-filter: blur(24px) saturate(142%);
   }
   #root .profile-edit-page .profile-edit-photo-card {
     display: flex; align-items: center; flex-direction: column; padding: 24px 20px 20px;
@@ -477,8 +474,45 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   @media (prefers-reduced-motion: reduce) {
     #root .profile-dashboard *,
     #root .profile-edit-page * {
-      transition-duration: .01ms !important; animation-duration: .01ms !important;
+      transition-duration: .01ms; animation-duration: .01ms;
     }
+  }
+  #root .profile-dashboard .profile-card::before,
+  #root .profile-edit-page .profile-edit-card::before {
+    position: absolute; z-index: 0; inset: 0; content: ""; border-radius: inherit;
+    background: linear-gradient(125deg, rgba(255,255,255,.58), transparent 42%, rgba(255,212,59,.055));
+    pointer-events: none;
+  }
+  #root .profile-dashboard .profile-card > *,
+  #root .profile-edit-page .profile-edit-card > * { position: relative; z-index: 1; }
+  #root .profile-edit-page .profile-edit-heading {
+    border: 1px solid rgba(255,255,255,.8); border-radius: 20px;
+    padding: clamp(22px, 3vw, 32px);
+    background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,250,236,.48));
+    box-shadow: var(--momo-depth-shadow); backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+  }
+  #root .profile-edit-page .profile-edit-photo-card,
+  #root .profile-edit-page .profile-edit-details {
+    transition: transform 220ms cubic-bezier(.2,.7,.2,1), box-shadow 220ms ease, border-color 220ms ease;
+  }
+  #root .profile-edit-page .profile-edit-photo-card:hover,
+  #root .profile-edit-page .profile-edit-details:hover {
+    border-color: rgba(255,255,255,.98); box-shadow: 0 20px 38px rgba(41,40,32,.11), inset 0 1px rgba(255,255,255,.98);
+    transform: translateY(-2px);
+  }
+  #root .profile-edit-page .profile-edit-sidebar-note {
+    background: rgba(255,250,236,.48); box-shadow: inset 0 1px rgba(255,255,255,.78);
+  }
+  #root .profile-edit-page .profile-delete-button {
+    min-height: 38px; padding: 0 13px; border: 1px solid rgba(190,112,98,.36);
+    border-radius: 10px; background: rgba(255,247,243,.62); color: #8C5149;
+    box-shadow: inset 0 1px rgba(255,255,255,.86);
+    transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+  #root .profile-edit-page .profile-delete-button:hover,
+  #root .profile-delete-section .profile-delete-button:hover {
+    border-color: rgba(190,112,98,.62); background: rgba(255,241,236,.88); transform: translateY(-1px);
   }
 `;
 
