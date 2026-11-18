@@ -557,7 +557,11 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
   #root .momo-app-main > .home-page { background-image: radial-gradient(ellipse at 88% 0%, rgba(214,187,132,.11), transparent 42rem); }
   #root .momo-app-main > .search-page { background-image: radial-gradient(ellipse at 8% 0%, rgba(156,177,160,.12), transparent 42rem); }
-  #root .momo-app-main > .favorite-page { background-image: radial-gradient(ellipse at 92% 0%, rgba(165,177,143,.12), transparent 42rem); }
+  #root .momo-app-main > .favorite-page {
+    background-image:
+      radial-gradient(ellipse at 92% 0%, rgba(165,177,143,.12), transparent 42rem),
+      linear-gradient(180deg, rgba(165,177,143,.07), transparent 620px);
+  }
   #root .momo-app-main > .movie-detail-page { background-image: radial-gradient(ellipse at 88% 0%, rgba(157,174,178,.11), transparent 42rem); }
 
   /* The same material on panels, cards and editing surfaces. */
@@ -596,6 +600,14 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     backdrop-filter: blur(24px) saturate(150%);
   }
   #root .home-feature-info { background: linear-gradient(140deg, rgba(255,255,255,.56), rgba(255,250,236,.24)); }
+  #root .favorite-page .favorite-page-card {
+    border-color: rgba(255,255,255,.9);
+    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.46) 62%, rgba(232,226,213,.2));
+    box-shadow: 0 4px 10px rgba(41,40,32,.04), 0 16px 30px rgba(41,40,32,.07), inset 0 1px rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
+  }
+
 
   /* Cinematic hero and rating glass keep their stronger optical depth. */
   #root .movie-detail-page .movie-detail-header {
