@@ -441,6 +441,223 @@ const MomoMaterialSystemStyles = createGlobalStyle`
       transition-duration: .01ms;
     }
   }
+
+  /* Final material pass: the previous controls had shadow only, not glass. */
+  #root .momo-app-main button,
+  #root .signup-page button,
+  #root .momo-app-header button {
+    border: 1px solid rgba(255,255,255,.9);
+    background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.42) 58%, rgba(232,226,213,.2)), rgba(255,255,255,.14);
+    color: #514C40;
+    box-shadow: 0 3px 8px rgba(41,40,32,.045), 0 8px 18px rgba(41,40,32,.055), inset 0 1px 0 rgba(255,255,255,.98), inset 0 -1px 0 rgba(216,201,159,.16);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    backdrop-filter: blur(18px) saturate(150%);
+    transition: color 200ms ease, background 200ms ease, border-color 200ms ease, box-shadow 200ms ease, filter 200ms ease, transform 100ms ease;
+  }
+  #root .momo-app-main button:hover:not(:disabled),
+  #root .signup-page button:hover:not(:disabled),
+  #root .momo-app-header button:hover:not(:disabled) {
+    border-color: rgba(255,255,255,1);
+    background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,252,243,.68) 58%, rgba(237,230,215,.3)), rgba(255,255,255,.22);
+    color: #292820;
+    box-shadow: 0 6px 12px rgba(41,40,32,.055), 0 14px 26px rgba(41,40,32,.085), inset 0 1px 0 rgba(255,255,255,1), inset 0 0 0 1px rgba(255,255,255,.22);
+    filter: saturate(1.04);
+    transform: none;
+  }
+  #root .momo-app-main button:active:not(:disabled),
+  #root .signup-page button:active:not(:disabled),
+  #root .momo-app-header button:active:not(:disabled) {
+    background: linear-gradient(145deg, rgba(246,242,232,.82), rgba(230,223,207,.48));
+    box-shadow: var(--momo-glass-depth-active);
+    transform: scale(.985);
+  }
+  #root .momo-app-main button:disabled,
+  #root .signup-page button:disabled,
+  #root .momo-app-header button:disabled { opacity: .56; cursor: not-allowed; }
+
+  /* Primary actions: translucent cream-yellow refraction, never flat yellow. */
+  #root .momo-app-main .recommend-button,
+  #root .momo-app-main .all-reviews-search-submit,
+  #root .momo-app-main .favorite-browse-button,
+  #root .momo-app-main .home-favorites-more,
+  #root .momo-app-main .profile-edit-submit,
+  #root .momo-app-main .profile-edit-image-save,
+  #root .momo-app-main .review-form-actions button,
+  #root .momo-app-main .signup-submit,
+  #root .signup-page .signup-submit {
+    border-color: rgba(255,255,255,.96);
+    background: linear-gradient(140deg, rgba(255,255,255,.88), rgba(255,238,183,.58) 52%, rgba(255,212,59,.28)), rgba(255,255,255,.16);
+    color: #4E421F;
+    box-shadow: 0 4px 10px rgba(92,76,29,.065), 0 10px 20px rgba(92,76,29,.075), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(214,180,63,.16);
+    -webkit-backdrop-filter: blur(20px) saturate(155%);
+    backdrop-filter: blur(20px) saturate(155%);
+  }
+  #root .momo-app-main .recommend-button:hover:not(:disabled),
+  #root .momo-app-main .all-reviews-search-submit:hover:not(:disabled),
+  #root .momo-app-main .favorite-browse-button:hover:not(:disabled),
+  #root .momo-app-main .home-favorites-more:hover:not(:disabled),
+  #root .momo-app-main .profile-edit-submit:hover:not(:disabled),
+  #root .momo-app-main .profile-edit-image-save:hover:not(:disabled),
+  #root .momo-app-main .review-form-actions button:hover:not(:disabled),
+  #root .momo-app-main .signup-submit:hover:not(:disabled),
+  #root .signup-page .signup-submit:hover:not(:disabled) {
+    background: linear-gradient(140deg, rgba(255,255,255,.98), rgba(255,235,163,.76) 52%, rgba(255,212,59,.42)), rgba(255,255,255,.24);
+    color: #3D3318;
+  }
+
+  /* Reactions retain their meaning through translucent semantic tints. */
+  #root .momo-app-main .detail-reaction-count:first-child,
+  #root .momo-app-main .rating-vote-button.is-like,
+  #root .momo-app-main .review-like-button,
+  #root .momo-app-main .comment-like-button,
+  #root .momo-app-main .selected-like {
+    border-color: rgba(214,180,63,.48);
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,241,190,.5) 58%, rgba(255,212,59,.18));
+    color: #66510F;
+  }
+  #root .momo-app-main .detail-reaction-count:last-child,
+  #root .momo-app-main .rating-vote-button.is-dislike,
+  #root .momo-app-main .review-dislike-button,
+  #root .momo-app-main .comment-dislike-button,
+  #root .momo-app-main .selected-dislike {
+    border-color: rgba(218,174,164,.56);
+    background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(250,233,228,.58) 58%, rgba(229,184,173,.2));
+    color: #87534B;
+  }
+  #root .momo-app-main .profile-delete-button,
+  #root .momo-app-main .review-action-button.delete,
+  #root .momo-app-main .liked-review-unlike,
+  #root .momo-app-main .review-comment-actions .delete {
+    border-color: rgba(218,168,157,.7);
+    background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(250,233,228,.56) 58%, rgba(229,184,173,.22));
+    color: #884F47;
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    backdrop-filter: blur(18px) saturate(145%);
+  }
+
+  /* Quiet cinematic canvas: atmospheric cream, not a yellow paper sheet. */
+  body {
+    background-color: #F5F2EB;
+    background-image: radial-gradient(ellipse at 12% 0%, rgba(255,255,255,.9), transparent 48rem), radial-gradient(ellipse at 94% 10%, rgba(204,190,158,.13), transparent 42rem), radial-gradient(ellipse at 52% 100%, rgba(216,221,205,.12), transparent 52rem);
+    background-attachment: fixed;
+  }
+  #root .momo-app-main > .home-page,
+  #root .momo-app-main > .search-page,
+  #root .momo-app-main > .favorite-page,
+  #root .momo-app-main > .movie-detail-page,
+  #root .momo-app-main > .all-reviews-page,
+  #root .momo-app-main > .my-reviews-page,
+  #root .momo-app-main > .liked-reviews-page,
+  #root .momo-app-main > .profile-dashboard,
+  #root .momo-app-main > .profile-edit-page,
+  #root .momo-app-main > .profile-page,
+  #root .momo-app-main > .review-detail-page {
+    background-color: transparent;
+    border-radius: 0;
+  }
+  #root .momo-app-main > .home-page { background-image: radial-gradient(ellipse at 88% 0%, rgba(214,187,132,.11), transparent 42rem); }
+  #root .momo-app-main > .search-page { background-image: radial-gradient(ellipse at 8% 0%, rgba(156,177,160,.12), transparent 42rem); }
+  #root .momo-app-main > .favorite-page { background-image: radial-gradient(ellipse at 92% 0%, rgba(165,177,143,.12), transparent 42rem); }
+  #root .momo-app-main > .movie-detail-page { background-image: radial-gradient(ellipse at 88% 0%, rgba(157,174,178,.11), transparent 42rem); }
+
+  /* The same material on panels, cards and editing surfaces. */
+  #root .home-feature-section,
+  #root .home-feature-info,
+  #root .home-favorites-empty,
+  #root .home-brand-line,
+  #root .search-page-heading,
+  #root .favorite-page-heading,
+  #root .favorite-page-empty,
+  #root .favorite-page-card,
+  #root .profile-dashboard-heading,
+  #root .profile-dashboard .profile-card,
+  #root .profile-activity-item,
+  #root .profile-edit-heading,
+  #root .profile-edit-card,
+  #root .profile-edit-photo-card,
+  #root .profile-edit-details,
+  #root .all-reviews-heading,
+  #root .all-reviews-card,
+  #root .all-reviews-search,
+  #root .my-reviews-heading,
+  #root .my-reviews-card,
+  #root .liked-reviews-heading,
+  #root .liked-reviews-card,
+  #root .movie-detail-page .movie-detail-header,
+  #root .movie-detail-page .movie-rating-panel,
+  #root .movie-detail-page .detail-content-section,
+  #root .review-detail-page .review-detail-card,
+  #root .review-detail-page .review-comment-card,
+  #root .signup-page .signup-card {
+    border-color: rgba(255,255,255,.9);
+    background: linear-gradient(138deg, rgba(255,255,255,.74), rgba(255,250,236,.38) 58%, rgba(232,226,213,.18)), rgba(255,255,255,.12);
+    box-shadow: 0 4px 10px rgba(41,40,32,.04), 0 16px 34px rgba(41,40,32,.065), inset 0 1px 0 rgba(255,255,255,.98), inset 0 -1px 0 rgba(216,201,159,.16);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
+  }
+  #root .home-feature-info { background: linear-gradient(140deg, rgba(255,255,255,.56), rgba(255,250,236,.24)); }
+
+  /* Remove memo-pad markers and dotted separators. */
+  #root .profile-dashboard .profile-card::before,
+  #root .profile-dashboard-heading::before,
+  #root .profile-edit-heading::before,
+  #root .all-reviews-heading::before,
+  #root .my-reviews-heading::before,
+  #root .liked-reviews-heading::before,
+  #root .favorite-page-heading::before,
+  #root .home-favorites-empty::before {
+    display: none;
+    content: none;
+  }
+  #root .profile-user-info p { border-bottom: 0; padding: 5px 0; }
+  #root .profile-user-info p + p { border-top: 1px solid rgba(229,222,207,.64); }
+  #root .home-page .state-message,
+  #root .home-page .empty-review-panel,
+  #root .home-favorites-empty,
+  #root .poster-placeholder,
+  #root .people-empty,
+  #root .all-reviews-state,
+  #root .my-reviews-state,
+  #root .liked-reviews-state,
+  #root .review-detail-state,
+  #root .favorite-page-empty,
+  #root .review-detail-page .review-detail-content,
+  #root .home-page .recommend-state {
+    border: 1px solid rgba(255,255,255,.9);
+    border-style: solid;
+    border-radius: 18px;
+    background: linear-gradient(140deg, rgba(255,255,255,.72), rgba(255,250,236,.38) 58%, rgba(232,226,213,.2)), rgba(255,255,255,.12);
+    color: #514C40;
+    box-shadow: 0 4px 10px rgba(41,40,32,.035), 0 14px 28px rgba(41,40,32,.055), inset 0 1px 0 rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    backdrop-filter: blur(22px) saturate(150%);
+  }
+  #root .home-page .recommend-state {
+    display: grid;
+    min-height: 100%;
+    place-items: center;
+    padding: 28px;
+    color: #514C40;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.9), transparent 58%), linear-gradient(140deg, rgba(255,255,255,.72), rgba(255,250,236,.42));
+  }
+  #root .review-detail-page .review-detail-content {
+    min-height: 170px;
+    padding: clamp(20px, 3vw, 30px);
+    background: linear-gradient(140deg, rgba(255,255,255,.74), rgba(255,250,236,.38) 58%, rgba(232,226,213,.2));
+    line-height: 1.85;
+  }
+
+  /* Footer: frosted glass, never graph paper. */
+  #root .momo-app-footer {
+    background: linear-gradient(145deg, rgba(255,255,255,.74), rgba(255,250,236,.62));
+    border-top: 1px solid rgba(255,255,255,.9);
+    box-shadow: 0 -8px 26px rgba(41,40,32,.045), inset 0 1px 0 rgba(255,255,255,.98);
+    -webkit-backdrop-filter: blur(28px) saturate(150%);
+    backdrop-filter: blur(28px) saturate(150%);
+  }
+  #root .momo-app-footer::before { display: none; content: none; background: none; background-image: none; }
+
 `;
 
 export default MomoMaterialSystemStyles;
