@@ -72,6 +72,17 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     expect(visual.border).toBe("rgb(233, 223, 197)");
     expect(visual.title).toBe("rgb(41, 40, 32)");
 
+    const routeSurface = page.locator(route.surface).first();
+    if (await routeSurface.count()) {
+      const surfaceStyle = await routeSurface.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return { background: style.backgroundColor, border: style.borderTopColor };
+      });
+      expect(surfaceStyle.background).not.toBe("rgb(236, 234, 227)");
+      expect(surfaceStyle.background).not.toContain("rgb(239, 243, 237)");
+      expect(surfaceStyle.border).not.toBe("rgb(168, 177, 154)");
+    }
+
     await page.screenshot({
       path: `test-results/route-${route.path.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "")}-desktop.png`,
       fullPage: true,
