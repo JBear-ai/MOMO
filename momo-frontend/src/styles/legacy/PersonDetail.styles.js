@@ -127,7 +127,7 @@ const PersonDetailStyles = createGlobalStyle`
 }
 
 @media (max-width: 600px) {
-  .movie-detail-page > .detail-content-section:has(> .people-list) {
+  .movie-detail-page > .detail-content-section {
     padding: 22px 16px;
   }
 
