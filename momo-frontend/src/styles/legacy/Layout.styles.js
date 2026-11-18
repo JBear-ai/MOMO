@@ -136,7 +136,7 @@ const UserArea = styled.div`
   min-width: 0;
   white-space: nowrap;
   font-size: 12px;
-  p { margin: 0 2px 0 5px; color: #827B6D; }
+  p { margin: 0 2px 0 5px; color: #6A6251; }
   p strong { color: #292820; font-weight: 850; }
   @media (max-width: 600px) { margin-left: auto; gap: 5px; font-size: 11px; p { display: none; } }
 `;
@@ -182,7 +182,7 @@ const ActionButton = styled.button`
     padding: 0 12px;
     border-color: rgba(216,201,159,.58);
     background: rgba(255,254,250,.34);
-    color: #827B6D;
+    color: #6A6251;
     font-size: 10px;
     font-weight: 700;
     box-shadow: inset 0 1px rgba(255,255,255,.82);
