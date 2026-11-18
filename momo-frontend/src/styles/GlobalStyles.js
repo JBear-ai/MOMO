@@ -5,6 +5,7 @@ import ProfileWorkspaceStyles from "./global/ProfileWorkspace.styles";
 import GlobalResetStyles from "./global/GlobalReset.styles";
 import MomoMaterialSystemStyles from "./global/MomoMaterialSystem.styles";
 import MomoReferenceLiquidGlassStyles from "./global/MomoReferenceLiquidGlass.styles";
+import MomoPrismGlassRefinementStyles from "./global/MomoPrismGlassRefinement.styles";
 import ToastNotificationStyles from "./global/ToastNotification.styles";
 import FoundationAndProfileStyles from "./legacy/FoundationAndProfile.styles";
 import HomeAndMovieStyles from "./legacy/HomeAndMovie.styles";
@@ -49,6 +50,7 @@ function GlobalStyles() {
       <ProfileWorkspaceStyles />
       <MomoMaterialSystemStyles />
       <MomoReferenceLiquidGlassStyles />
+      <MomoPrismGlassRefinementStyles />
     </>
   );
 }
