@@ -39,10 +39,9 @@ const SearchInput = styled.input`
   font-size: 15px;
   outline: none;
   box-shadow: 0 8px 24px rgba(53,43,24,.065), inset 0 1px rgba(255,255,255,.94);
-  transition: transform 180ms cubic-bezier(.2,.72,.2,1), border-color 180ms ease, box-shadow 180ms ease;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
   &:focus {
     border-color: #C9A62D;
-    transform: translateY(-2px);
     box-shadow: 0 0 0 4px rgba(255, 212, 59, .16), 0 14px 30px rgba(53,43,24,.1);
   }
   &::placeholder { color: var(--momo-placeholder); }
@@ -66,13 +65,20 @@ const MovieCard = styled.div`
   text-align: left;
   cursor: pointer;
   animation: appear .42s cubic-bezier(.2,.72,.2,1) both;
-  transition: transform 240ms cubic-bezier(.2,.72,.2,1);
+  padding: 7px;
+  border: 1px solid rgba(255,255,255,.86);
+  border-radius: 17px;
+  background: rgba(255,250,236,.34);
+  box-shadow: 0 4px 12px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,.92);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  transition: border-color 240ms ease, box-shadow 240ms ease, background 240ms ease;
   @keyframes appear {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  &:hover { transform: translateY(-5px); }
-  &:hover img { transform: scale(1.06); }
+  &:hover { border-color: rgba(255,255,255,.98); background: rgba(255,255,255,.48); box-shadow: 0 9px 19px rgba(41,40,32,.085), inset 0 1px rgba(255,255,255,1); }
+  &:hover img { transform: scale(1.025); }
   &:focus-visible { outline: 2px solid var(--momo-link); outline-offset: 4px; }
 `;
 
@@ -84,7 +90,7 @@ const Poster = styled.div`
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,.92);
   background: var(--momo-note);
-  box-shadow: 0 8px 22px rgba(43,35,21,.1);
+  box-shadow: 0 7px 18px rgba(43,35,21,.09), inset 0 1px rgba(255,255,255,.65);
   transition: box-shadow 240ms ease, border-color 240ms ease;
   img {
     width: 100%;
@@ -93,7 +99,7 @@ const Poster = styled.div`
     display: block;
     transition: transform .4s cubic-bezier(.2,.7,.2,1);
   }
-  ${MovieCard}:hover & { border-color: rgba(205,166,44,.72); box-shadow: 0 16px 30px rgba(43,35,21,.16); }
+  ${MovieCard}:hover & { border-color: rgba(205,166,44,.72); box-shadow: 0 10px 22px rgba(43,35,21,.14), inset 0 1px rgba(255,255,255,.82); }
 `;
 
 const MovieInfo = styled.div`
@@ -118,10 +124,10 @@ const SearchMessage = styled.div`
   text-align: center;
   color: var(--momo-muted);
   font-size: 14px;
-  background: rgba(255, 254, 250, .55);
-  border: 1px dashed rgba(177,157,111,.5);
+  background: rgba(255, 254, 250, .68);
+  border: 1px solid rgba(255,255,255,.82);
   border-radius: 16px;
-  background: rgba(255,254,250,.66);
+  background: rgba(255,254,250,.68);
   backdrop-filter: blur(12px);
 `;
 
