@@ -735,7 +735,7 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
     return { background: style.backgroundImage, border: style.borderTopColor };
   });
   expect(movieHeroStyle.background).toContain("linear-gradient");
-  expect(movieHeroStyle.border).toBe("rgba(255, 255, 255, 0.88)");
+  expect(movieHeroStyle.border).toBe("rgba(255, 255, 255, 0.9)");
   await page.screenshot({ path: "test-results/route-movie-detail-mobile.png", fullPage: true });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: "test-results/route-movie-detail-desktop.png", fullPage: true });
