@@ -14,7 +14,7 @@ const GlobalTokensStyles = createGlobalStyle`
 
     /* Brand accent: MOMO highlighter yellow */
     --momo-accent: #FFD43B;
-    --momo-accent-hover: #F3C72E;
+    --momo-accent-hover: #F3C51E;
     --momo-accent-soft: #FFF1B2;
     --momo-accent-ink: #292820;
 
