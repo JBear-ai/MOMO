@@ -250,6 +250,13 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     backdrop-filter: blur(26px) saturate(158%);
     -webkit-backdrop-filter: blur(26px) saturate(158%);
   }
+  #root .profile-edit-page .profile-edit-heading {
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+  }
+  #root .movie-detail-page .movie-rating-panel {
+    border: 1px solid rgba(255,255,255,.82);
+  }
   #root .profile-edit-page .profile-edit-photo-card,
   #root .profile-edit-page .profile-edit-details {
     border: 1px solid rgba(233,223,197,.9);
