@@ -341,6 +341,51 @@ const MomoReferenceLiquidGlassStyles = createGlobalStyle`
       transition-duration: .01ms !important;
     }
   }
+  /* FINAL TRANSLUCENT MATERIAL ENFORCEMENT */
+  /* Last in the cascade: legacy page rules must not repaint glass opaque. */
+  body {
+    background-color: #E9E8E2 !important;
+    background-image: linear-gradient(to right, transparent 0, transparent 62px, rgba(157,105,100,.10) 62px, rgba(157,105,100,.10) 63px, transparent 63px), repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(104,126,137,.055) 31px, rgba(104,126,137,.055) 32px), radial-gradient(ellipse at 12% 0%, rgba(255,255,255,.34), transparent 46rem), radial-gradient(ellipse at 88% 18%, rgba(194,177,218,.055), transparent 42rem), linear-gradient(140deg, #EFEEE8 0%, #E9E8E2 56%, #E3E3DD 100%) !important;
+    background-attachment: fixed !important;
+  }
+  #root .momo-app-header, #root .momo-app-footer,
+  #root .home-feature-section, #root .home-feature-info, #root .home-brand-line, #root .home-favorites-empty, #root .home-section,
+  #root .search-page-heading, #root .search-filter-panel, #root .search-movie-card,
+  #root .favorite-page-heading, #root .favorite-page-card, #root .favorite-page-empty,
+  #root .profile-dashboard-heading, #root .profile-card, #root .profile-overview-card, #root .profile-activity-section, #root .profile-activity-item, #root .profile-delete-section,
+  #root .profile-edit-heading, #root .profile-edit-card, #root .profile-edit-photo-card, #root .profile-edit-details, #root .profile-delete-page-card,
+  #root .all-reviews-heading, #root .all-reviews-card, #root .all-reviews-search, #root .my-reviews-heading, #root .my-reviews-card, #root .liked-reviews-heading, #root .liked-reviews-card,
+  #root .review-detail-card, #root .review-detail-content, #root .review-detail-movie, #root .review-comment-card, #root .review-comment-form,
+  #root .movie-detail-page .movie-detail-header, #root .movie-detail-page .detail-content-section, #root .movie-detail-page .movie-rating-panel, #root .movie-detail-page .rating-distribution, #root .movie-detail-page .movie-score-display, #root .movie-detail-page .detail-reaction-counts, #root .movie-detail-page .people-section, #root .movie-detail-page .detail-review-card, #root .movie-detail-page .review-write-section,
+  #root .person-detail-page .person-detail-header, #root .person-detail-page .person-filmography, #root .signup-page .signup-card, #root .login-page .login-card {
+    background-color: rgba(218,231,225,.15) !important;
+    background-image: linear-gradient(128deg, rgba(255,255,255,.25), rgba(255,255,255,.055) 32%, rgba(159,213,211,.075) 58%, rgba(194,177,218,.07) 78%, rgba(232,205,155,.075)) !important;
+    border: 1px solid rgba(255,255,255,.66) !important;
+    box-shadow: 0 3px 9px rgba(38,43,40,.045), 0 16px 36px rgba(38,43,40,.075), inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(104,120,116,.13) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(158%) !important;
+    backdrop-filter: blur(30px) saturate(158%) !important;
+  }
+  #root .home-feature-info, #root .profile-overview-card, #root .profile-activity-section, #root .profile-delete-section,
+  #root .movie-detail-page .detail-content-section, #root .movie-detail-page .movie-rating-panel, #root .movie-detail-page .rating-distribution, #root .movie-detail-page .movie-score-display, #root .movie-detail-page .detail-reaction-counts, #root .movie-detail-page .people-section, #root .review-detail-content, #root .review-detail-movie {
+    background-color: rgba(211,225,219,.11) !important;
+    background-image: linear-gradient(138deg, rgba(255,255,255,.19), rgba(255,255,255,.025) 48%, rgba(183,204,199,.085)) !important;
+    box-shadow: 0 3px 8px rgba(38,43,40,.035), 0 10px 24px rgba(38,43,40,.05), inset 0 1px 0 rgba(255,255,255,.62), inset 0 -1px 0 rgba(104,120,116,.1) !important;
+  }
+  #root .momo-app-main button, #root .momo-app-header button, #root .momo-app-footer button, #root .momo-chat-launcher, #root .signup-page button, #root .login-page button, #root .momo-app-main [role="button"] {
+    border: 1px solid rgba(255,255,255,.7) !important;
+    background: linear-gradient(180deg, rgba(255,255,255,.43), rgba(220,231,226,.2) 52%, rgba(205,218,212,.16)) !important;
+    box-shadow: 0 3px 9px rgba(38,43,40,.05), inset 0 1px 0 rgba(255,255,255,.84), inset 0 -1px 0 rgba(105,123,116,.13) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(165%) !important; backdrop-filter: blur(22px) saturate(165%) !important;
+  }
+  #root .momo-app-main button[class*="primary"], #root .momo-app-main button[class*="submit"], #root .momo-app-main .recommend-button, #root .momo-app-main .all-reviews-search-submit, #root .momo-app-main .favorite-browse-button, #root .momo-app-main .profile-edit-submit, #root .signup-page .signup-submit, #root .login-page .login-submit {
+    background: linear-gradient(140deg, rgba(255,255,255,.48), rgba(245,225,175,.32) 52%, rgba(209,190,145,.2)) !important; color: #51451F !important;
+  }
+  #root .momo-app-main input:not([type="checkbox"]):not([type="radio"]), #root .momo-app-main textarea, #root .momo-app-main select, #root .momo-app-header input, #root .signup-page input, #root .login-page input {
+    background: linear-gradient(180deg, rgba(250,252,250,.34), rgba(210,224,218,.19)) !important; border: 1px solid rgba(255,255,255,.58) !important;
+    box-shadow: inset 0 2px 6px rgba(38,43,40,.055), inset 0 1px 0 rgba(255,255,255,.62) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(155%) !important; backdrop-filter: blur(18px) saturate(155%) !important;
+  }
+  #root .momo-app-main img, #root .momo-app-main video, #root .momo-app-main canvas, #root .momo-app-main picture, #root .momo-app-main svg { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
 `;
 
 export default MomoReferenceLiquidGlassStyles;
