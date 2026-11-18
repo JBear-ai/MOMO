@@ -609,6 +609,9 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   expect(personHeroStyle.background).toContain("linear-gradient");
   expect(personHeroStyle.border).toBe("rgb(233, 223, 197)");
   await page.screenshot({ path: "test-results/route-person-detail-mobile.png", fullPage: true });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.screenshot({ path: "test-results/route-person-detail-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
 
   // 긴 인물 소개는 세 줄 미리보기에서 펼치고 다시 접을 수 있어야 한다.
   const biography = page.locator(".person-biography");
@@ -648,6 +651,9 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
   expect(movieHeroStyle.background).toContain("linear-gradient");
   expect(movieHeroStyle.border).toBe("rgb(233, 223, 197)");
   await page.screenshot({ path: "test-results/route-movie-detail-mobile.png", fullPage: true });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.screenshot({ path: "test-results/route-movie-detail-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
   await expect(page.locator(".detail-reaction-counts .rating-vote-button")).toHaveCount(2);
 
   // 영화 상세 헤더는 원형 광원 없이 절제된 반투명 글래스로 표현한다.
