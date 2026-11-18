@@ -25,14 +25,13 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     box-shadow: 0 7px 18px rgba(54,45,28,.07), inset 0 1px rgba(255,255,255,.98), inset 0 -1px rgba(190,172,135,.12);
     backdrop-filter: blur(16px) saturate(145%);
     -webkit-backdrop-filter: blur(16px) saturate(145%);
-    transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
   }
 
   .momo-search-form:focus-within {
     border-color: rgba(214, 166, 20, .72);
     background: rgba(255, 255, 255, .9);
     box-shadow: 0 0 0 3px rgba(255, 212, 59, 0.17), 0 12px 26px rgba(54,45,28,.1), inset 0 1px rgba(255,255,255,.98);
-    transform: translateY(-2px);
   }
 
   /* 검색 입력 */

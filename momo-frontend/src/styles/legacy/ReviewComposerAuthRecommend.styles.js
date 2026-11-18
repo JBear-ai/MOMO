@@ -165,7 +165,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 
 .review-form-actions button:hover:not(:disabled) {
   background: var(--momo-accent-hover);
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .review-form-actions button:disabled {
@@ -232,7 +232,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .review-form-actions button:hover {
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .detail-review-card {
@@ -416,7 +416,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 
 .signup-submit:hover:not(:disabled) {
   filter: brightness(0.96);
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .signup-submit:disabled {
@@ -550,7 +550,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .recommend-button:hover {
-    transform: translateY(-2px);
+    transform: none;
     filter: brightness(0.96);
 }
 

@@ -119,7 +119,7 @@ body {
 .profile-button:hover {
   background: var(--momo-note);
   border-color: var(--momo-accent-ink);
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .profile-button-secondary {
@@ -232,7 +232,7 @@ body {
 }
 
 .profile-activity-item:hover {
-  transform: translateY(-2px);
+  transform: none;
   box-shadow: 0 5px 14px rgba(0, 0, 0, 0.06);
 }
 
@@ -381,7 +381,7 @@ body {
 .profile-card-heading { margin-bottom: 20px; }
 .profile-card-heading h2 { font-size: 18px; letter-spacing: -.025em; }
 .profile-button { min-height: 40px; border-radius: 8px; box-shadow: none; }
-.profile-button:hover { transform: translateY(-1px); }
+.profile-button:hover { transform: none; }
 .profile-avatar { width: 68px; height: 68px; box-shadow: none; }
 .profile-activity-grid { gap: 12px; }
 .profile-activity-item {
