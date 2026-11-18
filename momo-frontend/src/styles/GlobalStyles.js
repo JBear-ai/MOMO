@@ -32,7 +32,6 @@ function GlobalStyles() {
   return (
     <>
       <GlobalTokensStyles />
-      <GlobalResetStyles />
       <ToastNotificationStyles />
       <FoundationAndProfileStyles />
       <HomeAndMovieStyles />
@@ -53,6 +52,7 @@ function GlobalStyles() {
       <MomoLiquidGlassPageStyles />
       <ProfileWorkspaceStyles />
       <RouteBrandSystemStyles />
+      <GlobalResetStyles />
     </>
   );
 }
