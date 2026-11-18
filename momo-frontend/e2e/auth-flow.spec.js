@@ -101,8 +101,8 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   });
   expect(homeHeroMaterial.columns).toBe(2);
   expect(homeHeroMaterial.background).toContain("linear-gradient");
-  expect(homeHeroMaterial.blur).toContain("blur(36px)");
-  expect(homeHeroMaterial.border).toBe("rgba(255, 255, 255, 0.96)");
+  expect(homeHeroMaterial.blur).toContain("blur(42px)");
+  expect(homeHeroMaterial.border).toBe("rgba(255, 255, 255, 0.98)");
 
   const homeMovieCards = page.locator(".home-movie-card");
   await expect(homeMovieCards.first()).toBeVisible();
@@ -221,9 +221,9 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     };
   });
   expect(overviewSurface.radius).toBe("20px");
-  expect(overviewSurface.background).toBe("rgba(255, 255, 255, 0.12)");
+  expect(overviewSurface.background).toBe("rgba(255, 254, 250, 0.95)");
   expect(overviewSurface.backgroundImage).toContain("linear-gradient");
-  expect(overviewSurface.blur).toContain("blur(24px)");
+  expect(overviewSurface.blur).toContain("blur(38px)");
   expect(overviewSurface.innerBackground).toBe("rgba(0, 0, 0, 0)");
   expect(overviewSurface.innerBorder).toBe("0px");
 
@@ -733,7 +733,7 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
     return { background: style.backgroundImage, border: style.borderTopColor };
   });
   expect(personHeroStyle.background).toContain("linear-gradient");
-  expect(personHeroStyle.border).toBe("rgba(255, 255, 255, 0.9)");
+  expect(personHeroStyle.border).toBe("rgba(255, 255, 255, 0.98)");
   await page.screenshot({ path: "test-results/route-person-detail-mobile.png", fullPage: true });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: "test-results/route-person-detail-desktop.png", fullPage: true });
@@ -775,7 +775,7 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
     return { background: style.backgroundImage, border: style.borderTopColor };
   });
   expect(movieHeroStyle.background).toContain("linear-gradient");
-  expect(movieHeroStyle.border).toBe("rgba(255, 255, 255, 0.9)");
+  expect(movieHeroStyle.border).toBe("rgba(255, 255, 255, 0.98)");
   await page.screenshot({ path: "test-results/route-movie-detail-mobile.png", fullPage: true });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: "test-results/route-movie-detail-desktop.png", fullPage: true });
@@ -832,15 +832,15 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
       })(),
     };
   });
-  expect(ratingVisual.panelBackground).toBe("rgba(0, 0, 0, 0)");
-  expect(ratingVisual.panelBorder).toBe("rgba(255, 255, 255, 0.9)");
+  expect(ratingVisual.panelBackground).toBe("rgba(255, 254, 250, 0.95)");
+  expect(ratingVisual.panelBorder).toBe("rgba(255, 255, 255, 0.98)");
   expect(ratingVisual.title).toBe("rgb(41, 40, 32)");
   expect(ratingVisual.score).toBe("rgb(41, 40, 32)");
   expect(ratingVisual.progress).toContain("linear-gradient");
-  expect(ratingVisual.likeBackground).toBe("rgba(0, 0, 0, 0)");
+  expect(ratingVisual.likeBackground).toBe("rgba(255, 254, 250, 0.95)");
   expect(ratingVisual.likeBackgroundImage).toContain("linear-gradient");
   expect(ratingVisual.likeText).toBe("rgb(102, 81, 15)");
-  expect(ratingVisual.dislikeBackground).toBe("rgba(0, 0, 0, 0)");
+  expect(ratingVisual.dislikeBackground).toBe("rgba(255, 254, 250, 0.95)");
   expect(ratingVisual.dislikeBackgroundImage).toContain("linear-gradient");
   expect(ratingVisual.dislikeText).toBe("rgb(135, 83, 75)");
   expect(ratingVisual.height).toBeGreaterThan(240);
