@@ -7,6 +7,7 @@ import MomoLiquidGlassPageStyles from "./global/MomoLiquidGlassPage.styles";
 import ProfileWorkspaceStyles from "./global/ProfileWorkspace.styles";
 import RouteBrandSystemStyles from "./global/RouteBrandSystem.styles";
 import GlobalResetStyles from "./global/GlobalReset.styles";
+import MomoMaterialSystemStyles from "./global/MomoMaterialSystem.styles";
 import ToastNotificationStyles from "./global/ToastNotification.styles";
 import FoundationAndProfileStyles from "./legacy/FoundationAndProfile.styles";
 import HomeAndMovieStyles from "./legacy/HomeAndMovie.styles";
@@ -53,6 +54,7 @@ function GlobalStyles() {
       <ProfileWorkspaceStyles />
       <RouteBrandSystemStyles />
       <GlobalResetStyles />
+      <MomoMaterialSystemStyles />
     </>
   );
 }
