@@ -186,13 +186,13 @@ export const SectionHeading = styled.div`
   display: flex; align-items: end; justify-content: space-between; gap: 20px;
   margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid rgba(154,138,101,.24);
   h2 { margin: 0; color: #292820; font-size: clamp(21px, 2.2vw, 27px); font-weight: 850; letter-spacing: -.045em; }
-  p { margin: 6px 0 0; color: #827B6D; font-size: 12px; line-height: 1.6; }
+  p { margin: 6px 0 0; color: #6A6251; font-size: 12px; line-height: 1.6; }
   @media (max-width: 520px) { align-items: flex-start; flex-direction: column; gap: 9px; margin-bottom: 16px; }
 `;
 
 export const MoreText = styled.span`
   display: inline-flex; align-items: center; min-height: 28px; padding: 0 9px;
-  border-left: 2px solid rgba(214,180,63,.72); color: #827B6D; font-size: 11px; font-weight: 700; white-space: nowrap;
+  border-left: 2px solid rgba(214,180,63,.72); color: #6A6251; font-size: 11px; font-weight: 700; white-space: nowrap;
 `;
 
 export const MovieGrid = styled.div`
@@ -238,7 +238,7 @@ export const Rank = styled.span`
 export const MovieInfo = styled.div`
   min-width: 0; padding: 11px 2px 0;
   h3 { margin: 0; overflow: hidden; color: #292820; font-size: 13px; font-weight: 800; letter-spacing: -.025em; text-overflow: ellipsis; white-space: nowrap; }
-  p { margin: 5px 0 0; color: #827B6D; font-size: 11px; font-weight: 550; }
+  p { margin: 5px 0 0; color: #6A6251; font-size: 11px; font-weight: 550; }
 `;
 
 export const GenreList = styled.div`
@@ -251,7 +251,7 @@ export const GenreList = styled.div`
     color: #514C40; font-size: 13px; font-weight: 750; text-align: left; cursor: pointer;
     -webkit-backdrop-filter: blur(20px) saturate(140%); backdrop-filter: blur(20px) saturate(140%);
     transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
-    &::after { content: "↗"; color: #9A8545; font-size: 13px; }
+    &::after { content: "↗"; color: #80600E; font-size: 13px; }
     &:hover {
       border-color: rgba(214,180,63,.76);
       background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,248,223,.74));
@@ -271,12 +271,12 @@ export const BrandLine = styled.div`
   -webkit-backdrop-filter: blur(24px) saturate(145%); backdrop-filter: blur(24px) saturate(145%);
   &::before { position: absolute; top: 22px; bottom: 22px; left: 0; width: 3px; content: ""; border-radius: 0 3px 3px 0; background: var(--momo-accent); }
   h2 { margin: 0; color: #292820; font-size: clamp(18px, 2.3vw, 25px); font-weight: 850; letter-spacing: -.04em; }
-  p { margin: 6px 0 0; color: #827B6D; font-size: 12px; line-height: 1.7; }
+  p { margin: 6px 0 0; color: #6A6251; font-size: 12px; line-height: 1.7; }
   @media (max-width: 600px) { align-items: flex-start; flex-direction: column; gap: 12px; }
 `;
 
 export const EmptyPoster = styled.div`
   display: flex; width: 100%; height: 100%; align-items: center; justify-content: center;
-  color: #827B6D; background: linear-gradient(145deg, rgba(255,255,255,.35), rgba(229,222,207,.62));
+  color: #6A6251; background: linear-gradient(145deg, rgba(255,255,255,.35), rgba(229,222,207,.62));
   font-size: 12px; font-weight: 650;
 `;
