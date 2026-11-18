@@ -125,7 +125,8 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     background: currentColor;
     box-shadow: 0 0 0 3px rgba(255,212,59,.2);
   }
-  #root .my-reviews-heading { --route-accent: #80600E; }
+  #root .all-reviews-heading { --route-accent: #768C80; }
+  #root .my-reviews-heading { --route-accent: #88734D; }
   #root .liked-reviews-heading { --route-accent: #9A6258; }
   #root .favorite-page-heading { --route-accent: #596A4E; }
 
@@ -1192,7 +1193,9 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     padding: clamp(20px, 3vw, 30px);
     border: 1px solid rgba(233,223,197,.84);
     border-radius: 15px;
-    background: linear-gradient(140deg, rgba(255,255,255,.78), rgba(255,250,236,.48) 58%, rgba(232,226,213,.22));
+    background:
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.82), transparent 58%),
+      linear-gradient(145deg, rgba(255,255,255,.46), rgba(245,247,242,.28) 52%, rgba(232,238,231,.38));
     color: #3F3A31;
     font-size: 14px;
     line-height: 2;
@@ -1217,7 +1220,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .review-detail-page .review-comment-content { color: #514C40; font-size: 12px; line-height: 1.75; }
 
-  /* Signup and login share a centered, illuminated glass notebook. */
+  /* Signup and login share a centered, illuminated glass entry panel. */
   #root .signup-page {
     min-height: calc(100vh - 220px);
     display: grid;
@@ -1384,7 +1387,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   @media (max-width: 430px) {
     #root .favorite-page .favorite-page-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px 11px; }
     #root .movie-detail-page .detail-reaction-counts { grid-template-columns: 1fr; }
-    #root .movie-detail-page .people-list-compact { grid-template-columns: 1fr; }
+    #root .movie-detail-page .people-list-compact { grid-template-columns: repeat(2,minmax(0,1fr)); }
     #root .all-reviews-card,
     #root .my-reviews-card,
     #root .liked-reviews-card { padding: 16px 12px; }
