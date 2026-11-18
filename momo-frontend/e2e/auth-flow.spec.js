@@ -130,7 +130,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
       const style = getComputedStyle(document.body);
       return { image: style.backgroundImage, size: style.backgroundSize };
     });
-    expect(bodyCanvas.image).toContain("linear-gradient");
+    expect(bodyCanvas.image).toContain("radial-gradient");
     expect(bodyCanvas.size).not.toContain("34px 34px");
 
     const visual = await page.locator(route.heading).first().evaluate((element) => {
@@ -189,6 +189,12 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   });
   expect(dashboardCanvas.background).toBe("rgba(0, 0, 0, 0)");
   expect(dashboardCanvas.image).toBe("none");
+
+  const profileHeaderMarker = await page.locator(".profile-dashboard-heading").evaluate((element) => {
+    const style = getComputedStyle(element, "::before");
+    return style.display;
+  });
+  expect(profileHeaderMarker).toBe("none");
 
   const overviewSurface = await page.locator(".profile-overview-card").evaluate((element) => {
     const style = getComputedStyle(element);
