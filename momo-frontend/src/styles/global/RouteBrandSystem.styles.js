@@ -486,6 +486,136 @@ const RouteBrandSystemStyles = createGlobalStyle`
     color: var(--momo-danger) !important;
   }
 
+
+  /* Search result cards use the same poster frame and text hierarchy as favorites. */
+  #root .search-page .movie-card,
+  #root .search-page .movie-grid > *,
+  #root .search-page .movie-item {
+    border: 1px solid var(--momo-route-line) !important;
+    border-radius: 15px !important;
+    background: rgba(255,250,236,.92) !important;
+    color: var(--momo-route-ink) !important;
+    box-shadow: 0 10px 24px rgba(75,61,31,.075), inset 0 1px rgba(255,255,255,.96) !important;
+  }
+
+  #root .search-page .movie-card:hover,
+  #root .search-page .movie-item:hover {
+    border-color: rgba(214,180,63,.72) !important;
+    background: rgba(255,250,236,.98) !important;
+    box-shadow: 0 16px 30px rgba(75,61,31,.12), inset 0 1px rgba(255,255,255,.98) !important;
+  }
+
+  #root .search-page .poster-frame,
+  #root .search-page .movie-poster,
+  #root .search-page .poster-placeholder {
+    border-color: rgba(233,223,197,.9) !important;
+    background: #FFFEFA !important;
+  }
+
+  #root .search-page .movie-card h3,
+  #root .search-page .movie-item h3,
+  #root .search-page .movie-info h3 {
+    color: var(--momo-route-ink) !important;
+  }
+
+  #root .search-page .movie-card p,
+  #root .search-page .movie-item p,
+  #root .search-page .movie-info p,
+  #root .search-page .movie-audience-info {
+    color: var(--momo-route-muted) !important;
+  }
+
+  #root .search-page .poster-rank {
+    border: 1px solid rgba(233,223,197,.72) !important;
+    background: rgba(41,40,32,.86) !important;
+    color: #FFF1B2 !important;
+  }
+
+  #root .search-page .movie-message,
+  #root .search-page [class*="Message"] {
+    color: var(--momo-route-muted) !important;
+  }
+
+  /* Detail metadata, biography, filmography and review composer. */
+  #root .movie-detail-page .movie-detail-info,
+  #root .movie-detail-page .movie-detail-info > p:not(.eyebrow),
+  #root .movie-detail-page .person-meta-details,
+  #root .movie-detail-page .person-meta-details p,
+  #root .movie-detail-page .person-biography,
+  #root .movie-detail-page .rating-panel-description,
+  #root .movie-detail-page .rating-panel-stamp,
+  #root .movie-detail-page .movie-score-value span,
+  #root .movie-detail-page .rating-vote-summary,
+  #root .movie-detail-page .rating-distribution-legend,
+  #root .movie-detail-page .detail-total-count {
+    color: var(--momo-route-body) !important;
+  }
+
+  #root .movie-detail-page .detail-rank {
+    border: 1px solid rgba(214,180,63,.58) !important;
+    background: rgba(255,241,178,.58) !important;
+    color: var(--momo-route-yellow-ink) !important;
+  }
+
+  #root .movie-detail-page .rating-distribution-heading,
+  #root .movie-detail-page .rating-distribution-heading strong,
+  #root .movie-detail-page .detail-total-count strong {
+    color: var(--momo-route-ink) !important;
+  }
+
+  #root .movie-detail-page .rating-error {
+    color: var(--momo-danger) !important;
+  }
+
+  #root .movie-detail-page .rating-unavailable {
+    border-color: var(--momo-route-line) !important;
+    background: rgba(255,250,236,.72) !important;
+    color: var(--momo-route-muted) !important;
+  }
+
+  #root .movie-detail-page .review-write-section,
+  #root .movie-detail-page .detail-review-card {
+    border: 1px solid var(--momo-route-line) !important;
+    border-radius: 16px !important;
+    background: rgba(255,250,236,.9) !important;
+    box-shadow: 0 10px 24px rgba(75,61,31,.065), inset 0 1px rgba(255,255,255,.96) !important;
+  }
+
+  #root .movie-detail-page .review-write-toggle {
+    color: var(--momo-route-ink) !important;
+  }
+
+  #root .movie-detail-page .review-write-toggle:hover {
+    background: rgba(255,241,178,.4) !important;
+  }
+
+  #root .movie-detail-page .review-write-content {
+    border-top-color: rgba(216,201,159,.72) !important;
+  }
+
+  #root .movie-detail-page .review-write-content h3,
+  #root .movie-detail-page .review-field-heading label,
+  #root .movie-detail-page .detail-review-card h3 {
+    color: var(--momo-route-ink) !important;
+  }
+
+  #root .movie-detail-page .review-field-heading span,
+  #root .movie-detail-page .detail-review-card p {
+    color: var(--momo-route-body) !important;
+  }
+
+  #root .movie-detail-page .people-empty,
+  #root .movie-detail-page .person-biography {
+    color: var(--momo-route-body) !important;
+  }
+
+  #root .movie-detail-page .filmography-list .person-chip,
+  #root .movie-detail-page .people-list .person-chip {
+    border-color: var(--momo-route-line) !important;
+    background: rgba(255,254,250,.9) !important;
+    color: var(--momo-route-body) !important;
+  }
+
   @media (max-width: 760px) {
     #root .my-reviews-page,
     #root .all-reviews-page {
