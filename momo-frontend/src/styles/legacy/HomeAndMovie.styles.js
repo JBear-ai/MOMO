@@ -342,7 +342,7 @@ const HomeAndMovieStyles = createGlobalStyle`
   padding: 12px;
   color: var(--momo-muted);
   background: var(--momo-note);
-  border: 1px dashed var(--momo-border);
+  border: 1px solid rgba(255,255,255,.9);
   border-radius: 8px;
   text-align: center;
   overflow-wrap: anywhere;
@@ -572,7 +572,7 @@ const HomeAndMovieStyles = createGlobalStyle`
   padding: 16px;
   color: var(--momo-muted);
   background: var(--momo-bg);
-  border: 1px dashed var(--momo-border);
+  border: 1px solid rgba(255,255,255,.9);
   border-radius: 8px;
   font-size: 13px;
   line-height: 1.7;
