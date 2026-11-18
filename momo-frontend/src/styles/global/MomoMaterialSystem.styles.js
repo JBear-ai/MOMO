@@ -14,18 +14,18 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     --momo-glass-edge-soft: rgba(233,223,197,.72);
     --momo-glass-surface: linear-gradient(138deg, rgba(255,255,255,.68), rgba(255,250,236,.34) 54%, rgba(255,241,178,.24));
     --momo-glass-depth:
-      0 2px 5px rgba(34,42,37,.035),
-      0 14px 34px rgba(34,42,37,.075),
+      0 2px 5px rgba(41,40,32,.035),
+      0 14px 34px rgba(41,40,32,.075),
       inset 0 1px 0 rgba(255,255,255,.98),
       inset 0 -1px 0 rgba(216,201,159,.2);
     --momo-glass-depth-hover:
-      0 5px 10px rgba(34,42,37,.045),
-      0 18px 38px rgba(34,42,37,.1),
+      0 5px 10px rgba(41,40,32,.045),
+      0 18px 38px rgba(41,40,32,.1),
       inset 0 1px 0 rgba(255,255,255,1),
       inset 0 -1px 0 rgba(216,201,159,.26);
     --momo-glass-depth-active:
-      0 1px 3px rgba(34,42,37,.045),
-      inset 0 2px 5px rgba(34,42,37,.075),
+      0 1px 3px rgba(41,40,32,.045),
+      inset 0 2px 5px rgba(41,40,32,.075),
       inset 0 1px 0 rgba(255,255,255,.88);
     --momo-glass-button:
       linear-gradient(145deg, rgba(255,255,255,.58), rgba(255,250,236,.34) 54%, rgba(255,241,178,.24)),
@@ -77,7 +77,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-header {
     background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(245,248,245,.56));
     border-bottom: 1px solid rgba(255,255,255,.88);
-    box-shadow: 0 8px 28px rgba(34,42,37,.065), inset 0 1px 0 rgba(255,255,255,.98);
+    box-shadow: 0 8px 28px rgba(41,40,32,.065), inset 0 1px 0 rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(32px) saturate(175%);
     backdrop-filter: blur(32px) saturate(175%);
   }
@@ -85,7 +85,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     border: 1px solid rgba(255,255,255,.9);
     background: var(--momo-glass-button);
     color: #3D4941;
-    box-shadow: 0 2px 5px rgba(34,42,37,.045), 0 7px 16px rgba(34,42,37,.065), inset 0 1px 0 rgba(255,255,255,.98);
+    box-shadow: 0 2px 5px rgba(41,40,32,.045), 0 7px 16px rgba(41,40,32,.065), inset 0 1px 0 rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     backdrop-filter: blur(24px) saturate(180%);
     transition: color var(--momo-motion-material), background var(--momo-motion-material), border-color var(--momo-motion-material), box-shadow var(--momo-motion-material), transform var(--momo-motion-press);
@@ -100,23 +100,23 @@ const MomoMaterialSystemStyles = createGlobalStyle`
 
   #root .momo-chat-launcher {
     border: 1px solid rgba(255,255,255,.94);
-    background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(232,243,235,.56) 54%, rgba(255,241,178,.36));
+    background: linear-gradient(145deg, rgba(255,255,255,.84), rgba(255,250,236,.56) 54%, rgba(255,241,178,.36));
     color: #514C40;
-    box-shadow: 0 8px 22px rgba(34,42,37,.12), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.16);
+    box-shadow: 0 8px 22px rgba(41,40,32,.12), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.16);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     backdrop-filter: blur(24px) saturate(180%);
   }
   #root .momo-chat-launcher:hover {
     border-color: rgba(255,255,255,1);
     background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,241,178,.72) 54%, rgba(255,212,59,.48));
-    box-shadow: 0 11px 26px rgba(34,42,37,.15), inset 0 1px 0 rgba(255,255,255,1);
+    box-shadow: 0 11px 26px rgba(41,40,32,.15), inset 0 1px 0 rgba(255,255,255,1);
     color: #292820;
     transform: none;
   }
 
   #root .momo-app-header nav a {
     border: 1px solid rgba(255,255,255,.54);
-    background: linear-gradient(145deg, rgba(255,255,255,.46), rgba(235,242,237,.18));
+    background: linear-gradient(145deg, rgba(255,255,255,.46), rgba(255,250,236,.18));
     color: #514C40;
     box-shadow: inset 0 1px rgba(255,255,255,.78);
     -webkit-backdrop-filter: blur(18px) saturate(165%);
@@ -126,20 +126,20 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-header nav a:hover,
   #root .momo-app-header nav a:focus-visible {
     border-color: rgba(255,255,255,.98);
-    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(230,240,233,.48));
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.48));
     color: #292820;
-    box-shadow: 0 5px 13px rgba(34,42,37,.065), inset 0 1px rgba(255,255,255,1);
+    box-shadow: 0 5px 13px rgba(41,40,32,.065), inset 0 1px rgba(255,255,255,1);
   }
   #root .momo-app-header nav a.active {
     border-color: rgba(233,223,197,.78);
     background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.56));
     color: #292820;
-    box-shadow: 0 3px 10px rgba(34,42,37,.04), inset 0 1px rgba(255,255,255,1);
+    box-shadow: 0 3px 10px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,1);
   }
   #root .momo-app-header .momo-search-form {
     border: 1px solid rgba(255,255,255,.9);
-    background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(237,244,239,.36));
-    box-shadow: 0 4px 14px rgba(34,42,37,.055), inset 0 1px rgba(255,255,255,.98);
+    background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(255,250,236,.36));
+    box-shadow: 0 4px 14px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(24px) saturate(165%);
     backdrop-filter: blur(24px) saturate(165%);
   }
@@ -154,7 +154,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     border: 1px solid rgba(255,255,255,.94);
     border-radius: 18px;
     background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.56) 58%, rgba(255,241,178,.38));
-    box-shadow: 0 20px 46px rgba(34,42,37,.14), inset 0 1px rgba(255,255,255,1);
+    box-shadow: 0 20px 46px rgba(41,40,32,.14), inset 0 1px rgba(255,255,255,1);
     -webkit-backdrop-filter: blur(30px) saturate(175%);
     backdrop-filter: blur(30px) saturate(175%);
   }
@@ -179,8 +179,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
   #root .momo-app-header .momo-search-form:focus-within {
     border-color: rgba(233,223,197,.92);
-    background: linear-gradient(140deg, rgba(255,255,255,.84), rgba(235,245,238,.5));
-    box-shadow: 0 0 0 3px rgba(216,201,159,.18), 0 9px 22px rgba(34,42,37,.075), inset 0 1px rgba(255,255,255,1);
+    background: linear-gradient(140deg, rgba(255,255,255,.84), rgba(255,250,236,.5));
+    box-shadow: 0 0 0 3px rgba(216,201,159,.18), 0 9px 22px rgba(41,40,32,.075), inset 0 1px rgba(255,255,255,1);
   }
 
   /* Main glass planes. Each keeps its own shape and hierarchy. */
@@ -225,13 +225,13 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     backdrop-filter: blur(28px) saturate(175%);
     background:
       radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.78), transparent 50%),
-      linear-gradient(135deg, rgba(255,255,255,.62), rgba(231,241,234,.32) 56%, rgba(255,255,255,.22));
+      linear-gradient(135deg, rgba(255,255,255,.62), rgba(255,250,236,.32) 56%, rgba(255,255,255,.22));
   }
   #root .home-feature-info {
-    background: linear-gradient(145deg, rgba(255,255,255,.46), rgba(234,242,235,.2));
+    background: linear-gradient(145deg, rgba(255,255,255,.46), rgba(255,250,236,.2));
   }
   #root .home-feature-visual .recommend-content {
-    background: linear-gradient(140deg, rgba(255,255,255,.3), rgba(229,239,232,.14) 55%, rgba(255,255,255,.08)), rgba(23,31,27,.3);
+    background: linear-gradient(140deg, rgba(255,255,255,.3), rgba(255,250,236,.14) 55%, rgba(255,255,255,.08)), rgba(41,40,32,.3);
     border-color: rgba(255,255,255,.58);
     box-shadow: 0 18px 48px rgba(0,0,0,.26), inset 0 1px rgba(255,255,255,.68), inset 0 -1px rgba(255,255,255,.12);
     -webkit-backdrop-filter: blur(28px) saturate(175%);
@@ -255,7 +255,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .movie-detail-page .movie-detail-header {
     background:
       radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.78), transparent 48%),
-      linear-gradient(135deg, rgba(241,248,243,.68), rgba(255,250,236,.28) 58%, rgba(255,255,255,.2));
+      linear-gradient(135deg, rgba(255,250,236,.68), rgba(255,250,236,.28) 58%, rgba(255,255,255,.2));
     border-color: rgba(255,255,255,.9);
     -webkit-backdrop-filter: blur(32px) saturate(175%);
     backdrop-filter: blur(32px) saturate(175%);
@@ -264,7 +264,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .movie-detail-page .detail-content-section,
   #root .movie-detail-page .review-write-section,
   #root .movie-detail-page .detail-review-card {
-    background: linear-gradient(140deg, rgba(255,255,255,.66), rgba(244,248,245,.32) 58%, rgba(221,233,225,.24));
+    background: linear-gradient(140deg, rgba(255,255,255,.66), rgba(244,248,245,.32) 58%, rgba(255,250,236,.24));
   }
   #root .review-detail-page .review-detail-card,
   #root .review-detail-page .review-comment-card {
@@ -280,7 +280,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .favorite-page-empty,
   #root .profile-delete-page-card,
   #root .signup-page .signup-card {
-    background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(245,248,245,.32) 58%, rgba(224,233,226,.22));
+    background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(245,248,245,.32) 58%, rgba(255,250,236,.22));
   }
 
   /* Compact cards also need transparency, a highlight rim and real depth. */
@@ -296,8 +296,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .review-detail-movie,
   #root .review-comment-item {
     border-color: rgba(255,255,255,.84);
-    background: linear-gradient(145deg, rgba(255,255,255,.58), rgba(239,246,241,.28) 58%, rgba(255,250,236,.22));
-    box-shadow: 0 4px 12px rgba(34,42,37,.045), 0 12px 26px rgba(34,42,37,.06), inset 0 1px 0 rgba(255,255,255,.96);
+    background: linear-gradient(145deg, rgba(255,255,255,.58), rgba(255,250,236,.28) 58%, rgba(255,250,236,.22));
+    box-shadow: 0 4px 12px rgba(41,40,32,.045), 0 12px 26px rgba(41,40,32,.06), inset 0 1px 0 rgba(255,255,255,.96);
     -webkit-backdrop-filter: blur(22px) saturate(160%);
     backdrop-filter: blur(22px) saturate(160%);
   }
@@ -311,7 +311,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .all-reviews-mobile-item:hover,
   #root .person-chip:hover {
     border-color: rgba(255,255,255,.98);
-    background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(237,246,239,.4) 58%, rgba(255,250,236,.3));
+    background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.4) 58%, rgba(255,250,236,.3));
     box-shadow: var(--momo-glass-depth-hover);
     filter: saturate(1.045);
     transform: none;
@@ -328,7 +328,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .favorite-page-poster,
   #root .movie-detail-poster {
     border: 1px solid rgba(255,255,255,.9);
-    box-shadow: 0 8px 20px rgba(34,42,37,.12), inset 0 1px rgba(255,255,255,.9);
+    box-shadow: 0 8px 20px rgba(41,40,32,.12), inset 0 1px rgba(255,255,255,.9);
   }
   #root .favorite-page-poster:hover img,
   #root .momo-home-poster-frame:hover img {
@@ -354,8 +354,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     background: var(--momo-glass-button);
     color: #3D4941;
     box-shadow:
-      0 2px 5px rgba(34,42,37,.045),
-      0 7px 16px rgba(34,42,37,.065),
+      0 2px 5px rgba(41,40,32,.045),
+      0 7px 16px rgba(41,40,32,.065),
       inset 0 1px 0 rgba(255,255,255,.98),
       inset 0 -1px 0 rgba(216,201,159,.22);
     -webkit-backdrop-filter: blur(20px) saturate(175%);
@@ -440,7 +440,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     border-radius: 999px;
     background: var(--momo-glass-button);
     color: #514C40;
-    box-shadow: 0 3px 8px rgba(34,42,37,.045), 0 7px 15px rgba(34,42,37,.055), inset 0 1px rgba(255,255,255,.98);
+    box-shadow: 0 3px 8px rgba(41,40,32,.045), 0 7px 15px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(20px) saturate(170%);
     backdrop-filter: blur(20px) saturate(170%);
   }
@@ -491,7 +491,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main .favorite-star {
     border: 1px solid rgba(255,255,255,.72);
     border-radius: 12px;
-    background: linear-gradient(145deg, rgba(32,40,34,.58), rgba(31,37,32,.34));
+    background: linear-gradient(145deg, rgba(41,40,32,.58), rgba(41,40,32,.34));
     color: rgba(255,255,255,.94);
     box-shadow: 0 6px 16px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.38);
     -webkit-backdrop-filter: blur(20px) saturate(175%);
@@ -499,7 +499,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
   #root .momo-app-main .favorite-star:hover:not(:disabled) {
     border-color: rgba(255,255,255,.98);
-    background: linear-gradient(145deg, rgba(39,49,41,.72), rgba(31,37,32,.46));
+    background: linear-gradient(145deg, rgba(41,40,32,.72), rgba(41,40,32,.46));
     color: #fff;
     box-shadow: 0 8px 19px rgba(0,0,0,.2), inset 0 1px rgba(255,255,255,.52);
   }
@@ -547,10 +547,10 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main textarea,
   #root .momo-app-main select,
   #root .momo-app-header .momo-search-input {
-    border-color: rgba(212,222,214,.9);
-    background: linear-gradient(145deg, rgba(255,255,255,.7), rgba(239,246,241,.36));
+    border-color: rgba(255,250,236,.9);
+    background: linear-gradient(145deg, rgba(255,255,255,.7), rgba(255,250,236,.36));
     color: #303A33;
-    box-shadow: inset 0 1px 2px rgba(34,42,37,.035), 0 1px 0 rgba(255,255,255,.86);
+    box-shadow: inset 0 1px 2px rgba(41,40,32,.035), 0 1px 0 rgba(255,255,255,.86);
     -webkit-backdrop-filter: blur(16px) saturate(150%);
     backdrop-filter: blur(16px) saturate(150%);
   }
@@ -559,8 +559,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main select:focus,
   #root .momo-app-header .momo-search-input:focus {
     border-color: rgba(216,201,159,.82);
-    background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(236,245,239,.55));
-    box-shadow: 0 0 0 3px rgba(255,241,178,.16), inset 0 1px 2px rgba(34,42,37,.025);
+    background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(255,250,236,.55));
+    box-shadow: 0 0 0 3px rgba(255,241,178,.16), inset 0 1px 2px rgba(41,40,32,.025);
     outline: none;
   }
   #root .momo-app-main input::placeholder,
@@ -573,16 +573,16 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .review-detail-page .review-detail-content {
     border: 1px solid rgba(255,255,255,.86);
     border-radius: 15px;
-    background: linear-gradient(140deg, rgba(255,255,255,.6), rgba(242,247,243,.32) 58%, rgba(222,233,225,.22));
+    background: linear-gradient(140deg, rgba(255,255,255,.6), rgba(242,247,243,.32) 58%, rgba(255,250,236,.22));
     color: #353D36;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), 0 8px 20px rgba(34,42,37,.045);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.96), 0 8px 20px rgba(41,40,32,.045);
     -webkit-backdrop-filter: blur(22px) saturate(155%);
     backdrop-filter: blur(22px) saturate(155%);
   }
   #root .review-detail-page .review-detail-movie {
     border: 1px solid rgba(255,255,255,.88);
-    background: linear-gradient(145deg, rgba(255,255,255,.64), rgba(238,245,240,.32));
-    box-shadow: 0 6px 16px rgba(34,42,37,.05), inset 0 1px rgba(255,255,255,.96);
+    background: linear-gradient(145deg, rgba(255,255,255,.64), rgba(255,250,236,.32));
+    box-shadow: 0 6px 16px rgba(41,40,32,.05), inset 0 1px rgba(255,255,255,.96);
     -webkit-backdrop-filter: blur(22px) saturate(155%);
     backdrop-filter: blur(22px) saturate(155%);
   }
@@ -629,9 +629,9 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     padding: 28px;
     border: 1px solid rgba(255,255,255,.9);
     border-radius: 20px;
-    background: linear-gradient(140deg, rgba(255,255,255,.62), rgba(234,243,237,.38) 58%, rgba(255,250,236,.24));
+    background: linear-gradient(140deg, rgba(255,255,255,.62), rgba(255,250,236,.38) 58%, rgba(255,250,236,.24));
     color: #514C40;
-    box-shadow: 0 8px 24px rgba(34,42,37,.055), inset 0 1px rgba(255,255,255,.98);
+    box-shadow: 0 8px 24px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(24px) saturate(165%);
     backdrop-filter: blur(24px) saturate(165%);
   }
@@ -646,8 +646,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main .all-reviews-table-wrap {
     border: 1px solid rgba(255,255,255,.88);
     border-radius: 14px;
-    background: linear-gradient(145deg, rgba(255,255,255,.54), rgba(235,243,237,.32));
-    box-shadow: inset 0 1px rgba(255,255,255,.98), 0 7px 18px rgba(34,42,37,.04);
+    background: linear-gradient(145deg, rgba(255,255,255,.54), rgba(255,250,236,.32));
+    box-shadow: inset 0 1px rgba(255,255,255,.98), 0 7px 18px rgba(41,40,32,.04);
     -webkit-backdrop-filter: blur(22px) saturate(155%);
     backdrop-filter: blur(22px) saturate(155%);
   }
@@ -671,7 +671,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-main .liked-review-item,
   #root .momo-app-main .all-reviews-mobile-item {
     border-bottom-color: rgba(255,255,255,.72);
-    background: linear-gradient(145deg, rgba(255,255,255,.48), rgba(233,242,236,.26));
+    background: linear-gradient(145deg, rgba(255,255,255,.48), rgba(255,250,236,.26));
   }
   #root .momo-app-main .my-review-item:hover,
   #root .momo-app-main .liked-review-item:hover,
@@ -690,8 +690,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   /* Footer is a quiet translucent panel, not a graph-paper memo. */
   #root .momo-app-footer {
     border-top-color: rgba(255,255,255,.86);
-    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(239,244,239,.42) 58%, rgba(225,232,225,.34));
-    box-shadow: 0 -8px 26px rgba(34,42,37,.045), inset 0 1px rgba(255,255,255,.98);
+    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(239,244,239,.42) 58%, rgba(255,250,236,.34));
+    box-shadow: 0 -8px 26px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
     -webkit-backdrop-filter: blur(28px) saturate(155%);
     backdrop-filter: blur(28px) saturate(155%);
   }
@@ -1136,7 +1136,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-header button {
     background:
       linear-gradient(112deg, rgba(255,255,255,.62), rgba(255,255,255,.2) 38%, rgba(255,250,236,.25) 100%),
-      linear-gradient(145deg, rgba(255,255,255,.56), rgba(255,250,236,.26) 58%, rgba(222,232,223,.16));
+      linear-gradient(145deg, rgba(255,255,255,.56), rgba(255,250,236,.26) 58%, rgba(255,250,236,.16));
     border-color: rgba(255,255,255,.96);
     box-shadow:
       0 2px 5px rgba(41,40,32,.045),
@@ -1151,7 +1151,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-header button:hover:not(:disabled) {
     background:
       linear-gradient(112deg, rgba(255,255,255,.82), rgba(255,255,255,.38) 38%, rgba(255,250,236,.38) 100%),
-      linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.38) 58%, rgba(222,232,223,.24));
+      linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.38) 58%, rgba(255,250,236,.24));
     box-shadow:
       0 5px 10px rgba(41,40,32,.055),
       0 15px 28px rgba(41,40,32,.11),
