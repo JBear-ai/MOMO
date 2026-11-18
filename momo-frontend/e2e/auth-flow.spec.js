@@ -43,6 +43,34 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   await expect(page.getByRole("button", { name: "로그아웃" })).toBeVisible();
   await initialFavoritesSync;
 
+  // The homepage needs an actual cinema-feature composition, not only shared colors.
+  await page.goto("/");
+  const homeHero = page.locator(".home-feature-section");
+  await expect(homeHero).toBeVisible();
+  await expect(page.locator(".home-feature-info")).toBeVisible();
+  await expect(page.locator(".home-feature-visual")).toBeVisible();
+  const homeHeroMaterial = await homeHero.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      columns: style.gridTemplateColumns.split(" ").length,
+      background: style.backgroundImage,
+      blur: style.backdropFilter,
+      border: style.borderTopColor,
+    };
+  });
+  expect(homeHeroMaterial.columns).toBe(2);
+  expect(homeHeroMaterial.background).toContain("linear-gradient");
+  expect(homeHeroMaterial.blur).toContain("blur(28px)");
+  expect(homeHeroMaterial.border).toBe("rgba(255, 255, 255, 0.92)");
+  await page.screenshot({ path: "test-results/home-cinema-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileHomeColumns = await homeHero.evaluate(
+    (element) => getComputedStyle(element).gridTemplateColumns.split(" ").length,
+  );
+  expect(mobileHomeColumns).toBe(1);
+  await page.screenshot({ path: "test-results/home-cinema-mobile.png", fullPage: true });
+  await page.setViewportSize({ width: 1280, height: 800 });
+
   // Requested routes must use one shared warm-paper visual system on desktop and mobile.
   const brandRoutes = [
     { path: "/profile/reviews", heading: ".my-reviews-heading", surface: ".my-reviews-card" },
@@ -62,7 +90,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
       return { image: style.backgroundImage, size: style.backgroundSize };
     });
     expect(bodyCanvas.image).toContain("linear-gradient");
-    expect(bodyCanvas.size).toContain("34px 34px");
+    expect(bodyCanvas.size).not.toContain("34px 34px");
 
     const visual = await page.locator(route.heading).first().evaluate((element) => {
       const style = getComputedStyle(element);
@@ -76,7 +104,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     });
     expect(visual.background).toContain("linear-gradient");
     expect(visual.blur).toContain("blur(26px)");
-    expect(visual.border).toBe("rgb(233, 223, 197)");
+    expect(visual.border).toBe("rgba(233, 223, 197, 0.9)");
     expect(visual.title).toBe("rgb(41, 40, 32)");
 
     const routeSurface = page.locator(route.surface).first();
@@ -185,8 +213,8 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   const headerActionRadius = await page.getByRole("button", { name: "로그아웃" }).evaluate(
     (element) => getComputedStyle(element).borderRadius,
   );
-  expect(headerNavRadius).toBe("11px");
-  expect(headerActionRadius).toBe("10px");
+  expect(headerNavRadius).toBe("999px");
+  expect(headerActionRadius).toBe("999px");
 
   await page.setViewportSize({ width: 390, height: 844 });
   const mobileActivityColumns = await page.locator(".profile-activity-grid").evaluate(
