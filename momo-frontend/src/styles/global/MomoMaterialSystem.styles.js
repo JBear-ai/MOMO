@@ -194,6 +194,11 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     padding: 0;
   }
 
+  /* Preserve semantic left-edge cues for the three profile destinations. */
+  #root .profile-dashboard .profile-activity-item[data-tone="writing"] { border-left-color: #D6B43F; }
+  #root .profile-dashboard .profile-activity-item[data-tone="liked"] { border-left-color: #B98778; }
+  #root .profile-dashboard .profile-activity-item[data-tone="saved"] { border-left-color: #829276; }
+
   /* Poster edges are crisp; the image remains the visual focus. */
   #root .favorite-page .favorite-page-poster,
   #root .movie-detail-page .movie-detail-poster,
@@ -292,6 +297,11 @@ const MomoMaterialSystemStyles = createGlobalStyle`
       inset 0 1px 0 rgba(255,255,255,1),
       inset 0 0 0 1px rgba(255,255,255,.18);
     filter: saturate(1.06) brightness(1.015);
+  }
+
+  /* The logout action stays visually secondary inside the glass masthead. */
+  #root .momo-app-header button.momo-logout-button {
+    border-color: rgba(216,201,159,.58);
   }
 
   #root .profile-button:active:not(:disabled),
