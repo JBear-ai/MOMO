@@ -1448,8 +1448,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .home-section {
     padding: clamp(18px,2.2vw,26px) !important;
     border-radius: 24px !important;
-    background-color: rgba(255,252,242,.76) !important;
-    background-image: linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,250,236,.7) 65%,rgba(255,241,178,.36)) !important;
+    background-color: rgba(255,252,242,.9) !important;
+    background-image: linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,250,236,.88) 65%,rgba(255,241,178,.48)) !important;
   }
 
   #root .home-feature-info {
