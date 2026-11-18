@@ -117,6 +117,20 @@ const MomoMaterialSystemStyles = createGlobalStyle`
       linear-gradient(132deg, rgba(255,255,255,.76), rgba(255,250,236,.42));
   }
 
+  /* Main cinematic surfaces keep a stronger refractive layer than compact cards. */
+  #root .movie-detail-page .movie-detail-header {
+    border-color: rgba(255,255,255,.88);
+    backdrop-filter: blur(32px) saturate(152%);
+    -webkit-backdrop-filter: blur(32px) saturate(152%);
+  }
+  #root .movie-detail-page .movie-rating-panel {
+    background: radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.82), transparent 48%), linear-gradient(140deg, rgba(255,255,255,.74), rgba(255,250,236,.5));
+  }
+  #root .profile-edit-page .profile-edit-photo-card {
+    backdrop-filter: blur(24px) saturate(145%);
+    -webkit-backdrop-filter: blur(24px) saturate(145%);
+  }
+
   /* Smaller surfaces keep their own silhouettes instead of becoming uniform cards. */
   #root .favorite-page .favorite-page-card,
   #root .profile-dashboard .profile-activity-item,
@@ -164,6 +178,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
       inset 0 1px 0 rgba(255,255,255,1);
     filter: saturate(1.04);
   }
+
+  #root .favorite-page .favorite-page-card { border-color: #E9DFC5; }
 
   /* Poster edges are crisp; the image remains the visual focus. */
   #root .favorite-page .favorite-page-poster,
