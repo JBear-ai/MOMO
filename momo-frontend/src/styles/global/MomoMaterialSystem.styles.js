@@ -1366,6 +1366,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   /* Opaque milk-glass pass. These rules intentionally win over legacy page
      surfaces so every named component receives the same visible material. */
   #root .profile-card,
+  #root .profile-activity-item,
+  #root .profile-user-details > div,
   #root .profile-delete-section,
   #root .home-feature-section,
   #root .home-feature-info,
@@ -1397,6 +1399,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
 
   #root .profile-card,
+  #root .profile-activity-item,
+  #root .profile-user-details > div,
   #root .profile-delete-section,
   #root .home-feature-info,
   #root .home-favorites-empty,
