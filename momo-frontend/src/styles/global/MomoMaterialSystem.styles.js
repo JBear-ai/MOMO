@@ -824,6 +824,110 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     color: #3F3A31;
   }
 
+
+  /* The movie hero keeps its own lens-like refraction, above the common panel layer. */
+  #root .movie-detail-page .movie-detail-header {
+    border-color: rgba(255,255,255,.9);
+    background:
+      radial-gradient(ellipse at 8% 4%, rgba(255,255,255,.9), transparent 42%),
+      radial-gradient(ellipse at 96% 100%, rgba(255,212,59,.1), transparent 46%),
+      linear-gradient(132deg, rgba(255,255,255,.76), rgba(255,250,236,.42));
+    -webkit-backdrop-filter: blur(32px) saturate(152%);
+    backdrop-filter: blur(32px) saturate(152%);
+  }
+
+  /* These were more specific than the earlier memo-marker reset. */
+  #root .profile-dashboard .profile-dashboard-heading::before,
+  #root .profile-edit-page .profile-edit-heading::before {
+    display: none;
+    content: none;
+  }
+
+  /* More visible glass optics: a clearer refraction tint and deeper edge light. */
+  #root .momo-app-main button,
+  #root .signup-page button,
+  #root .momo-app-header button {
+    background:
+      linear-gradient(112deg, rgba(255,255,255,.62), rgba(255,255,255,.2) 38%, rgba(214,231,220,.25) 100%),
+      linear-gradient(145deg, rgba(255,255,255,.56), rgba(255,250,236,.26) 58%, rgba(222,232,223,.16));
+    border-color: rgba(255,255,255,.96);
+    box-shadow:
+      0 2px 5px rgba(41,40,32,.045),
+      0 10px 22px rgba(41,40,32,.085),
+      inset 0 1px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(187,205,191,.25);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+  }
+  #root .momo-app-main button:hover:not(:disabled),
+  #root .signup-page button:hover:not(:disabled),
+  #root .momo-app-header button:hover:not(:disabled) {
+    background:
+      linear-gradient(112deg, rgba(255,255,255,.82), rgba(255,255,255,.38) 38%, rgba(214,231,220,.38) 100%),
+      linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.38) 58%, rgba(222,232,223,.24));
+    box-shadow:
+      0 5px 10px rgba(41,40,32,.055),
+      0 15px 28px rgba(41,40,32,.11),
+      inset 0 1px 0 rgba(255,255,255,1),
+      inset 0 0 0 1px rgba(255,255,255,.36);
+  }
+  #root .momo-app-main .recommend-button,
+  #root .momo-app-main .all-reviews-search-submit,
+  #root .momo-app-main .favorite-browse-button,
+  #root .momo-app-main .home-favorites-more,
+  #root .momo-app-main .profile-edit-submit,
+  #root .momo-app-main .profile-edit-image-save,
+  #root .momo-app-main .review-form-actions button,
+  #root .momo-app-main .signup-submit,
+  #root .signup-page .signup-submit {
+    background:
+      linear-gradient(112deg, rgba(255,255,255,.88), rgba(255,255,255,.32) 38%, rgba(255,230,149,.35) 100%),
+      linear-gradient(140deg, rgba(255,255,255,.62), rgba(255,238,183,.36) 52%, rgba(255,212,59,.18));
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+  }
+
+  /* The no-recommendation hero uses a lens object so its right half is never an empty sheet. */
+  #root .home-page .home-feature-visual .recommend-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background:
+      radial-gradient(ellipse at 50% 8%, rgba(255,255,255,.96), transparent 62%),
+      linear-gradient(145deg, #F4F0E7, #EAEDE5);
+    color: #514C40;
+    font-size: 13px;
+    font-weight: 650;
+  }
+  #root .home-page .home-feature-visual .recommend-state::before {
+    display: block;
+    width: clamp(132px, 15vw, 176px);
+    height: clamp(132px, 15vw, 176px);
+    flex: 0 0 auto;
+    content: "";
+    border: 1px solid rgba(255,255,255,.98);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 31% 25%, rgba(255,255,255,.98), rgba(255,255,255,.58) 20%, transparent 37%),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,.86) 0 8%, rgba(214,231,220,.42) 8.5% 18%, transparent 18.5% 28%, rgba(255,255,255,.72) 28.5% 29.5%, transparent 30% 43%, rgba(181,199,185,.28) 43.5% 44.5%, transparent 45%),
+      linear-gradient(145deg, rgba(255,255,255,.58), rgba(206,223,211,.22));
+    box-shadow:
+      0 18px 36px rgba(41,40,32,.09),
+      inset 0 1px 0 rgba(255,255,255,1),
+      inset 0 -8px 22px rgba(152,178,159,.12),
+      0 0 0 10px rgba(255,255,255,.18);
+  }
+  #root .home-page .home-feature-visual .recommend-state::after {
+    display: block;
+    content: "MOMO  /  CINEMA ARCHIVE";
+    color: #8B805F;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .18em;
+  }
+
 `;
 
 export default MomoMaterialSystemStyles;
