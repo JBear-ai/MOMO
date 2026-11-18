@@ -45,6 +45,47 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
 
   // The homepage needs an actual cinema-feature composition, not only shared colors.
   await page.goto("/");
+
+  // Shared navigation controls must render with the actual frosted-glass material.
+  const headerSearchButton = page.locator(".momo-app-header .momo-search-button");
+  await expect(headerSearchButton).toBeVisible();
+  const headerSearchMaterial = await headerSearchButton.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      background: style.backgroundImage,
+      blur: style.backdropFilter,
+      border: style.borderTopColor,
+    };
+  });
+  expect(headerSearchMaterial.background).toContain("linear-gradient");
+  expect(headerSearchMaterial.blur).toContain("blur(18px)");
+  expect(headerSearchMaterial.border).toBe("rgba(255, 255, 255, 0.92)");
+
+  const footerGlass = await page.locator(".momo-app-footer").evaluate((element) => {
+    const style = getComputedStyle(element, "::before");
+    return { display: style.display, image: style.backgroundImage };
+  });
+  expect(footerGlass.display).toBe("none");
+  expect(footerGlass.image).toBe("none");
+
+  const reviewCopyMaterial = await page.evaluate(() => {
+    const wrapper = document.createElement("main");
+    wrapper.className = "momo-app-main";
+    const page = document.createElement("section");
+    page.className = "review-detail-page";
+    const copy = document.createElement("div");
+    copy.className = "review-detail-content";
+    wrapper.appendChild(page);
+    page.appendChild(copy);
+    document.querySelector("#root").appendChild(wrapper);
+    const style = getComputedStyle(copy);
+    const result = { background: style.backgroundImage };
+    wrapper.remove();
+    return result;
+  });
+  expect(reviewCopyMaterial.background).toContain("linear-gradient");
+  expect(reviewCopyMaterial.background).not.toContain("repeating-linear-gradient");
+
   const homeHero = page.locator(".home-feature-section");
   await expect(homeHero).toBeVisible();
   await expect(page.locator(".home-feature-info")).toBeVisible();
@@ -60,7 +101,7 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
   });
   expect(homeHeroMaterial.columns).toBe(2);
   expect(homeHeroMaterial.background).toContain("linear-gradient");
-  expect(homeHeroMaterial.blur).toContain("blur(28px)");
+  expect(homeHeroMaterial.blur).toContain("blur(24px)");
   expect(homeHeroMaterial.border).toBe("rgba(255, 255, 255, 0.92)");
   await page.screenshot({ path: "test-results/home-cinema-desktop.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
@@ -652,7 +693,7 @@ test("인물 ID와 필모그래피 영화 ID가 통합 영화 상세로 정확�
     return { background: style.backgroundImage, border: style.borderTopColor };
   });
   expect(personHeroStyle.background).toContain("linear-gradient");
-  expect(personHeroStyle.border).toBe("rgba(255, 255, 255, 0.88)");
+  expect(personHeroStyle.border).toBe("rgba(255, 255, 255, 0.9)");
   await page.screenshot({ path: "test-results/route-person-detail-mobile.png", fullPage: true });
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.screenshot({ path: "test-results/route-person-detail-desktop.png", fullPage: true });
