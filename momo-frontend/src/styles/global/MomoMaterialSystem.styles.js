@@ -597,6 +597,25 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
   #root .home-feature-info { background: linear-gradient(140deg, rgba(255,255,255,.56), rgba(255,250,236,.24)); }
 
+  /* Cinematic hero and rating glass keep their stronger optical depth. */
+  #root .movie-detail-page .movie-detail-header {
+    border-color: rgba(255,255,255,.9);
+    background:
+      radial-gradient(ellipse at 8% 4%, rgba(255,255,255,.78), transparent 44%),
+      radial-gradient(ellipse at 96% 100%, rgba(255,212,59,.12), transparent 46%),
+      linear-gradient(132deg, rgba(255,255,255,.76), rgba(255,250,236,.42));
+    -webkit-backdrop-filter: blur(32px) saturate(152%);
+    backdrop-filter: blur(32px) saturate(152%);
+  }
+  #root .movie-detail-page .movie-rating-panel {
+    border-color: rgba(255,255,255,.82);
+    background:
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.82), transparent 48%),
+      linear-gradient(140deg, rgba(255,255,255,.74), rgba(255,250,236,.5));
+    -webkit-backdrop-filter: blur(26px) saturate(150%);
+    backdrop-filter: blur(26px) saturate(150%);
+  }
+
   /* Remove memo-pad markers and dotted separators. */
   #root .profile-dashboard .profile-card::before,
   #root .profile-dashboard-heading::before,
