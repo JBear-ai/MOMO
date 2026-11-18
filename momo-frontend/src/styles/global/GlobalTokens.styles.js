@@ -6,11 +6,11 @@ const GlobalTokensStyles = createGlobalStyle`
     color-scheme: light;
 
     /* Neutral canvas and glass surfaces */
-    --momo-bg: #EFF3EF;
-    --momo-surface: #F8FBF8;
+    --momo-bg: #F5F2EB;
+    --momo-surface: #FFFAEC;
     --momo-surface-raised: #FFFEFA;
-    --momo-note: #EEF4EF;
-    --momo-note-strong: #E3EEE5;
+    --momo-note: #FFFAEC;
+    --momo-note-strong: #FFF1B2;
 
     /* Brand accent: MOMO highlighter yellow */
     --momo-accent: #FFD43B;
@@ -26,9 +26,9 @@ const GlobalTokensStyles = createGlobalStyle`
     --momo-link: #715713;
 
     /* Borders and feedback */
-    --momo-border: #DCE5DD;
-    --momo-border-strong: #C9D7CC;
-    --momo-note-border: #D8E4DA;
+    --momo-border: #E9DFC5;
+    --momo-border-strong: #D8C99F;
+    --momo-note-border: #E9DFC5;
     --momo-focus: rgba(198, 161, 43, .45);
     --momo-like-bg: #FFF3C5;
     --momo-like-bg-hover: #FFE99A;
@@ -43,17 +43,17 @@ const GlobalTokensStyles = createGlobalStyle`
     --momo-success: #77601C;
 
     /* Material */
-    --momo-shadow-xs: 0 1px 2px rgba(39, 43, 39, .035);
-    --momo-shadow-sm: 0 5px 16px rgba(39, 43, 39, .055);
+    --momo-shadow-xs: 0 1px 2px rgba(41, 40, 32, .035);
+    --momo-shadow-sm: 0 5px 16px rgba(41, 40, 32, .055);
     --momo-shadow: 0 12px 28px rgba(41, 40, 32, .065);
     --momo-shadow-lg: 0 24px 48px rgba(41, 40, 32, .105);
     --momo-glass: rgba(255, 253, 247, .48);
     --momo-glass-border: rgba(255, 255, 255, .86);
     --momo-header-glass: rgba(255, 253, 247, .58);
     --momo-glass-clear: rgba(255, 255, 255, .32);
-    --momo-glass-soft: rgba(238, 245, 240, .48);
+    --momo-glass-soft: rgba(255, 250, 236, .54);
     --momo-glass-highlight: rgba(255, 255, 255, .94);
-    --momo-glass-shadow: 0 14px 34px rgba(34,42,37,.075), 0 3px 8px rgba(34,42,37,.035), inset 0 1px rgba(255,255,255,.96), inset 0 -1px rgba(207,220,210,.16);
+    --momo-glass-shadow: 0 14px 34px rgba(41,40,32,.075), 0 3px 8px rgba(41,40,32,.035), inset 0 1px rgba(255,255,255,.96), inset 0 -1px rgba(216,201,159,.16);
     --momo-depth-shadow: 0 16px 34px rgba(41,40,32,.085), 0 4px 10px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,.96);
 
     /* Layout */
