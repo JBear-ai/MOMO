@@ -57,16 +57,25 @@ test("회원가입, 로그인, 로그아웃이 브라우저에서 이어진다",
     await expect(page.locator(".momo-app-header")).toBeVisible();
     await expect(page.locator(route.heading).first()).toBeVisible({ timeout: 20000 });
 
+    const bodyCanvas = await page.evaluate(() => {
+      const style = getComputedStyle(document.body);
+      return { image: style.backgroundImage, size: style.backgroundSize };
+    });
+    expect(bodyCanvas.image).toContain("linear-gradient");
+    expect(bodyCanvas.size).toContain("34px 34px");
+
     const visual = await page.locator(route.heading).first().evaluate((element) => {
       const style = getComputedStyle(element);
       const title = element.querySelector("h1") || element;
       return {
         background: style.backgroundImage,
+        blur: style.backdropFilter,
         border: style.borderTopColor,
         title: getComputedStyle(title).color,
       };
     });
     expect(visual.background).toContain("linear-gradient");
+    expect(visual.blur).toContain("blur(26px)");
     expect(visual.border).toBe("rgb(233, 223, 197)");
     expect(visual.title).toBe("rgb(41, 40, 32)");
 
