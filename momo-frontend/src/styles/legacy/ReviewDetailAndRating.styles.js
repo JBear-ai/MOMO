@@ -188,7 +188,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   min-height: 260px;
   padding: 30px;
   background: var(--momo-surface);
-  border: 1px dashed var(--momo-border);
+  border: 1px solid rgba(255,255,255,.9);
   border-radius: var(--momo-radius);
   color: var(--momo-muted);
   font-size: 14px;
