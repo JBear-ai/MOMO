@@ -9,8 +9,8 @@ import { createGlobalStyle } from "styled-components";
 const RouteBrandSystemStyles = createGlobalStyle`
   :root {
     --momo-route-bg: #F5F2EB;
-    --momo-route-paper: rgba(255, 250, 236, .92);
-    --momo-route-white: rgba(255, 254, 250, .96);
+    --momo-route-paper: rgba(255, 250, 236, .72);
+    --momo-route-white: rgba(255, 254, 250, .76);
     --momo-route-ink: #292820;
     --momo-route-body: #494333;
     --momo-route-muted: #6A6251;
@@ -124,9 +124,10 @@ const RouteBrandSystemStyles = createGlobalStyle`
     content: "";
     display: block;
     border-radius: 50%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.42), transparent);
-    filter: blur(12px);
+    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.68) 48%, transparent 72%);
+    filter: blur(1px);
     transform: rotate(18deg);
+    animation: momo-glass-sheen 8s ease-in-out infinite;
     pointer-events: none;
     opacity: .7;
   }
@@ -718,6 +719,73 @@ const RouteBrandSystemStyles = createGlobalStyle`
     }
   }
 
+  /* Shared material: glass edges, layered depth and tactile hover response. */
+  #root .my-reviews-card, #root .liked-reviews-card, #root .all-reviews-card,
+  #root .favorite-page-empty, #root .all-reviews-search, #root .all-reviews-search-panel,
+  #root .all-reviews-table-wrap, #root .movie-detail-page .detail-content-section,
+  #root .movie-detail-page .movie-rating-panel, #root .movie-detail-page .review-write-section,
+  #root .movie-detail-page .detail-review-card {
+    position: relative; isolation: isolate; border-color: rgba(255,255,255,.82);
+    box-shadow: var(--momo-glass-shadow); backdrop-filter: blur(26px) saturate(145%);
+    -webkit-backdrop-filter: blur(26px) saturate(145%);
+    transition: transform 220ms cubic-bezier(.2,.7,.2,1), box-shadow 220ms ease, border-color 220ms ease;
+  }
+  #root .my-reviews-card:hover, #root .liked-reviews-card:hover, #root .all-reviews-card:hover,
+  #root .movie-detail-page .detail-content-section:hover, #root .movie-detail-page .movie-rating-panel:hover,
+  #root .movie-detail-page .review-write-section:hover, #root .movie-detail-page .detail-review-card:hover {
+    border-color: rgba(255,255,255,.98);
+    box-shadow: 0 24px 46px rgba(41,40,32,.12), 0 5px 12px rgba(41,40,32,.05), inset 0 1px rgba(255,255,255,.98);
+    transform: translateY(-2px);
+  }
+  #root .favorite-page .favorite-page-card {
+    background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,250,236,.48));
+    box-shadow: var(--momo-depth-shadow); backdrop-filter: blur(24px) saturate(148%);
+    -webkit-backdrop-filter: blur(24px) saturate(148%); transform-style: preserve-3d;
+    transition: transform 220ms cubic-bezier(.2,.7,.2,1), box-shadow 220ms ease, border-color 220ms ease;
+  }
+  #root .favorite-page .favorite-page-card:hover {
+    box-shadow: 0 22px 38px rgba(41,40,32,.13), inset 0 1px rgba(255,255,255,.98);
+    transform: translateY(-4px) rotateX(.4deg);
+  }
+  #root .search-page .movie-card, #root .search-page .movie-grid > *, #root .search-page .movie-item {
+    position: relative; isolation: isolate; transform-style: preserve-3d;
+    background: linear-gradient(145deg, rgba(255,255,255,.64), rgba(255,250,236,.44));
+    box-shadow: var(--momo-depth-shadow); backdrop-filter: blur(24px) saturate(145%);
+    -webkit-backdrop-filter: blur(24px) saturate(145%);
+    transition: transform 220ms cubic-bezier(.2,.7,.2,1), box-shadow 220ms ease, border-color 220ms ease;
+  }
+  #root .search-page .movie-card:hover, #root .search-page .movie-item:hover {
+    box-shadow: 0 20px 36px rgba(41,40,32,.12), inset 0 1px rgba(255,255,255,.98); transform: translateY(-3px);
+  }
+  #root .movie-detail-page .movie-detail-header {
+    background: radial-gradient(circle at 92% 0%, rgba(255,212,59,.18), transparent 34%), linear-gradient(135deg, rgba(255,255,255,.76), rgba(255,250,236,.48));
+    border-color: rgba(255,255,255,.88);
+    box-shadow: 0 28px 56px rgba(41,40,32,.12), 0 6px 16px rgba(41,40,32,.05), inset 0 1px rgba(255,255,255,.98);
+    backdrop-filter: blur(32px) saturate(155%); -webkit-backdrop-filter: blur(32px) saturate(155%);
+    transform-style: preserve-3d;
+  }
+  #root .movie-detail-page .movie-detail-header::before {
+    position: absolute; z-index: 0; inset: 0; content: ""; border-radius: inherit;
+    background: linear-gradient(112deg, rgba(255,255,255,.52), transparent 36%, rgba(255,212,59,.06) 76%, transparent); pointer-events: none;
+  }
+  #root .movie-detail-page .movie-detail-header > * { position: relative; z-index: 1; }
+  #root .movie-detail-page .movie-detail-poster { transform: translateZ(10px); transition: transform 240ms ease, box-shadow 240ms ease; }
+  #root .movie-detail-page .movie-detail-poster:hover { transform: translateY(-4px) translateZ(16px); }
+  #root .movie-detail-page .movie-rating-panel {
+    min-height: 250px;
+    background: radial-gradient(circle at 100% 0%, rgba(255,212,59,.16), transparent 42%), linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,250,236,.50));
+    box-shadow: 0 22px 44px rgba(41,40,32,.10), inset 0 1px rgba(255,255,255,.98);
+  }
+  #root .movie-detail-page .movie-score-value strong { font-size: clamp(42px, 5vw, 58px); line-height: 1; letter-spacing: -.065em; text-shadow: 0 2px 0 rgba(255,255,255,.72), 0 10px 22px rgba(41,40,32,.08); }
+  #root .movie-detail-page .rating-distribution-track { overflow: hidden; border-radius: 999px; box-shadow: inset 0 2px 4px rgba(41,40,32,.08), 0 1px rgba(255,255,255,.7); }
+  #root .movie-detail-page .rating-distribution-track span { border-radius: inherit; box-shadow: 0 0 12px rgba(255,212,59,.32); }
+  #root .movie-detail-page .rating-vote-button { min-height: 44px; border-radius: 12px; box-shadow: 0 5px 12px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.84); transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease; }
+  #root .movie-detail-page .rating-vote-button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(41,40,32,.09), inset 0 1px rgba(255,255,255,.94); }
+  #root .movie-detail-page .person-chip { background: linear-gradient(145deg, rgba(255,255,255,.66), rgba(255,250,236,.42)); box-shadow: 0 6px 16px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.9); backdrop-filter: blur(18px) saturate(138%); -webkit-backdrop-filter: blur(18px) saturate(138%); transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease; }
+  #root .movie-detail-page .person-chip:hover { box-shadow: 0 12px 22px rgba(41,40,32,.09), inset 0 1px rgba(255,255,255,.96); transform: translateY(-2px); }
+  #root [aria-label="전체 회원 채팅"] { overflow: hidden; border: 1px solid rgba(255,255,255,.9); border-radius: 22px; background: rgba(255,254,250,.78); box-shadow: 0 26px 68px rgba(32,27,18,.20), inset 0 1px rgba(255,255,255,.96); backdrop-filter: blur(28px) saturate(155%); -webkit-backdrop-filter: blur(28px) saturate(155%); }
+  #root [aria-label="공용 채팅 열기"] { border: 1px solid rgba(255,255,255,.84); border-radius: 16px; box-shadow: 0 12px 28px rgba(53,43,24,.16), inset 0 1px rgba(255,255,255,.44); transition: transform 220ms ease, box-shadow 220ms ease; }
+  #root [aria-label="공용 채팅 열기"]:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(53,43,24,.20), inset 0 1px rgba(255,255,255,.52); }
 `;
 
 export default RouteBrandSystemStyles;
