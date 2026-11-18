@@ -792,7 +792,7 @@ body {
     border-color: rgba(255,255,255,.88);
     background: rgba(29,36,32,.72);
     box-shadow: 0 10px 20px rgba(18,24,20,.24), inset 0 1px rgba(255,255,255,.42);
-    transform: translateY(-2px);
+    transform: none;
   }
   #root .favorite-star.is-active {
     border-color: rgba(255,255,255,.76);
@@ -986,7 +986,7 @@ body {
   #root .all-reviews-mobile-item:hover {
     background: rgba(255,255,255,.82);
     box-shadow: 0 10px 20px rgba(39,43,39,.075);
-    transform: translateY(-2px);
+    transform: none;
   }
   #root .liked-review-unlike {
     border: 1px solid rgba(137,107,105,.25);
