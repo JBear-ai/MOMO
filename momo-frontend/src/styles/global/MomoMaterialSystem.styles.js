@@ -11,8 +11,8 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     --momo-glass-blur: 26px;
     --momo-glass-saturation: 165%;
     --momo-glass-edge: rgba(255,255,255,.9);
-    --momo-glass-edge-soft: rgba(222,230,223,.72);
-    --momo-glass-surface: linear-gradient(138deg, rgba(255,255,255,.68), rgba(244,248,245,.34) 54%, rgba(222,232,225,.24));
+    --momo-glass-edge-soft: rgba(233,223,197,.72);
+    --momo-glass-surface: linear-gradient(138deg, rgba(255,255,255,.68), rgba(255,250,236,.34) 54%, rgba(255,241,178,.24));
     --momo-glass-depth:
       0 2px 5px rgba(34,42,37,.035),
       0 14px 34px rgba(34,42,37,.075),
@@ -28,10 +28,10 @@ const MomoMaterialSystemStyles = createGlobalStyle`
       inset 0 2px 5px rgba(34,42,37,.075),
       inset 0 1px 0 rgba(255,255,255,.88);
     --momo-glass-button:
-      linear-gradient(145deg, rgba(255,255,255,.58), rgba(229,241,233,.34) 54%, rgba(255,241,178,.24)),
+      linear-gradient(145deg, rgba(255,255,255,.58), rgba(255,250,236,.34) 54%, rgba(255,241,178,.24)),
       rgba(255,255,255,.16);
     --momo-glass-button-hover:
-      linear-gradient(145deg, rgba(255,255,255,.9), rgba(241,248,243,.58) 54%, rgba(255,250,236,.38)),
+      linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,250,236,.58) 54%, rgba(255,250,236,.38)),
       rgba(255,255,255,.2);
     --momo-glass-button-primary:
       linear-gradient(140deg, rgba(255,255,255,.66), rgba(255,231,151,.48) 48%, rgba(255,212,59,.26)),
@@ -43,89 +43,36 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     --momo-motion-press: 100ms cubic-bezier(.2,.7,.2,1);
   }
 
-  /* A neutral canvas. Yellow is reserved for actions and selected states. */
+  /* Warm notebook paper is the canvas; glass surfaces float above it. */
   body {
-    background-color: #EEF2EE;
+    background-color: #F5F2EB;
     background-image:
-      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.9), transparent 46rem),
-      radial-gradient(ellipse at 92% 16%, rgba(255,212,59,.25), transparent 42rem),
-      radial-gradient(ellipse at 8% 88%, rgba(255,241,178,.22), transparent 36rem),
-      linear-gradient(140deg, #EEF3EF 0%, #E9F0EB 54%, #EFF3EE 100%);
+      linear-gradient(to right, transparent 0, transparent 62px, rgba(205,104,91,.28) 62px, rgba(205,104,91,.28) 64px, transparent 64px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(130,166,194,.16) 31px, rgba(130,166,194,.16) 32px),
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.82), transparent 46rem),
+      radial-gradient(ellipse at 92% 16%, rgba(255,212,59,.16), transparent 42rem),
+      linear-gradient(140deg, #F8F5EC 0%, #F5F2EB 56%, #F1EBDD 100%);
     background-attachment: fixed;
   }
 
-  /* Route-specific colour fields. These sit behind the glass, not on top of it. */
-  #root .momo-app-main > .home-page {
-    background:
-      radial-gradient(ellipse at 84% 2%, rgba(255,212,59,.34), transparent 37rem),
-      radial-gradient(ellipse at 2% 52%, rgba(255,250,236,.62), transparent 32rem),
-      linear-gradient(145deg, rgba(255,250,236,.72), rgba(238,244,235,.54) 58%, rgba(255,241,178,.64));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .search-page {
-    background:
-      radial-gradient(ellipse at 5% 0%, rgba(116,166,178,.3), transparent 36rem),
-      radial-gradient(ellipse at 96% 58%, rgba(199,222,225,.56), transparent 38rem),
-      linear-gradient(145deg, rgba(222,239,241,.76), rgba(235,244,242,.54) 58%, rgba(218,235,237,.62));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .favorite-page {
-    background:
-      radial-gradient(ellipse at 4% 0%, rgba(255,212,59,.32), transparent 36rem),
-      radial-gradient(ellipse at 96% 62%, rgba(255,241,178,.56), transparent 40rem),
-      linear-gradient(145deg, rgba(255,250,236,.78), rgba(239,245,232,.56) 58%, rgba(255,241,178,.64));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .movie-detail-page {
-    background:
-      radial-gradient(ellipse at 8% 0%, rgba(113,157,163,.3), transparent 36rem),
-      radial-gradient(ellipse at 96% 68%, rgba(194,218,213,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(221,237,235,.78), rgba(236,243,237,.54) 58%, rgba(218,232,229,.62));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .all-reviews-page {
-    background:
-      radial-gradient(ellipse at 4% 0%, rgba(163,150,180,.28), transparent 36rem),
-      radial-gradient(ellipse at 96% 60%, rgba(218,207,229,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(234,229,241,.76), rgba(243,240,246,.54) 58%, rgba(228,224,239,.62));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .my-reviews-page {
-    background:
-      radial-gradient(ellipse at 4% 0%, rgba(216,201,159,.3), transparent 36rem),
-      radial-gradient(ellipse at 96% 60%, rgba(218,226,204,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(230,237,220,.78), rgba(243,245,235,.54) 58%, rgba(255,250,236,.62));
-    border-radius: 26px;
-  }
-  #root .momo-app-main > .liked-reviews-page {
-    background:
-      radial-gradient(ellipse at 4% 0%, rgba(187,139,145,.28), transparent 36rem),
-      radial-gradient(ellipse at 96% 60%, rgba(230,204,209,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(244,229,232,.76), rgba(248,239,240,.54) 58%, rgba(237,220,225,.62));
-    border-radius: 26px;
-  }
+  /* Every route uses the same warm brand field beneath its glass surfaces. */
+  #root .momo-app-main > .home-page,
+  #root .momo-app-main > .search-page,
+  #root .momo-app-main > .favorite-page,
+  #root .momo-app-main > .movie-detail-page,
+  #root .momo-app-main > .all-reviews-page,
+  #root .momo-app-main > .my-reviews-page,
+  #root .momo-app-main > .liked-reviews-page,
   #root .momo-app-main > .profile-dashboard,
   #root .momo-app-main > .profile-edit-page,
-  #root .momo-app-main > .profile-page {
-    background:
-      radial-gradient(ellipse at 6% 0%, rgba(255,241,178,.3), transparent 36rem),
-      radial-gradient(ellipse at 96% 64%, rgba(255,250,236,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(225,238,230,.78), rgba(239,245,240,.56) 58%, rgba(255,250,236,.62));
-    border-radius: 26px;
-  }
+  #root .momo-app-main > .profile-page,
   #root .momo-app-main > .review-detail-page {
     background:
-      radial-gradient(ellipse at 4% 0%, rgba(130,159,177,.28), transparent 36rem),
-      radial-gradient(ellipse at 96% 65%, rgba(203,220,230,.5), transparent 40rem),
-      linear-gradient(145deg, rgba(225,237,243,.76), rgba(240,245,247,.54) 58%, rgba(216,231,238,.62));
+      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.76), transparent 38rem),
+      radial-gradient(ellipse at 94% 58%, rgba(255,212,59,.14), transparent 40rem),
+      linear-gradient(145deg, rgba(255,250,236,.58), rgba(255,255,255,.22) 58%, rgba(255,241,178,.28));
     border-radius: 26px;
   }
-  #root .signup-page {
-    background:
-      radial-gradient(ellipse at 50% 0%, rgba(216,201,159,.28), transparent 42rem),
-      radial-gradient(ellipse at 86% 68%, rgba(224,213,190,.18), transparent 32rem);
-  }
-
   /* Shared header: translucent material with a visible refractive rim. */
   #root .momo-app-header {
     background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(245,248,245,.56));
@@ -206,7 +153,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   #root .momo-app-header .momo-search-dropdown {
     border: 1px solid rgba(255,255,255,.94);
     border-radius: 18px;
-    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(238,246,240,.56) 58%, rgba(220,233,225,.38));
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.56) 58%, rgba(255,241,178,.38));
     box-shadow: 0 20px 46px rgba(34,42,37,.14), inset 0 1px rgba(255,255,255,1);
     -webkit-backdrop-filter: blur(30px) saturate(175%);
     backdrop-filter: blur(30px) saturate(175%);
@@ -432,7 +379,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
   }
   #root .momo-app-main button:active:not(:disabled),
   #root .signup-page button:active:not(:disabled) {
-    background: linear-gradient(145deg, rgba(234,242,236,.74), rgba(214,228,218,.48));
+    background: linear-gradient(145deg, rgba(255,250,236,.74), rgba(255,241,178,.48));
     box-shadow: var(--momo-glass-depth-active);
     filter: none;
     transform: scale(.985);
