@@ -47,9 +47,14 @@ const GlobalTokensStyles = createGlobalStyle`
     --momo-shadow-sm: 0 5px 16px rgba(39, 43, 39, .055);
     --momo-shadow: 0 12px 30px rgba(39, 43, 39, .075);
     --momo-shadow-lg: 0 20px 46px rgba(39, 43, 39, .105);
-    --momo-glass: rgba(255, 250, 236, .76);
-    --momo-glass-border: rgba(255, 255, 255, .78);
-    --momo-header-glass: rgba(255, 250, 236, .84);
+    --momo-glass: rgba(255, 250, 236, .62);
+    --momo-glass-border: rgba(255, 255, 255, .82);
+    --momo-header-glass: rgba(255, 250, 236, .68);
+    --momo-glass-clear: rgba(255, 254, 250, .52);
+    --momo-glass-soft: rgba(255, 250, 236, .66);
+    --momo-glass-highlight: rgba(255, 255, 255, .88);
+    --momo-glass-shadow: 0 20px 44px rgba(41, 40, 32, .10), 0 4px 12px rgba(41, 40, 32, .045), inset 0 1px rgba(255,255,255,.94), inset 0 -1px rgba(216,201,159,.18);
+    --momo-depth-shadow: 0 16px 30px rgba(41,40,32,.09), 0 4px 9px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.94);
 
     /* Layout */
     --momo-radius-sm: 8px;
@@ -80,7 +85,10 @@ const GlobalTokensStyles = createGlobalStyle`
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    background: var(--momo-bg);
+    background-color: var(--momo-bg);
+    background-image: linear-gradient(rgba(116,145,178,.065) 1px, transparent 1px), linear-gradient(90deg, rgba(116,145,178,.065) 1px, transparent 1px), radial-gradient(ellipse at 12% 0%, rgba(255,255,255,.82), transparent 38%), radial-gradient(ellipse at 92% 28%, rgba(255,212,59,.11), transparent 42%);
+    background-size: 34px 34px, 34px 34px, auto, auto;
+    background-attachment: fixed;
     color: var(--momo-text);
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
       system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
@@ -104,14 +112,6 @@ const GlobalTokensStyles = createGlobalStyle`
   input::placeholder, textarea::placeholder { color: var(--momo-placeholder); }
   code { font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      scroll-behavior: auto !important;
-      animation-duration: .01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: .01ms !important;
-    }
-  }
 `;
 
 export default GlobalTokensStyles;
