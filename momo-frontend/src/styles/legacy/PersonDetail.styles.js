@@ -56,7 +56,7 @@ const PersonDetailStyles = createGlobalStyle`
 .movie-detail-page > .detail-content-section > .people-list > .person-chip:hover {
   background: var(--momo-surface);
   color: var(--momo-text);
-  transform: translateY(-3px);
+  transform: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -150,7 +150,7 @@ const PersonDetailStyles = createGlobalStyle`
   box-shadow: none;
 }
 .movie-detail-page > .detail-content-section > .people-list > .person-chip:hover {
-  transform: translateY(-2px);
+  transform: none;
   box-shadow: var(--momo-shadow-sm);
 }
 .movie-detail-page > .detail-content-section > .people-list > .person-chip > img,
