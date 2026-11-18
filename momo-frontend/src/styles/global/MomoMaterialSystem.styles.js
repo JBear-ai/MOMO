@@ -181,6 +181,18 @@ const MomoMaterialSystemStyles = createGlobalStyle`
 
   #root .favorite-page .favorite-page-card { border-color: #E9DFC5; }
 
+  /* The saved-film action is anchored to the poster, without shifting the card itself. */
+  #root .favorite-page .favorite-page-poster .favorite-star,
+  #root .momo-home-poster-frame .favorite-star {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+
   /* Poster edges are crisp; the image remains the visual focus. */
   #root .favorite-page .favorite-page-poster,
   #root .movie-detail-page .movie-detail-poster,
