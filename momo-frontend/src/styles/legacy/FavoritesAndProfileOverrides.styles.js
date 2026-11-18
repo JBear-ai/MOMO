@@ -297,7 +297,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page-empty {
   padding: 64px 20px;
-  border: 1px dashed var(--momo-border);
+  border: 1px solid rgba(255,255,255,.9);
   border-radius: 12px;
   background: var(--momo-surface);
   text-align: center;
