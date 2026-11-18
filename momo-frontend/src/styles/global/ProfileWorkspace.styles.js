@@ -44,7 +44,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   }
   #root .profile-dashboard .profile-dashboard-edit:hover {
     border-color: #D6B43F; background: #FFF1B2;
-    box-shadow: 0 7px 16px rgba(75,61,31,.075); transform: translateY(-1px);
+    box-shadow: 0 7px 16px rgba(75,61,31,.075); transform: none;
   }
 
   #root .profile-dashboard .profile-card {
@@ -142,7 +142,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     border-color: rgba(214,180,63,.74);
     background: linear-gradient(155deg, #FFFEFA, #FFF8E4);
     box-shadow: 0 11px 22px rgba(75,61,31,.085), inset 0 1px rgba(255,255,255,1);
-    transform: translateY(-3px);
+    transform: none;
   }
   #root .profile-dashboard .profile-activity-item:focus-visible {
     outline: 3px solid rgba(198,161,43,.5); outline-offset: 3px;
@@ -387,7 +387,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   }
   #root .profile-edit-page .profile-edit-submit:hover:not(:disabled) {
     border-color: #B38D19; background: #F3C72E;
-    box-shadow: 0 8px 18px rgba(179,141,25,.18); transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(179,141,25,.18); transform: none;
   }
   #root .profile-edit-page .profile-edit-submit:disabled {
     border-color: rgba(214,180,63,.5); background: #F5EBC6;
@@ -398,7 +398,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     color: #665D4D; box-shadow: none;
   }
   #root .profile-edit-page .profile-edit-cancel:hover:not(:disabled) {
-    border-color: rgba(214,180,63,.6); background: #FFF8E5; transform: translateY(-1px);
+    border-color: rgba(214,180,63,.6); background: #FFF8E5; transform: none;
   }
 
   /* Standalone member deletion uses the same account surface. */
@@ -499,7 +499,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   #root .profile-edit-page .profile-edit-photo-card:hover,
   #root .profile-edit-page .profile-edit-details:hover {
     border-color: rgba(255,255,255,.98); box-shadow: 0 20px 38px rgba(41,40,32,.11), inset 0 1px rgba(255,255,255,.98);
-    transform: translateY(-2px);
+    transform: none;
   }
   #root .profile-edit-page .profile-edit-sidebar-note {
     background: rgba(255,250,236,.48); box-shadow: inset 0 1px rgba(255,255,255,.78);
@@ -512,7 +512,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
   }
   #root .profile-edit-page .profile-delete-button:hover,
   #root .profile-delete-section .profile-delete-button:hover {
-    border-color: rgba(190,112,98,.62); background: rgba(255,241,236,.88); transform: translateY(-1px);
+    border-color: rgba(190,112,98,.62); background: rgba(255,241,236,.88); transform: none;
   }
 `;
 
