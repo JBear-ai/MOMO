@@ -38,9 +38,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     overflow: hidden;
     border: 1px solid rgba(255,255,255,.9);
     border-radius: 22px;
-    background:
-      radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.92), transparent 52%),
-      linear-gradient(132deg, rgba(255,254,250,.84), rgba(255,250,236,.54) 65%, rgba(255,243,194,.32));
+    background: linear-gradient(132deg, rgba(255,254,250,.88), rgba(255,250,236,.58) 65%, rgba(255,243,194,.34));
     box-shadow: var(--momo-route-depth);
     -webkit-backdrop-filter: blur(28px) saturate(150%);
     backdrop-filter: blur(28px) saturate(150%);
@@ -180,7 +178,8 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .favorite-page-heading {
     min-height: 164px;
     margin-bottom: 23px;
-    border-radius: 22px;
+    border-radius: 21px;
+    background: linear-gradient(132deg, rgba(255,254,250,.92), rgba(255,250,236,.62) 68%, rgba(255,243,194,.3));
   }
   #root .favorite-page .favorite-list-toolbar {
     display: flex;
@@ -216,7 +215,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     flex-direction: column;
     padding: 8px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,.9);
+    border: 1px solid #E9DFC5;
     border-radius: 17px;
     background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.54));
     box-shadow: 0 3px 8px rgba(41,40,32,.035), 0 12px 26px rgba(41,40,32,.065), inset 0 1px rgba(255,255,255,.98);
@@ -791,13 +790,13 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .movie-detail-page .rating-vote-button.is-like {
     border-color: rgba(214,180,63,.42);
-    background: rgba(255,241,178,.28);
+    background: #FFF3C5;
     color: #66510F;
   }
   #root .movie-detail-page .rating-vote-button.is-dislike {
     border-color: rgba(183,123,112,.28);
-    background: rgba(255,241,236,.38);
-    color: #88594F;
+    background: #FFF1EC;
+    color: #8B4F47;
   }
   #root .movie-detail-page .rating-vote-button.selected-like {
     border-color: #D6B43F;
