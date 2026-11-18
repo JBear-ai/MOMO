@@ -83,7 +83,7 @@ const HomeAndMovieStyles = createGlobalStyle`
   padding: 28px;
   color: var(--momo-muted);
   background: var(--momo-surface);
-  border: 1px dashed var(--momo-border);
+  border: 1px solid rgba(255,255,255,.88);
   border-radius: var(--momo-radius);
   text-align: center;
   font-weight: 600;
