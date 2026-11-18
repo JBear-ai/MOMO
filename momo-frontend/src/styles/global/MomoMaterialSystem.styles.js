@@ -11,7 +11,7 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     --momo-glass-saturation: 150%;
     --momo-glass-tint: rgba(255, 250, 236, .38);
     --momo-glass-clear: rgba(255, 255, 255, .34);
-    --momo-glass-edge: rgba(255, 255, 255, .9);
+    --momo-glass-edge: rgba(233, 223, 197, .9);
     --momo-glass-edge-warm: rgba(214, 180, 63, .28);
     --momo-glass-surface:
       linear-gradient(138deg, rgba(255,255,255,.78), rgba(255,250,236,.48) 58%, rgba(255,245,214,.35));
