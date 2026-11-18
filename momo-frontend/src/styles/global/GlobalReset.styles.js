@@ -11,5 +11,12 @@ const GlobalResetStyles = createGlobalStyle`
   img { max-width: 100%; }
   a { color: inherit; }
   code { font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html:root { scroll-behavior: auto; }
+    #root *:not(#root), #root *:not(#root)::before, #root *:not(#root)::after {
+      animation: none; transition: none; transform: none;
+    }
+  }
 `;
 export default GlobalResetStyles;
