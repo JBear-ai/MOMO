@@ -61,18 +61,6 @@ body {
   overflow: hidden;
 }
 
-/* 메모지 감성 포인트 라인 */
-.profile-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 28px;
-  right: 28px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--momo-accent), rgba(255,212,59,0));
-  border-radius: 2px;
-}
-
 .profile-card-heading {
   display: flex;
   align-items: center;
@@ -192,8 +180,8 @@ body {
   margin: 0;
   font-size: 13px;
   color: var(--momo-text);
-  border-bottom: 1px dashed var(--momo-border);
-  padding-bottom: 6px;
+  border-bottom: 0;
+  padding: 5px 0;
 }
 
 .profile-user-info span {
