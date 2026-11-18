@@ -86,7 +86,7 @@ export const WindowActionButton = styled.button`
   font-size: 20px;
   line-height: 1;
   transition: box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
-  &:hover { border-color: rgba(255,255,255,1); background: rgba(255,255,255,.92); box-shadow: 0 6px 12px rgba(34,42,37,.08), inset 0 1px rgba(255,255,255,1); }
+  &:hover { border-color: rgba(255,255,255,1); background: rgba(255,255,255,.92); box-shadow: 0 6px 12px rgba(41,40,32,.08), inset 0 1px rgba(255,255,255,1); }
 `;
 
 export const MessageList = styled.div`
@@ -214,8 +214,8 @@ export const ImageUploadButton = styled.button`
   border: 1px solid rgba(255,255,255,.9);
   border-radius: 10px;
   color: #46554A;
-  background: linear-gradient(145deg, rgba(255,255,255,.8), rgba(232,242,235,.46));
-  box-shadow: 0 3px 8px rgba(34,42,37,.045), inset 0 1px rgba(255,255,255,.98);
+  background: linear-gradient(145deg, rgba(255,255,255,.8), rgba(255,250,236,.46));
+  box-shadow: 0 3px 8px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
   -webkit-backdrop-filter: blur(18px) saturate(165%);
   backdrop-filter: blur(18px) saturate(165%);
   cursor: pointer;
@@ -237,8 +237,8 @@ export const SecondaryButton = styled.button`
   border: 1px solid rgba(255,255,255,.9);
   border-radius: 9px;
   color: #46554A;
-  background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(235,243,237,.44));
-  box-shadow: 0 3px 8px rgba(34,42,37,.04), inset 0 1px rgba(255,255,255,.98);
+  background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.44));
+  box-shadow: 0 3px 8px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,.98);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   backdrop-filter: blur(18px) saturate(160%);
   cursor: pointer;
@@ -339,13 +339,13 @@ export const ChatLauncher = styled.button.attrs({ className: "momo-chat-launcher
   border: 1px solid rgba(255,255,255,.92);
   border-radius: 24px;
   color: #3D4C41;
-  background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(224,239,228,.48) 58%, rgba(210,228,215,.34));
-  box-shadow: 0 8px 20px rgba(34,42,37,.12), inset 0 1px rgba(255,255,255,1);
+  background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.48) 58%, rgba(255,250,236,.34));
+  box-shadow: 0 8px 20px rgba(41,40,32,.12), inset 0 1px rgba(255,255,255,1);
   -webkit-backdrop-filter: blur(24px) saturate(175%);
   backdrop-filter: blur(24px) saturate(175%);
   cursor: pointer;
   transition: box-shadow 200ms ease, border-color 200ms ease, background 200ms ease;
-  &:hover { border-color: rgba(255,255,255,1); background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(221,239,226,.64)); box-shadow: 0 11px 25px rgba(34,42,37,.15), inset 0 1px rgba(255,255,255,1); }
+  &:hover { border-color: rgba(255,255,255,1); background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,250,236,.64)); box-shadow: 0 11px 25px rgba(41,40,32,.15), inset 0 1px rgba(255,255,255,1); }
 `;
 
 export const UnreadBadge = styled.span`
