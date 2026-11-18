@@ -1303,6 +1303,87 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     right: auto;
   }
 
+
+  /* MOMO brand restoration: warm yellow notebook paper beneath neutral glass. */
+  :root {
+    --momo-glass-edge-soft: rgba(233,223,197,.76);
+    --momo-glass-surface: linear-gradient(138deg, rgba(255,255,255,.78), rgba(255,250,236,.52) 54%, rgba(255,241,178,.24));
+    --momo-glass-depth:
+      0 2px 5px rgba(41,40,32,.035),
+      0 14px 34px rgba(41,40,32,.075),
+      inset 0 1px 0 rgba(255,255,255,.98),
+      inset 0 -1px 0 rgba(216,201,159,.2);
+    --momo-glass-button: linear-gradient(145deg, rgba(255,255,255,.7), rgba(255,250,236,.48) 54%, rgba(255,241,178,.28)), rgba(255,255,255,.16);
+    --momo-glass-button-hover: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,250,236,.7) 54%, rgba(255,241,178,.42)), rgba(255,255,255,.2);
+  }
+
+  body {
+    background-color: #F5F2EB;
+    background-image:
+      repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(145,169,190,.19) 31px, rgba(145,169,190,.19) 32px),
+      linear-gradient(to right, transparent 0, transparent 54px, rgba(205,112,104,.34) 54px, rgba(205,112,104,.34) 56px, transparent 56px),
+      radial-gradient(ellipse at 12% 0%, rgba(255,255,255,.72), transparent 48rem),
+      linear-gradient(135deg, #FFF9DF 0%, #FFF4C8 52%, #FFF8DD 100%);
+    background-attachment: fixed;
+    background-size: auto, auto, auto, auto;
+  }
+
+  #root .momo-app-main > .home-page,
+  #root .momo-app-main > .search-page,
+  #root .momo-app-main > .favorite-page,
+  #root .momo-app-main > .movie-detail-page,
+  #root .momo-app-main > .all-reviews-page,
+  #root .momo-app-main > .my-reviews-page,
+  #root .momo-app-main > .liked-reviews-page,
+  #root .momo-app-main > .profile-dashboard,
+  #root .momo-app-main > .profile-edit-page,
+  #root .momo-app-main > .profile-page,
+  #root .momo-app-main > .review-detail-page {
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+  }
+
+  /* Glass stays clear and warm; no green mineral tint. */
+  #root .home-feature-section,
+  #root .home-feature-info,
+  #root .home-favorites-empty,
+  #root .search-page-heading,
+  #root .favorite-page-heading,
+  #root .favorite-page-empty,
+  #root .favorite-page-card,
+  #root .profile-dashboard-heading,
+  #root .profile-dashboard .profile-card,
+  #root .profile-activity-item,
+  #root .profile-edit-heading,
+  #root .profile-edit-card,
+  #root .profile-edit-photo-card,
+  #root .profile-edit-details,
+  #root .all-reviews-heading,
+  #root .all-reviews-card,
+  #root .all-reviews-search,
+  #root .my-reviews-heading,
+  #root .my-reviews-card,
+  #root .liked-reviews-heading,
+  #root .liked-reviews-card,
+  #root .movie-detail-page .movie-detail-header,
+  #root .movie-detail-page .movie-rating-panel,
+  #root .movie-detail-page .detail-content-section,
+  #root .review-detail-page .review-detail-card,
+  #root .review-detail-page .review-comment-card,
+  #root .signup-page .signup-card {
+    border-color: rgba(233,223,197,.78);
+    background: linear-gradient(138deg, rgba(255,255,255,.78), rgba(255,250,236,.52) 58%, rgba(255,241,178,.2)), rgba(255,255,255,.12);
+    box-shadow: 0 4px 10px rgba(41,40,32,.04), 0 16px 34px rgba(41,40,32,.065), inset 0 1px 0 rgba(255,255,255,.98), inset 0 -1px 0 rgba(216,201,159,.16);
+    -webkit-backdrop-filter: blur(24px) saturate(155%);
+    backdrop-filter: blur(24px) saturate(155%);
+  }
+
+  #root .momo-app-footer {
+    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.72));
+    border-top-color: rgba(233,223,197,.82);
+  }
+
 `;
 
 export default MomoMaterialSystemStyles;
