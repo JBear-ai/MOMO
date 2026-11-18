@@ -1,331 +1,315 @@
 import { createGlobalStyle } from "styled-components";
 
+/*
+ * MOMO material language
+ * Glass is defined by visible transparency, optical edge light and layered
+ * reflections. Interaction uses light/pressure feedback rather than dated lift.
+ */
 const MomoMaterialSystemStyles = createGlobalStyle`
-  /* Final material pass: visible glass depth, reflection and tactile elevation. */
   :root {
-    --momo-material-glass: rgba(255,250,236,.48);
-    --momo-material-clear: rgba(255,255,255,.58);
-    --momo-material-edge: rgba(255,255,255,.94);
-    --momo-material-shadow: 0 2px 5px rgba(48,39,22,.035), 0 15px 32px rgba(48,39,22,.09), 0 30px 58px rgba(48,39,22,.045), inset 0 1px rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.22);
-    --momo-material-shadow-raised: 0 5px 10px rgba(48,39,22,.045), 0 24px 44px rgba(48,39,22,.145), 0 40px 70px rgba(48,39,22,.065), inset 0 1px rgba(255,255,255,1);
-    --momo-material-ease: 240ms cubic-bezier(.2,.72,.2,1);
+    --momo-glass-tint: rgba(255, 250, 236, .42);
+    --momo-glass-clear: rgba(255, 255, 255, .28);
+    --momo-glass-edge: rgba(255, 255, 255, .88);
+    --momo-glass-edge-warm: rgba(214, 180, 63, .34);
+    --momo-glass-blur: 30px;
+    --momo-glass-saturation: 168%;
+    --momo-glass-depth:
+      0 1px 2px rgba(50, 41, 22, .035),
+      0 9px 24px rgba(50, 41, 22, .075),
+      0 26px 56px rgba(50, 41, 22, .075),
+      inset 0 1px 0 rgba(255, 255, 255, .96),
+      inset 0 -1px 0 rgba(216, 201, 159, .24);
+    --momo-glass-depth-raised:
+      0 2px 5px rgba(50, 41, 22, .045),
+      0 14px 30px rgba(50, 41, 22, .12),
+      0 34px 64px rgba(50, 41, 22, .10),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+    --momo-motion-material: 320ms cubic-bezier(.16, 1, .3, 1);
+    --momo-motion-press: 110ms cubic-bezier(.2, .7, .2, 1);
   }
 
-  /* The page title is a floating glass sheet, not plain text above the cards. */
+  /* Ambient desk: the graph remains visible through every glass surface. */
+  html, body, #root {
+    min-height: 100%;
+  }
+  body {
+    background-color: #F5F2EB;
+    background-image:
+      radial-gradient(ellipse at 12% 4%, rgba(255, 212, 59, .16), transparent 34rem),
+      radial-gradient(ellipse at 88% 24%, rgba(255, 255, 255, .78), transparent 42rem),
+      linear-gradient(rgba(166, 148, 108, .075) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(166, 148, 108, .075) 1px, transparent 1px);
+    background-size: auto, auto, 32px 32px, 32px 32px;
+    background-attachment: fixed;
+  }
+
+  /* Navigation is a continuous glass plane, not an opaque cream bar. */
+  #root .momo-app-header {
+    background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,250,236,.42));
+    border-bottom: 1px solid rgba(255,255,255,.86);
+    box-shadow: 0 8px 28px rgba(48,39,22,.075), inset 0 1px rgba(255,255,255,.96);
+    -webkit-backdrop-filter: blur(34px) saturate(175%);
+    backdrop-filter: blur(34px) saturate(175%);
+  }
+
+  /* Shared glass panels across home, profile, archive, search and detail. */
   #root .profile-dashboard .profile-dashboard-heading,
-  #root .profile-edit-page .profile-edit-heading,
-  #root .favorite-page .favorite-page-heading,
-  #root .search-page-heading,
-  #root .all-reviews-heading,
-  #root .my-reviews-heading,
-  #root .liked-reviews-heading {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    border: 1px solid var(--momo-route-line);
-    border-radius: 21px;
-    background: linear-gradient(132deg, rgba(255,255,255,.74), rgba(255,250,236,.42) 58%, rgba(255,243,194,.3));
-    box-shadow: var(--momo-material-shadow);
-    backdrop-filter: blur(26px) saturate(158%);
-    -webkit-backdrop-filter: blur(26px) saturate(158%);
-  }
-  #root .profile-dashboard .profile-dashboard-heading::after,
-  #root .profile-edit-page .profile-edit-heading::after,
-  #root .favorite-page .favorite-page-heading::after,
-  #root .search-page-heading::after,
-  #root .all-reviews-heading::after,
-  #root .my-reviews-heading::after,
-  #root .liked-reviews-heading::after {
-    position: absolute;
-    inset: 0;
-    content: "";
-    background:
-      linear-gradient(112deg, transparent 16%, rgba(255,255,255,.44) 43%, transparent 68%),
-      linear-gradient(180deg, rgba(255,255,255,.14), transparent 48%);
-    opacity: .86;
-    pointer-events: none;
-  }
-  #root .profile-dashboard .profile-dashboard-heading > *,
-  #root .profile-edit-page .profile-edit-heading > *,
-  #root .favorite-page .favorite-page-heading > *,
-  #root .search-page-heading > *,
-  #root .all-reviews-heading > *,
-  #root .my-reviews-heading > *,
-  #root .liked-reviews-heading > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  #root .profile-dashboard .profile-dashboard-heading {
-    min-height: 132px;
-    padding: clamp(24px, 3.4vw, 36px);
-  }
-
-  /* Identity, edit form, saved movies and review panels share one optical material. */
   #root .profile-dashboard .profile-card,
+  #root .profile-dashboard .profile-activity-item,
+  #root .profile-edit-page .profile-edit-heading,
   #root .profile-edit-page .profile-edit-card,
   #root .profile-edit-page .profile-edit-photo-card,
   #root .profile-edit-page .profile-edit-details,
-  #root .profile-delete-page-card,
+  #root .favorite-page-heading,
   #root .favorite-page-empty,
   #root .favorite-page .favorite-page-card,
+  #root .search-page-heading,
   #root .search-page .movie-card,
   #root .search-page .movie-item,
   #root .search-page .movie-grid > *,
-  #root .all-reviews-card,
+  #root .my-reviews-heading,
   #root .my-reviews-card,
+  #root .liked-reviews-heading,
   #root .liked-reviews-card,
-  #root .review-detail-card,
-  #root .review-comment-card,
+  #root .all-reviews-heading,
+  #root .all-reviews-card,
+  #root .all-reviews-search,
+  #root .all-reviews-search-panel,
+  #root .all-reviews-table-wrap,
   #root .movie-detail-page .movie-detail-header,
   #root .movie-detail-page .movie-rating-panel,
   #root .movie-detail-page .detail-content-section,
   #root .movie-detail-page .review-write-section,
-  #root .movie-detail-page .detail-review-card {
-    border: 1px solid var(--momo-material-edge);
+  #root .movie-detail-page .detail-review-card,
+  #root .person-detail-page .person-detail-header,
+  #root .review-detail-card,
+  #root .review-comment-card {
     background:
-      radial-gradient(ellipse at 90% 0%, rgba(255,255,255,.62), transparent 46%),
-      linear-gradient(145deg, rgba(255,255,255,.62), rgba(255,250,236,.38) 58%, rgba(255,243,194,.28));
-    box-shadow: var(--momo-material-shadow);
-    backdrop-filter: blur(28px) saturate(158%);
-    -webkit-backdrop-filter: blur(28px) saturate(158%);
-    transition: transform var(--momo-material-ease), border-color var(--momo-material-ease), box-shadow var(--momo-material-ease), background var(--momo-material-ease);
+      radial-gradient(ellipse at 14% 0%, rgba(255,255,255,.78), transparent 43%),
+      radial-gradient(ellipse at 100% 100%, rgba(255,212,59,.12), transparent 48%),
+      linear-gradient(138deg, rgba(255,255,255,.58), rgba(255,250,236,.34) 56%, rgba(255,243,194,.26));
+    border: 1px solid var(--momo-glass-edge);
+    box-shadow: var(--momo-glass-depth);
+    -webkit-backdrop-filter: blur(var(--momo-glass-blur)) saturate(var(--momo-glass-saturation));
+    backdrop-filter: blur(var(--momo-glass-blur)) saturate(var(--momo-glass-saturation));
   }
 
-  /* Double edge-light creates a readable glass rim without a flat white outline. */
+  /* A thin lens reflection and inner rim are shared by every major surface. */
   #root .profile-dashboard .profile-card,
+  #root .profile-dashboard .profile-activity-item,
   #root .profile-edit-page .profile-edit-card,
   #root .profile-edit-page .profile-edit-photo-card,
   #root .profile-edit-page .profile-edit-details,
-  #root .favorite-page-empty,
   #root .favorite-page .favorite-page-card,
   #root .search-page .movie-card,
   #root .search-page .movie-item,
-  #root .all-reviews-card,
   #root .my-reviews-card,
   #root .liked-reviews-card,
-  #root .review-detail-card,
-  #root .review-comment-card,
+  #root .all-reviews-card,
   #root .movie-detail-page .movie-rating-panel,
   #root .movie-detail-page .detail-content-section,
   #root .movie-detail-page .review-write-section,
-  #root .movie-detail-page .detail-review-card {
+  #root .movie-detail-page .detail-review-card,
+  #root .review-detail-card,
+  #root .review-comment-card {
     position: relative;
     isolation: isolate;
+    overflow: hidden;
   }
   #root .profile-dashboard .profile-card::before,
+  #root .profile-dashboard .profile-activity-item::before,
   #root .profile-edit-page .profile-edit-card::before,
   #root .profile-edit-page .profile-edit-photo-card::before,
   #root .profile-edit-page .profile-edit-details::before,
-  #root .favorite-page-empty::before,
   #root .favorite-page .favorite-page-card::before,
   #root .search-page .movie-card::before,
   #root .search-page .movie-item::before,
-  #root .all-reviews-card::before,
   #root .my-reviews-card::before,
   #root .liked-reviews-card::before,
-  #root .review-detail-card::before,
-  #root .review-comment-card::before,
+  #root .all-reviews-card::before,
   #root .movie-detail-page .movie-rating-panel::before,
   #root .movie-detail-page .detail-content-section::before,
   #root .movie-detail-page .review-write-section::before,
-  #root .movie-detail-page .detail-review-card::before {
+  #root .movie-detail-page .detail-review-card::before,
+  #root .review-detail-card::before,
+  #root .review-comment-card::before {
     position: absolute;
     z-index: 0;
     inset: 0;
     content: "";
     border-radius: inherit;
     background:
-      linear-gradient(118deg, rgba(255,255,255,.42), transparent 34%, transparent 76%, rgba(255,255,255,.12)),
-      radial-gradient(ellipse at 82% 0%, rgba(255,255,255,.22), transparent 42%);
+      linear-gradient(116deg, rgba(255,255,255,.52) 0%, rgba(255,255,255,.12) 24%, transparent 44%),
+      linear-gradient(180deg, rgba(255,255,255,.24), transparent 26%, transparent 78%, rgba(214,180,63,.055));
     pointer-events: none;
   }
   #root .profile-dashboard .profile-card > *,
+  #root .profile-dashboard .profile-activity-item > *,
   #root .profile-edit-page .profile-edit-card > *,
   #root .profile-edit-page .profile-edit-photo-card > *,
   #root .profile-edit-page .profile-edit-details > *,
-  #root .favorite-page-empty > *,
   #root .favorite-page .favorite-page-card > *,
   #root .search-page .movie-card > *,
   #root .search-page .movie-item > *,
-  #root .all-reviews-card > *,
   #root .my-reviews-card > *,
   #root .liked-reviews-card > *,
-  #root .review-detail-card > *,
-  #root .review-comment-card > *,
+  #root .all-reviews-card > *,
   #root .movie-detail-page .movie-rating-panel > *,
   #root .movie-detail-page .detail-content-section > *,
   #root .movie-detail-page .review-write-section > *,
-  #root .movie-detail-page .detail-review-card > * {
+  #root .movie-detail-page .detail-review-card > *,
+  #root .review-detail-card > *,
+  #root .review-comment-card > * {
     position: relative;
     z-index: 1;
   }
 
-  /* Soft 3D hover — small Z lift with layered shadow, never a harsh jump. */
-  #root .profile-dashboard .profile-card:hover,
-  #root .profile-edit-page .profile-edit-photo-card:hover,
-  #root .profile-edit-page .profile-edit-details:hover,
-  #root .favorite-page .favorite-page-card:hover,
-  #root .search-page .movie-card:hover,
-  #root .search-page .movie-item:hover,
-  #root .all-reviews-card:hover,
-  #root .my-reviews-card:hover,
-  #root .liked-reviews-card:hover,
-  #root .movie-detail-page .movie-rating-panel:hover,
-  #root .movie-detail-page .detail-content-section:hover {
-    border-color: rgba(214,180,63,.62);
-    box-shadow: var(--momo-material-shadow-raised);
-    transform: perspective(1100px) translateY(-4px) rotateX(.45deg) translateZ(2px);
-  }
-
-  /* Profile data and activity cards: distinct elevated surfaces within the main pane. */
-  #root .profile-dashboard .profile-activity-item {
-    position: relative;
-    isolation: isolate;
-    border: 1px solid rgba(233,223,197,.9);
-    border-left-color: #D6B43F;
-    border-radius: 15px;
-    background:
-      radial-gradient(ellipse at 92% 0%, rgba(255,255,255,.78), transparent 48%),
-      linear-gradient(145deg, rgba(255,255,255,.62), rgba(255,250,236,.4));
-    box-shadow: 0 2px 4px rgba(48,39,22,.035), 0 10px 22px rgba(48,39,22,.08), inset 0 1px rgba(255,255,255,1), inset 0 -1px rgba(216,201,159,.18);
-    backdrop-filter: blur(24px) saturate(152%);
-    -webkit-backdrop-filter: blur(24px) saturate(152%);
-    transition: transform var(--momo-material-ease), box-shadow var(--momo-material-ease), border-color var(--momo-material-ease);
-  }
-  #root .profile-dashboard .profile-activity-item::before {
-    position: absolute;
-    inset: 0;
-    content: "";
-    border-radius: inherit;
-    background: linear-gradient(116deg, rgba(255,255,255,.46), transparent 48%, rgba(255,255,255,.1));
-    pointer-events: none;
-  }
-  #root .profile-dashboard .profile-activity-item > * { position: relative; z-index: 1; }
-  #root .profile-dashboard .profile-activity-item:hover {
-    border-color: rgba(214,180,63,.68);
-    border-left-color: #D6B43F;
-    box-shadow: 0 5px 9px rgba(48,39,22,.045), 0 18px 32px rgba(48,39,22,.13), inset 0 1px rgba(255,255,255,1);
-    transform: perspective(900px) translateY(-4px) rotateX(.6deg) translateZ(2px);
-  }
-  #root .profile-dashboard .profile-activity-icon {
-    border: 1px solid rgba(214,180,63,.44);
-    background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(255,241,178,.62));
-    box-shadow: 0 3px 7px rgba(68,55,27,.08), inset 0 1px rgba(255,255,255,1);
-  }
-
-  /* Movie / person detail hero reads as a thick lens over the poster atmosphere. */
-  #root .movie-detail-page .movie-detail-header {
+  /* Buttons: glass capsule, refractive rim, light sweep and physical press. */
+  #root button,
+  #root [role="button"],
+  #root .profile-button,
+  #root .favorite-browse-button,
+  #root .all-reviews-search-submit,
+  #root .rating-vote-button,
+  #root .person-chip,
+  #root .page-back-link,
+  #root .detail-back-button {
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,.88);
-    border-radius: 22px;
-    background:
-      radial-gradient(ellipse at 88% 0%, rgba(255,212,59,.22), transparent 38%),
-      linear-gradient(130deg, rgba(255,255,255,.68), rgba(255,250,236,.38));
-    box-shadow: 0 4px 10px rgba(48,39,22,.045), 0 24px 52px rgba(48,39,22,.13), inset 0 1px rgba(255,255,255,1);
-    backdrop-filter: blur(32px) saturate(160%);
-    -webkit-backdrop-filter: blur(32px) saturate(160%);
+    border-color: rgba(255,255,255,.84);
+    box-shadow:
+      0 2px 4px rgba(50,41,22,.045),
+      0 7px 16px rgba(50,41,22,.075),
+      inset 0 1px 0 rgba(255,255,255,.96),
+      inset 0 -1px 0 rgba(216,201,159,.18);
+    transition:
+      background-color var(--momo-motion-material),
+      border-color var(--momo-motion-material),
+      box-shadow var(--momo-motion-material),
+      filter var(--momo-motion-material),
+      transform var(--momo-motion-press);
   }
-  #root .movie-detail-page .movie-detail-header::after {
+  #root button::after,
+  #root [role="button"]::after,
+  #root .profile-button::after,
+  #root .favorite-browse-button::after,
+  #root .all-reviews-search-submit::after,
+  #root .rating-vote-button::after,
+  #root .person-chip::after,
+  #root .page-back-link::after,
+  #root .detail-back-button::after {
     position: absolute;
+    z-index: -1;
     inset: 0;
     content: "";
-    background: linear-gradient(116deg, transparent 17%, rgba(255,255,255,.34) 45%, transparent 72%);
+    border-radius: inherit;
+    background: linear-gradient(112deg, rgba(255,255,255,.52), transparent 38%, rgba(255,255,255,.18) 72%, transparent);
+    opacity: .56;
     pointer-events: none;
+    transition: opacity var(--momo-motion-material);
   }
-  #root .movie-detail-page .movie-detail-poster,
-  #root .favorite-page .favorite-page-poster,
-  #root .search-page .poster-frame,
-  #root .search-page .movie-poster,
-  #root .search-page .poster-placeholder {
-    border: 1px solid rgba(255,255,255,.96);
-    border-radius: 13px;
-    box-shadow: 0 3px 7px rgba(42,35,20,.08), 0 14px 25px rgba(42,35,20,.16), inset 0 1px rgba(255,255,255,.92);
+  #root button:hover:not(:disabled),
+  #root [role="button"]:hover,
+  #root .profile-button:hover:not(:disabled),
+  #root .favorite-browse-button:hover:not(:disabled),
+  #root .all-reviews-search-submit:hover:not(:disabled),
+  #root .rating-vote-button:hover:not(:disabled),
+  #root .person-chip:hover,
+  #root .page-back-link:hover,
+  #root .detail-back-button:hover {
+    border-color: rgba(255,255,255,.98);
+    box-shadow:
+      0 3px 7px rgba(50,41,22,.055),
+      0 12px 24px rgba(50,41,22,.105),
+      inset 0 1px 0 rgba(255,255,255,1),
+      inset 0 0 0 1px rgba(255,255,255,.2);
+    filter: saturate(1.12) brightness(1.025);
   }
-
-  #root .profile-dashboard .profile-card {
-    border-radius: 20px;
-    backdrop-filter: blur(26px) saturate(158%);
-    -webkit-backdrop-filter: blur(26px) saturate(158%);
+  #root button:hover:not(:disabled)::after,
+  #root [role="button"]:hover::after,
+  #root .profile-button:hover:not(:disabled)::after,
+  #root .favorite-browse-button:hover:not(:disabled)::after,
+  #root .all-reviews-search-submit:hover:not(:disabled)::after,
+  #root .rating-vote-button:hover:not(:disabled)::after,
+  #root .person-chip:hover::after,
+  #root .page-back-link:hover::after,
+  #root .detail-back-button:hover::after {
+    opacity: .96;
   }
-  #root .profile-edit-page .profile-edit-heading {
-    backdrop-filter: blur(24px) saturate(150%);
-    -webkit-backdrop-filter: blur(24px) saturate(150%);
+  #root button:active:not(:disabled),
+  #root [role="button"]:active,
+  #root .profile-button:active:not(:disabled),
+  #root .favorite-browse-button:active:not(:disabled),
+  #root .all-reviews-search-submit:active:not(:disabled),
+  #root .rating-vote-button:active:not(:disabled),
+  #root .person-chip:active,
+  #root .page-back-link:active,
+  #root .detail-back-button:active {
+    transform: scale(.975);
+    box-shadow:
+      0 1px 2px rgba(50,41,22,.06),
+      inset 0 2px 5px rgba(50,41,22,.08),
+      inset 0 1px 0 rgba(255,255,255,.78);
+    transition-duration: var(--momo-motion-press);
   }
-  #root .movie-detail-page .movie-rating-panel {
-    border: 1px solid rgba(255,255,255,.82);
-  }
-  #root .profile-edit-page .profile-edit-photo-card,
-  #root .profile-edit-page .profile-edit-details {
-    border: 1px solid rgba(233,223,197,.9);
-    border-radius: 18px;
-    backdrop-filter: blur(24px) saturate(150%);
-    -webkit-backdrop-filter: blur(24px) saturate(150%);
-  }
-  #root .favorite-page .favorite-page-card {
-    border-color: var(--momo-route-line);
-    border-radius: 15px;
-    backdrop-filter: blur(24px) saturate(152%);
-    -webkit-backdrop-filter: blur(24px) saturate(152%);
-  }
-  #root .movie-detail-page .movie-rating-panel {
-    backdrop-filter: blur(26px) saturate(156%);
-    -webkit-backdrop-filter: blur(26px) saturate(156%);
-  }
-
-  /* Inputs retain legibility while reflecting the glass surface around them. */
-  #root .profile-edit-page .profile-edit-field input,
-  #root .profile-edit-page .profile-edit-file-input,
-  #root .movie-detail-page input,
-  #root .movie-detail-page textarea,
-  #root .search-page input,
-  #root .search-page select,
-  #root .all-reviews-search-input,
-  #root .all-reviews-search-select {
-    background: rgba(255,254,250,.76);
-    border-color: rgba(216,201,159,.76);
-    box-shadow: inset 0 1px 2px rgba(48,39,22,.04), 0 1px rgba(255,255,255,.9);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-  }
-
-  /* Navigation controls float above the graph-paper canvas. */
-  #root .momo-app-header {
-    border-bottom-color: rgba(255,255,255,.88);
-    background: rgba(255,250,236,.62);
-    box-shadow: 0 5px 12px rgba(48,39,22,.04), 0 14px 30px rgba(48,39,22,.075), inset 0 1px rgba(255,255,255,.98);
-    backdrop-filter: blur(32px) saturate(165%);
-    -webkit-backdrop-filter: blur(32px) saturate(165%);
+  #root button:focus-visible,
+  #root [role="button"]:focus-visible,
+  #root a:focus-visible,
+  #root input:focus-visible,
+  #root textarea:focus-visible,
+  #root select:focus-visible {
+    outline: 3px solid rgba(214,180,63,.72);
+    outline-offset: 3px;
   }
 
-  @media (max-width:700px) {
-    #root .profile-dashboard .profile-dashboard-heading,
-    #root .profile-edit-page .profile-edit-heading {
-      min-height: 116px;
-      padding: 22px 18px;
+  /* Soft 3D surfaces respond optically, not by the old translateY hover trick. */
+  #root .profile-dashboard .profile-activity-item:hover,
+  #root .favorite-page .favorite-page-card:hover,
+  #root .search-page .movie-card:hover,
+  #root .search-page .movie-item:hover {
+    border-color: rgba(255,255,255,.98);
+    box-shadow: var(--momo-glass-depth-raised);
+  }
+  #root .profile-dashboard .profile-activity-item,
+  #root .favorite-page .favorite-page-card,
+  #root .search-page .movie-card,
+  #root .search-page .movie-item {
+    transform: translateZ(0);
+    transition: border-color var(--momo-motion-material), box-shadow var(--momo-motion-material), background var(--momo-motion-material);
+  }
+
+  /* Nested controls stay translucent rather than becoming opaque white boxes. */
+  #root input,
+  #root textarea,
+  #root select {
+    background-color: rgba(255,254,250,.68);
+    border-color: rgba(216,201,159,.78);
+    box-shadow: inset 0 1px 2px rgba(50,41,22,.035), 0 1px 0 rgba(255,255,255,.82);
+    -webkit-backdrop-filter: blur(16px) saturate(145%);
+    backdrop-filter: blur(16px) saturate(145%);
+  }
+
+  @media (hover: none) {
+    #root button:hover:not(:disabled),
+    #root [role="button"]:hover,
+    #root .profile-button:hover:not(:disabled),
+    #root .favorite-browse-button:hover:not(:disabled),
+    #root .all-reviews-search-submit:hover:not(:disabled),
+    #root .rating-vote-button:hover:not(:disabled) {
+      filter: none;
     }
-    #root .profile-dashboard .profile-card,
-    #root .profile-edit-page .profile-edit-card,
-    #root .profile-edit-page .profile-edit-photo-card,
-    #root .profile-edit-page .profile-edit-details {
-      border-radius: 18px;
-    }
   }
-  @media (prefers-reduced-motion:reduce) {
-    #root .profile-dashboard .profile-card,
-    #root .profile-dashboard .profile-activity-item,
-    #root .profile-edit-page .profile-edit-photo-card,
-    #root .profile-edit-page .profile-edit-details,
-    #root .favorite-page .favorite-page-card,
-    #root .search-page .movie-card,
-    #root .search-page .movie-item {
+  @media (prefers-reduced-motion: reduce) {
+    #root *,
+    #root *::before,
+    #root *::after {
+      scroll-behavior: auto;
+      animation-duration: .01ms;
+      animation-iteration-count: 1;
       transition-duration: .01ms;
-      transform: none;
     }
   }
-
 `;
 
 export default MomoMaterialSystemStyles;
