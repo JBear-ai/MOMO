@@ -368,6 +368,7 @@ const ProfileWorkspaceStyles = createGlobalStyle`
     border-top: 1px solid rgba(214,180,63,.22);
   }
   #root .profile-dashboard .profile-activity-footer p {
+    display: block;
     min-width: 0;
     margin: 0;
     color: #6A6251;
