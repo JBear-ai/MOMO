@@ -30,7 +30,7 @@ export const HomePage = styled.div.attrs({ className: "home-page" })`
   }
   .home-favorites-empty::before {
     position: absolute; top: 18px; bottom: 18px; left: 0; width: 3px;
-    content: ""; border-radius: 0 3px 3px 0; background: #859B89;
+    content: ""; border-radius: 0 3px 3px 0; background: #D6B43F;
   }
   .home-favorites-empty strong { font-size: 15px; font-weight: 800; }
   .home-favorites-empty p { margin: 0; color: var(--home-muted); font-size: 13px; line-height: 1.7; }
