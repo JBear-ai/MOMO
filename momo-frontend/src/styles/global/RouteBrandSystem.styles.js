@@ -786,6 +786,33 @@ const RouteBrandSystemStyles = createGlobalStyle`
   #root [aria-label="전체 회원 채팅"] { overflow: hidden; border: 1px solid rgba(255,255,255,.9); border-radius: 22px; background: rgba(255,254,250,.78); box-shadow: 0 26px 68px rgba(32,27,18,.20), inset 0 1px rgba(255,255,255,.96); backdrop-filter: blur(28px) saturate(155%); -webkit-backdrop-filter: blur(28px) saturate(155%); }
   #root [aria-label="공용 채팅 열기"] { border: 1px solid rgba(255,255,255,.84); border-radius: 16px; box-shadow: 0 12px 28px rgba(53,43,24,.16), inset 0 1px rgba(255,255,255,.44); transition: transform 220ms ease, box-shadow 220ms ease; }
   #root [aria-label="공용 채팅 열기"]:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(53,43,24,.20), inset 0 1px rgba(255,255,255,.52); }
+  #root .momo-app-header {
+    border-bottom-color: rgba(255,255,255,.82);
+    background: rgba(255,250,236,.66);
+    box-shadow: 0 12px 28px rgba(41,40,32,.065), inset 0 1px rgba(255,255,255,.94);
+    backdrop-filter: blur(28px) saturate(148%);
+    -webkit-backdrop-filter: blur(28px) saturate(148%);
+  }
+  #root .momo-app-header button.momo-logout-button {
+    min-height: 32px; padding: 0 11px; border-color: rgba(216,201,159,.58);
+    border-radius: 10px; background: rgba(255,254,250,.34); color: #827B6D;
+    font-size: 10px; font-weight: 650; box-shadow: none;
+  }
+  #root .momo-app-header button.momo-logout-button:hover:not(:disabled) {
+    border-color: rgba(216,201,159,.9); background: rgba(255,250,236,.76); color: #514C40;
+    box-shadow: 0 4px 10px rgba(41,40,32,.045); transform: translateY(-1px);
+  }
+  #root .profile-page .profile-delete-section .profile-delete-button {
+    border: 1px solid rgba(190,112,98,.36); border-radius: 10px;
+    background: rgba(255,247,243,.62); color: #8C5149;
+    box-shadow: inset 0 1px rgba(255,255,255,.86);
+  }
+  #root .profile-delete-page-card {
+    border-color: rgba(229,184,173,.62);
+    background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,247,243,.58));
+    box-shadow: var(--momo-depth-shadow); backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+  }
 `;
 
 export default RouteBrandSystemStyles;
