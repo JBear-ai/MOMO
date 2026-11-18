@@ -9,7 +9,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   :root {
     --momo-route-ink: #292820;
     --momo-route-body: #514C40;
-    --momo-route-muted: #827B6D;
+    --momo-route-muted: #6A6251;
     --momo-route-paper: rgba(255,250,236,.78);
     --momo-route-glass: linear-gradient(138deg, rgba(255,255,255,.78), rgba(255,250,236,.48) 60%, rgba(255,244,210,.34));
     --momo-route-edge: rgba(255,255,255,.9);
@@ -127,7 +127,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .my-reviews-heading { --route-accent: #80600E; }
   #root .liked-reviews-heading { --route-accent: #9A6258; }
-  #root .favorite-page-heading { --route-accent: #6F7962; }
+  #root .favorite-page-heading { --route-accent: #596A4E; }
 
   #root .page-back-link,
   #root .favorite-back-button,
@@ -275,7 +275,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     height: 100%;
     place-items: center;
     background: linear-gradient(145deg, #EEE9DE, #F9F5EB);
-    color: #827B6D;
+    color: #6A6251;
     font-size: 11px;
   }
   #root .favorite-page .favorite-page-movie-info {
@@ -296,7 +296,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .favorite-page .favorite-page-movie-info p {
     margin: 0;
-    color: #827B6D;
+    color: #6A6251;
     font-size: 11px;
     font-weight: 600;
   }
@@ -539,7 +539,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     border: 1px solid rgba(233,223,197,.88);
     border-radius: 999px;
     background: rgba(255,254,250,.64);
-    color: #827B6D;
+    color: #6A6251;
     font-size: 10px;
     font-weight: 800;
   }
@@ -596,7 +596,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .movie-detail-page .people-list-compact .person-chip span {
     overflow: hidden;
-    color: #827B6D;
+    color: #6A6251;
     font-size: 9px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -633,7 +633,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .movie-detail-page .rating-panel-eyebrow {
     display: block;
     margin: 0 0 7px;
-    color: #9B7C2D;
+    color: #80600E;
     font-size: 9px;
     font-weight: 850;
     letter-spacing: .15em;
@@ -659,7 +659,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     border: 1px solid rgba(233,223,197,.88);
     border-radius: 999px;
     background: rgba(255,254,250,.6);
-    color: #827B6D;
+    color: #6A6251;
     font-size: 8px;
     font-weight: 850;
     letter-spacing: .11em;
@@ -698,7 +698,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     font-variant-numeric: tabular-nums;
   }
   #root .movie-detail-page .movie-score-value span {
-    color: #827B6D;
+    color: #6A6251;
     font-size: 11px;
     font-weight: 700;
   }
@@ -710,7 +710,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .movie-detail-page .rating-score-caption {
     margin: 5px 0 0;
-    color: #918A7D;
+    color: #6A6251;
     font-size: 9px;
     line-height: 1.45;
   }
@@ -816,7 +816,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .movie-detail-page .detail-total-count {
     margin: 10px 2px 0;
-    color: #827B6D;
+    color: #6A6251;
     text-align: right;
     font-size: 10px;
   }
@@ -938,7 +938,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .my-reviews-card-heading p,
   #root .liked-reviews-toolbar p {
     margin: 5px 0 0;
-    color: #827B6D;
+    color: #6A6251;
     font-size: 11px;
   }
   #root .all-reviews-page-info,
@@ -1081,7 +1081,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .my-review-info p,
   #root .liked-review-content { color: #625B4F; font-size: 11px; line-height: 1.65; }
   #root .my-review-date,
-  #root .liked-review-meta { color: #918A7D; font-size: 10px; }
+  #root .liked-review-meta { color: #6A6251; font-size: 10px; }
   #root .my-review-arrow { color: #B38D19; }
   #root .liked-review-unlike {
     min-height: 34px;
@@ -1120,7 +1120,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .review-detail-page .review-detail-eyebrow {
     margin: 0 0 11px;
-    color: #9B7C2D;
+    color: #80600E;
     font-size: 9px;
     font-weight: 850;
     letter-spacing: .14em;
@@ -1180,7 +1180,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
     font-size: 17px;
     font-weight: 850;
   }
-  #root .review-detail-page .review-detail-movie-info > p { margin: 0 0 9px; color: #827B6D; font-size: 10px; }
+  #root .review-detail-page .review-detail-movie-info > p { margin: 0 0 9px; color: #6A6251; font-size: 10px; }
   #root .review-detail-page .review-detail-content {
     min-height: 140px;
     padding: clamp(20px, 3vw, 30px);
@@ -1247,7 +1247,7 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   #root .signup-page .signup-eyebrow {
     display: block;
     margin: 0 0 8px;
-    color: #9B7C2D;
+    color: #80600E;
     font-size: 9px;
     font-weight: 850;
     letter-spacing: .15em;
@@ -1296,19 +1296,19 @@ const MomoLiquidGlassPageStyles = createGlobalStyle`
   }
   #root .signup-page .signup-footer {
     margin: 18px 0 0;
-    color: #827B6D;
+    color: #6A6251;
     font-size: 11px;
     text-align: center;
   }
   #root .signup-page .signup-footer a { color: #80600E; font-weight: 800; text-decoration: none; }
-  #root .signup-page .signup-bottom-caption { margin: 14px 0 0; color: #918A7D; font-size: 10px; text-align: center; }
+  #root .signup-page .signup-bottom-caption { margin: 14px 0 0; color: #6A6251; font-size: 10px; text-align: center; }
 
   /* State and accessibility treatment. */
   #root .all-reviews-state,
   #root .my-reviews-state,
   #root .liked-reviews-state,
   #root .review-detail-state {
-    color: #827B6D;
+    color: #6A6251;
   }
   #root .all-reviews-error,
   #root .my-reviews-state.error,
