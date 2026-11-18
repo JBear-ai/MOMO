@@ -196,7 +196,7 @@ const ActionButton = styled.button`
   @media (max-width: 600px) { min-height: 34px; padding: 0 11px; }
 `;
 
-const Main = styled.main`
+const Main = styled.main.attrs({ className: "momo-app-main" })`
   position: relative;
   flex: 1;
   width: 100%;
@@ -215,7 +215,7 @@ const Footer = styled.footer.attrs({ className: "momo-app-footer" })`
   box-sizing: border-box;
   isolation: isolate;
   border-top: 1px solid rgba(255,255,255,.88);
-  background: linear-gradient(145deg, rgba(255,255,255,.74), rgba(255,250,236,.82));
+  background: linear-gradient(135deg, rgba(255,255,255,.62), rgba(247,249,246,.46) 52%, rgba(238,241,234,.48));
   color: #292820;
   box-shadow: 0 -8px 26px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
   -webkit-backdrop-filter: blur(28px) saturate(145%);
@@ -232,7 +232,7 @@ const FooterContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto 24px;
   padding-bottom: 24px;
-  border-bottom: 1px solid rgba(216,201,159,.48);
+  border-bottom: 1px solid rgba(255,255,255,.64);
   box-sizing: border-box;
   @media (max-width: 768px) { flex-direction: column; align-items: flex-start; gap: 22px; }
 `;
