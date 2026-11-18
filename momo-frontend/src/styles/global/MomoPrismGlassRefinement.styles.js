@@ -326,7 +326,7 @@ const MomoPrismGlassRefinementStyles = createGlobalStyle`
       border-radius: 19px !important;
     }
   }
-\`;
+`;
 
 
 export default MomoPrismGlassRefinementStyles;
