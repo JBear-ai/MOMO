@@ -1500,6 +1500,157 @@ const MomoMaterialSystemStyles = createGlobalStyle`
     #root .detail-content-section, #root .movie-rating-panel { border-radius: 18px !important; }
   }
 
+
+  /* ============================================================
+     OPAQUE FROSTED GLASS OVERRIDE
+     The notebook background is the only exposed canvas.
+     All UI surfaces above it use dense, milky glass.
+  ============================================================ */
+  :root {
+    --momo-frosted-face: linear-gradient(145deg, rgba(255,255,255,.96) 0%, rgba(255,253,247,.93) 52%, rgba(255,247,220,.9) 100%);
+    --momo-frosted-face-soft: linear-gradient(145deg, rgba(255,255,255,.93), rgba(255,251,238,.9));
+    --momo-frosted-edge: rgba(255,255,255,.99);
+    --momo-frosted-shadow: 0 3px 8px rgba(65,54,29,.055), 0 16px 38px rgba(65,54,29,.105), inset 0 1px 0 #fff, inset 0 -1px 0 rgba(214,180,63,.18);
+    --momo-frosted-blur: blur(30px) saturate(185%);
+  }
+
+  /* App shell and navigation */
+  #root .momo-app-header,
+  #root .momo-app-header .momo-search-form,
+  #root .momo-app-header .momo-search-dropdown,
+  #root .momo-app-header nav a,
+  #root .momo-app-header button,
+  #root .momo-chat-launcher {
+    background: var(--momo-frosted-face) !important;
+    border: 1px solid var(--momo-frosted-edge) !important;
+    box-shadow: var(--momo-frosted-shadow) !important;
+    -webkit-backdrop-filter: var(--momo-frosted-blur) !important;
+    backdrop-filter: var(--momo-frosted-blur) !important;
+  }
+
+  /* Every named UI surface: cards, panels, sections, drawers,
+     empty states, chips, rows, popovers, dialogs and toolbars. */
+  #root .momo-app-main [class*="card"],
+  #root .momo-app-main [class*="panel"],
+  #root .momo-app-main [class*="section"],
+  #root .momo-app-main [class*="empty"],
+  #root .momo-app-main [class*="dropdown"],
+  #root .momo-app-main [class*="popover"],
+  #root .momo-app-main [class*="modal"],
+  #root .momo-app-main [class*="dialog"],
+  #root .momo-app-main [class*="popup"],
+  #root .momo-app-main [class*="toolbar"],
+  #root .momo-app-main [class*="chip"],
+  #root .momo-app-main [class*="badge"],
+  #root .momo-app-main [class*="activity-item"],
+  #root .momo-app-main [class*="review-item"],
+  #root .momo-app-main [class*="movie-item"],
+  #root .momo-app-main [class*="table-wrap"],
+  #root .momo-app-main [class*="search-form"],
+  #root .momo-app-main [class*="search-filter"],
+  #root .momo-app-main [class*="feature-info"],
+  #root .momo-app-main [class*="brand-line"],
+  #root .momo-app-main .profile-card,
+  #root .momo-app-main .profile-overview-card,
+  #root .momo-app-main .profile-activity-section,
+  #root .momo-app-main .profile-delete-section,
+  #root .momo-app-main .home-favorites-empty,
+  #root .momo-app-main .home-feature-section,
+  #root .momo-app-main .movie-detail-header,
+  #root .momo-app-main .detail-content-section,
+  #root .momo-app-main .movie-rating-panel,
+  #root .momo-app-main .rating-distribution,
+  #root .momo-app-main .movie-score-display,
+  #root .momo-app-main .detail-reaction-counts,
+  #root .momo-app-main .people-section,
+  #root .signup-page .signup-card {
+    background: var(--momo-frosted-face) !important;
+    border-color: var(--momo-frosted-edge) !important;
+    box-shadow: var(--momo-frosted-shadow) !important;
+    -webkit-backdrop-filter: var(--momo-frosted-blur) !important;
+    backdrop-filter: var(--momo-frosted-blur) !important;
+  }
+
+  /* Inner information blocks remain distinct, but are still dense glass. */
+  #root .momo-app-main [class*="info"],
+  #root .momo-app-main [class*="content"],
+  #root .momo-app-main [class*="details"],
+  #root .momo-app-main [class*="summary"],
+  #root .momo-app-main [class*="distribution"],
+  #root .momo-app-main [class*="score-display"],
+  #root .momo-app-main [class*="reaction-count"],
+  #root .momo-app-main [class*="person-chip"],
+  #root .momo-app-main [class*="movie-meta"] {
+    background-color: rgba(255,253,247,.94) !important;
+    background-image: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,250,232,.91)) !important;
+    border-color: rgba(255,255,255,.98) !important;
+    box-shadow: inset 0 1px 0 #fff, 0 5px 16px rgba(65,54,29,.065) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(180%) !important;
+    backdrop-filter: blur(26px) saturate(180%) !important;
+  }
+
+  /* Controls are solid-looking frosted glass, not see-through pills. */
+  #root .momo-app-main button,
+  #root .momo-app-main [role="button"],
+  #root .momo-app-header button,
+  #root .signup-page button {
+    background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(255,250,231,.94)) !important;
+    border: 1px solid rgba(255,255,255,1) !important;
+    box-shadow: 0 3px 8px rgba(65,54,29,.07), 0 8px 18px rgba(65,54,29,.075), inset 0 1px 0 #fff !important;
+    -webkit-backdrop-filter: blur(24px) saturate(185%) !important;
+    backdrop-filter: blur(24px) saturate(185%) !important;
+  }
+  #root .momo-app-main button:hover:not(:disabled),
+  #root .momo-app-main [role="button"]:hover,
+  #root .momo-app-header button:hover:not(:disabled),
+  #root .signup-page button:hover:not(:disabled) {
+    background: linear-gradient(145deg, #fff, rgba(255,245,207,.98)) !important;
+    border-color: #fff !important;
+    box-shadow: 0 6px 14px rgba(65,54,29,.1), 0 14px 25px rgba(65,54,29,.09), inset 0 1px 0 #fff !important;
+  }
+
+  #root .momo-app-main input:not([type="checkbox"]):not([type="radio"]),
+  #root .momo-app-main textarea,
+  #root .momo-app-main select,
+  #root .momo-app-header input,
+  #root .signup-page input {
+    background: linear-gradient(145deg, rgba(255,255,255,.99), rgba(255,252,241,.96)) !important;
+    border: 1px solid rgba(255,255,255,1) !important;
+    box-shadow: inset 0 2px 5px rgba(65,54,29,.045), 0 2px 8px rgba(65,54,29,.045) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+    backdrop-filter: blur(22px) saturate(180%) !important;
+  }
+
+  /* Selected and primary actions retain MOMO yellow through the glass. */
+  #root .momo-app-main button[class*="active"],
+  #root .momo-app-main button[class*="selected"],
+  #root .momo-app-main button[class*="primary"],
+  #root .momo-app-main .signup-submit,
+  #root .momo-app-main .review-form-actions button,
+  #root .momo-app-main .all-reviews-search-submit,
+  #root .momo-app-main .favorite-browse-button,
+  #root .momo-app-main .recommend-button,
+  #root .momo-app-main .profile-edit-submit {
+    background: linear-gradient(145deg, rgba(255,255,255,.99), rgba(255,235,166,.97) 58%, rgba(255,212,59,.88)) !important;
+    color: #51400F !important;
+    border-color: rgba(255,255,255,1) !important;
+  }
+
+  /* Do not frost the notebook canvas or turn poster/media artwork into panels. */
+  #root .momo-app-main img,
+  #root .momo-app-main video,
+  #root .momo-app-main canvas,
+  #root .momo-app-main svg,
+  #root .momo-app-main picture,
+  #root .momo-app-main .movie-poster,
+  #root .momo-app-main .favorite-page-poster,
+  #root .momo-app-main .momo-home-poster-frame,
+  #root .momo-app-main .search-poster-frame,
+  #root .momo-app-main .movie-detail-poster {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
 `;
 
 export default MomoMaterialSystemStyles;
