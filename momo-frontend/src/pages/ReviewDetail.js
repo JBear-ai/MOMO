@@ -1,6 +1,6 @@
 import { safeRequestFailure } from "../utils/safeRequestFailure";
 import SafeImage from "../components/common/SafeImage";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import ProfileAvatar from "../components/ProfileAvatar";
@@ -18,6 +18,12 @@ function ReviewDetail() {
 
   const [comments, setComments] = useState([]);
   const [commentsTotal, setCommentsTotal] = useState(0);
+  const [commentsPage, setCommentsPage] = useState(0);
+  const [hasMoreComments, setHasMoreComments] = useState(false);
+  const [moreCommentsLoading, setMoreCommentsLoading] = useState(false);
+  const [commentsError, setCommentsError] = useState("");
+  const commentsGeneration = useRef(0);
+  const moreCommentsPending = useRef(false);
   const [currentUser, setCurrentUser] = useState(null);
 
   const [likeCount, setLikeCount] = useState(0);
@@ -66,17 +72,57 @@ function ReviewDetail() {
     return response.data;
   };
 
-  // 댓글 목록 조회
+  // 페이지 경계의 중복 ID는 한 번만 표시하고 서버의 오래된 순서를 유지한다.
+  const applyCommentPage = (data, page, append = false) => {
+    const incoming = data.content || [];
+    const total = data.page?.totalElements ?? data.totalElements ?? incoming.length;
+    const totalPages = data.page?.totalPages ?? data.totalPages ?? Math.ceil(total / 10);
+    setComments(previous => Array.from(new Map(
+      [...(append ? previous : []), ...incoming].map(comment => [String(comment.commentId), comment]),
+    ).values()));
+    setCommentsTotal(total);
+    setCommentsPage(page);
+    setHasMoreComments(page + 1 < totalPages);
+  };
+
+  // 작성·수정·삭제 후에는 기존 정책대로 첫 페이지를 새로 조회한다.
   const fetchComments = async () => {
+    const generation = ++commentsGeneration.current;
+    moreCommentsPending.current = false;
+    setMoreCommentsLoading(false);
+    setHasMoreComments(false);
+    setCommentsError("");
     try {
       const response = await AxiosApi.reviewComments(reviewId, 0);
-
-      setComments(response.data.content || []);
-      setCommentsTotal(
-        response.data.page?.totalElements ?? response.data.totalElements ?? response.data.content?.length ?? 0,
-      );
+      if (generation !== commentsGeneration.current) return;
+      applyCommentPage(response.data, 0);
     } catch (err) {
+      if (generation !== commentsGeneration.current) return;
       console.error("댓글 목록 조회 실패:", safeRequestFailure(err));
+      setCommentsError("댓글 목록을 불러오지 못했습니다.");
+    }
+  };
+
+  // 연속 클릭을 즉시 막고, 화면 이동·댓글 갱신 이전의 응답은 반영하지 않는다.
+  const loadMoreComments = async () => {
+    if (!hasMoreComments || moreCommentsPending.current || commentLoading) return;
+    const generation = commentsGeneration.current;
+    moreCommentsPending.current = true;
+    setMoreCommentsLoading(true);
+    setCommentsError("");
+    try {
+      const response = await AxiosApi.reviewComments(reviewId, commentsPage + 1);
+      if (generation !== commentsGeneration.current) return;
+      applyCommentPage(response.data, commentsPage + 1, true);
+    } catch (err) {
+      if (generation !== commentsGeneration.current) return;
+      console.error("추가 댓글 조회 실패:", safeRequestFailure(err));
+      setCommentsError("추가 댓글을 불러오지 못했습니다. 다시 시도해 주세요.");
+    } finally {
+      if (generation === commentsGeneration.current) {
+        moreCommentsPending.current = false;
+        setMoreCommentsLoading(false);
+      }
     }
   };
 
@@ -95,6 +141,14 @@ function ReviewDetail() {
   // 초기 데이터 조회
   useEffect(() => {
     let active = true;
+    commentsGeneration.current += 1;
+    moreCommentsPending.current = false;
+    setComments([]);
+    setCommentsPage(0);
+    setCommentsTotal(0);
+    setHasMoreComments(false);
+    setMoreCommentsLoading(false);
+    setCommentsError("");
     const controller = new AbortController();
     const { signal } = controller;
 
@@ -133,8 +187,7 @@ function ReviewDetail() {
         if (results[0].status === "fulfilled") {
           const data = results[0].value.data;
 
-          setComments(data.content || []);
-          setCommentsTotal(data.page?.totalElements ?? data.totalElements ?? data.content?.length ?? 0);
+          applyCommentPage(data, 0);
         } else {
           console.error("댓글 조회 실패:", safeRequestFailure(results[0].reason));
         }
@@ -224,6 +277,7 @@ function ReviewDetail() {
 
     return () => {
       active = false;
+      commentsGeneration.current += 1;
       controller.abort();
     };
   }, [reviewId]);
@@ -469,7 +523,7 @@ function ReviewDetail() {
   if (loading) {
     return h(
       "div",
-      { className: "review-detail-page" },
+      { className: "review-detail-page", "data-archive-page": "review" },
       h(
         "div",
         { className: "review-detail-state" },
@@ -482,7 +536,7 @@ function ReviewDetail() {
   if (error || !review) {
     return h(
       "div",
-      { className: "review-detail-page" },
+      { className: "review-detail-page", "data-archive-page": "review" },
       h(
         Link,
         {
@@ -501,73 +555,24 @@ function ReviewDetail() {
     );
   }
 
-  // 리뷰 상단
-  const reviewHeader = h(
-    "div",
-    { className: "review-detail-top" },
-
-    h(
-      "div",
-      { className: "review-detail-main" },
-
-      h("p", { className: "review-detail-eyebrow" }, "MOMO COMMUNITY REVIEW"),
-
-      editingReview
-        ? h("input", {
-            className: "review-edit-title",
-            value: editTitle,
-            maxLength: 100,
-            onChange: (e) => setEditTitle(e.target.value),
-            placeholder: "리뷰 제목을 입력해주세요.",
-          })
-        : h("h1", { className: "review-detail-title" }, review.title),
-
-      h(
-        "div",
-        { className: "review-detail-meta" },
-
-        h(
-          "span",
-          null,
-          "작성자 ",
-          h("strong", null, review.nickname || "익명"),
-        ),
-
-        h("span", null, "작성일 ", formatDate(review.createdAt)),
-
-        review.updatedAt &&
-          new Date(review.updatedAt).getTime() >
-            new Date(review.createdAt).getTime() &&
-          h("span", null, "수정일 ", formatDate(review.updatedAt)),
-      ),
-    ),
-
-    isReviewAuthor &&
-      !editingReview &&
-      h(
-        "div",
-        { className: "review-detail-actions" },
-
-        h(
-          "button",
-          {
-            type: "button",
-            className: "review-action-button",
-            onClick: () => setEditingReview(true),
-          },
-          "수정",
-        ),
-
-        h(
-          "button",
-          {
-            type: "button",
-            className: "review-action-button delete",
-            onClick: handleReviewDelete,
-          },
-          "삭제",
-        ),
-      ),
+  // 작성자 정보와 본인 전용 조작을 한 행에 두되 기존 권한 판별은 그대로 사용한다.
+  const reviewHeader = (
+    <header className="review-detail-top">
+      <div className="review-detail-main">
+        {editingReview ? <input className="review-edit-title" value={editTitle} maxLength={100} onChange={(event) => setEditTitle(event.target.value)} placeholder="리뷰 제목을 입력해주세요." /> : <h1 className="review-detail-title">{review.title}</h1>}
+        <div className="review-detail-byline">
+          <div className="review-detail-meta">
+            <span>작성자 <strong>{review.nickname || "익명"}</strong></span>
+            <span>작성일 {formatDate(review.createdAt)}</span>
+            {review.updatedAt && new Date(review.updatedAt).getTime() > new Date(review.createdAt).getTime() && <span>수정일 {formatDate(review.updatedAt)}</span>}
+          </div>
+          {isReviewAuthor && !editingReview && <div className="review-detail-actions">
+            <button type="button" className="review-action-button" onClick={() => setEditingReview(true)}>수정</button>
+            <button type="button" className="review-action-button delete" onClick={handleReviewDelete}>삭제</button>
+          </div>}
+        </div>
+      </div>
+    </header>
   );
 
   // 리뷰 수정 영역
@@ -777,6 +782,13 @@ function ReviewDetail() {
                 { className: "review-comment-meta" },
 
                 h("strong", null, comment.nickname || "익명"),
+                // 로그인 계정과 무관하게 원글 작성자의 댓글에만 배지를 표시한다.
+                comment.userId != null && review.userId != null &&
+                  String(comment.userId) === String(review.userId) &&
+                  h("span", { className: "review-author-badge" },
+                    h("svg", { viewBox: "0 0 16 16", width: 12, height: 12, "aria-hidden": true },
+                      h("path", { d: "M11 1l4 4-9 9-5 1 1-5zM9 3l4 4", fill: "none", stroke: "currentColor", strokeWidth: 1.5 })),
+                    "글쓴이"),
 
                 h("span", null, formatDate(comment.createdAt)),
 
@@ -887,7 +899,7 @@ function ReviewDetail() {
   // 최종 화면
   return h(
     "div",
-    { className: "review-detail-page" },
+    { className: "review-detail-page", "data-archive-page": "review" },
 
     h(
       Link,
@@ -905,8 +917,8 @@ function ReviewDetail() {
       reviewHeader,
       reviewEditArea,
       movieSection,
-      reactionSection,
       reviewContentSection,
+      reactionSection,
     ),
 
     h(
@@ -922,6 +934,11 @@ function ReviewDetail() {
       commentForm,
 
       h("div", { className: "review-comment-list" }, commentList),
+      commentsError && h("p", { role: "alert" }, commentsError),
+      hasMoreComments && h("button", {
+        type: "button", onClick: loadMoreComments,
+        disabled: moreCommentsLoading || commentLoading,
+      }, moreCommentsLoading ? "댓글을 불러오는 중..." : "댓글 더 보기"),
     ),
   );
 }
