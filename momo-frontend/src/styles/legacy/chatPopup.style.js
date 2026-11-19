@@ -24,12 +24,10 @@ export const ChatPanel = styled.section`
   box-sizing: border-box;
   min-width: 0;
   min-height: 0;
-  border: 1px solid rgba(255,255,255,.9);
-  border-radius: 20px;
-  background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.66));
-  box-shadow: 0 14px 36px rgba(41,40,32,.13), inset 0 1px rgba(255,255,255,.98);
-  -webkit-backdrop-filter: blur(28px) saturate(150%);
-  backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid var(--momo-border);
+  border-radius: 16px;
+  background: var(--momo-surface);
+  box-shadow: 0 12px 36px rgba(35, 28, 18, 0.22);
 
   @media (max-width: 600px) {
     max-width: calc(100vw - 32px);
@@ -43,10 +41,7 @@ export const ChatHeader = styled.header`
   justify-content: space-between;
   padding: 13px 14px;
   color: var(--momo-text);
-  background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.54));
-  border-bottom: 1px solid rgba(255,255,255,.86);
-  -webkit-backdrop-filter: blur(20px) saturate(145%);
-  backdrop-filter: blur(20px) saturate(145%);
+  background: var(--momo-bg);
   cursor: move;
   user-select: none;
 `;
@@ -62,7 +57,7 @@ export const ConnectionStatus = styled.span`
 `;
 
 export const OnlineCount = styled.span`
-  color: var(--momo-text-soft);
+  color: var(--momo-text);
   font-size: 12px;
   font-weight: 700;
 `;
@@ -75,18 +70,13 @@ export const WindowActions = styled.div`
 export const WindowActionButton = styled.button`
   width: 30px;
   height: 30px;
-  border: 1px solid rgba(255,255,255,.84);
+  border: 0;
   border-radius: 10px;
-  color: #514C40;
-  background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.44));
-  box-shadow: 0 2px 6px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
-  -webkit-backdrop-filter: blur(16px) saturate(145%);
-  backdrop-filter: blur(16px) saturate(145%);
+  color: var(--momo-text);
+  background: var(--momo-surface);
   cursor: pointer;
   font-size: 20px;
   line-height: 1;
-  transition: box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
-  &:hover { border-color: rgba(255,255,255,1); background: rgba(255,255,255,.92); box-shadow: 0 6px 12px rgba(41,40,32,.08), inset 0 1px rgba(255,255,255,1); }
 `;
 
 export const MessageList = styled.div`
@@ -120,8 +110,8 @@ export const AvatarFallback = styled.span`
   height: 32px;
   place-items: center;
   border-radius: 50%;
-  color: var(--momo-text-soft);
-  background: var(--momo-border);
+  color: var(--momo-text);
+  background: var(--momo-note);
 `;
 
 export const MessageBody = styled.div`
@@ -135,7 +125,7 @@ export const MessageMeta = styled.div`
   justify-content: ${({ $isOwn }) => ($isOwn ? "flex-end" : "flex-start")};
   gap: 7px;
   margin: 0 2px 4px;
-  color: var(--momo-text-soft);
+  color: var(--momo-text);
   font-size: 12px;
 
   time {
@@ -145,12 +135,10 @@ export const MessageMeta = styled.div`
 `;
 
 export const DeleteButton = styled.button`
-  min-height: 26px;
-  padding: 0 8px;
-  border: 1px solid rgba(255,255,255,.86);
-  border-radius: 999px;
-  color: #6A6251;
-  background: rgba(255,255,255,.42);
+  padding: 0;
+  border: 0;
+  color: var(--momo-muted);
+  background: transparent;
   cursor: pointer;
   font-size: 11px;
 `;
@@ -160,10 +148,8 @@ export const MessageBubble = styled.p`
   padding: 9px 12px;
   overflow-wrap: anywhere;
   border-radius: ${({ $isOwn }) => ($isOwn ? "14px 14px 4px 14px" : "14px 14px 14px 4px")};
-  color: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-muted)" : $isOwn ? "var(--momo-surface-raised)" : "var(--momo-text)")};
-  background: ({ $isOwn, $isDeleted }) => ($isDeleted ? "rgba(255,250,236,.68)" : $isOwn ? "linear-gradient(145deg, rgba(255,255,255,.84), rgba(255,239,190,.62))" : "linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.58))");
-  border: 1px solid rgba(255,255,255,.82);
-  box-shadow: 0 2px 6px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,.96);
+  color: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-muted)" : $isOwn ? "var(--momo-text)" : "var(--momo-text)")};
+  background: ${({ $isOwn, $isDeleted }) => ($isDeleted ? "var(--momo-note)" : $isOwn ? "var(--momo-note)" : "var(--momo-surface)")};
   line-height: 1.45;
   white-space: pre-wrap;
   font-style: ${({ $isDeleted }) => ($isDeleted ? "italic" : "normal")};
@@ -175,7 +161,7 @@ export const MessageImage = styled.img`
   max-height: 240px;
   border-radius: 12px;
   object-fit: contain;
-  background: var(--momo-note);
+  background: var(--momo-surface);
   cursor: zoom-in;
 `;
 
@@ -211,13 +197,10 @@ export const ImageModalContent = styled.img`
 export const ImageUploadButton = styled.button`
   flex: 0 0 auto;
   padding: 9px 10px;
-  border: 1px solid rgba(255,255,255,.9);
+  border: 1px solid var(--momo-border);
   border-radius: 10px;
-  color: #46554A;
-  background: linear-gradient(145deg, rgba(255,255,255,.8), rgba(255,250,236,.46));
-  box-shadow: 0 3px 8px rgba(41,40,32,.045), inset 0 1px rgba(255,255,255,.98);
-  -webkit-backdrop-filter: blur(18px) saturate(165%);
-  backdrop-filter: blur(18px) saturate(165%);
+  color: var(--momo-text);
+  background: var(--momo-bg);
   cursor: pointer;
 
   &:disabled {
@@ -234,13 +217,10 @@ export const SecondaryButton = styled.button`
   width: 100%;
   margin-bottom: 10px;
   padding: 8px;
-  border: 1px solid rgba(255,255,255,.9);
+  border: 0;
   border-radius: 9px;
-  color: #46554A;
-  background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(255,250,236,.44));
-  box-shadow: 0 3px 8px rgba(41,40,32,.04), inset 0 1px rgba(255,255,255,.98);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
+  color: var(--momo-text);
+  background: var(--momo-note);
   cursor: pointer;
 `;
 
@@ -257,27 +237,26 @@ export const MessageForm = styled.form`
   min-height: 58px;
   box-sizing: border-box;
   padding: 12px;
-  border-top: 1px solid rgba(255,255,255,.84);
-  background: rgba(246,249,246,.36);
+  border-top: 1px solid var(--momo-border);
 `;
 
 export const MessageInput = styled.input`
+  background: var(--momo-bg);
+  color: var(--momo-text);
+  &::placeholder { color: var(--momo-muted); }
   flex: 1;
   min-width: 0;
   padding: 9px 10px;
-  border: 1px solid var(--momo-border-strong);
+  border: 1px solid var(--momo-border);
   border-radius: 10px;
 `;
 
 export const SendButton = styled.button`
   padding: 9px 12px;
-  border: 1px solid rgba(255,255,255,.94);
+  border: 0;
   border-radius: 10px;
-  color: #4D421F;
-  background: linear-gradient(140deg, rgba(255,255,255,.82), rgba(255,231,151,.6) 48%, rgba(255,212,59,.32));
-  box-shadow: 0 4px 10px rgba(92,76,29,.08), inset 0 1px rgba(255,255,255,.98);
-  -webkit-backdrop-filter: blur(18px) saturate(165%);
-  backdrop-filter: blur(18px) saturate(165%);
+  color: var(--momo-on-primary);
+  background: var(--momo-primary);
   cursor: pointer;
 
   &:disabled {
@@ -289,7 +268,7 @@ export const SendButton = styled.button`
 export const ErrorNotice = styled.p`
   margin: 0;
   padding: 0 12px 12px;
-  color: var(--momo-danger);
+  color: var(--momo-error);
   font-size: 13px;
 `;
 
@@ -317,8 +296,8 @@ export const ResizeHandle = styled.button`
     bottom: 3px;
     width: 9px;
     height: 9px;
-    border-right: 2px solid var(--momo-placeholder);
-    border-bottom: 2px solid var(--momo-placeholder);
+    border-right: 2px solid var(--momo-muted);
+    border-bottom: 2px solid var(--momo-muted);
     content: "";
   }
 
@@ -327,7 +306,7 @@ export const ResizeHandle = styled.button`
   }
 `;
 
-export const ChatLauncher = styled.button.attrs({ className: "momo-chat-launcher" })`
+export const ChatLauncher = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -336,16 +315,11 @@ export const ChatLauncher = styled.button.attrs({ className: "momo-chat-launcher
   bottom: 20px;
   z-index: 1001;
   padding: 13px 18px;
-  border: 1px solid rgba(255,255,255,.92);
+  border: 0;
   border-radius: 24px;
-  color: #3D4C41;
-  background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.48) 58%, rgba(255,250,236,.34));
-  box-shadow: 0 8px 20px rgba(41,40,32,.12), inset 0 1px rgba(255,255,255,1);
-  -webkit-backdrop-filter: blur(24px) saturate(175%);
-  backdrop-filter: blur(24px) saturate(175%);
+  color: var(--momo-text);
+  background: var(--momo-surface);
   cursor: pointer;
-  transition: box-shadow 200ms ease, border-color 200ms ease, background 200ms ease;
-  &:hover { border-color: rgba(255,255,255,1); background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,250,236,.64)); box-shadow: 0 11px 25px rgba(41,40,32,.15), inset 0 1px rgba(255,255,255,1); }
 `;
 
 export const UnreadBadge = styled.span`
@@ -356,14 +330,14 @@ export const UnreadBadge = styled.span`
   box-sizing: border-box;
   padding: 0 5px;
   border-radius: 10px;
-  color: var(--momo-text-soft);
+  color: var(--momo-text);
   background: var(--momo-accent);
   font-size: 12px;
   font-weight: 700;
 `;
 
 export const ConnectionIndicator = styled.span`
-  color: var(--momo-note-strong);
+  color: var(--momo-text);
   font-size: 11px;
   font-weight: 400;
 `;

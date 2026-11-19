@@ -36,7 +36,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .review-write-toggle:hover {
-  background: var(--momo-note-strong);
+  background: #F5EDD6;
 }
 
 .review-toggle-arrow {
@@ -116,7 +116,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 
 .review-title-field input::placeholder,
 .review-content-field textarea::placeholder {
-  color: var(--momo-placeholder);
+  color: #A39B8E;
 }
 
 /* 본문 입력창 */
@@ -164,8 +164,8 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .review-form-actions button:hover:not(:disabled) {
-  background: var(--momo-accent-hover);
-  transform: none;
+  background: #F5C928;
+  transform: translateY(-1px);
 }
 
 .review-form-actions button:disabled {
@@ -232,7 +232,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .review-form-actions button:hover {
-  transform: none;
+  transform: translateY(-1px);
 }
 
 .detail-review-card {
@@ -306,19 +306,19 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .signup-card {
-  padding: clamp(22px, 3vw, 36px);
-  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
+  padding: 36px;
+  background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius-lg);
-  box-shadow: var(--momo-shadow-sm);
+  border-radius: var(--momo-radius);
+  box-shadow: var(--momo-shadow);
 }
 
 .signup-card-heading {
   padding: 26px;
   margin-bottom: 28px;
-  background: linear-gradient(135deg, var(--momo-note), #FFFDF6);
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
-  border-radius: 16px;
+  border-radius: 10px;
 }
 
 .signup-eyebrow {
@@ -416,7 +416,7 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 
 .signup-submit:hover:not(:disabled) {
   filter: brightness(0.96);
-  transform: none;
+  transform: translateY(-1px);
 }
 
 .signup-submit:disabled {
@@ -499,9 +499,9 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
     margin-bottom: 16px;
     padding: 7px 14px;
     /* 쨍한 노랑 대신 부드럽고 차분한 크림 옐로우 톤 적용 */
-    background-color: var(--momo-note-strong);
-    color: var(--momo-accent-ink);
-    border: 1px solid var(--momo-note-border);
+    background-color: #F3E9C8;
+    color: #4A3800;
+    border: 1px solid #E5D7B5;
     border-radius: 6px;
     font-size: 12px;
     font-weight: 800;
@@ -537,11 +537,11 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 
 .recommend-button {
     padding: 13px 24px;
-    border: 1px solid var(--momo-note-border);
+    border: 1px solid #E5D7B5;
     border-radius: 8px;
     /* 버튼도 동일하게 차분한 크림 옐로우 톤 적용 */
-    background-color: var(--momo-note-strong);
-    color: var(--momo-accent-ink);
+    background-color: #F3E9C8;
+    color: #4A3800;
     font-size: 14px;
     font-weight: 800;
     cursor: pointer;
@@ -550,27 +550,23 @@ const ReviewComposerAuthRecommendStyles = createGlobalStyle`
 }
 
 .recommend-button:hover {
-    transform: none;
+    transform: translateY(-2px);
     filter: brightness(0.96);
 }
 
 .recommend-state {
-    display: grid;
-    place-items: center;
     width: 100%;
-    min-height: 220px;
-    height: auto;
-    margin-bottom: 28px;
-    padding: 28px;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,.9);
-    background: linear-gradient(140deg, rgba(255,255,255,.72), rgba(255,250,236,.38));
-    color: var(--momo-text-soft);
-    font-size: 13px;
-    line-height: 1.75;
-    box-shadow: 0 8px 24px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
-    -webkit-backdrop-filter: blur(22px) saturate(150%);
-    backdrop-filter: blur(22px) saturate(150%);
+    height: 400px;
+    margin-bottom: 45px;
+    border-radius: var(--momo-radius);
+    background-color: var(--momo-surface);
+    border: 1px dashed var(--momo-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--momo-muted);
+    font-size: 15px;
+    font-weight: 600;
 }
 
 /* 반응형 모바일 조정 */

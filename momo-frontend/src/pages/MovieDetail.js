@@ -1,7 +1,9 @@
 import { safeRequestFailure } from "../utils/safeRequestFailure";
-import React, { useState, useEffect } from "react";
+import ActorCarousel from "../components/redesign/ActorCarousel";
+import FavoriteStar from "../components/common/FavoriteStar";
+import React, { useState, useEffect, useRef } from "react";
 import SafeImage from "../components/common/SafeImage";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import { formatReleaseDate } from "../utils/releaseDate";
 import { resolvePosterUrl } from "../utils/mediaUrl";
@@ -114,6 +116,35 @@ function MovieDetail() {
   const [reviewText, setReviewText] = useState("");
 
   const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
+  const [shareMessage, setShareMessage] = useState("");
+
+  // 영화가 바뀌면 표시용 상태만 초기화하고 기존 메모·API 처리에는 관여하지 않는다.
+  useEffect(() => {
+    setIsOverviewExpanded(false);
+    setShareMessage("");
+  }, [id]);
+
+  // 외부 공유 서비스나 API 없이 현재 상세 주소만 복사하고 결과를 화면에 알린다.
+  async function copyMovieUrl() {
+    setShareMessage("");
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error("CLIPBOARD_UNAVAILABLE");
+      await navigator.clipboard.writeText(window.location.href);
+      setShareMessage("영화 주소를 복사했습니다.");
+    } catch {
+      setShareMessage("주소를 복사하지 못했습니다. 주소창에서 직접 복사해 주세요.");
+    }
+  }
+
+  const reviewTitleRef = useRef(null);
+
+  // 하단의 첫 메모 진입에서도 위에 펼쳐진 입력창을 바로 찾도록 포커스를 옮긴다.
+  // 확장 시에만 실행해 작성 중 재렌더링은 입력 위치에 영향을 주지 않는다.
+  useEffect(() => {
+    if (isReviewOpen) reviewTitleRef.current?.focus();
+  }, [isReviewOpen]);
+
   const [isReviewSubmitting, setIsReviewSubmitting] = useState(false);
 
   const [reviewError, setReviewError] = useState("");
@@ -322,11 +353,10 @@ function MovieDetail() {
   const totalCount = ratingSummary.totalCount || 0;
   const myRating = ratingSummary.myRating;
 
-  // 좋아요 비율을 5점 만점 평점과 긍정 비율로 환산한다.
+  // 좋아요 비율을 5점 만점 평점으로 환산
   const movieScore =
     totalCount > 0 ? ((likeCount / totalCount) * 5).toFixed(2) : "—";
-  const positivePercent =
-    totalCount > 0 ? Math.round((likeCount / totalCount) * 100) : 0;
+  const positivePercent = totalCount > 0 ? Math.round((likeCount / totalCount) * 100) : 0;
 
   // =========================================================
   // 7. 영화 평가 갱신
@@ -519,7 +549,7 @@ function MovieDetail() {
   if (loading) {
     return React.createElement(
       "main",
-      { className: "movie-detail-page" },
+      { className: "movie-detail-page", "data-archive-page": "movie" },
       React.createElement("p", null, "영화 정보를 불러오는 중입니다."),
     );
   }
@@ -531,7 +561,7 @@ function MovieDetail() {
   if (error || !movie) {
     return React.createElement(
       "main",
-      { className: "movie-detail-page" },
+      { className: "movie-detail-page", "data-archive-page": "movie" },
       React.createElement(
         "button",
         { className: "detail-back-button", onClick: () => navigate("/") },
@@ -554,397 +584,214 @@ function MovieDetail() {
 
   return React.createElement(
     "main",
-    { className: "movie-detail-page" },
+    { className: "movie-detail-page", "data-archive-page": "movie" },
     React.createElement(
       "button",
       { className: "detail-back-button", onClick: () => navigate("/") },
       "← 메인으로 돌아가기",
     ),
+    (<section className="movie-detail-header" data-detail-region="basic">
+      <div className="movie-detail-poster"><SafeImage src={resolvePosterUrl(movie.posterUrl)} alt={movie.title}
+        fallback={<div className="movie-detail-poster-placeholder">포스터 준비 중</div>}
+        onError={() => setMovie((current) => current ? { ...current, posterUrl: "" } : current)} /></div>
+      <div className="movie-detail-info">
+        <span className="detail-rank">영화 상세정보</span>
+        <h1>{movie.title}</h1>
+        <p className="movie-original-title">{movie.titleEn || "영문 제목 정보 없음"}</p>
+        <dl className="movie-detail-facts">
+          <div><dt>개봉일</dt><dd>{formatReleaseDate(movie.releaseDate)}</dd></div>
+          <div><dt>장르</dt><dd>{movie.genre || "정보 없음"}</dd></div>
+          <div><dt>러닝타임</dt><dd>{movie.runningTime ? `${formatNumber(movie.runningTime)}분` : "정보 없음"}</dd></div>
+          <div><dt>관람등급</dt><dd>{movie.watchGrade || "정보 없음"}</dd></div>
+          <div><dt>감독</dt><dd>{directors.map((person) => person.name).join(", ") || "정보 없음"}</dd></div>
+          <div><dt>출연 배우</dt><dd>{actors.map((person) => person.name).join(", ") || "정보 없음"}</dd></div>
+        </dl>
+        <div className="movie-detail-synopsis">
+          <h2>줄거리</h2>
+          <p id="movie-overview" className={isOverviewExpanded ? "is-expanded" : "is-collapsed"}>{movie.overview || "줄거리 정보가 없습니다."}</p>
+          {movie.overview && <button type="button" className="movie-overview-toggle" aria-controls="movie-overview" aria-expanded={isOverviewExpanded} onClick={() => setIsOverviewExpanded((previous) => !previous)}>{isOverviewExpanded ? "접기" : "더보기"}</button>}
+        </div>
+        <div className="movie-detail-actions">
+          {movie.movieCode && <FavoriteStar movie={movie} />}
+          <button type="button" className="movie-share-button" onClick={copyMovieUrl}>공유</button>
+        </div>
+        {shareMessage && <p className="movie-share-result" role="status">{shareMessage}</p>}
+      </div>
+    </section>),
     React.createElement(
       "section",
-      { className: `movie-detail-header ${movie.posterUrl ? "" : "movie-detail-header-no-poster"}` },
-      movie.posterUrl
-        ? React.createElement(
-            "div",
-            { className: "movie-detail-poster" },
-            React.createElement(SafeImage, {
-              src: resolvePosterUrl(movie.posterUrl),
-              alt: movie.title,
-              fallback: null,
-              onError: () => {
-                setMovie((currentMovie) => currentMovie
-                  ? { ...currentMovie, posterUrl: "" }
-                  : currentMovie);
-              },
-            }),
-          )
-        : null,
-      React.createElement(
-        "div",
-        { className: "movie-detail-info" },
-        React.createElement(
-          "span",
-          { className: "detail-rank" },
-          "영화 상세정보",
-        ),
-        React.createElement("h1", null, movie.title),
-        React.createElement(
-          "p",
-          null,
-          "영문 제목: ",
-          movie.titleEn || "정보 없음",
-        ),
-        React.createElement(
-          "p",
-          null,
-          "개봉일: ",
-          formatReleaseDate(movie.releaseDate),
-        ),
-        React.createElement(
-          "p",
-          null,
-          "상영시간:",
-          " ",
-          movie.runningTime
-            ? `${formatNumber(movie.runningTime)}분`
-            : "정보 없음",
-        ),
-        React.createElement("p", null, "장르: ", movie.genre || "정보 없음"),
-        React.createElement(
-          "p",
-          null,
-          "관람등급: ",
-          movie.watchGrade || "정보 없음",
-        ),
-      ),
-    ),
-    movie.overview &&
-      React.createElement(
-        "section",
-        { className: "detail-content-section" },
-        React.createElement("h2", null, "줄거리"),
-        React.createElement("p", null, movie.overview),
-      ),
-    React.createElement(
-      "section",
-      {
-        className: `movie-rating-panel ${movie.movieCode ? "" : "is-unavailable"}`,
-        "aria-labelledby": "movie-audience-rating-title",
-      },
-      React.createElement(
-        "div",
-        { className: "rating-panel-heading" },
-        React.createElement(
-          "div",
-          { className: "rating-panel-title-group" },
-          React.createElement("span", { className: "rating-panel-eyebrow" }, "MOMO AUDIENCE NOTE"),
-          React.createElement(
-            "h2",
-            { className: "rating-label", id: "movie-audience-rating-title" },
-            "관객 평점",
-          ),
-          React.createElement(
-            "p",
-            { className: "rating-panel-description" },
-            "관객이 남긴 반응을 한눈에 확인해 보세요.",
-          ),
-        ),
-        React.createElement(
-          "span",
-          { className: "rating-panel-stamp" },
-          movie.movieCode ? "COMMUNITY SCORE" : "INFO PENDING",
-        ),
-      ),
-      React.createElement(
-        "div",
-        { className: "rating-panel-main" },
-        React.createElement(
-          "div",
-          { className: "movie-score-display" },
-          React.createElement(
-            "div",
-            { className: "movie-score-value" },
-            React.createElement("strong", null, movieScore),
-            React.createElement("span", null, "/ 5.00"),
-          ),
-          React.createElement(
-            "p",
-            { className: "rating-vote-summary" },
-            totalCount > 0
-              ? `총 ${formatNumber(totalCount)}명이 평가했습니다.`
-              : "아직 등록된 관객 평가가 없습니다.",
-          ),
-          React.createElement(
-            "span",
-            { className: "rating-score-caption" },
-            totalCount > 0 ? "좋아요 반응을 5점 척도로 환산한 점수" : "첫 번째 평가를 기다리고 있어요",
-          ),
-        ),
-        React.createElement(
-          "div",
-          { className: "rating-distribution" },
-          React.createElement(
-            "div",
-            { className: "rating-distribution-heading" },
-            React.createElement("span", null, "긍정 평가 비율"),
-            React.createElement(
-              "strong",
-              null,
-              totalCount > 0 ? `${positivePercent}%` : "집계 대기",
-            ),
-          ),
-          React.createElement(
-            "div",
-            {
-              className: "rating-distribution-track",
-              role: "progressbar",
-              "aria-label": "긍정 평가 비율",
-              "aria-valuemin": 0,
-              "aria-valuemax": 100,
-              "aria-valuenow": positivePercent,
-            },
-            React.createElement("span", {
-              style: { width: `${positivePercent}%` },
-            }),
-          ),
-          React.createElement(
-            "div",
-            { className: "rating-distribution-legend" },
-            React.createElement(
-              "span",
-              null,
-              React.createElement("i", { className: "rating-legend-dot is-like", "aria-hidden": "true" }),
-              "좋아요 ",
-              formatNumber(likeCount),
-            ),
-            React.createElement(
-              "span",
-              null,
-              React.createElement("i", { className: "rating-legend-dot is-dislike", "aria-hidden": "true" }),
-              "싫어요 ",
-              formatNumber(dislikeCount),
-            ),
-          ),
-        ),
-      ),
-      movie.movieCode
-        ? React.createElement(
-            React.Fragment,
-            null,
-            React.createElement(
-              "div",
-              { className: "detail-reaction-counts" },
-              React.createElement(
-                "button",
-                {
-                  type: "button",
-                  className: `detail-reaction-count rating-vote-button is-like ${myRating === true ? "selected-like" : ""}`,
-                  onClick: () => handleMovieRating(true),
-                  disabled: isRatingSubmitting,
-                  "aria-pressed": myRating === true,
-                },
-                React.createElement("span", null, "좋아요"),
-                React.createElement("strong", null, formatNumber(likeCount)),
-              ),
-              React.createElement(
-                "button",
-                {
-                  type: "button",
-                  className: `detail-reaction-count rating-vote-button is-dislike ${myRating === false ? "selected-dislike" : ""}`,
-                  onClick: () => handleMovieRating(false),
-                  disabled: isRatingSubmitting,
-                  "aria-pressed": myRating === false,
-                },
-                React.createElement("span", null, "싫어요"),
-                React.createElement("strong", null, formatNumber(dislikeCount)),
-              ),
-            ),
-            React.createElement(
-              "p",
-              { className: "detail-total-count" },
-              "전체 평가 수 ",
-              React.createElement("strong", null, formatNumber(totalCount)),
-              "명",
-            ),
-            isRatingSubmitting &&
-              React.createElement(
-                "p",
-                { className: "rating-status" },
-                "평가를 저장하고 있습니다.",
-              ),
-            ratingError &&
-              React.createElement("p", { className: "rating-error" }, ratingError),
-          )
-        : React.createElement(
-            "div",
-            { className: "rating-unavailable" },
-            React.createElement("span", { "aria-hidden": "true" }, "✎"),
-            React.createElement(
-              "p",
-              null,
-              "이 영화는 관객 평가 기능과 아직 연결되지 않았습니다.",
-            ),
-          ),
-    ),
-    React.createElement(
-      "section",
-      { className: "detail-content-section people-section" },
-      React.createElement(
-        "div",
-        { className: "detail-section-heading" },
-        React.createElement("h2", null, "감독"),
-        React.createElement("span", { className: "detail-section-count" }, `${directors.length}명`),
-      ),
+      { className: "detail-content-section", "data-detail-region": "people" },
+      React.createElement("h2", null, "감독"),
       directors.length > 0
         ? React.createElement(
-            React.Fragment,
-            null,
-            React.createElement(
-              "div",
-              { className: "people-list people-list-compact" },
-              directors
-                .slice(0, showAllDirectors ? directors.length : 6)
-                .map((person, index) =>
-                  React.createElement(
-                    "button",
-                    {
-                      type: "button",
-                      className: "person-chip",
-                      key: `${person.name}-${index}`,
-                      onClick: () => moveToPersonDetail(person, "director"),
-                    },
-                    React.createElement(SafeImage, {
-                      src: person.profileUrl,
-                      alt: person.name,
-                      loading: "lazy",
-                      fallback: React.createElement(
-                        "div",
-                        null,
-                        React.createElement("span", null, "👤"),
-                      ),
-                    }),
-                    React.createElement(
-                      "div",
-                      null,
-                      React.createElement("strong", null, person.name),
-                      person.originalName && person.originalName !== person.name
-                        ? React.createElement("span", null, person.originalName)
-                        : null,
-                    ),
-                  ),
-                ),
-            ),
-            directors.length > 6 &&
+            "div",
+            { className: "people-list" },
+            directors.slice(0, showAllDirectors ? directors.length : 6).map((person, index) =>
               React.createElement(
-                "div",
-                { className: "people-list-actions" },
+                "button",
+                {
+                  type: "button",
+                  className: "person-chip",
+                  key: `${person.name}-${index}`,
+                  onClick: () => moveToPersonDetail(person, "director"),
+                },
+                React.createElement(SafeImage, {
+                  src: person.profileUrl,
+                  alt: person.name,
+                  loading: "lazy",
+                  fallback: React.createElement(
+                    "div",
+                    null,
+                    React.createElement("span", null, "👤"),
+                  ),
+                }),
                 React.createElement(
-                  "button",
-                  {
-                    type: "button",
-                    className: "people-more-button",
-                    onClick: () => setShowAllDirectors((value) => !value),
-                    "aria-expanded": showAllDirectors,
-                  },
-                  showAllDirectors ? "감독 접기" : `감독 더보기 (6 / ${directors.length})`,
+                  "div",
+                  null,
+                  React.createElement("strong", null, person.name),
+                  person.originalName && person.originalName !== person.name
+                    ? React.createElement("span", null, person.originalName)
+                    : null,
                 ),
               ),
+            ),
           )
         : React.createElement(
             "p",
             { className: "people-empty" },
             "감독 정보가 아직 연결되지 않았습니다.",
           ),
+      // 팀 main의 인물 더보기 기능은 새 화면에서도 유지한다.
+      directors.length > 6 && React.createElement("button", { type: "button", className: "people-more-button", "aria-expanded": showAllDirectors, onClick: () => setShowAllDirectors((value) => !value) }, showAllDirectors ? "감독 접기" : `감독 더보기 (6 / ${directors.length})`),
     ),
     React.createElement(
       "section",
-      { className: "detail-content-section people-section" },
-      React.createElement(
-        "div",
-        { className: "detail-section-heading" },
-        React.createElement("h2", null, "출연 배우"),
-        React.createElement("span", { className: "detail-section-count" }, `${actors.length}명`),
-      ),
+      { className: "detail-content-section" },
+      React.createElement("h2", null, "출연 배우"),
       actors.length > 0
         ? React.createElement(
-            React.Fragment,
+            ActorCarousel,
             null,
-            React.createElement(
-              "div",
-              { className: "people-list people-list-compact" },
-              actors
-                .slice(0, showAllActors ? actors.length : 6)
-                .map((person, index) =>
-                  React.createElement(
-                    "button",
-                    {
-                      type: "button",
-                      className: "person-chip",
-                      key: `${person.name}-${index}`,
-                      onClick: () => moveToPersonDetail(person, "actor"),
-                    },
-                    React.createElement(SafeImage, {
-                      src: person.profileUrl,
-                      alt: person.name,
-                      loading: "lazy",
-                      fallback: React.createElement(
-                        "div",
-                        null,
-                        React.createElement("span", null, "👤"),
-                      ),
-                    }),
-                    React.createElement(
-                      "div",
-                      null,
-                      React.createElement("strong", null, person.name),
-                      person.originalName && person.originalName !== person.name
-                        ? React.createElement("span", null, person.originalName)
-                        : null,
-                      person.role &&
-                        React.createElement(
-                          "span",
-                          { className: "person-role" },
-                          person.role,
-                        ),
-                    ),
-                  ),
-                ),
-            ),
-            actors.length > 6 &&
+            actors.slice(0, showAllActors ? actors.length : 6).map((person, index) =>
               React.createElement(
-                "div",
-                { className: "people-list-actions" },
+                "button",
+                {
+                  type: "button",
+                  className: "person-chip",
+                  key: `${person.name}-${index}`,
+                  onClick: () => moveToPersonDetail(person, "actor"),
+                },
+                React.createElement(SafeImage, {
+                  src: person.profileUrl,
+                  alt: person.name,
+                  loading: "lazy",
+                  fallback: React.createElement(
+                    "div",
+                    null,
+                    React.createElement("span", null, "👤"),
+                  ),
+                }),
                 React.createElement(
-                  "button",
-                  {
-                    type: "button",
-                    className: "people-more-button",
-                    onClick: () => setShowAllActors((value) => !value),
-                    "aria-expanded": showAllActors,
-                  },
-                  showAllActors ? "배우 접기" : `배우 더보기 (6 / ${actors.length})`,
+                  "div",
+                  null,
+                  React.createElement("strong", null, person.name),
+                  person.originalName && person.originalName !== person.name
+                    ? React.createElement("span", null, person.originalName)
+                    : null,
+                  person.role &&
+                    React.createElement(
+                      "span",
+                      { className: "person-role" },
+                      person.role,
+                    ),
                 ),
               ),
+            ),
           )
         : React.createElement(
             "p",
             { className: "people-empty" },
             "배우 정보가 아직 연결되지 않았습니다.",
           ),
+      actors.length > 6 && React.createElement("button", { type: "button", className: "people-more-button", "aria-expanded": showAllActors, onClick: () => setShowAllActors((value) => !value) }, showAllActors ? "배우 접기" : `배우 더보기 (6 / ${actors.length})`),
     ),
     React.createElement(
       "section",
-      { className: "detail-content-section" },
-      React.createElement("h2", null, "영화 메모"),
-      !movie.movieCode &&
+      { className: "movie-rating-panel", "data-detail-region": "reactions" },
+      movie.movieCode && React.createElement(
+        "div",
+        { className: "detail-reaction-counts" },
+        React.createElement(
+          "button",
+          {
+            type: "button",
+            className: `detail-reaction-count ${
+              myRating === true ? "selected-like" : ""
+            }`,
+            onClick: () => handleMovieRating(true),
+            disabled: isRatingSubmitting,
+            "aria-pressed": myRating === true,
+          },
+          React.createElement("span", null, "👍 좋아요"),
+          React.createElement("strong", null, formatNumber(likeCount)),
+        ),
+        React.createElement(
+          "button",
+          {
+            type: "button",
+            className: `detail-reaction-count ${
+              myRating === false ? "selected-dislike" : ""
+            }`,
+            onClick: () => handleMovieRating(false),
+            disabled: isRatingSubmitting,
+            "aria-pressed": myRating === false,
+          },
+          React.createElement("span", null, "👎 싫어요"),
+          React.createElement("strong", null, formatNumber(dislikeCount)),
+        ),
+      ),
+      React.createElement("h2", { className: "rating-label" }, "관객 평점"),
+      React.createElement(
+        "div",
+        { className: "movie-score-display" },
+        React.createElement(
+          "div",
+          { className: "movie-score-value" },
+          React.createElement("strong", null, movieScore),
+          React.createElement("span", null, "/ 5.00"),
+        ),
+        React.createElement(
+          "p",
+          null,
+          "총 ",
+          formatNumber(totalCount),
+          "명이 평가했습니다.",
+        ),
+        React.createElement("p", { className: "rating-positive-summary" }, totalCount > 0 ? `긍정 평가 비율 ${positivePercent}%` : "아직 등록된 관객 평가가 없습니다."),
+      ),
+      !movie.movieCode && React.createElement("p", { className: "rating-unavailable" }, "이 영화는 관객 평가 기능과 아직 연결되지 않았습니다."),
+      React.createElement(
+        "p",
+        { className: "detail-total-count" },
+        "전체 평가 수: ",
+        React.createElement("strong", null, formatNumber(totalCount)),
+      ),
+      isRatingSubmitting &&
+        React.createElement(
+          "p",
+          { className: "rating-status" },
+          "평가를 저장하고 있습니다.",
+        ),
+      ratingError &&
+        React.createElement("p", { className: "people-empty" }, ratingError),
+    ),
+    React.createElement("section", { className: "detail-content-section detail-my-memo", "data-detail-region": "memo" }, React.createElement("h2", null, "나의 메모"), !movie.movieCode &&
         React.createElement(
           "p",
           { className: "people-empty" },
           "이 작품은 외부 영화 정보로 표시 중입니다. KOBIS 영화 코드가 연결되면 MOMO의 영화 메모와 평가 기능도 사용할 수 있습니다.",
-        ),
-      reviewError &&
-        React.createElement("p", { className: "people-empty" }, reviewError),
-      React.createElement(
+        ), reviewError &&
+        React.createElement("p", { className: "people-empty" }, reviewError), React.createElement(
         "div",
         { className: "review-write-section" },
         React.createElement(
@@ -952,26 +799,27 @@ function MovieDetail() {
           {
             type: "button",
             className: "review-write-toggle",
-            onClick: () => setIsReviewOpen((prev) => !prev),
+            // 작성 중에는 접지 않아 초안과 입력 흐름을 유지한다. 등록 성공 시에만 기존 초기화 흐름으로 돌아간다.
+            onClick: () => setIsReviewOpen(true),
+            "aria-expanded": isReviewOpen,
+            "aria-controls": "archive-review-editor",
             disabled: !movie.movieCode,
           },
           React.createElement(
             "span",
             null,
-            "✏️ ",
-            movie.title,
-            " 영화 메모 작성하기",
+            "영화 메모 작성하기",
           ),
           React.createElement(
             "span",
             { className: "review-toggle-arrow" },
-            isReviewOpen ? "▲" : "▼",
+            isReviewOpen ? "작성 중" : "+",
           ),
         ),
         isReviewOpen &&
           React.createElement(
             "div",
-            { className: "review-write-content" },
+            { className: "review-write-content", id: "archive-review-editor" },
             React.createElement("h3", null, "✏️ 이 영화, 어떻게 기억하시나요?"),
             React.createElement(
               "div",
@@ -988,6 +836,7 @@ function MovieDetail() {
               ),
               React.createElement("input", {
                 id: "reviewTitle",
+                ref: reviewTitleRef,
                 type: "text",
                 value: reviewTitle,
                 onChange: (e) => setReviewTitle(e.target.value),
@@ -1030,8 +879,9 @@ function MovieDetail() {
               ),
             ),
           ),
-      ),
-      reviews.length > 0
+      )),
+    React.createElement("section", { className: "detail-content-section detail-member-reviews", "data-detail-region": "reviews" }, React.createElement("h2", null, "사용자 리뷰"),
+      reviewMovieCode && React.createElement(Link, { to: `/reviews/movie/${encodeURIComponent(reviewMovieCode)}` }, "전체 리뷰 보기"), reviews.length > 0
         ? React.createElement(
             "div",
             { className: "detail-review-list" },
@@ -1042,7 +892,7 @@ function MovieDetail() {
                 React.createElement(
                   "div",
                   null,
-                  React.createElement("strong", null, review.title),
+                  React.createElement(Link, { to: `/reviews/${review.reviewId}`, className: "detail-review-title" }, review.title),
                   React.createElement(
                     "span",
                     null,
@@ -1051,16 +901,19 @@ function MovieDetail() {
                       : "",
                   ),
                 ),
-                React.createElement("p", null, review.content),
+                React.createElement("p", { className: "detail-review-body" }, review.content),
+                React.createElement("span", { className: "detail-review-author" }, review.nickname || "익명"),
               ),
             ),
           )
         : React.createElement(
-            "p",
-            { className: "people-empty" },
-            "아직 작성된 영화 메모가 없습니다.",
-          ),
-    ),
+            "div",
+            { className: "detail-memo-empty" },
+            React.createElement("span", { role: "img", "aria-label": "메모 없음" }, "✎"),
+            React.createElement("h3", null, "아직 남겨진 영화 메모가 없어요."),
+            React.createElement("p", null, "기억하고 싶은 장면이나 감상을 첫 메모로 남겨 보세요."),
+            movie.movieCode && React.createElement("button", { type: "button", onClick: () => setIsReviewOpen(true) }, "첫 메모 남기기"),
+          ))
   );
 }
 

@@ -6,47 +6,6 @@ import AxiosApi from "../api/AxiosApi";
 import ProfileAvatar from "../components/ProfileAvatar";
 import { ProfileDeleteLink } from "../styles/legacy/Profile.styles";
 
-function ActivityIcon({ type }) {
-  const shared = {
-    viewBox: "0 0 28 28",
-    width: 20,
-    height: 20,
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.65,
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    "aria-hidden": "true",
-    focusable: "false",
-  };
-
-  if (type === "writing") {
-    return (
-      <svg {...shared}>
-        <path d="m18.9 5.3 3.8 3.8M6 22l4.3-.9L22 9.4a2.7 2.7 0 0 0-3.8-3.8L6.5 17.7 6 22Z" />
-        <path d="M5 25h18" />
-      </svg>
-    );
-  }
-
-  if (type === "liked") {
-    return (
-      <svg {...shared}>
-        <path d="M23 9.3c0 5.2-9 11-9 11s-9-5.8-9-11a4.8 4.8 0 0 1 9-2.2 4.8 4.8 0 0 1 9 2.2Z" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg {...shared}>
-      <path d="M6.5 4.75h15A2.25 2.25 0 0 1 23.75 7v2.4a2.6 2.6 0 0 0 0 5.2V17A2.25 2.25 0 0 1 21.5 19.25h-15A2.25 2.25 0 0 1 4.25 17v-2.4a2.6 2.6 0 0 0 0-5.2V7A2.25 2.25 0 0 1 6.5 4.75Z" />
-      <rect x="9.25" y="7.75" width="9.5" height="8.5" rx="1.2" />
-      <path d="m13 10.1 3.1 1.9-3.1 1.9v-3.8Z" />
-      <path d="M7 7.2v1.1M7 15.8v1.1M21 7.2v1.1M21 15.8v1.1" />
-    </svg>
-  );
-}
-
 function Profile() {
   const [userId, setUserId] = useState("");
   const [nickname, setNickname] = useState("");
@@ -65,7 +24,6 @@ function Profile() {
   useEffect(() => {
     setUserId(localStorage.getItem("username") || "");
     setNickname(localStorage.getItem("nickname") || "");
-    setEmail(localStorage.getItem("email") || "");
   }, []);
 
   // 관심 영화 등록 및 해제 상태 감지
@@ -92,6 +50,11 @@ function Profile() {
 
         if (controller.signal.aborted) return;
 
+        // 캐시된 표시값보다 현재 회원 조회의 실제 값을 우선해 빈 이메일·오래된 닉네임을 피한다.
+        setUserId(response.data.loginId ?? localStorage.getItem("username") ?? "");
+        setNickname(response.data.nickname ?? localStorage.getItem("nickname") ?? "");
+        // 이메일이 응답에 없을 때 계정 구분 없는 로컬 값을 노출하지 않는다.
+        setEmail(response.data.email || "");
         setProfileUserId(response.data.userId || null);
         setHasProfileImage(Boolean(response.data.profileImage));
       } catch (error) {
@@ -151,39 +114,25 @@ function Profile() {
   }, []);
 
   return (
-    <main className="profile-page profile-dashboard">
-      <div className="profile-container profile-dashboard-container">
-        <header className="profile-heading profile-dashboard-heading">
-          <div className="profile-heading-main">
-            <span className="profile-heading-eyebrow">MY MOMO</span>
-            <h1>마이페이지</h1>
-            <p>나의 계정 정보와 영화 활동을 한곳에서 확인하세요.</p>
-          </div>
-
-          <Link to="/profile/edit" className="profile-dashboard-edit">
-            <span>프로필 설정</span>
-            <svg
-              viewBox="0 0 20 20"
-              width="16"
-              height="16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M4 16 15.5 4.5M8 4.5h7.5V12" />
-            </svg>
-          </Link>
+    <main className="profile-page" data-archive-page="profile">
+      <div className="profile-container">
+        {/* 페이지 제목 */}
+        <header className="profile-heading">
+          <h1>마이페이지</h1>
+          <p>나의 계정 정보와 영화 활동을 확인해 보세요.</p>
         </header>
 
-        <section className="profile-card profile-overview-card">
+        {/* 내 프로필 */}
+        <section className="profile-card compact-profile-card">
           <div className="profile-card-heading">
             <div>
-              <span className="profile-section-label">ACCOUNT</span>
               <h2>내 프로필</h2>
-              <p>현재 MOMO 계정에 등록된 회원 정보입니다.</p>
+            </div>
+
+            <div className="profile-card-actions">
+              <Link to="/profile/edit" className="profile-button">
+                프로필 수정
+              </Link>
             </div>
           </div>
 
@@ -197,141 +146,76 @@ function Profile() {
             </div>
 
             <div className="profile-user-info">
-              <div className="profile-user-identity">
-                <span className="profile-user-kicker">MEMBER PROFILE</span>
-                <h3>{nickname || userId || "로그인 사용자"}</h3>
-              </div>
+              <h3>{nickname || userId || "로그인 사용자"}</h3>
 
-              <dl className="profile-user-details">
-                <div>
-                  <dt>아이디</dt>
-                  <dd>{userId || "정보 없음"}</dd>
-                </div>
-                <div>
-                  <dt>닉네임</dt>
-                  <dd>{nickname || "정보 없음"}</dd>
-                </div>
-                <div>
-                  <dt>이메일</dt>
-                  <dd>{email || "등록된 이메일 정보 없음"}</dd>
-                </div>
+              <dl className="compact-profile-fields">
+                <div><dt><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="10" cy="6" r="3" /><path d="M4 18v-2a6 6 0 0 1 12 0v2" /></svg>아이디</dt><dd>{userId || "정보 없음"}</dd></div>
+                <div><dt><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><rect x="2" y="4" width="16" height="12" rx="2" /><path d="m2 5 8 6 8-6" /></svg>이메일</dt><dd>{email || "이메일 조회 정보 없음"}</dd></div>
               </dl>
             </div>
           </div>
         </section>
 
-        <section className="profile-card profile-activity-section">
+        {/* 나의 영화 활동 */}
+        <section className="profile-card archive-activity-section">
           <div className="profile-card-heading">
             <div>
-              <span className="profile-section-label">YOUR COLLECTION</span>
               <h2>나의 영화 활동</h2>
-              <p>내가 남기고 저장한 영화 기록을 모아볼 수 있어요.</p>
+              <p>내가 남긴 영화 기록을 모아볼 수 있어요.</p>
             </div>
           </div>
 
+          {/* 영화 활동 3개 가로 배치 */}
           <div className="profile-activity-grid">
+            {/* 작성한 리뷰 */}
             <Link
               to="/profile/reviews"
               className="profile-activity-item profile-reviews-link"
-              data-tone="writing"
             >
-              <div className="profile-activity-top">
-                <span className="profile-activity-icon">
-                  <ActivityIcon type="writing" />
-                </span>
-                <span className="profile-activity-number">01</span>
-              </div>
-              <div className="profile-activity-body">
-                <h3>작성한 리뷰</h3>
-                <div className="profile-activity-count-row">
-                  <strong className="profile-activity-count">
-                    {reviewCount === null ? "-" : reviewCount}
-                  </strong>
-                  <span className="profile-activity-unit">개</span>
-                </div>
-              </div>
-              <div className="profile-activity-footer">
-                <p>내가 남긴 영화 기록</p>
-                <span className="profile-activity-arrow" aria-hidden="true">↗</span>
-              </div>
+              <span className="profile-activity-icon">✎</span>
+              <h3>작성한 리뷰</h3>
+              <strong>{reviewCount === null ? "-" : reviewCount} 개</strong>
+              <p>작성한 리뷰 보기 →</p>
             </Link>
 
+            {/* 좋아요한 리뷰 */}
             <Link
               to="/profile/liked-reviews"
               className="profile-activity-item profile-liked-reviews-link"
-              data-tone="liked"
             >
-              <div className="profile-activity-top">
-                <span className="profile-activity-icon">
-                  <ActivityIcon type="liked" />
-                </span>
-                <span className="profile-activity-number">02</span>
-              </div>
-              <div className="profile-activity-body">
-                <h3>좋아요한 리뷰</h3>
-                <div className="profile-activity-count-row">
-                  <strong className="profile-activity-count">
-                    {likedReviewCount === null ? "-" : likedReviewCount}
-                  </strong>
-                  <span className="profile-activity-unit">개</span>
-                </div>
-              </div>
-              <div className="profile-activity-footer">
-                <p>마음에 남은 다른 사람의 기록</p>
-                <span className="profile-activity-arrow" aria-hidden="true">↗</span>
-              </div>
+              <span className="profile-activity-icon">♥</span>
+              <h3>좋아요한 리뷰</h3>
+              <strong>
+                {likedReviewCount === null ? "-" : likedReviewCount} 개
+              </strong>
+              <p>좋아요한 리뷰 보기 →</p>
             </Link>
 
+            {/* 관심 영화 */}
             <Link
               to="/profile/favorites"
               className="profile-activity-item profile-favorites-link"
-              data-tone="saved"
             >
-              <div className="profile-activity-top">
-                <span className="profile-activity-icon">
-                  <ActivityIcon type="saved" />
-                </span>
-                <span className="profile-activity-number">03</span>
-              </div>
-              <div className="profile-activity-body">
-                <h3>관심 영화</h3>
-                <div className="profile-activity-count-row">
-                  <strong className="profile-activity-count">{favoriteCount}</strong>
-                  <span className="profile-activity-unit">편</span>
-                </div>
-              </div>
-              <div className="profile-activity-footer">
-                <p>다시 보고 싶은 영화 모음</p>
-                <span className="profile-activity-arrow" aria-hidden="true">↗</span>
-              </div>
+              <span className="profile-activity-icon">★</span>
+              <h3>관심 영화</h3>
+              <strong>{favoriteCount} 편</strong>
+              <p>관심 영화 보기 →</p>
             </Link>
           </div>
         </section>
 
-        <section className="profile-delete-section" aria-label="회원 탈퇴">
-          <div className="profile-delete-copy">
-            <span className="profile-section-label">ACCOUNT</span>
+        {/* 회원 탈퇴 */}
+        <section className="profile-card profile-delete-section">
+          <div>
             <h2>회원 탈퇴</h2>
-            <p>계정과 관련된 작업이 더 이상 필요하지 않을 때 진행할 수 있습니다.</p>
+            <p>회원 탈퇴를 진행하면 계정 이용에 제한이 생길 수 있습니다.</p>
           </div>
+
           <ProfileDeleteLink
             to="/profile/delete"
             className="profile-button profile-delete-button"
           >
             회원 탈퇴
-            <svg
-              viewBox="0 0 20 20"
-              width="15"
-              height="15"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M4 10h12M11 5l5 5-5 5" />
-            </svg>
           </ProfileDeleteLink>
         </section>
       </div>

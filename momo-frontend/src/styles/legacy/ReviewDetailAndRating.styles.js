@@ -8,9 +8,9 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 
 .review-detail-page {
   width: 100%;
-  max-width: 980px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 12px 0 88px;
+  padding: 30px 0 80px;
   color: var(--momo-text);
 }
 
@@ -41,11 +41,11 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 .review-detail-card {
   position: relative;
   overflow: hidden;
-  padding: clamp(24px, 3vw, 40px);
-  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
+  padding: 36px;
+  background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius-lg);
-  box-shadow: var(--momo-shadow-sm);
+  border-radius: var(--momo-radius);
+  box-shadow: var(--momo-shadow);
 }
 
 .review-detail-card::before {
@@ -73,7 +73,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 
 .review-detail-title {
   margin: 0 0 22px;
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(24px, 4vw, 32px);
   font-weight: 800;
   line-height: 1.45;
   overflow-wrap: anywhere;
@@ -102,10 +102,10 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   justify-content: space-between;
   gap: 16px;
   margin: 24px 0;
-  padding: 22px 24px;
-  background: linear-gradient(135deg, var(--momo-note), #FFFDF6);
+  padding: 18px 20px;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
-  border-radius: 18px;
+  border-radius: 10px;
 }
 
 .review-detail-movie-info {
@@ -123,7 +123,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 .review-detail-movie strong {
   display: block;
   overflow-wrap: anywhere;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
 }
 
@@ -162,12 +162,12 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   min-height: 180px;
   padding: 28px;
   margin: 0;
-  background: linear-gradient(140deg, rgba(255,255,255,.64), rgba(242,247,243,.34));
-  border: 1px solid rgba(255,255,255,.88);
-  border-radius: 14px;
+  background: #FFFCF4;
+  border: 1px solid var(--momo-note-border);
+  border-radius: 10px;
   color: var(--momo-text);
   font-size: 15px;
-  line-height: 2.05;
+  line-height: 2;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
@@ -188,7 +188,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   min-height: 260px;
   padding: 30px;
   background: var(--momo-surface);
-  border: 1px solid rgba(255,255,255,.9);
+  border: 1px dashed var(--momo-border);
   border-radius: var(--momo-radius);
   color: var(--momo-muted);
   font-size: 14px;
@@ -197,7 +197,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 }
 
 .review-detail-error {
-  color: var(--momo-danger);
+  color: #C0392B;
 }
 
 /* 모바일 */
@@ -242,12 +242,9 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   gap: 14px;
   margin-top: 18px;
   padding: 20px;
-  background: linear-gradient(140deg, rgba(255,255,255,.68), rgba(255,250,236,.38));
-  border: 1px solid rgba(255,255,255,.88);
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(41,40,32,.055), inset 0 1px rgba(255,255,255,.98);
-  -webkit-backdrop-filter: blur(22px) saturate(155%);
-  backdrop-filter: blur(22px) saturate(155%);
+  background: var(--momo-note);
+  border: 1px solid var(--momo-note-border);
+  border-radius: 10px;
 }
 
 .rating-label {
@@ -303,7 +300,7 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
 }
 
 .detail-reaction-count:hover {
-  transform: none;
+  transform: translateY(-2px);
   box-shadow: var(--momo-shadow);
 }
 
@@ -344,34 +341,6 @@ const ReviewDetailAndRatingStyles = createGlobalStyle`
   }
 }
 
-
-
-/* Product refinement: the reader's note is the visual focus. */
-.review-detail-page { max-width: 920px; padding-top: 6px; }
-.review-detail-card {
-  padding: clamp(22px, 3vw, 36px);
-  border-radius: 16px;
-  box-shadow: var(--momo-shadow-xs);
-}
-.review-detail-card::before { left: 0; right: auto; width: 48px; height: 4px; background: var(--momo-accent); }
-.review-detail-title { font-size: clamp(25px, 3.4vw, 35px); line-height: 1.3; }
-.review-detail-movie { padding: 17px 19px; border-radius: 12px; }
-.review-detail-content {
-  min-height: 160px;
-  padding: clamp(20px, 2.5vw, 28px);
-  background: #FFFAEC;
-  border-color: #E9DFC5;
-  border-radius: 9px;
-  font-size: 15px;
-  line-height: 1.9;
-}
-.movie-rating-panel { padding: 18px; border-radius: 12px; }
-.detail-reaction-count { min-height: 96px; border-radius: 9px; box-shadow: none; }
-.detail-reaction-count:hover { box-shadow: var(--momo-shadow-sm); }
-@media (max-width: 600px) {
-  .review-detail-card { padding: 23px 17px; }
-  .review-detail-title { font-size: 25px; }
-}
 
 `;
 
