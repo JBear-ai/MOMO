@@ -8,9 +8,9 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-page {
   width: 100%;
-  max-width: 1480px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 12px 0 64px;
+  padding: 30px 0 80px;
   color: var(--momo-text);
 }
 
@@ -20,12 +20,12 @@ const ReviewListStyles = createGlobalStyle`
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: clamp(28px, 3.5vw, 44px);
-  margin-bottom: 30px;
-  background: linear-gradient(120deg, var(--momo-note), rgba(255,255,255,.88));
+  padding: 36px;
+  margin-bottom: 32px;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
-  border-radius: 26px;
-  box-shadow: 0 18px 46px rgba(54, 45, 28, .065);
+  border-radius: var(--momo-radius);
+  box-shadow: var(--momo-shadow);
   position: relative;
   overflow: hidden;
 }
@@ -50,7 +50,7 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-heading h1 {
   margin: 0 0 10px;
-  font-size: clamp(30px, 4.2vw, 42px);
+  font-size: clamp(26px, 4vw, 34px);
   font-weight: 800;
   letter-spacing: -0.03em;
 }
@@ -91,11 +91,11 @@ const ReviewListStyles = createGlobalStyle`
 
 /* 리뷰 목록 카드 */
 .all-reviews-card {
-  padding: clamp(20px, 2.8vw, 34px);
+  padding: 30px;
   background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: var(--momo-radius-lg);
-  box-shadow: var(--momo-shadow-sm);
+  border-radius: var(--momo-radius);
+  box-shadow: var(--momo-shadow);
 }
 
 .all-reviews-card-heading {
@@ -125,7 +125,7 @@ const ReviewListStyles = createGlobalStyle`
   padding: 8px 12px;
   background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
-  border-radius: 10px;
+  border-radius: 7px;
   color: var(--momo-accent-ink);
   font-size: 12px;
   font-weight: 700;
@@ -134,12 +134,12 @@ const ReviewListStyles = createGlobalStyle`
 /* 전체 리뷰 검색 */
 .all-reviews-search {
   display: grid;
-  grid-template-columns: auto minmax(140px, .75fr) minmax(220px, 2fr) auto auto;
+  grid-template-columns: auto minmax(0, 1fr) minmax(220px, 2fr) auto auto;
   align-items: center;
   gap: 10px;
   margin: 0 0 24px;
   padding: 16px;
-  background: var(--momo-note);
+  background: #FFFCF4;
   border: 1px solid var(--momo-note-border);
   border-radius: 10px;
 }
@@ -190,7 +190,7 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-search-submit:hover {
-  background: var(--momo-accent-hover);
+  background: #F5C928;
 }
 
 .all-reviews-search-reset {
@@ -201,7 +201,7 @@ const ReviewListStyles = createGlobalStyle`
 
 .all-reviews-search-reset:hover {
   background: var(--momo-bg);
-  border-color: var(--momo-border-strong);
+  border-color: #BEB5A7;
 }
 
 /* 리뷰 테이블 */
@@ -288,7 +288,7 @@ const ReviewListStyles = createGlobalStyle`
 .review-author-cell,
 .review-date-cell {
   color: var(--momo-muted);
-  font-size: 12px;
+  font-size: 12px !important;
 }
 
 .all-reviews-table tbody tr {
@@ -296,7 +296,7 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-table tbody tr:hover {
-  background: var(--momo-note);
+  background: #FFFCF4;
 }
 
 /* 로딩 / 오류 / 빈 목록 */
@@ -308,7 +308,7 @@ const ReviewListStyles = createGlobalStyle`
   padding: 30px;
   color: var(--momo-muted);
   background: var(--momo-bg);
-  border: 1px solid rgba(255,255,255,.9);
+  border: 1px dashed var(--momo-border);
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -316,9 +316,9 @@ const ReviewListStyles = createGlobalStyle`
 }
 
 .all-reviews-error {
-  color: var(--momo-danger);
-  background: var(--momo-danger-bg);
-  border-color: var(--momo-dislike-border);
+  color: #C0392B;
+  background: #FFF5F5;
+  border-color: #EED2D2;
 }
 
 /* 모바일 리뷰 목록 */
@@ -477,39 +477,6 @@ const ReviewListStyles = createGlobalStyle`
     height: 34px;
     padding: 0 8px;
   }
-}
-
-
-/* Product refinement: review discovery stays compact and readable. */
-.all-reviews-heading {
-  padding: 26px 30px;
-  margin-bottom: 22px;
-  background: #FFF9E9;
-  border-radius: 16px;
-  box-shadow: none;
-}
-.all-reviews-heading::before { width: 4px; }
-.all-reviews-heading h1 { font-size: clamp(27px, 3vw, 35px); line-height: 1.2; }
-.all-reviews-count { width: 104px; height: 86px; border-radius: 10px; }
-.all-reviews-card {
-  padding: clamp(18px, 2.4vw, 28px);
-  border-radius: 14px;
-  box-shadow: none;
-}
-.all-reviews-card-heading { margin-bottom: 18px; padding-bottom: 15px; }
-.all-reviews-search {
-  padding: 12px;
-  background: #F7F3E9;
-  border-color: var(--momo-border);
-  border-radius: 9px;
-}
-.all-reviews-table th { padding: 13px 12px; }
-.all-reviews-table td { padding: 16px 12px; }
-.all-reviews-table tbody tr:hover { background: #FFFAEC; }
-.all-reviews-pagination button { border-radius: 8px; }
-@media (max-width: 600px) {
-  .all-reviews-heading { padding: 22px 18px; }
-  .all-reviews-card { padding: 16px 13px; }
 }
 
 `;

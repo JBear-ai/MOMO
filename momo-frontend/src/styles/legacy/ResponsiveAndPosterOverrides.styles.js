@@ -121,7 +121,32 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   }
 }
 
-/* 마이페이지 활동 그리드는 PaperGlassDetailPolish에서 실제 DOM 구조 기준으로 관리합니다. */
+/* 마이페이지 영화 활동 가로 배치 */
+.profile-card:has(> .profile-card-heading > div > h2) {
+  /* 다른 profile-card에는 영향 주지 않도록 아래 선택자로 한정 */
+}
+
+.profile-card:has(.profile-reviews-link) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* 제목과 설명은 카드 전체 너비 */
+.profile-card:has(.profile-reviews-link) > .profile-card-heading {
+  width: 100%;
+}
+
+/* 활동 카드 3개 */
+.profile-card:has(.profile-reviews-link) > .profile-activity-item {
+  flex: 1 1 0;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+
 
 /* 내가 작성한 리뷰 - 영화 포스터 */
 
@@ -137,7 +162,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   aspect-ratio: 2 / 3;
   overflow: hidden;
   border-radius: 8px;
-  background: var(--momo-note);
+  background: #f0f0f0;
 }
 
 .my-review-poster img {
@@ -153,7 +178,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   height: 100%;
   align-items: center;
   justify-content: center;
-  color: var(--momo-placeholder);
+  color: #999;
   font-size: 12px;
   font-weight: 700;
 }
@@ -166,7 +191,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
 .my-review-movie {
   display: block;
   margin-bottom: 8px;
-  color: var(--momo-muted);
+  color: #777;
   font-size: 13px;
   font-weight: 600;
 }
@@ -203,7 +228,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 12px;
-  color: var(--momo-muted);
+  color: #777;
   font-size: 13px;
 }
 
@@ -214,7 +239,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
 }
 
 .my-review-stats strong {
-  color: var(--momo-text);
+  color: #333;
   font-weight: 700;
 }
 
@@ -240,7 +265,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   aspect-ratio: 2 / 3;
   overflow: hidden;
   border-radius: 5px;
-  background: var(--momo-note);
+  background: #f0f0f0;
 }
 
 .all-review-poster img {
@@ -256,7 +281,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   height: 100%;
   align-items: center;
   justify-content: center;
-  color: var(--momo-placeholder);
+  color: #999;
   font-size: 9px;
   font-weight: 700;
 }
@@ -269,7 +294,7 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  color: var(--momo-muted);
+  color: #777;
   font-size: 12px;
   white-space: nowrap;
 }
@@ -304,12 +329,12 @@ const ResponsiveAndPosterOverridesStyles = createGlobalStyle`
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 12px;
-  color: var(--momo-muted);
+  color: #777;
   font-size: 12px;
 }
 
 .all-review-mobile-stats strong {
-  color: var(--momo-text);
+  color: #333;
 }
 
 @media (max-width: 600px) {

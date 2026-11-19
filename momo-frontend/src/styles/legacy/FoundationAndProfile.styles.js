@@ -18,9 +18,9 @@ body {
 ======================================== */
 .profile-page {
   width: 100%;
-  max-width: 1080px;
+  max-width: 820px;
   margin: 0 auto;
-  padding: 12px 0 64px;
+  padding: 30px 20px 80px;
 }
 
 .profile-container {
@@ -29,8 +29,8 @@ body {
 }
 
 .profile-heading h1 {
-  margin: 0 0 8px;
-  font-size: clamp(28px, 3vw, 36px);
+  margin: 0 0 6px;
+  font-size: 30px;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--momo-text);
@@ -52,13 +52,24 @@ body {
 }
 
 .profile-card {
-  padding: clamp(22px, 3vw, 32px);
-  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
-  border: 1px solid var(--momo-glass-border);
-  border-radius: var(--momo-radius-lg);
-  box-shadow: 0 12px 34px rgba(54, 45, 28, .055);
+  padding: 28px;
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
+  border-radius: var(--momo-radius);
+  box-shadow: var(--momo-shadow);
   position: relative;
-  overflow: hidden;
+}
+
+/* 메모지 감성 포인트 라인 */
+.profile-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 28px;
+  right: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--momo-accent) 0%, transparent 100%);
+  border-radius: 2px;
 }
 
 .profile-card-heading {
@@ -107,7 +118,7 @@ body {
 .profile-button:hover {
   background: var(--momo-note);
   border-color: var(--momo-accent-ink);
-  transform: none;
+  transform: translateY(-1px);
 }
 
 .profile-button-secondary {
@@ -116,15 +127,15 @@ body {
 }
 
 .profile-delete-button {
-  background: var(--momo-danger-bg);
-  border-color: var(--momo-dislike-border);
-  color: var(--momo-danger);
+  background: #FFF5F5;
+  border-color: #EED2D2;
+  color: #C53030;
   text-decoration: none;
 }
 
 /* 회원 탈퇴 버튼 - 활성화 상태에서만 호버 적용 (추가 / 11.02 )*/
 .profile-delete-button:not(:disabled):hover {
-  background: var(--momo-dislike-bg-hover);
+  background: #fed7d7;
 }
 
 /* 체크박스 선택 전 - 비활성화 */
@@ -180,8 +191,8 @@ body {
   margin: 0;
   font-size: 13px;
   color: var(--momo-text);
-  border-bottom: 0;
-  padding: 5px 0;
+  border-bottom: 1px dashed var(--momo-border);
+  padding-bottom: 6px;
 }
 
 .profile-user-info span {
@@ -196,7 +207,7 @@ body {
   display: grid;
   /* 화면이 좁을 때는 줄바꿈되거나 유연하게 줄어들고, 
      넓어질 때는 150px 이상 크기로 각 카드가 공간을 나눠 갖도록 설정 */
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
   gap: 14px;
   width: 100%;
 }
@@ -208,11 +219,11 @@ body {
   justify-content: center;
   gap: 10px;
   min-width: 0; /* 내부 텍스트나 flex 아이템이 칸을 뚫고 나가지 않게 방지 */
-  min-height: 168px;
-  padding: 22px 14px;
-  background: linear-gradient(145deg, var(--momo-note), #FFFDF6);
+  min-height: 145px;
+  padding: 20px 12px;
+  background: var(--momo-note);
   border: 1px solid var(--momo-note-border);
-  border-radius: 16px;
+  border-radius: 10px;
   text-align: center;
   text-decoration: none;
   color: var(--momo-text);
@@ -220,7 +231,7 @@ body {
 }
 
 .profile-activity-item:hover {
-  transform: none;
+  transform: translateY(-2px);
   box-shadow: 0 5px 14px rgba(0, 0, 0, 0.06);
 }
 
@@ -351,40 +362,6 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
-}
-
-
-/* Product refinement: profile pages use clear information groups, not decorative panels. */
-.profile-page { max-width: 1120px; padding-top: 8px; }
-.profile-container { gap: 20px; }
-.profile-heading h1 { font-size: clamp(27px, 3vw, 34px); letter-spacing: -.04em; }
-.profile-card {
-  padding: clamp(20px, 2.6vw, 30px);
-  background: var(--momo-surface);
-  border: 1px solid var(--momo-border);
-  border-radius: 15px;
-  box-shadow: var(--momo-shadow-xs);
-}
-.profile-card::before { left: 0; right: auto; width: 4px; height: 34px; background: var(--momo-accent); }
-.profile-card-heading { margin-bottom: 20px; }
-.profile-card-heading h2 { font-size: 18px; letter-spacing: -.025em; }
-.profile-button { min-height: 40px; border-radius: 8px; box-shadow: none; }
-.profile-button:hover { transform: none; }
-.profile-avatar { width: 68px; height: 68px; box-shadow: none; }
-.profile-activity-grid { gap: 12px; }
-.profile-activity-item {
-  min-height: 148px;
-  padding: 18px 12px;
-  background: #FFFAEC;
-  border-radius: 12px;
-  box-shadow: none;
-}
-.profile-activity-item:hover { box-shadow: var(--momo-shadow-sm); }
-.profile-form { gap: 10px; }
-.profile-form input { min-height: 44px; border-radius: 8px; }
-@media (max-width: 600px) {
-  .profile-card { padding: 19px 16px; }
-  .profile-activity-item { min-height: 118px; }
 }
 
 `;

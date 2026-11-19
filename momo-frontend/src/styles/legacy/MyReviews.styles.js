@@ -8,10 +8,11 @@ const MyReviewsStyles = createGlobalStyle`
 ================================================== */
 
 .my-reviews-page {
-  width: 100%;
+  width: calc(100% - 40px);
   max-width: 1320px;
+
   margin: 0 auto;
-  padding: 12px 0 64px;
+  padding: 30px 0 80px;
 }
 
 .my-reviews-heading {
@@ -20,18 +21,18 @@ const MyReviewsStyles = createGlobalStyle`
   justify-content: space-between;
   gap: 20px;
 
-  padding: clamp(28px, 3.5vw, 44px);
+  padding: 36px;
   margin-bottom: 30px;
 
-  background: var(--momo-note);
-  border: 1px solid var(--momo-note-border);
-  border-radius: 24px;
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
+  border-radius: 14px;
 }
 
 .my-reviews-eyebrow {
   margin: 0 0 10px;
 
-  color: var(--momo-link);
+  color: var(--momo-muted);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 1px;
@@ -41,7 +42,7 @@ const MyReviewsStyles = createGlobalStyle`
   margin: 0 0 10px;
 
   color: var(--momo-text);
-  font-size: clamp(30px, 4vw, 40px);
+  font-size: 30px;
   font-weight: 800;
 }
 
@@ -53,7 +54,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-reviews-heading > a {
-  color: var(--momo-link);
+  color: var(--momo-muted);
   font-size: 14px;
   font-weight: 800;
   text-decoration: none;
@@ -64,11 +65,11 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-reviews-card {
-  padding: clamp(20px, 2.8vw, 34px);
+  padding: 30px;
+
   background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: 22px;
-  box-shadow: var(--momo-shadow-sm);
+  border-radius: 14px;
 }
 
 .my-reviews-card-heading {
@@ -80,7 +81,7 @@ const MyReviewsStyles = createGlobalStyle`
   margin-bottom: 24px;
   padding-bottom: 18px;
 
-  border-bottom: 1px solid var(--momo-border);
+  border-bottom: 1px solid #e8e3dc;
 }
 
 .my-reviews-card-heading h2 {
@@ -101,11 +102,11 @@ const MyReviewsStyles = createGlobalStyle`
 .my-reviews-card-heading > span {
   padding: 7px 12px;
 
-  background: var(--momo-note);
-  border: 1px solid var(--momo-note-border);
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
   border-radius: 8px;
 
-  color: var(--momo-link);
+  color: var(--momo-muted);
   font-size: 12px;
   font-weight: 800;
 }
@@ -124,9 +125,8 @@ const MyReviewsStyles = createGlobalStyle`
   gap: 20px;
 
   padding: 22px 12px;
-  border-bottom: 1px solid var(--momo-border);
-  border-radius: 12px;
-  transition: background .18s ease, transform .18s ease;
+
+  border-bottom: 1px solid #e8e3dc;
 
   color: var(--momo-text);
   text-decoration: none;
@@ -135,7 +135,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-review-item:hover {
-  background: var(--momo-note);
+  background: var(--momo-surface);
 }
 
 .my-review-info {
@@ -144,7 +144,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-review-movie {
-  color: var(--momo-link);
+  color: var(--momo-muted);
   font-size: 12px;
   font-weight: 800;
 }
@@ -160,7 +160,7 @@ const MyReviewsStyles = createGlobalStyle`
 .my-review-info p {
   margin: 0 0 10px;
 
-  color: var(--momo-text-soft);
+  color: var(--momo-muted);
   font-size: 14px;
   line-height: 1.6;
 
@@ -170,12 +170,12 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-review-date {
-  color: var(--momo-placeholder);
+  color: var(--momo-muted);
   font-size: 12px;
 }
 
 .my-review-arrow {
-  color: var(--momo-link);
+  color: var(--momo-muted);
   font-size: 22px;
 }
 
@@ -195,13 +195,13 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .my-reviews-state a {
-  color: var(--momo-link);
+  color: var(--momo-muted);
   font-weight: 800;
   text-decoration: none;
 }
 
 .my-reviews-state.error {
-  color: var(--momo-danger);
+  color: var(--momo-muted);
 }
 
 /* 페이지네이션 */
@@ -225,15 +225,15 @@ const MyReviewsStyles = createGlobalStyle`
   border: 1px solid var(--momo-border);
   border-radius: 8px;
 
-  color: var(--momo-text-soft);
+  color: var(--momo-muted);
   font-weight: 700;
 
   cursor: pointer;
 }
 
 .my-reviews-pagination button.active {
-  background: var(--momo-accent);
-  border-color: var(--momo-accent);
+  background: var(--momo-surface);
+  border-color: var(--momo-border);
   color: var(--momo-text);
 }
 
@@ -251,11 +251,11 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .profile-reviews-link:hover {
-  background: var(--momo-note);
+  background: var(--momo-surface);
 }
 
 .profile-reviews-count {
-  color: var(--momo-link);
+  color: var(--momo-muted);
   font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
@@ -270,7 +270,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .review-clickable-row:hover {
-  background: var(--momo-note);
+  background: var(--momo-surface);
 }
 
 .all-reviews-mobile-item {
@@ -278,33 +278,7 @@ const MyReviewsStyles = createGlobalStyle`
 }
 
 .all-reviews-mobile-item:hover {
-  background: var(--momo-note);
-}
-
-
-/* Personal review archive: emphasize the writing, keep metadata quiet. */
-.my-reviews-page { max-width: 1240px; padding-top: 6px; }
-.my-reviews-heading {
-  padding: 24px 28px;
-  margin-bottom: 20px;
-  background: #FFF9E9;
-  border-radius: 15px;
-}
-.my-reviews-heading h1 { font-size: clamp(26px, 3vw, 34px); letter-spacing: -.04em; }
-.my-reviews-card {
-  padding: clamp(18px, 2.5vw, 28px);
-  border-radius: 14px;
-  box-shadow: none;
-}
-.my-reviews-card-heading { margin-bottom: 16px; padding-bottom: 14px; }
-.my-review-item { padding: 18px 10px; border-radius: 8px; }
-.my-review-item:hover { background: #FFFAEC; }
-.my-review-info h3 { font-size: 16px; }
-.my-review-info p { white-space: normal; line-height: 1.65; }
-.my-reviews-pagination button { border-radius: 7px; }
-@media (max-width: 600px) {
-  .my-reviews-heading { padding: 20px 17px; }
-  .my-reviews-card { padding: 16px 13px; }
+  background: var(--momo-surface);
 }
 
 `;
