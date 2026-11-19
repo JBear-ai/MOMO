@@ -5,7 +5,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   .momo-search-area {
     position: relative;
     flex-shrink: 0;
-    width: clamp(260px, 28vw, 380px);
+    width: 340px;
     max-width: 100%;
   }
 
@@ -15,21 +15,16 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    min-height: 44px;
     padding: 6px 16px;
-    background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(255,250,236,.52));
-    border: 1px solid rgba(255,255,255,.96);
-    border-radius: 16px;
-    box-shadow: 0 7px 18px rgba(54,45,28,.07), inset 0 1px rgba(255,255,255,.98), inset 0 -1px rgba(190,172,135,.12);
-    backdrop-filter: blur(16px) saturate(145%);
-    -webkit-backdrop-filter: blur(16px) saturate(145%);
-    transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    background: var(--momo-note);
+    border: 1px solid var(--momo-border);
+    border-radius: 20px;
+    transition: all 0.2s ease;
   }
 
   .momo-search-form:focus-within {
-    border-color: rgba(214, 166, 20, .72);
-    background: rgba(255, 255, 255, .9);
-    box-shadow: 0 0 0 3px rgba(255, 212, 59, 0.17), 0 12px 26px rgba(54,45,28,.1), inset 0 1px rgba(255,255,255,.98);
+    border-color: var(--momo-text);
+    box-shadow: 0 0 0 3px rgba(190, 184, 178, 0.2);
   }
 
   /* 검색 입력 */
@@ -44,7 +39,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   }
 
   .momo-search-input::placeholder {
-    color: var(--momo-placeholder);
+    color: var(--momo-muted);
   }
 
   /* 검색 버튼 */
@@ -54,7 +49,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     padding: 2px 4px;
     border: none;
     background: transparent;
-    color: var(--momo-accent-ink);
+    color: var(--momo-text);
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
@@ -74,12 +69,10 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     max-height: 390px;
     overflow-y: auto;
     box-sizing: border-box;
-    background: linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,250,236,.78));
-    border: 1px solid rgba(255,255,255,.98);
-    border-radius: 17px;
-    box-shadow: 0 24px 56px rgba(54,45,28,.17), 0 3px 8px rgba(54,45,28,.045), inset 0 1px rgba(255,255,255,.98);
-    backdrop-filter: blur(28px) saturate(165%);
-    -webkit-backdrop-filter: blur(28px) saturate(165%);
+    background: var(--momo-surface);
+    border: 1px solid var(--momo-border);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(45, 38, 26, 0.12);
   }
 
   /* 영화 검색 결과 */
@@ -88,14 +81,13 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     align-items: center;
     gap: 12px;
     width: 100%;
-    min-height: 88px;
-    padding: 10px 14px;
+    min-height: 84px;
+    padding: 10px 12px;
     border: none;
-    border-bottom: 1px solid rgba(255,255,255,.72);
-    background: rgba(255,255,255,.12);
+    border-bottom: 1px solid var(--momo-border);
+    background: var(--momo-surface);
     text-align: left;
     cursor: pointer;
-    transition: background 180ms ease, border-color 180ms ease;
   }
 
   .momo-search-result:last-child {
@@ -105,8 +97,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   .momo-search-result:hover,
   .momo-search-result:focus-visible,
   .momo-search-result.is-active {
-    background: linear-gradient(145deg, rgba(255,255,255,.78), rgba(255,250,236,.58));
-    border-color: rgba(255,255,255,.96);
+    background: var(--momo-note);
     outline: none;
   }
 
@@ -119,11 +110,9 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     width: 42px;
     height: 60px;
     overflow: hidden;
-    padding: 3px;
-    border: 1px solid rgba(255,255,255,.98);
-    border-radius: 7px;
-    background: rgba(255,255,255,.72);
-    box-shadow: 0 3px 8px rgba(54,45,28,.1), inset 0 1px rgba(255,255,255,.98);
+    border: 1px solid var(--momo-border);
+    border-radius: 5px;
+    background: var(--momo-note);
   }
 
   .momo-search-poster img {
@@ -139,7 +128,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
     justify-content: center;
     width: 100%;
     height: 100%;
-    color: var(--momo-placeholder);
+    color: var(--momo-muted);
     font-size: 18px;
   }
 
@@ -156,15 +145,15 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
   .momo-search-title {
     overflow: hidden;
     color: var(--momo-text);
-    font-size: 13px;
-    font-weight: 850;
+    font-size: 14px;
+    font-weight: 700;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
   .momo-search-meta {
     overflow: hidden;
-    color: var(--momo-placeholder);
+    color: var(--momo-muted);
     font-size: 11px;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -172,7 +161,7 @@ const MovieSearchAutocompleteStyles = createGlobalStyle`
 
   /* 검색 상태 */
   .momo-search-message {
-    padding: 20px 12px;
+    padding: 18px 12px;
     color: var(--momo-muted);
     font-size: 13px;
     text-align: center;

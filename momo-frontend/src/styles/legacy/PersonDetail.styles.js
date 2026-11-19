@@ -30,9 +30,9 @@ const PersonDetailStyles = createGlobalStyle`
 
 .movie-detail-page > .detail-content-section > .people-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   align-items: stretch;
-  gap: 22px;
+  gap: 20px;
 }
 
 .movie-detail-page > .detail-content-section > .people-list > .person-chip {
@@ -41,12 +41,12 @@ const PersonDetailStyles = createGlobalStyle`
   flex-direction: column;
   align-items: stretch;
   gap: 10px;
-  padding: 14px;
+  padding: 12px;
   overflow: hidden;
-  background: linear-gradient(145deg, var(--momo-surface), var(--momo-surface-raised));
+  background: var(--momo-surface);
   border: 1px solid var(--momo-border);
-  border-radius: 18px;
-  box-shadow: var(--momo-shadow-xs);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   cursor: default;
   transition:
     transform 0.2s ease,
@@ -56,14 +56,14 @@ const PersonDetailStyles = createGlobalStyle`
 .movie-detail-page > .detail-content-section > .people-list > .person-chip:hover {
   background: var(--momo-surface);
   color: var(--momo-text);
-  transform: none;
+  transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .movie-detail-page > .detail-content-section > .people-list > .person-chip > img {
   display: block;
   width: 100%;
-  height: 270px;
+  height: 250px;
   object-fit: cover;
   border-radius: 6px;
 }
@@ -101,7 +101,7 @@ const PersonDetailStyles = createGlobalStyle`
   width: fit-content;
   padding-left: 0;
   border-left: 0;
-  color: var(--momo-text-soft);
+  color: var(--momo-text);
   font-size: 13px;
 }
 
@@ -112,8 +112,8 @@ const PersonDetailStyles = createGlobalStyle`
 
 .movie-detail-page > .detail-content-section > .people-list + div > button {
   padding: 12px 24px;
-  background: var(--momo-surface-raised);
-  border: 1px solid var(--momo-border-strong);
+  background: var(--momo-surface);
+  border: 1px solid var(--momo-border);
   border-radius: 6px;
   font-size: 15px;
   font-weight: 600;
@@ -123,16 +123,16 @@ const PersonDetailStyles = createGlobalStyle`
 
 .movie-detail-page > .detail-content-section > .people-list + div > button:hover {
   background: var(--momo-note);
-  border-color: var(--momo-placeholder);
+  border-color: var(--momo-muted);
 }
 
 @media (max-width: 600px) {
-  .movie-detail-page > .detail-content-section {
+  .movie-detail-page > .detail-content-section:has(> .people-list) {
     padding: 22px 16px;
   }
 
   .movie-detail-page > .detail-content-section > .people-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
     gap: 12px;
   }
 
@@ -141,25 +141,6 @@ const PersonDetailStyles = createGlobalStyle`
     height: 210px;
   }
 }
-
-/* Person pages: keep portrait scale and filmography density balanced. */
-.movie-detail-page > .detail-content-section > .people-list { gap: 16px; }
-.movie-detail-page > .detail-content-section > .people-list > .person-chip {
-  padding: 11px;
-  border-radius: 12px;
-  box-shadow: none;
-}
-.movie-detail-page > .detail-content-section > .people-list > .person-chip:hover {
-  transform: none;
-  box-shadow: var(--momo-shadow-sm);
-}
-.movie-detail-page > .detail-content-section > .people-list > .person-chip > img,
-.movie-detail-page > .detail-content-section > .people-list > .person-chip > div:first-child {
-  height: 230px;
-  border-radius: 8px;
-}
-.movie-detail-page > .detail-content-section > .people-list > .person-chip strong { font-size: 14px; }
-
 `;
 
 export default PersonDetailStyles;

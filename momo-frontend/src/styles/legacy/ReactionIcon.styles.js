@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const ButtonWrapper = styled.button`
   background: none;
-  border: 1px solid transparent;
+  border: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -22,7 +22,7 @@ const ButtonWrapper = styled.button`
 
   span {
     font-size: 14px;
-    color: var(--momo-muted);
+    color: #666666;
     font-weight: 500;
   }
 `;

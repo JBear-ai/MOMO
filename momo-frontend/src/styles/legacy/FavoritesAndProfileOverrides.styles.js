@@ -17,15 +17,15 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   justify-content: center;
 
   box-sizing: border-box;
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   padding: 0;
 
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 50%;
 
   background: rgba(30, 30, 30, 0.38);
-  backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 
   color: rgba(255, 255, 255, 0.9);
@@ -49,13 +49,13 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-star:hover {
   background: rgba(30, 30, 30, 0.7);
-  transform: none;
+  transform: scale(1.08);
 }
 
 .favorite-star.is-active {
   background: rgba(255, 212, 59, 0.25);
   border-color: rgba(255, 212, 59, 0.7);
-  color: var(--momo-accent);
+  color: #ffd43b;
 }
 
 /* ========================================
@@ -64,26 +64,26 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .home-favorites-more {
   padding: 8px 12px;
-  border: 1px solid var(--momo-border);
+  border: 1px solid #e2dcce;
   border-radius: 8px;
-  background: var(--momo-surface);
-  color: var(--momo-text-soft);
+  background: #ffffff;
+  color: #4a453c;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
 }
 
 .home-favorites-more:hover {
-  border-color: var(--momo-accent);
-  background: var(--momo-note-strong);
+  border-color: #ffd43b;
+  background: #fff8dc;
 }
 
 .home-favorites-empty {
   padding: 32px 20px;
-  border: 1px solid rgba(255,255,255,.9);
-  border-radius: 16px;
-  background: var(--momo-surface);
-  color: var(--momo-muted);
+  border: 1px dashed #e2dcce;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #736e63;
   font-size: 13px;
   text-align: center;
 }
@@ -99,13 +99,13 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .profile-favorites-link:hover {
-  border-color: var(--momo-accent);
-  background: var(--momo-surface-raised);
+  border-color: #ffd43b;
+  background: #fffdf4;
 }
 
 .profile-favorites-count {
   flex-shrink: 0;
-  color: var(--momo-link);
+  color: #a37e1c;
   font-size: 12px;
   font-weight: 800;
 }
@@ -116,12 +116,12 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page {
   min-height: 100vh;
-  padding: 12px 0 64px;
-  background: transparent;
+  padding: 56px 24px 80px;
+  background: #faf9f6;
 }
 
 .favorite-page-container {
-  max-width: 1360px;
+  max-width: 1240px;
   margin: 0 auto;
 }
 
@@ -130,12 +130,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 30px 34px;
-  margin-bottom: 28px;
-  background: linear-gradient(120deg, var(--momo-note), rgba(255,255,255,.88));
-  border: 1px solid var(--momo-note-border);
-  border-radius: var(--momo-radius-lg);
-  box-shadow: var(--momo-shadow-sm);
+  margin-bottom: 32px;
 }
 
 .favorite-page-heading > div {
@@ -145,7 +140,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-page-heading .eyebrow {
   display: block;
   margin-bottom: 8px;
-  color: var(--momo-link);
+  color: #a37e1c;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -153,7 +148,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page-heading h1 {
   margin: 0 0 8px;
-  color: var(--momo-text);
+  color: #1f1d1a;
   font-size: clamp(26px, 4vw, 34px);
   font-weight: 800;
 }
@@ -161,17 +156,17 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-page-heading p,
 .favorite-list-toolbar p {
   margin: 0;
-  color: var(--momo-muted);
+  color: #736e63;
   font-size: 13px;
 }
 
 .favorite-back-button {
   flex-shrink: 0;
   padding: 10px 16px;
-  border: 1px solid var(--momo-border);
+  border: 1px solid #e2dcce;
   border-radius: 8px;
-  background: var(--momo-surface);
-  color: var(--momo-text-soft);
+  background: #ffffff;
+  color: #4a453c;
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
@@ -184,40 +179,29 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   gap: 16px;
   padding: 18px 0;
   margin-bottom: 22px;
-  border-top: 1px solid var(--momo-border);
-  border-bottom: 1px solid var(--momo-border);
+  border-top: 1px solid #e2dcce;
+  border-bottom: 1px solid #e2dcce;
 }
 
 .favorite-list-toolbar strong {
-  color: var(--momo-text);
+  color: #1f1d1a;
   font-size: 15px;
 }
 
 .favorite-list-toolbar strong span {
   margin-left: 6px;
-  color: var(--momo-link);
+  color: #a37e1c;
 }
 
 .favorite-page-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 22px 18px;
+  gap: 24px 18px;
 }
 
 .favorite-page-card {
   position: relative;
   min-width: 0;
-  padding: 10px;
-  background: var(--momo-surface);
-  border: 1px solid var(--momo-border);
-  border-radius: 18px;
-  box-shadow: var(--momo-shadow-xs);
-  transition: transform .2s ease, box-shadow .2s ease;
-
-  &:hover {
-    transform: none;
-    box-shadow: var(--momo-shadow-sm);
-  }
 }
 
 .favorite-page-poster {
@@ -226,9 +210,9 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   padding: 0;
   aspect-ratio: 2 / 2.85;
   overflow: hidden;
-  border: 1px solid var(--momo-border);
+  border: 1px solid #e2dcce;
   border-radius: 10px;
-  background: var(--momo-note);
+  background: #efece4;
   cursor: pointer;
 }
 
@@ -244,7 +228,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .favorite-page-poster > .favorite-page-open-button:focus-visible {
-  outline: 3px solid var(--momo-link);
+  outline: 3px solid #a37e1c;
   outline-offset: -3px;
 }
 
@@ -262,8 +246,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .favorite-page-poster:hover img {
-  transform: none;
-  filter: saturate(1.04);
+  transform: scale(1.035);
 }
 
 .favorite-page-no-poster {
@@ -272,7 +255,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   justify-content: center;
   width: 100%;
   height: 100%;
-  color: var(--momo-muted);
+  color: #8c8578;
   font-size: 12px;
 }
 
@@ -283,7 +266,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .favorite-page-movie-info h3 {
   margin: 0;
   overflow: hidden;
-  color: var(--momo-text);
+  color: #1f1d1a;
   font-size: 15px;
   font-weight: 750;
   text-overflow: ellipsis;
@@ -292,21 +275,21 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page-movie-info p {
   margin: 6px 0 0;
-  color: var(--momo-muted);
+  color: #736e63;
   font-size: 12px;
 }
 
 .favorite-page-empty {
   padding: 64px 20px;
-  border: 1px solid rgba(255,255,255,.9);
+  border: 1px dashed #e2dcce;
   border-radius: 12px;
-  background: var(--momo-surface);
+  background: #ffffff;
   text-align: center;
 }
 
 .favorite-empty-symbol {
   margin-bottom: 12px;
-  color: var(--momo-link);
+  color: #a37e1c;
   font-size: 42px;
 }
 
@@ -317,16 +300,16 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 
 .favorite-page-empty p {
   margin: 0 0 20px;
-  color: var(--momo-muted);
+  color: #736e63;
   font-size: 13px;
 }
 
 .favorite-page-empty button {
   padding: 11px 18px;
-  border: 1px solid var(--momo-border);
+  border: 1px solid #e2dcce;
   border-radius: 8px;
-  background: var(--momo-accent);
-  color: var(--momo-accent-ink);
+  background: #ffd43b;
+  color: #594400;
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
@@ -378,26 +361,26 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 }
 
 .favorite-back-button {
-  color: var(--momo-text-soft);
-  background: var(--momo-surface);
-  border: 1px solid var(--momo-border);
+  color: #62594e;
+  background: #fff;
+  border: 1px solid #e2dbd0;
 }
 
 .favorite-back-button:hover {
-  background: var(--momo-bg);
-  border-color: var(--momo-border-strong);
+  background: #f5f2eb;
+  border-color: #cfc4b5;
 }
 
 .favorite-browse-button {
-  color: var(--momo-surface);
-  background: var(--momo-text-soft);
-  border: 1px solid var(--momo-text-soft);
+  color: #fff;
+  background: #66594b;
+  border: 1px solid #66594b;
 }
 
 .favorite-browse-button:hover {
-  background: var(--momo-text-soft);
-  border-color: var(--momo-text-soft);
-  transform: none;
+  background: #514538;
+  border-color: #514538;
+  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(50, 40, 30, 0.12);
 }
 
@@ -420,15 +403,15 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   padding: 30px 20px;
   margin: 20px 0;
 
-  background: var(--momo-bg);
-  border: 1px solid var(--momo-border);
+  background: #f5f2eb;
+  border: 1px solid #e2dbd0;
   border-radius: 16px;
 }
 
 .movie-score-label {
   font-size: 16px;
   font-weight: 600;
-  color: var(--momo-muted);
+  color: #81796e;
   margin-bottom: 12px;
 }
 
@@ -443,18 +426,18 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   font-size: 72px;
   font-weight: 800;
   line-height: 1;
-  color: var(--momo-link);
+  color: #b58a45;
 }
 
 .movie-score-value span {
   font-size: 22px;
-  color: var(--momo-muted);
+  color: #918779;
 }
 
 .movie-score-display p {
   margin: 12px 0 0;
   font-size: 14px;
-  color: var(--momo-muted);
+  color: #81796e;
 }
 
 /* =========================
@@ -470,7 +453,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--momo-border);
+  background-color: #e5e5e5;
   flex-shrink: 0;
 }
 
@@ -498,7 +481,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--momo-note);
+  background-color: #f0f0f0;
   margin: 0 auto 16px auto;
 }
 
@@ -511,7 +494,7 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
 .profile-image-preview span {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--momo-muted);
+  color: #666;
 }
 
 .profile-image-buttons {
@@ -530,35 +513,6 @@ const FavoritesAndProfileOverridesStyles = createGlobalStyle`
   margin-bottom: 10px;
 }
 
-
-
-/* Favorites: let the poster be the main surface, not another nested card. */
-.favorite-page-container { max-width: 1280px; }
-.favorite-page-heading {
-  padding: 24px 28px;
-  margin-bottom: 20px;
-  background: #FFF9E9;
-  border-radius: 15px;
-  box-shadow: none;
-}
-.favorite-page-heading h1 { font-size: clamp(26px, 3vw, 34px); letter-spacing: -.04em; }
-.favorite-page-grid { gap: 24px 18px; }
-.favorite-page-card {
-  padding: 0;
-  border: 0;
-  border-radius: 10px;
-  background: transparent;
-  box-shadow: none;
-}
-.favorite-page-card:hover { transform: none; box-shadow: none; }
-.favorite-page-poster { border-radius: 10px; box-shadow: var(--momo-shadow-xs); }
-.favorite-page-movie-info { padding: 10px 2px 0; }
-.favorite-page-movie-info h3 { font-size: 14px; }
-.home-favorites-empty { border-radius: 10px; background: rgba(255,254,250,.65); }
-@media (max-width: 600px) {
-  .favorite-page-heading { padding: 20px 17px; }
-  .favorite-page-grid { gap: 18px 12px; }
-}
 
 `;
 

@@ -18,22 +18,6 @@ const PWD_REGEX =
 // 닉네임: 한글, 영문, 숫자 2~12자
 const NICKNAME_REGEX = /^[가-힣a-zA-Z0-9]{2,12}$/;
 
-function ProfileEditField({ id, label, input, message, state = "", wide = false }) {
-  return React.createElement(
-    "div",
-    { className: `profile-edit-field${wide ? " is-wide" : ""}` },
-    React.createElement("label", { htmlFor: id }, label),
-    input,
-    message
-      ? React.createElement(
-          "p",
-          { className: `profile-edit-feedback ${state}`.trim(), id: `${id}-feedback` },
-          message,
-        )
-      : null,
-  );
-}
-
 function ProfileEdit() {
   const navigate = useNavigate();
 
@@ -114,7 +98,8 @@ function ProfileEdit() {
         );
         setProfileUserId(user.userId || null);
         setNickname(user.nickname || localStorage.getItem("nickname") || "");
-        setEmail(user.email || localStorage.getItem("email") || "");
+        // 계정 전환 시 이전 회원의 로컬 이메일을 사용하지 않는다.
+        setEmail(user.email || "");
 
         const savedProfileImage = user.profileImage || "";
         setProfileImage(savedProfileImage);
@@ -524,7 +509,6 @@ function ProfileEdit() {
 
       // 수정 성공 후 로컬 정보 갱신
       localStorage.setItem("nickname", nickname.trim());
-      localStorage.setItem("email", email.trim());
 
       alert("프로필 정보가 수정되었습니다.");
 
@@ -548,282 +532,268 @@ function ProfileEdit() {
      화면
   ========================= */
 
-  const nicknameFeedback = !nickname
-    ? ""
-    : isNickname
-      ? "사용 가능한 닉네임 형식입니다."
-      : "한글, 영문, 숫자로 2~12자 입력하세요.";
-  const emailFeedback = !email
-    ? ""
-    : isEmail
-      ? "올바른 이메일 형식입니다."
-      : "이메일 형식이 올바르지 않습니다.";
-  const currentPasswordFeedback = passwordChecking
-    ? "현재 비밀번호 확인 중입니다."
-    : passwordCheckError
-      ? passwordCheckError
-      : passwordCheckResult === true
-        ? "현재 비밀번호가 일치합니다."
-        : passwordCheckResult === false
-          ? "현재 비밀번호가 일치하지 않습니다."
-          : "";
-  const newPasswordFeedback = !newPassword
-    ? ""
-    : isSamePassword
-      ? "기존 비밀번호와 다른 비밀번호를 입력해 주세요."
-      : isPwd
-        ? "사용 가능한 비밀번호입니다."
-        : "영문, 숫자, 특수문자를 포함해 8~20자로 입력하세요.";
-  const confirmPasswordFeedback = !confirmPassword
-    ? ""
-    : isPwdCheck
-      ? "비밀번호가 일치합니다."
-      : "비밀번호가 일치하지 않습니다.";
-
-  const feedbackState = (value, valid) => {
-    if (!value) return "";
-    return valid ? "is-valid" : "is-error";
-  };
-
   return React.createElement(
     "main",
-    { className: "profile-page profile-edit-page" },
+    { className: "profile-page", "data-archive-page": "edit" },
     React.createElement(
-      "div",
-      { className: "profile-container profile-edit-container" },
+      "section",
+      { className: "profile-container" },
       React.createElement(
         "header",
-        { className: "profile-heading profile-edit-heading" },
-        React.createElement("div", { className: "profile-heading-main" },
-          React.createElement("span", { className: "profile-heading-eyebrow" }, "ACCOUNT SETTINGS"),
-          React.createElement("h1", null, "프로필 수정"),
-          React.createElement("p", null, "회원 정보와 프로필 사진을 관리하고 비밀번호를 변경할 수 있습니다."),
-        ),
+        { className: "profile-heading" },
+        React.createElement("h1", null, "프로필 수정"),
+        React.createElement("p", null, "회원 정보를 수정할 수 있습니다."),
       ),
       React.createElement(
         "section",
-        { className: "profile-card profile-edit-card" },
+        { className: "profile-card" },
         React.createElement(
           "form",
-          { className: "profile-form profile-edit-form", onSubmit: handleSave },
-          React.createElement(
+          { className: "profile-form", onSubmit: handleSave },
+          React.createElement("section",{className:"archive-edit-section"},React.createElement("h2",null,"기본 회원 정보"),React.createElement(
             "div",
-            { className: "profile-edit-layout" },
+            { className: "profile-image-edit" },
             React.createElement(
-              "aside",
-              { className: "profile-edit-sidebar" },
-              React.createElement(
-                "section",
-                { className: "profile-edit-photo-card", "aria-labelledby": "profile-photo-title" },
-                React.createElement(
-                  "div",
-                  { className: "profile-edit-section-heading" },
-                  React.createElement("span", { className: "profile-edit-section-eyebrow" }, "PROFILE IMAGE"),
-                  React.createElement("h2", { id: "profile-photo-title" }, "프로필 사진"),
-                  React.createElement("p", null, "MOMO에서 사용할 사진을 등록하세요."),
-                ),
-                React.createElement(
-                  "div",
-                  { className: "profile-image-preview" },
-                  React.createElement(ProfileAvatar, {
-                    userId: profileUserId,
-                    hasImage: Boolean(profileImage),
-                    src: profilePreview || profileImageUrl,
-                    alt: "프로필 이미지",
-                  }),
-                ),
-                React.createElement("input", {
-                  id: "profile-image-input",
-                  className: "profile-edit-file-input",
-                  type: "file",
-                  accept: "image/jpeg,image/png",
-                  onChange: handleProfileImageChange,
-                  disabled: profileImageUploading || isSubmitting,
-                }),
-                React.createElement("p", { className: "profile-edit-file-help" }, "JPG 또는 PNG · 최대 5MB"),
-                React.createElement(
-                  "div",
-                  { className: "profile-image-buttons" },
-                  React.createElement(
-                    "button",
-                    {
-                      type: "button",
-                      className: "profile-button profile-edit-image-save",
-                      onClick: handleProfileImageUpload,
-                      disabled: !profileFile || profileImageUploading || isSubmitting,
-                    },
-                    profileImageUploading ? "처리 중..." : "이미지 변경",
-                  ),
-                  (profileImage || profileImageUrl) &&
-                    React.createElement(
-                      "button",
-                      {
-                        type: "button",
-                        className: "profile-button profile-button-secondary profile-edit-image-remove",
-                        onClick: handleProfileImageDelete,
-                        disabled: profileImageUploading || isSubmitting,
-                      },
-                      "이미지 삭제",
-                    ),
-                ),
-              ),
-              React.createElement(
-                "div",
-                { className: "profile-edit-sidebar-note" },
-                React.createElement("span", { className: "profile-edit-note-mark", "aria-hidden": "true" }, "i"),
-                React.createElement(
-                  "p",
-                  null,
-                  "선택한 사진은 저장 버튼과 별도로 이미지 변경을 눌러야 적용됩니다.",
-                ),
-              ),
+              "div",
+              { className: "profile-image-preview" },
+              React.createElement(ProfileAvatar, {
+                userId: profileUserId,
+                hasImage: Boolean(profileImage),
+                src: profilePreview || profileImageUrl,
+                alt: "프로필 이미지",
+              }),
             ),
             React.createElement(
               "div",
-              { className: "profile-edit-details" },
+              { className: "profile-image-input-wrapper" },
+              React.createElement("input", {
+                id: "profile-image-input",
+                type: "file",
+                accept: "image/jpeg,image/png",
+                onChange: handleProfileImageChange,
+                disabled: profileImageUploading || isSubmitting,
+              }),
+            ),
+            React.createElement(
+              "div",
+              { className: "profile-image-buttons" },
               React.createElement(
-                "section",
-                { className: "profile-edit-section", "aria-labelledby": "profile-basic-title" },
-                React.createElement(
-                  "div",
-                  { className: "profile-edit-section-heading" },
-                  React.createElement("span", { className: "profile-edit-section-eyebrow" }, "PERSONAL DETAILS"),
-                  React.createElement("h2", { id: "profile-basic-title" }, "기본 정보"),
-                  React.createElement("p", null, "프로필에 표시될 회원 정보를 확인하고 수정하세요."),
-                ),
-                React.createElement(
-                  "div",
-                  { className: "profile-edit-fields" },
-                  React.createElement(ProfileEditField, {
-                    id: "edit-userId",
-                    label: "아이디",
-                    wide: true,
-                    input: React.createElement("input", {
-                      id: "edit-userId",
-                      type: "text",
-                      value: userId,
-                      readOnly: true,
-                    }),
-                  }),
-                  React.createElement(ProfileEditField, {
-                    id: "edit-nickname",
-                    label: "닉네임",
-                    input: React.createElement("input", {
-                      id: "edit-nickname",
-                      type: "text",
-                      value: nickname,
-                      onChange: (event) => setNickname(event.target.value),
-                      required: true,
-                      maxLength: 12,
-                      "aria-describedby": nicknameFeedback ? "edit-nickname-feedback" : undefined,
-                    }),
-                    message: nicknameFeedback,
-                    state: feedbackState(nickname, isNickname),
-                  }),
-                  React.createElement(ProfileEditField, {
-                    id: "edit-email",
-                    label: "이메일",
-                    input: React.createElement("input", {
-                      id: "edit-email",
-                      type: "email",
-                      value: email,
-                      onChange: (event) => setEmail(event.target.value),
-                      placeholder: "이메일을 입력해 주세요.",
-                      required: true,
-                      "aria-describedby": emailFeedback ? "edit-email-feedback" : undefined,
-                    }),
-                    message: emailFeedback,
-                    state: feedbackState(email, isEmail),
-                  }),
-                ),
+                "button",
+                {
+                  type: "button",
+                  className: "profile-button",
+                  onClick: handleProfileImageUpload,
+                  disabled:
+                    !profileFile || profileImageUploading || isSubmitting,
+                },
+                profileImageUploading ? "처리 중..." : "이미지 변경",
               ),
-              React.createElement(
-                "section",
-                { className: "profile-edit-section profile-edit-password-section", "aria-labelledby": "profile-password-title" },
+              (profileImage || profileImageUrl) &&
                 React.createElement(
-                  "div",
-                  { className: "profile-edit-section-heading" },
-                  React.createElement("span", { className: "profile-edit-section-eyebrow" }, "SECURITY"),
-                  React.createElement("h2", { id: "profile-password-title" }, "비밀번호 변경"),
-                  React.createElement("p", null, "비밀번호를 변경하지 않으려면 아래 항목을 비워 두세요."),
+                  "button",
+                  {
+                    type: "button",
+                    className: "profile-button profile-button-secondary",
+                    onClick: handleProfileImageDelete,
+                    disabled: profileImageUploading || isSubmitting,
+                  },
+                  "이미지 삭제",
                 ),
-                React.createElement(
-                  "div",
-                  { className: "profile-edit-fields profile-edit-password-fields" },
-                  React.createElement(ProfileEditField, {
-                    id: "current-password",
-                    label: "현재 비밀번호",
-                    input: React.createElement("input", {
-                      id: "current-password",
-                      type: "password",
-                      value: currentPassword,
-                      onChange: handleCurrentPasswordChange,
-                      onBlur: handleCurrentPasswordCheck,
-                      placeholder: "현재 비밀번호",
-                      autoComplete: "current-password",
-                      "aria-describedby": currentPasswordFeedback ? "current-password-feedback" : undefined,
-                    }),
-                    message: currentPasswordFeedback,
-                    state: passwordCheckError || passwordCheckResult === false
-                      ? "is-error"
-                      : passwordCheckResult === true
-                        ? "is-valid"
-                        : passwordChecking
-                          ? "is-pending"
-                          : "",
-                  }),
-                  React.createElement(ProfileEditField, {
-                    id: "new-password",
-                    label: "새 비밀번호",
-                    input: React.createElement("input", {
-                      id: "new-password",
-                      type: "password",
-                      value: newPassword,
-                      onChange: (event) => setNewPassword(event.target.value),
-                      placeholder: "새 비밀번호",
-                      autoComplete: "new-password",
-                      "aria-describedby": newPasswordFeedback ? "new-password-feedback" : undefined,
-                    }),
-                    message: newPasswordFeedback,
-                    state: feedbackState(newPassword, isPwd && !isSamePassword),
-                  }),
-                  React.createElement(ProfileEditField, {
-                    id: "confirm-password",
-                    label: "새 비밀번호 확인",
-                    wide: true,
-                    input: React.createElement("input", {
-                      id: "confirm-password",
-                      type: "password",
-                      value: confirmPassword,
-                      onChange: (event) => setConfirmPassword(event.target.value),
-                      placeholder: "새 비밀번호를 다시 입력해 주세요.",
-                      autoComplete: "new-password",
-                      "aria-describedby": confirmPasswordFeedback ? "confirm-password-feedback" : undefined,
-                    }),
-                    message: confirmPasswordFeedback,
-                    state: feedbackState(confirmPassword, isPwdCheck),
-                  }),
-                ),
-              ),
             ),
           ),
-          React.createElement(
+React.createElement("label", { htmlFor: "edit-userId" }, "아이디"),
+React.createElement("input", {
+            id: "edit-userId",
+            type: "text",
+            value: userId,
+            readOnly: true,
+          }),
+React.createElement("label", { htmlFor: "edit-nickname" }, "닉네임"),
+React.createElement("input", {
+            id: "edit-nickname",
+            type: "text",
+            value: nickname,
+            onChange: (event) => setNickname(event.target.value),
+            required: true,
+          }),
+React.createElement(
+            "p",
+            {
+              className: "signup-message",
+              style: {
+                color: !nickname ? "var(--momo-muted)" : isNickname ? "var(--momo-success)" : "var(--momo-error)",
+              },
+            },
+            !nickname
+              ? ""
+              : isNickname
+                ? "사용 가능한 닉네임 형식입니다."
+                : "한글, 영문, 숫자로 2~12자 입력하세요.",
+          ),
+React.createElement("label", { htmlFor: "edit-email" }, "이메일"),
+React.createElement("input", {
+            id: "edit-email",
+            type: "email",
+            value: email,
+            onChange: (event) => setEmail(event.target.value),
+            placeholder: "이메일을 입력해 주세요.",
+          }),
+React.createElement(
+            "p",
+            {
+              className: "signup-message",
+              style: {
+                color: !email ? "var(--momo-muted)" : isEmail ? "var(--momo-success)" : "var(--momo-error)",
+              },
+            },
+            !email
+              ? ""
+              : isEmail
+                ? "올바른 이메일 형식입니다."
+                : "이메일 형식이 올바르지 않습니다.",
+          )),
+React.createElement("section",{className:"archive-edit-section"},React.createElement(
+            "h3",
+            {
+              style: {
+                marginBottom: "16px",
+                fontSize: "1.1rem",
+              },
+            },
+            "비밀번호 변경",
+          ),
+React.createElement(
+            "p",
+            {
+              style: {
+                fontSize: "13px",
+                color: "var(--momo-muted)",
+                marginBottom: "16px",
+              },
+            },
+            "비밀번호를 변경하지 않으려면 아래 항목을 비워 두세요.",
+          ),
+React.createElement(
+            "label",
+            { htmlFor: "current-password" },
+            "현재 비밀번호",
+          ),
+React.createElement("input", {
+            id: "current-password",
+            type: "password",
+            value: currentPassword,
+            onChange: handleCurrentPasswordChange,
+            onBlur: handleCurrentPasswordCheck,
+            placeholder: "현재 비밀번호를 입력해 주세요.",
+            autoComplete: "current-password",
+          }),
+React.createElement(
+            "p",
+            {
+              className: "signup-message",
+              style: {
+                color: passwordCheckError
+                  ? "var(--momo-error)"
+                  : passwordCheckResult === true
+                    ? "var(--momo-success)"
+                    : passwordCheckResult === false
+                      ? "var(--momo-error)"
+                      : "var(--momo-muted)",
+              },
+            },
+            passwordChecking
+              ? "현재 비밀번호 확인 중입니다."
+              : passwordCheckError
+                ? passwordCheckError
+                : passwordCheckResult === true
+                  ? "현재 비밀번호가 일치합니다."
+                  : passwordCheckResult === false
+                    ? "현재 비밀번호가 일치하지 않습니다."
+                    : "",
+          ),
+React.createElement(
+            "label",
+            { htmlFor: "new-password" },
+            "새 비밀번호",
+          ),
+React.createElement("input", {
+            id: "new-password",
+            type: "password",
+            value: newPassword,
+            onChange: (event) => setNewPassword(event.target.value),
+            placeholder: "새 비밀번호를 입력해 주세요.",
+            autoComplete: "new-password",
+          }),
+React.createElement(
+            "p",
+            {
+              className: "signup-message",
+              style: {
+                color: !newPassword
+                  ? "var(--momo-muted)"
+                  : isSamePassword
+                    ? "var(--momo-error)"
+                    : isPwd
+                      ? "var(--momo-success)"
+                      : "var(--momo-error)",
+              },
+            },
+            !newPassword
+              ? ""
+              : isSamePassword
+                ? "기존 비밀번호와 다른 비밀번호를 입력해 주세요."
+                : isPwd
+                  ? "사용 가능한 비밀번호입니다."
+                  : "영문, 숫자, 특수문자를 포함해 8~20자로 입력하세요.",
+          ),
+React.createElement(
+            "label",
+            { htmlFor: "confirm-password" },
+            "새 비밀번호 확인",
+          ),
+React.createElement("input", {
+            id: "confirm-password",
+            type: "password",
+            value: confirmPassword,
+            onChange: (event) => setConfirmPassword(event.target.value),
+            placeholder: "새 비밀번호를 다시 입력해 주세요.",
+            autoComplete: "new-password",
+          }),
+React.createElement(
+            "p",
+            {
+              className: "signup-message",
+              style: {
+                color: !confirmPassword
+                  ? "var(--momo-muted)"
+                  : isPwdCheck
+                    ? "var(--momo-success)"
+                    : "var(--momo-error)",
+              },
+            },
+            !confirmPassword
+              ? ""
+              : isPwdCheck
+                ? "비밀번호가 일치합니다."
+                : "비밀번호가 일치하지 않습니다.",
+          )),
+React.createElement(
             "div",
-            { className: "profile-form-buttons profile-edit-actions" },
+            { className: "profile-form-buttons", style: { marginTop: "24px" } },
             React.createElement(
               "button",
               {
                 type: "submit",
-                className: "profile-button profile-edit-submit",
+                className: "profile-button",
                 disabled: !isAllValid || profileImageUploading,
               },
-              isSubmitting ? "저장 중..." : "변경 사항 저장",
+              isSubmitting ? "저장 중..." : "저장",
             ),
             React.createElement(
               "button",
               {
                 type: "button",
-                className: "profile-button profile-button-secondary profile-edit-cancel",
+                className: "profile-button profile-button-secondary",
                 onClick: () => navigate("/profile"),
                 disabled: isSubmitting,
               },
