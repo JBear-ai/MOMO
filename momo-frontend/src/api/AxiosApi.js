@@ -10,8 +10,32 @@ let authSessionVersion = 0;
 let refreshPromise = null;
 let isHandlingAuthExpired = false;
 
+const AUTH_SESSION_ID_KEY = "momo-auth-session-id";
+
+const createAuthSessionMarker = () =>
+  `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+
 export const getAuthSessionVersion = () => authSessionVersion;
 export const isAuthSessionCurrent = (version) => version === authSessionVersion;
+
+// 브라우저 탭이 달라도 같은 로그인 세션인지 비교할 수 있도록 localStorage에 표식을 둔다.
+export const getAuthSessionMarker = () => {
+  let marker = localStorage.getItem(AUTH_SESSION_ID_KEY);
+  if (!marker) {
+    marker = createAuthSessionMarker();
+    localStorage.setItem(AUTH_SESSION_ID_KEY, marker);
+  }
+  return marker;
+};
+
+// 사용자 이름과 세션 표식을 함께 비교해 다른 계정·재로그인 응답을 구분한다.
+export const getAuthSessionIdentity = () => {
+  const loginId = localStorage.getItem("username") || localStorage.getItem("loginId");
+  return loginId ? `${loginId}:${getAuthSessionMarker()}` : null;
+};
+
+export const isAuthIdentityCurrent = (identity) =>
+  Boolean(identity) && getAuthSessionIdentity() === identity;
 
 const sessionChangedError = () => {
   const error = new Error("인증 상태가 이미 변경되었습니다.");
@@ -63,6 +87,7 @@ export const storeLoginTokens = (accessToken, refreshToken) => {
   refreshPromise = null;
   isHandlingAuthExpired = false;
 
+  localStorage.setItem(AUTH_SESSION_ID_KEY, createAuthSessionMarker());
   localStorage.setItem("accessToken", accessToken);
   localStorage.setItem("refreshToken", refreshToken);
 
@@ -77,6 +102,7 @@ export const clearAuthSession = (expectedSessionVersion = authSessionVersion) =>
 
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
+  localStorage.removeItem(AUTH_SESSION_ID_KEY);
   localStorage.removeItem("username");
   localStorage.removeItem("nickname");
   // 이전 버전에서 저장한 이메일도 인증 종료 시 정리한다.
