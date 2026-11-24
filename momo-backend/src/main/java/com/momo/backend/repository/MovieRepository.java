@@ -59,7 +59,7 @@ public interface MovieRepository extends JpaRepository<Movie, String> {
         return findGenreValuesContaining(genre).stream()
                 .flatMap(value -> java.util.Arrays.stream(value.split(",")))
                 .map(String::trim)
-                .anyMatch(genre::equalsIgnoreCase);
+                .anyMatch(value -> genre.equalsIgnoreCase(value));
     }
 
     Page<Movie> findByGenreContainingIgnoreCaseOrderByReleaseDateDescMovieCodeAsc(String genre, Pageable pageable);
