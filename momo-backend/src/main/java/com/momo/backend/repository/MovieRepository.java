@@ -58,7 +58,7 @@ public interface MovieRepository extends JpaRepository<Movie, String> {
     default boolean existsByGenreToken(String genre) {
         return findGenreValuesContaining(genre).stream()
                 .flatMap(value -> java.util.Arrays.stream(value.split(",")))
-                .map(String::trim)
+                .map(value -> value.trim())
                 .anyMatch(value -> genre.equalsIgnoreCase(value));
     }
 
