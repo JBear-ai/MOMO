@@ -34,8 +34,6 @@ function ProfileEdit() {
   const [profileUserId, setProfileUserId] = useState(null);
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
-  const [provider, setProvider] = useState(null);
-  const isSocial = provider !== null && provider !== "LOCAL";
 
   /* =========================
      프로필 이미지 상태
@@ -102,7 +100,6 @@ function ProfileEdit() {
         setNickname(user.nickname || localStorage.getItem("nickname") || "");
         // 계정 전환 시 이전 회원의 로컬 이메일을 사용하지 않는다.
         setEmail(user.email || "");
-        setProvider(user.provider || "LOCAL");
 
         const savedProfileImage = user.profileImage || "";
         setProfileImage(savedProfileImage);
@@ -174,7 +171,7 @@ function ProfileEdit() {
 
   // 전체 유효성
   const isAllValid =
-    provider !== null && isNickname && (isSocial || (isEmail && isPasswordValid)) && !isSubmitting && !profileImageUploading;
+    isNickname && isEmail && isPasswordValid && !isSubmitting && !profileImageUploading;
 
   /* =========================
      현재 비밀번호 검증
@@ -416,12 +413,12 @@ function ProfileEdit() {
        이메일 검사
     ========================= */
 
-    if (!isSocial && !email.trim()) {
+    if (!email.trim()) {
       alert("이메일을 입력해 주세요.");
       return;
     }
 
-    if (!isSocial && !isEmail) {
+    if (!isEmail) {
       alert("올바른 이메일 형식을 입력해 주세요.");
       return;
     }
@@ -429,7 +426,7 @@ function ProfileEdit() {
        비밀번호 변경 검사
     ========================= */
 
-    if (!isSocial && isPasswordChange) {
+    if (isPasswordChange) {
       // 현재 비밀번호 입력 여부
       if (!currentPassword) {
         alert("현재 비밀번호를 입력해 주세요.");
@@ -477,7 +474,7 @@ function ProfileEdit() {
       setIsSubmitting(true);
 
       // 비밀번호 변경을 요청한 경우 현재 비밀번호 검증
-      if (!isSocial && isPasswordChange) {
+      if (isPasswordChange) {
         // 이미 불일치로 확인된 경우
         if (passwordCheckResult === false) {
           alert("현재 비밀번호가 일치하지 않습니다.");
@@ -501,7 +498,7 @@ function ProfileEdit() {
       }
 
       // 회원정보 수정 API 요청
-      await AxiosApi.memberUpdate(isSocial ? { nickname: nickname.trim() } : {
+      await AxiosApi.memberUpdate({
         nickname: nickname.trim(),
         email: email.trim(),
 
@@ -639,8 +636,7 @@ React.createElement("input", {
             type: "email",
             value: email,
             onChange: (event) => setEmail(event.target.value),
-            placeholder: isSocial ? "미등록" : "이메일을 입력해 주세요.",
-            readOnly: isSocial,
+            placeholder: "이메일을 입력해 주세요.",
           }),
 React.createElement(
             "p",
@@ -650,13 +646,13 @@ React.createElement(
                 color: !email ? "var(--momo-muted)" : isEmail ? "var(--momo-success)" : "var(--momo-error)",
               },
             },
-            isSocial || !email
+            !email
               ? ""
               : isEmail
                 ? "올바른 이메일 형식입니다."
                 : "이메일 형식이 올바르지 않습니다.",
           )),
-!isSocial && provider !== null && React.createElement("section",{className:"archive-edit-section"},React.createElement(
+React.createElement("section",{className:"archive-edit-section"},React.createElement(
             "h3",
             {
               style: {
