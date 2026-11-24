@@ -520,6 +520,48 @@ const AxiosApi = {
     );
   },
 
+  // 소셜 로그인 인가 시작
+  oauthAuthorize: async (provider) => {
+    return await axios.get(`${HM_DOMAIN}/api/auth/${encodeURIComponent(provider)}/authorize`, {
+      withCredentials: true,
+    });
+  },
+
+  // 소셜 로그인 콜백: 서버가 state 쿠키와 일회용 인가 코드를 검증한다.
+  oauthLogin: async (provider, code, state) => {
+    return await axios.post(
+      `${HM_DOMAIN}/api/auth/${encodeURIComponent(provider)}`,
+      { code, state },
+      { withCredentials: true },
+    );
+  },
+
+  // 네이버·구글 계정 탈퇴를 위한 별도 인증 시작
+  socialDeleteAuthorize: async (provider, confirmation) => {
+    return await axios.post(
+      `${HM_DOMAIN}/api/auth/${encodeURIComponent(provider)}/delete/authorize`,
+      confirmation,
+      { withCredentials: true },
+    );
+  },
+
+  // 네이버·구글 외부 계정 확인 후 MOMO 탈퇴 완료
+  socialDeleteComplete: async (provider, code, state, confirmation) => {
+    return await axios.post(
+      `${HM_DOMAIN}/api/auth/${encodeURIComponent(provider)}/delete/complete`,
+      { code, state, ...confirmation },
+      { withCredentials: true },
+    );
+  },
+
+  // 카카오 연결 해제와 MOMO 회원 탈퇴는 서버의 Admin Key 기반 절차로 처리한다.
+  socialMemberDelete: async (confirmation) => {
+    return await axios.delete(`${HM_DOMAIN}/api/auth/me/social`, {
+      data: confirmation,
+      withCredentials: true,
+    });
+  },
+
   // 15. 로그인 사용자 정보 조회
   memberMe: async (signal) => {
     return await axios.get(`${HM_DOMAIN}/api/auth/me`, {
