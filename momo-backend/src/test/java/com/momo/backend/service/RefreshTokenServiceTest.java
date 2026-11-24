@@ -49,7 +49,6 @@ class RefreshTokenServiceTest {
 
     @Test
     void reissueRotatesBothTokensAndRejectsPreviousRefreshToken() {
-        String loginId = "momo-user";
         Long userId = 1L;
         String oldRefreshToken = tokenProvider.createRefreshToken(userId);
         RefreshToken storedToken = new RefreshToken(user, oldRefreshToken);
@@ -74,7 +73,6 @@ class RefreshTokenServiceTest {
 
     @Test
     void mismatchedTokenDoesNotDeleteOrReplaceCurrentActiveToken() {
-        String loginId = "momo-user";
         Long userId = 1L;
         String requestToken = tokenProvider.createRefreshToken(userId);
         String activeToken = tokenProvider.createRefreshToken(userId);
@@ -118,7 +116,6 @@ class RefreshTokenServiceTest {
 
     @Test
     void refreshTokenWithoutStoredTokenIsRejected() {
-        String loginId = "momo-user";
         Long userId = 1L;
         String refreshToken = tokenProvider.createRefreshToken(userId);
 
