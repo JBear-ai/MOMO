@@ -15,8 +15,7 @@ public record UserUpdateRequest(
         )
         String nickname,
 
-        // 변경할 이메일
-        @NotBlank(message = "이메일은 필수 입력 항목입니다.")
+        // 소셜 회원은 이메일이 없을 수 있으며, LOCAL 회원의 필수 여부는 서비스에서 검증한다.
         @Email(message = "올바른 이메일 형식이 아닙니다.")
         @jakarta.validation.constraints.Pattern(
                 regexp = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$",
