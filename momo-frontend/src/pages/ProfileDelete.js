@@ -38,11 +38,11 @@ function ProfileDelete() {
   const isLocal = provider === "LOCAL";
   const isKakao = provider === "KAKAO";
   const socialName = provider === "NAVER" ? "네이버" : "Google";
-  const canSubmit =
-    Boolean(member) &&
-    isConfirmed &&
-    confirmation === DELETE_CONFIRMATION &&
-    (!isLocal || Boolean(password.trim()));
+  const canSubmit = isLocal
+    ? isConfirmed && Boolean(password.trim())
+    : Boolean(member) &&
+      isConfirmed &&
+      confirmation === DELETE_CONFIRMATION;
 
   const handleDelete = async () => {
     if (!canSubmit) return;
@@ -82,12 +82,13 @@ function ProfileDelete() {
         return;
       }
       console.error("회원 탈퇴 실패:", safeRequestFailure(error));
-      setErrorMessage(
+      const message =
         error.response?.data?.message ||
-          (typeof error.response?.data === "string"
-            ? error.response.data
-            : "회원 탈퇴 중 오류가 발생했습니다."),
-      );
+        (typeof error.response?.data === "string"
+          ? error.response.data
+          : "회원 탈퇴 중 오류가 발생했습니다.");
+      setErrorMessage(message);
+      window.alert(message);
     }
   };
 
@@ -161,9 +162,11 @@ function ProfileDelete() {
               onClick={handleDelete}
               disabled={!canSubmit}
             >
-              {isLocal || isKakao
-                ? "회원 탈퇴"
-                : `${socialName} 계정 확인 후 탈퇴`}
+              {isLocal
+                ? "탈퇴하기"
+                : isKakao
+                  ? "회원 탈퇴"
+                  : `${socialName} 계정 확인 후 탈퇴`}
             </button>
             <button
               type="button"
