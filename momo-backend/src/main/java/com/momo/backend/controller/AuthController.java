@@ -45,6 +45,7 @@ public class AuthController {
         // 로그인 성공 시 Access Token을 발급한다.
         private final AuthService authService;
         private final RefreshTokenService refreshTokenService;
+        private final com.momo.backend.service.AccountDeletionService accountDeletionService;
 
         // JWT 발급 담당
         private final TokenProvider tokenProvider;
@@ -129,6 +130,18 @@ public class AuthController {
                 // 인증 정보 제거
                 SecurityContextHolder.clearContext();
 
+                return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
+        }
+
+        // 카카오 회원은 서버에 저장된 공급자 ID로 연결을 해제한 뒤 회원 데이터를 삭제한다.
+        @DeleteMapping("/me/social")
+        public ResponseEntity<String> deleteSocialAccount(
+                        @Valid @RequestBody UserDeleteRequest dto,
+                        Authentication authentication) {
+                accountDeletionService.delete(
+                                MemberPrincipal.requireUserId(authentication),
+                                dto);
+                SecurityContextHolder.clearContext();
                 return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
         }
 

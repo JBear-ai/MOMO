@@ -88,6 +88,18 @@ public class SecurityConfig {
                                                                 "/api/auth/reissue")
                                                 .permitAll()
 
+                                                // 소셜 로그인 시작·콜백만 공개한다. DELETE 인증 경로는 JWT가 필요하다.
+                                                .requestMatchers(HttpMethod.GET,
+                                                                "/api/auth/kakao/authorize",
+                                                                "/api/auth/naver/authorize",
+                                                                "/api/auth/google/authorize")
+                                                .permitAll()
+                                                .requestMatchers(HttpMethod.POST,
+                                                                "/api/auth/kakao",
+                                                                "/api/auth/naver",
+                                                                "/api/auth/google")
+                                                .permitAll()
+
                                                 // 공개 회원 조회 및 프로필 이미지 조회
                                                 .requestMatchers(
                                                                 HttpMethod.GET,
